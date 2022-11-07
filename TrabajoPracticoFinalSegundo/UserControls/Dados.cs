@@ -10,6 +10,8 @@ using System.Windows.Forms;
 
 namespace TrabajoPracticoFinalSegundo.UserControls
 {
+   // private string url = @"https://localhost:7170/HomeHub.cs";
+
     public partial class Dados : UserControl
     {
         private int tiradas;

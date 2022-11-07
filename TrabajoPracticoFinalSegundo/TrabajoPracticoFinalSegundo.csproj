@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Emgu.CV" Version="4.6.0.5131" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.4" />
   </ItemGroup>
 

@@ -15,7 +15,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
     public partial class Home : Form
     {
         List<Jugador> jugadores;
-        String op;
         int segundos;
         string path;
 
@@ -89,7 +88,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private void IniciarJuego() 
         {
             this.progress.Visible = true;
-            int i = 0;
 
 
         }
