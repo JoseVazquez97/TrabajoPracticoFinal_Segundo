@@ -2,19 +2,42 @@
 
 <div id="miDiv">
     <div id="miDivCursor">
-        MOVEME NOMA
+        Turno NRO:
+    </div>
+    <div id="turne">
+        <p id="Turnero"> x </p>
     </div>
 </div>
+
+<div id="x" onclick="siguienteTurno()">
+    <div id="here">
+        CLICK HERE
+    </div>
+</div>
+
+
 
 <style>
     #miDiv
     {
         position: absolute;
         z-index: 9;
-        padding: 25px;
         background-color: #f1f1f1;
         border: 1px solid #d3d3d3;
-        textAlign: center;
+    }
+
+    #x
+    {
+        margin-top: 105px;
+        position: absolute;
+        z-index: 9;
+        background-color: #f1f1f1;
+        border: 1px solid #d3d3d3;
+    }
+
+    #Turnero
+    {
+        text-align: center;
     }
 
     #miDivCursor
@@ -29,3 +52,6 @@
 
 </style>
 
+
+<script src="~/js/signalr.js"></script>
+<script src=~/js/Conection.js></script>
