@@ -9,7 +9,7 @@ namespace WebApi_SingalR_Com.Hubs
         public static int valor1 { get; set; } = 0;
         public static int valor2 { get; set; } = 0;
 
-        public async Task TirarDados()
+        public async Task TirarDados(int valor1, int valor2)
         {
             //MANDAR LA ACTUALIZACION
             await Clients.All.SendAsync("VerDados", valor1, valor2);
