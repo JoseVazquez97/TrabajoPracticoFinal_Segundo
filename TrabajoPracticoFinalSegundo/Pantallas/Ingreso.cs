@@ -1,12 +1,18 @@
 using TrabajoPracticoFinalSegundo.Pantallas;
+using System.IO;
 
 namespace TrabajoPracticoFinalSegundo
 {
     public partial class Ingreso : Form
     {
+        string path;
+
         public Ingreso()
         {
             InitializeComponent();
+            this.path = Directory.GetParent(Directory.GetParent("..").ToString()).ToString();
+
+            this.BackgroundImage = Image.FromFile(this.path + "/Recursos/Fondos/FONDO_Ingreso.jpg");
         }
 
         private void btn_Ingresar_Click(object sender, EventArgs e)
@@ -15,6 +21,8 @@ namespace TrabajoPracticoFinalSegundo
             Intro intro = new Intro(this);
             intro.Show();
             */
+
+
 
             Home h = new Home();
             h.Show();
