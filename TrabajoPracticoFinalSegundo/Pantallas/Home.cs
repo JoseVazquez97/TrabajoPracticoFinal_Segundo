@@ -19,6 +19,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         int segundos;
         string path;
 
+        //Esto Es un comentario.
 
         public Home()
         {
