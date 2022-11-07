@@ -1,57 +1,13 @@
 ﻿@page
 
-<div id="miDiv">
-    <div id="miDivCursor">
-        Turno NRO:
-    </div>
-    <div id="turne">
-        <p id="Turnero"> x </p>
-    </div>
-</div>
+<script>
+    setInterval(function () {
+        UpdateHome();
+    }, 200);
+</script>
 
-<div id="x" onclick="siguienteTurno()">
-    <div id="here">
-        CLICK HERE
-    </div>
-</div>
-
-
-
-<style>
-    #miDiv
-    {
-        position: absolute;
-        z-index: 9;
-        background-color: #f1f1f1;
-        border: 1px solid #d3d3d3;
-    }
-
-    #x
-    {
-        margin-top: 105px;
-        position: absolute;
-        z-index: 9;
-        background-color: #f1f1f1;
-        border: 1px solid #d3d3d3;
-    }
-
-    #Turnero
-    {
-        text-align: center;
-    }
-
-    #miDivCursor
-    {
-        padding: 10px;
-        cursor:move;
-        z-index: 10;
-        background-color: #2196F3;
-        color: #fff;
-        
-    }
-
-</style>
-
+<p id="v1"></p>
+<p id="v2"></p>
 
 <script src="~/js/signalr.js"></script>
-<script src=~/js/Conection.js></script>
+<script src=~/js/HomeComunications.js></script>

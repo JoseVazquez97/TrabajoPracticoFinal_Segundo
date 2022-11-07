@@ -31,6 +31,6 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 //Luego tenemos que agregar la ruta a la que van a venir los clientes a consultar los datos.
-app.MapHub<UserHub>("/Hubs/UserHub.cs");
+app.MapHub<HomeHub>("/Hubs/HomeHub.cs");
 
 app.Run();
