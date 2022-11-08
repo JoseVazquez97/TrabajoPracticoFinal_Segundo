@@ -1,16 +1,20 @@
 ﻿//Generamos la coneXION
 
-var userConection = new signalR.HubConnectionBuilder().withUrl("/Hubs/UserHub.cs").build();
+var userConection = new signalR.HubConnectionBuilder().withUrl("/Hubs/HomeHub.cs").build();
 
 //Generar los metodos para recibir datos del hub
-userConection.on("UpdateTurno", (value) => {
-    var x = document.getElementById("Turnero");
-    x.innerHTML = value.toString();
+userConection.on("UpdateTurno", (valor) => {
+    var x = document.getElementById("v1");
+    x.innerHTML = parseInt(valor);
 })
 
 //Generar los metodos, para enviar datos hacia el hub
 function siguienteTurno() {
-    userConection.send("MandarTurno");
+
+    var turno = parseInt(document.getElementById("v1").innerHTML);
+
+    userConection.send("MandarTurno", parseInt(turno));
+
 }
 
 

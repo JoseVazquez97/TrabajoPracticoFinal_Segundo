@@ -13,8 +13,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 { 
     public partial class Dados : UserControl
     {
-        private string urlx = "https://localhost:7170/";
-        HubConnection hubConnection;
 
         private int tiradas;
         private int d1;
@@ -30,35 +28,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             InitializeComponent();
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
 
-            hubConnection = new HubConnectionBuilder().WithUrl(urlx).Build();
-
-            hubConnection.Closed += async (error) =>
-            {
-                System.Threading.Thread.Sleep(5000);
-                await hubConnection.StartAsync();
-            };
-
-
-
         }
 
-        private async void verDados() 
-        {
-            try
-            {
-                await hubConnection.StartAsync();
-            }
-            catch 
-            {
-                MessageBox.Show("No se pudo");
-            }
-
-            hubConnection.On<int, int>("VerDados", (valor1, valor2) =>
-            {
-                this.d1 = valor1;
-                this.d2 = valor2;
-            });
-        }
 
         #region  LOADS
 
