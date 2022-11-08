@@ -19,8 +19,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private string _url = "https://localhost:7170/Hubs/HomeHub.cs";
         HubConnection HomeConection;
 
-        int x;
-
         public Prueba()
         {
             InitializeComponent();
@@ -30,6 +28,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             //Si te desconectas segui intentado.
             HomeConection.Closed +=
                 async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync(); };
+        }
+
+        public void AsignarForm(ref Label x)
+        {
+
         }
 
         private async void Prueba_Load(object sender, EventArgs e)
@@ -49,9 +52,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             });
 
         }
-        private void refrescarNumero(int pepe) 
+        private void refrescarNumero(int pepe)
         {
-            
+
         }
     }
 }

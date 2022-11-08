@@ -13,12 +13,14 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 {
     public partial class ChatBox : UserControl
     {
-        HubConnection hubConnection;
         public ChatBox()
         {
             InitializeComponent();
+        }
 
-            hubConnection = new HubConnectionBuilder().WithUrl("https://localhost:7170").Build();
+        public ref Label miLabel() 
+        {
+            return ref this.label1;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

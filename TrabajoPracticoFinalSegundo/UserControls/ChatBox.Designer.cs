@@ -31,6 +31,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -56,19 +57,30 @@
             this.listBox1.ItemHeight = 15;
             this.listBox1.Location = new System.Drawing.Point(17, 12);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(338, 409);
+            this.listBox1.Size = new System.Drawing.Size(338, 109);
             this.listBox1.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(132, 241);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "label1";
             // 
             // ChatBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.button1);
             this.Name = "ChatBox";
             this.Size = new System.Drawing.Size(380, 525);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -77,5 +89,6 @@
         private Button button1;
         private RichTextBox richTextBox2;
         private ListBox listBox1;
+        private Label label1;
     }
 }
