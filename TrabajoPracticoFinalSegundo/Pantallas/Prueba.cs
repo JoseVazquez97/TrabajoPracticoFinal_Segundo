@@ -51,7 +51,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         private void refrescarNumero(int pepe) 
         {
-            LBL_PRUEBA.Location = new Point(pepe, 0);
+            
         }
     }
 }
