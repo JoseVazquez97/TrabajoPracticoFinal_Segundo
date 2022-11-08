@@ -6,13 +6,14 @@ namespace WebApi_SingalR_Com.Hubs
     //Lo primero que debemos hacer es crear un hub, que Herede de esta clase
     public class HomeHub : Hub
     {
-        public static int valor1 { get; set; } = 0;
-        public static int valor2 { get; set; } = 0;
+        public static int Turno { get; set; } = 0;
 
-        public async Task TirarDados(int valor1, int valor2)
+        public async Task MandarTurno()
         {
+            Turno++;
+
             //MANDAR LA ACTUALIZACION
-            await Clients.All.SendAsync("VerDados", valor1, valor2);
+            await Clients.All.SendAsync("UpdateTurno", Turno);
         }
     }
 }
