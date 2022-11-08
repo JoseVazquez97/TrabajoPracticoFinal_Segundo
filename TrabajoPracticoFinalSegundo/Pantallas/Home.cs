@@ -9,11 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajoPracticoFinalSegundo.Clases;
 using System.IO;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace TrabajoPracticoFinalSegundo.Pantallas
 {
     public partial class Home : Form
     {
+
+        private string _url = "https://localhost:7170/Hubs/HomeHub.cs";
+        HubConnection HomeConection;
+
         List<Jugador> jugadores;
         int segundos;
         string path;
@@ -23,6 +28,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         public Home()
         {
             InitializeComponent();
+
+            HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
+
+            //Si te desconectas segui intentado.
+            HomeConection.Closed += 
+                async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync();};
+
 
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
 
@@ -49,7 +61,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             x = Convert.ToInt32(this.flowLayoutPanel1.Width / 2);
             y = this.flowLayoutPanel1.Height;
 
-            this.dados1.LoadTablero(x, y);
+           // this.dados1.LoadTablero(x, y);
             this.urna1.Load_Urna(x, y);
             this.turnero1.LoadTurnero(x, y);
 
@@ -73,13 +85,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             jugadores.Add(Y);
 
             IniciarJuego();
-
-
         }
 
-        private void Home_Load(object sender, EventArgs e)
+        private async void Home_Load(object sender, EventArgs e)
         {
-
+            
         }
 
 

@@ -23,9 +23,13 @@ namespace TrabajoPracticoFinalSegundo
             */
 
 
-
+            /*
             Home h = new Home();
             h.Show();
+            */
+
+            Prueba x = new Prueba();
+            x.Show();
 
             this.Hide();
         }
