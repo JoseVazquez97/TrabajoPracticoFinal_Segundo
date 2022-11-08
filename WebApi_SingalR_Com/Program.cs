@@ -1,4 +1,3 @@
-
 using WebApi_SingalR_Com.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);

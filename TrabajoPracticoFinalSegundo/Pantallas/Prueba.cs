@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
@@ -28,10 +29,25 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             //Si te desconectas segui intentado.
             HomeConection.Closed +=
                 async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync(); };
+
+            Prueba_Load();
         }
 
-        public void AsignarForm(ref Label x)
+        private async void Prueba_Load()
         {
+            try
+            {
+                await HomeConection.StartAsync();
+            }
+            catch
+            {
+                MessageBox.Show("Nosepuedoconectar");
+            }
+
+            HomeConection.On<int>("UpdateTurno", pepe =>
+            {
+                MessageBox.Show(pepe.ToString());
+            });
 
         }
 
@@ -48,12 +64,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<int>("UpdateTurno", pepe =>
             {
-                refrescarNumero(pepe);
+                MessageBox.Show(pepe.ToString());
             });
-
-        }
-        private void refrescarNumero(int pepe)
-        {
 
         }
     }
