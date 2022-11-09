@@ -30,6 +30,8 @@
         {
             this.LBL_PRUEBA = new System.Windows.Forms.Label();
             this.comunicador1 = new TrabajoPracticoFinalSegundo.UserControls.Comunicador();
+            this.connectButton = new System.Windows.Forms.Button();
+            this.sendButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LBL_PRUEBA
@@ -49,11 +51,33 @@
             this.comunicador1.Size = new System.Drawing.Size(321, 179);
             this.comunicador1.TabIndex = 1;
             // 
+            // connectButton
+            // 
+            this.connectButton.Location = new System.Drawing.Point(148, 250);
+            this.connectButton.Name = "connectButton";
+            this.connectButton.Size = new System.Drawing.Size(245, 97);
+            this.connectButton.TabIndex = 2;
+            this.connectButton.Text = "CONECTARSE";
+            this.connectButton.UseVisualStyleBackColor = true;
+            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
+            // 
+            // sendButton
+            // 
+            this.sendButton.Location = new System.Drawing.Point(427, 253);
+            this.sendButton.Name = "sendButton";
+            this.sendButton.Size = new System.Drawing.Size(259, 94);
+            this.sendButton.TabIndex = 3;
+            this.sendButton.Text = "REINCIAR";
+            this.sendButton.UseVisualStyleBackColor = true;
+            this.sendButton.Click += new System.EventHandler(this.sendButton_Click);
+            // 
             // Prueba
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.sendButton);
+            this.Controls.Add(this.connectButton);
             this.Controls.Add(this.comunicador1);
             this.Controls.Add(this.LBL_PRUEBA);
             this.Name = "Prueba";
@@ -68,5 +92,7 @@
 
         private Label LBL_PRUEBA;
         private UserControls.Comunicador comunicador1;
+        private Button connectButton;
+        private Button sendButton;
     }
 }

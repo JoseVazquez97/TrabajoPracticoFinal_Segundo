@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +21,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
     {
         private string _url = "https://localhost:7170/Hubs/HomeHub.cs";
         HubConnection HomeConection;
+        Dispatcher dispatcher;
 
         public Prueba()
         {
@@ -32,23 +35,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         }
 
-        private async void Prueba_Load()
-        {
-            try
-            {
-                await HomeConection.StartAsync();
-            }
-            catch
-            {
-                MessageBox.Show("Nosepuedoconectar");
-            }
-
-            HomeConection.On<int>("UpdateTurno", pepe =>
-            {
-                MessageBox.Show(pepe.ToString());
-            });
-
-        }
 
         private async void Prueba_Load(object sender, EventArgs e)
         {
@@ -63,9 +49,37 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<int>("UpdateTurno", pepe =>
             {
-                MessageBox.Show(pepe.ToString());
+                this.dispatcher.InvokeAsync(() =>
+                {
+                    //var dato = $"{pepe}";
+                    //LBL_PRUEBA.Text = dato;
+                });
             });
 
+        }
+
+        private async void connectButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await HomeConection.StartAsync();
+            }
+            catch
+            {
+                MessageBox.Show("Nosepuedoconectar");
+            }
+        }
+
+        private async void sendButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await HomeConection.InvokeAsync("MandarTurno", 0);
+            }
+            catch (Exception ex)
+            {
+                
+            }
         }
     }
 }
