@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.barco1 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
-            this.dados1 = new TrabajoPracticoFinalSegundo.UserControls.Dados();
             this.progress = new System.Windows.Forms.ProgressBar();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.urna1 = new TrabajoPracticoFinalSegundo.UserControls.Urna();
             this.turnero1 = new TrabajoPracticoFinalSegundo.UserControls.Turnero();
             this.Update = new System.Windows.Forms.Timer(this.components);
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.LBL_PRUEBA = new System.Windows.Forms.Label();
             this.pantallaWeb1 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
             this.pantallaWeb2 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
             this.pantallaWeb3 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
@@ -62,16 +62,6 @@
             this.barco1.TabIndex = 0;
             this.barco1.Load += new System.EventHandler(this.barco1_Load);
             // 
-            // dados1
-            // 
-            this.dados1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dados1.Location = new System.Drawing.Point(530, 6);
-            this.dados1.Margin = new System.Windows.Forms.Padding(20, 0, 20, 0);
-            this.dados1.Name = "dados1";
-            this.dados1.Size = new System.Drawing.Size(321, 127);
-            this.dados1.TabIndex = 1;
-            this.dados1.Load += new System.EventHandler(this.dados1_Load);
-            // 
             // progress
             // 
             this.progress.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -85,7 +75,6 @@
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.urna1);
-            this.flowLayoutPanel1.Controls.Add(this.dados1);
             this.flowLayoutPanel1.Controls.Add(this.turnero1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
@@ -106,7 +95,7 @@
             // turnero1
             // 
             this.turnero1.BackColor = System.Drawing.Color.Green;
-            this.turnero1.Location = new System.Drawing.Point(871, 6);
+            this.turnero1.Location = new System.Drawing.Point(510, 6);
             this.turnero1.Margin = new System.Windows.Forms.Padding(0);
             this.turnero1.Name = "turnero1";
             this.turnero1.Size = new System.Drawing.Size(418, 127);
@@ -121,6 +110,7 @@
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel2.Controls.Add(this.LBL_PRUEBA);
             this.flowLayoutPanel2.Controls.Add(this.pantallaWeb1);
             this.flowLayoutPanel2.Controls.Add(this.pantallaWeb2);
             this.flowLayoutPanel2.Controls.Add(this.pantallaWeb3);
@@ -130,11 +120,21 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 772);
             this.flowLayoutPanel2.TabIndex = 5;
             // 
+            // LBL_PRUEBA
+            // 
+            this.LBL_PRUEBA.AutoSize = true;
+            this.LBL_PRUEBA.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LBL_PRUEBA.Location = new System.Drawing.Point(3, 0);
+            this.LBL_PRUEBA.Name = "LBL_PRUEBA";
+            this.LBL_PRUEBA.Size = new System.Drawing.Size(98, 32);
+            this.LBL_PRUEBA.TabIndex = 1;
+            this.LBL_PRUEBA.Text = "PRUEBA";
+            // 
             // pantallaWeb1
             // 
             this.pantallaWeb1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.pantallaWeb1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pantallaWeb1.Location = new System.Drawing.Point(25, 150);
+            this.pantallaWeb1.Location = new System.Drawing.Point(25, 182);
             this.pantallaWeb1.Margin = new System.Windows.Forms.Padding(25, 150, 25, 40);
             this.pantallaWeb1.Name = "pantallaWeb1";
             this.pantallaWeb1.Size = new System.Drawing.Size(270, 200);
@@ -144,7 +144,7 @@
             // 
             this.pantallaWeb2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.pantallaWeb2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pantallaWeb2.Location = new System.Drawing.Point(25, 415);
+            this.pantallaWeb2.Location = new System.Drawing.Point(25, 447);
             this.pantallaWeb2.Margin = new System.Windows.Forms.Padding(25, 25, 25, 40);
             this.pantallaWeb2.Name = "pantallaWeb2";
             this.pantallaWeb2.Size = new System.Drawing.Size(270, 200);
@@ -154,7 +154,7 @@
             // 
             this.pantallaWeb3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.pantallaWeb3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pantallaWeb3.Location = new System.Drawing.Point(25, 680);
+            this.pantallaWeb3.Location = new System.Drawing.Point(25, 712);
             this.pantallaWeb3.Margin = new System.Windows.Forms.Padding(25, 25, 25, 40);
             this.pantallaWeb3.Name = "pantallaWeb3";
             this.pantallaWeb3.Size = new System.Drawing.Size(270, 200);
@@ -230,6 +230,7 @@
             this.Load += new System.EventHandler(this.Home_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel5.ResumeLayout(false);
@@ -255,5 +256,6 @@
         private FlowLayoutPanel flowLayoutPanel4;
         private UserControls.RecursosDisplay recursosDisplay1;
         private FlowLayoutPanel flowLayoutPanel5;
+        private Label LBL_PRUEBA;
     }
 }

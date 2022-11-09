@@ -15,6 +15,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
     {
         Ingreso ing;
         int cont;
+        string path;
 
         public Intro(Ingreso ing)
         {
@@ -22,9 +23,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.ing = ing;
             this.cont = 0;
 
+            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
+
             p_boxUno.Location = new Point((((this.Width) / 2) - 50), (this.Height / 2));
 
-            p_boxUno.Image = Image.FromFile(@".\Recursos\Logos\LOGO_Manija.png");
+            p_boxUno.Image = Image.FromFile(this.path + @"\Recursos\Logos\LOGO_Manija.png");
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -32,12 +35,17 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             cont++;
             if(cont >= 3 && cont < 6) 
             {
-                p_boxUno.Image = Image.FromFile(@".\Recursos\Logos\LOGO_Gregoire.png");
+                p_boxUno.Image = Image.FromFile(this.path + @"\Recursos\Logos\LOGO_Gregoire.png");
             }
 
             if (cont >= 6) 
             {
+                /*
                 Home x = new Home();
+                x.Show();
+                */
+
+                PantallaPhoto x = new PantallaPhoto();
                 x.Show();
 
                 this.Close();

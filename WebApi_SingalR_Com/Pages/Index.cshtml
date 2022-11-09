@@ -1,13 +1,21 @@
 ﻿@page
 
+<p id="v1">1</p>
+
 <script>
     setInterval(function () {
-        UpdateHome();
-    }, 200);
+        console.log("hola");
+        siguienteTurno();
+    }, 1000);
 </script>
 
-<p id="v1"></p>
-<p id="v2"></p>
+<style>
+    #v1
+    {
+        font-size: 22px;
+    }
+
+</style>
 
 <script src="~/js/signalr.js"></script>
 <script src=~/js/HomeComunications.js></script>
