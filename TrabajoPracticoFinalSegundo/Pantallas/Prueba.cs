@@ -30,7 +30,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             HomeConection.Closed +=
                 async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync(); };
 
-            Prueba_Load();
         }
 
         private async void Prueba_Load()
