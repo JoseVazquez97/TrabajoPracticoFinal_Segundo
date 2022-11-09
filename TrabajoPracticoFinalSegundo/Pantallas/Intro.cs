@@ -33,12 +33,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private void Timer_Tick(object sender, EventArgs e)
         {
             cont++;
-            if(cont >= 3 && cont < 6) 
+            if(cont >= 3 && cont < 5) 
             {
                 p_boxUno.Image = Image.FromFile(this.path + @"\Recursos\Logos\LOGO_Gregoire.png");
             }
 
-            if (cont >= 6) 
+            if (cont >= 5) 
             {
                 /*
                 Home x = new Home();
@@ -59,13 +59,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void Intro_Click(object sender, EventArgs e)
         {
-            if (this.cont < 3) 
-            {
-                this.cont = 3;
-            }else if (this.cont < 6) 
-            {
-                this.cont = 6;
-            }
+            Timer.Interval = 10;
+
         }
     }
 }
