@@ -43,6 +43,7 @@
             this.p_boxUno.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.p_boxUno.TabIndex = 0;
             this.p_boxUno.TabStop = false;
+            this.p_boxUno.Click += new System.EventHandler(this.Intro_Click);
             // 
             // Timer
             // 

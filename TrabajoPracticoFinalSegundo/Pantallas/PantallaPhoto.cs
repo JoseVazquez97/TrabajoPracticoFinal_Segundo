@@ -48,7 +48,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             timer1.Stop();
             camara.Stop();
-            pictureBox1.Image = null;
+            //pictureBox1.Image = null;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -58,6 +58,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             pictureBox1.Image = frame.ToBitmap();
 
+        }
+
+        private void PantallaPhoto_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btn_JugarConFoto_Click(object sender, EventArgs e)
+        {
+            BuscarFoto.ShowDialog();
         }
     }
 }

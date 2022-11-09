@@ -33,8 +33,14 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_Encender = new System.Windows.Forms.Button();
             this.btn_Apagar = new System.Windows.Forms.Button();
+            this.btn_JugarConFoto = new System.Windows.Forms.Button();
+            this.BuscarFoto = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // pictureBox1
             // 
@@ -64,16 +70,29 @@
             this.btn_Apagar.UseVisualStyleBackColor = true;
             this.btn_Apagar.Click += new System.EventHandler(this.btnApagar_Click);
             // 
+            // btn_JugarConFoto
+            // 
+            this.btn_JugarConFoto.Location = new System.Drawing.Point(416, 422);
+            this.btn_JugarConFoto.Name = "btn_JugarConFoto";
+            this.btn_JugarConFoto.Size = new System.Drawing.Size(215, 77);
+            this.btn_JugarConFoto.TabIndex = 3;
+            this.btn_JugarConFoto.Text = "JUGAR CON FOTO";
+            this.btn_JugarConFoto.UseVisualStyleBackColor = true;
+            this.btn_JugarConFoto.Click += new System.EventHandler(this.btn_JugarConFoto_Click);
+            // 
             // PantallaPhoto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1056, 562);
+            this.Controls.Add(this.btn_JugarConFoto);
             this.Controls.Add(this.btn_Apagar);
             this.Controls.Add(this.btn_Encender);
             this.Controls.Add(this.pictureBox1);
             this.Name = "PantallaPhoto";
             this.Text = "PantallaPhoto";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PantallaPhoto_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -85,5 +104,7 @@
         private PictureBox pictureBox1;
         private Button btn_Encender;
         private Button btn_Apagar;
+        private Button btn_JugarConFoto;
+        private OpenFileDialog BuscarFoto;
     }
 }
