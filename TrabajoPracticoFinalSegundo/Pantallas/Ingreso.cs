@@ -17,10 +17,10 @@ namespace TrabajoPracticoFinalSegundo
 
         private void btn_Ingresar_Click(object sender, EventArgs e)
         {
-            /*
+            
             Intro intro = new Intro(this);
             intro.Show();
-            */
+            
 
 
             /*
@@ -28,8 +28,10 @@ namespace TrabajoPracticoFinalSegundo
             h.Show();
             */
 
+            /*
             Prueba x = new Prueba();
             x.Show();
+            */
 
             this.Hide();
         }
