@@ -69,7 +69,6 @@
             this.anim1.Size = new System.Drawing.Size(70, 70);
             this.anim1.TabIndex = 2;
             this.anim1.TabStop = false;
-            this.anim1.Click += new System.EventHandler(this.Dados_Click);
             // 
             // anim2
             // 
@@ -78,12 +77,12 @@
             this.anim2.Size = new System.Drawing.Size(70, 70);
             this.anim2.TabIndex = 3;
             this.anim2.TabStop = false;
-            this.anim2.Click += new System.EventHandler(this.Dados_Click);
             // 
             // Dados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Controls.Add(this.dado2);
             this.Controls.Add(this.anim2);
             this.Controls.Add(this.dado1);

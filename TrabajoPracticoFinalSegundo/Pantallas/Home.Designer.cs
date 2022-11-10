@@ -45,7 +45,7 @@
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.recursosDisplay1 = new TrabajoPracticoFinalSegundo.UserControls.RecursosDisplay();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.dados2 = new TrabajoPracticoFinalSegundo.UserControls.Dados();
+            this.dados1 = new TrabajoPracticoFinalSegundo.UserControls.Dados();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -66,23 +66,23 @@
             // progress
             // 
             this.progress.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progress.Location = new System.Drawing.Point(0, 772);
+            this.progress.Location = new System.Drawing.Point(0, 921);
             this.progress.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
             this.progress.Name = "progress";
-            this.progress.Size = new System.Drawing.Size(1315, 12);
+            this.progress.Size = new System.Drawing.Size(1534, 12);
             this.progress.TabIndex = 3;
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.urna1);
-            this.flowLayoutPanel1.Controls.Add(this.dados2);
+            this.flowLayoutPanel1.Controls.Add(this.dados1);
             this.flowLayoutPanel1.Controls.Add(this.turnero1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 784);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 933);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1315, 133);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1534, 133);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // urna1
@@ -119,7 +119,7 @@
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 772);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 921);
             this.flowLayoutPanel2.TabIndex = 5;
             // 
             // LBL_PRUEBA
@@ -177,9 +177,9 @@
             this.flowLayoutPanel3.BackColor = System.Drawing.Color.Transparent;
             this.flowLayoutPanel3.Controls.Add(this.btn_Exit);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(1250, 0);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(1469, 0);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(65, 772);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(65, 921);
             this.flowLayoutPanel3.TabIndex = 7;
             // 
             // flowLayoutPanel4
@@ -189,7 +189,7 @@
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(325, 0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(925, 107);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(1144, 107);
             this.flowLayoutPanel4.TabIndex = 8;
             // 
             // recursosDisplay1
@@ -208,21 +208,21 @@
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(325, 107);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(925, 665);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(925, 814);
             this.flowLayoutPanel5.TabIndex = 9;
             // 
-            // dados2
+            // dados1
             // 
-            this.dados2.Location = new System.Drawing.Point(513, -13);
-            this.dados2.Name = "dados2";
-            this.dados2.Size = new System.Drawing.Size(321, 143);
-            this.dados2.TabIndex = 4;
+            this.dados1.Location = new System.Drawing.Point(513, -13);
+            this.dados1.Name = "dados1";
+            this.dados1.Size = new System.Drawing.Size(321, 143);
+            this.dados1.TabIndex = 3;
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1315, 917);
+            this.ClientSize = new System.Drawing.Size(1534, 1066);
             this.Controls.Add(this.flowLayoutPanel5);
             this.Controls.Add(this.flowLayoutPanel4);
             this.Controls.Add(this.flowLayoutPanel3);
@@ -250,7 +250,6 @@
         #endregion
 
         private UserControls.Barco barco1;
-        private UserControls.Dados dados1;
         public ProgressBar progress;
         private FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Timer Update;
@@ -261,11 +260,11 @@
         private UserControls.Turnero turnero1;
         private UserControls.PantallaWeb pantallaWeb1;
         private UserControls.PantallaWeb pantallaWeb2;
-        private UserControls.PantallaWeb pantallaWeb3;
         private FlowLayoutPanel flowLayoutPanel4;
         private UserControls.RecursosDisplay recursosDisplay1;
         private FlowLayoutPanel flowLayoutPanel5;
         private Label LBL_PRUEBA;
-        private UserControls.Dados dados2;
+        private UserControls.PantallaWeb pantallaWeb3;
+        private UserControls.Dados dados1;
     }
 }

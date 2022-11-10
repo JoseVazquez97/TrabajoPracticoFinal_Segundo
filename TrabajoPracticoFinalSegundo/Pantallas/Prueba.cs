@@ -55,7 +55,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     {
                         LBL_PRUEBA.Invoke(new Action(() => LBL_PRUEBA.Text = $"{pepe}"));
                     }
-                    catch 
+                    catch
                     {
                         MessageBox.Show("Debes cerrar la app");
                     }
@@ -63,7 +63,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                 if (pruebauControl1.InvokeRequired) 
                 {
-
                     try
                     {
                         pruebauControl1.Invoke(new Action(() => pruebauControl1.recibirCambio(pepe)));

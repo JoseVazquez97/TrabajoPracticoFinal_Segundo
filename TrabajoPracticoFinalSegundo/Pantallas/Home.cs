@@ -17,7 +17,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
     {
 
         private string _url = "https://localhost:7170/Hubs/HomeHub.cs";
-        HubConnection HomeConection;
 
         List<Jugador> jugadores;
         int segundos;
@@ -29,11 +28,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             InitializeComponent();
 
-            HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
 
             //Si te desconectas segui intentado.
-            HomeConection.Closed += 
-                async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync();};
 
 
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
@@ -58,12 +54,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\FondoHomeDos.jpg");
 
             //BARRA (INFERIOR)
-            x = Convert.ToInt32(this.flowLayoutPanel1.Width / 2);
+            x = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
             y = this.flowLayoutPanel1.Height;
 
-           // this.dados1.LoadTablero(x, y);
             this.urna1.Load_Urna(x, y);
             this.turnero1.LoadTurnero(x, y);
+            this.dados1.CargarTablero(x, y);
+            this.dados1.AsignarTurnero(ref this.turnero1);
 
             //PROGRESSBAR
             this.progress.Width = this.Width;
@@ -163,9 +160,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         }
 
+        /*
         private void dados1_Load(object sender, EventArgs e)
         {
-            this.dados1.AsignarTurnero(ref this.turnero1);
+            //this.dados1.AsignarTurnero(ref this.turnero1);
         }
+        */
     }
 }

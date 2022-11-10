@@ -27,13 +27,12 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         {
             InitializeComponent();
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
-
         }
 
 
         #region  LOADS
 
-        public void LoadTablero()
+        public void LoadTablero(object sender, EventArgs e)
         {
             anim1.Visible = false;
             anim2.Visible = false;
@@ -46,10 +45,10 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         public void AsignarTurnero(ref Turnero x) 
         {
-            turnero = x;
+            this.turnero = x;
         }
 
-        public void LoadTablero(int tamaTotal, int altoTotal)
+        public void CargarTablero(int tamaTotal, int altoTotal)
         {
             this.Width = tamaTotal;
             this.Height = altoTotal;
@@ -70,12 +69,10 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             dado1.Location = new Point(x-65, 38);
             dado2.Location = new Point(x+60, 38);
         }
-
-
         #endregion
 
         #region FUNCIONALIDAD
-        private Image Tirada(ref int dado)
+        private Image Tirada(int dado)
         {
             int d = new Random().Next(1, 7);
             dado = d;
@@ -90,24 +87,14 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             TirandoDados.Interval = 50;
           
             TirandoDados.Start();
-            turnero.Siguiente();
-
-
+            this.turnero.Siguiente();
         }
 
-        private void Dados_Click(object sender, EventArgs e, Turnero x)
-        {
-            tiradas = 0;
-            TirandoDados.Interval = 50;
-
-            TirandoDados.Start();
-
-        }
 
         private void Dados_Try() 
         {
-            this.dado1.Image = Tirada(ref this.d1);
-            this.dado2.Image = Tirada(ref this.d2);
+            this.dado1.Image = Tirada(this.d1);
+            this.dado2.Image = Tirada(this.d2);
 
             if(anim1.Visible)
             {
@@ -119,7 +106,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                 anim1.Visible = true;
                 anim2.Visible = true;
             }
-
         }
 
         private void TerminarTirada()
