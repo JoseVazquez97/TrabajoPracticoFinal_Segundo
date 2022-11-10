@@ -6,7 +6,7 @@ namespace WebApi_SingalR_Com.Hubs
     {
         public static int Turno { get; set; } = 0;
 
-        public async Task MandarTurno(int turnox)
+        public async Task EnviarImagen(Bitmap X)
         {
             Turno = turnox;
             Turno++;
