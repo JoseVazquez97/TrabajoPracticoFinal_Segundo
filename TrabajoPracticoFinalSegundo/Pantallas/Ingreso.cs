@@ -18,9 +18,10 @@ namespace TrabajoPracticoFinalSegundo
         private void btn_Ingresar_Click(object sender, EventArgs e)
         {
             
-
+            
             Intro intro = new Intro(this);
             intro.Show();
+            
 
             /*
             Home h = new Home();

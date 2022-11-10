@@ -6,20 +6,22 @@ namespace WebApi_SingalR_Com.Hubs
     //Lo primero que debemos hacer es crear un hub, que Herede de esta clase
     public class HomeHub : Hub
     {
-        public static string imagen1 { get; set; } = "";
-        public static string imagen2 { get; set; } = "";
-        public static string imagen3 { get; set; } = "";
-        public static string imagen4 { get; set; } = "";
+                                //imageUCL -> Imagen Cliente
+        public static string imageUCL { get; set; } = "";
 
-        public async Task EnviarImagen(string img1, string img2, string img3, string img4)
+        public static string imagenU2 { get; set; } = "";
+        public static string imagenU3 { get; set; } = "";
+        public static string imagenU4 { get; set; } = "";
+
+        public async Task EnviarImagen(string imageUCLx, string imagenU2x, string imagenU3x, string imagenU4x)
         {
-            imagen1 = img1;
-            imagen2 = img2;
-            imagen3 = img3;
-            imagen4 = img4;
+            imageUCL= imageUCLx;
+            imagenU2= imagenU2x;
+            imagenU3= imagenU3x;
+            imagenU4= imagenU4x;
 
             //MANDAR LA ACTUALIZACION
-            await Clients.All.SendAsync("RecibirImagen", imagen1,imagen2,imagen3,imagen4);
+            await Clients.All.SendAsync("RecibirImagen", imageUCL, imagenU2, imagenU3, imagenU4);
         }
     }
 }

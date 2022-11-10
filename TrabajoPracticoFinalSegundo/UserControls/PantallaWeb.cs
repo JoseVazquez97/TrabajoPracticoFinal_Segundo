@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
     public partial class PantallaWeb : UserControl
     {
         string path;
-        
+        private Mat frame;
+
         public PantallaWeb()
         {
             InitializeComponent();
@@ -28,25 +30,17 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             pictureBox1.Image = Image.FromFile(this.path + @".\Recursos\Iconos\LogoEjemplo.png");
         }
 
-        public void RecibirFrame(string imagen) 
+        public void RecibirFrame(string stringimagen) 
         {
-            Bitmap frame = Base64StringToBitmap(imagen);
-            pictureBox1.Image = frame;
+           byte[] imgBytes = Convert.FromBase64String(stringimagen);
+           this.pictureBox1.Image = Base64ToImage(imgBytes);
         }
 
         public string DarFrame() 
         {
-            using (MemoryStream m = new MemoryStream())
-            {
-                Image image = pictureBox1.Image;
-                image.Save(m, image.RawFormat);
-                byte[] imageBytes = m.ToArray();
-
-                // Convert byte[] to Base64 String
-                string base64String = Convert.ToBase64String(imageBytes);
-                MessageBox.Show(base64String);
-                return base64String;
-            }
+            byte[] arreglo = ImageToByteArray(this.pictureBox1.Image);
+            string imagenByte = Convert.ToBase64String(arreglo);
+            return imagenByte;
         }
 
         public void CargarAvatar(Image avatar) 
@@ -59,28 +53,28 @@ namespace TrabajoPracticoFinalSegundo.UserControls
            
         }
 
-        //CONVIERTE STRING 64 A BITMAL
-        public static Bitmap Base64StringToBitmap(string base64String)
+        #region LA PERDICION
+        private byte[] ImageToByteArray(System.Drawing.Image imageIn)
         {
-            Bitmap bmpReturn = null;
-
-
-            byte[] byteBuffer = Convert.FromBase64String(base64String);
-            MemoryStream memoryStream = new MemoryStream(byteBuffer);
-
-
-            memoryStream.Position = 0;
-
-
-            bmpReturn = (Bitmap)Bitmap.FromStream(memoryStream);
-
-
-            memoryStream.Close();
-            memoryStream = null;
-            byteBuffer = null;
-
-
-            return bmpReturn;
+            using (var ms = new MemoryStream())
+            {
+                imageIn.Save(ms, imageIn.RawFormat);
+                return ms.ToArray();
+            }
         }
+
+        private Image Base64ToImage(byte[] imageBytes)
+        {
+            // Convert byte[] to Image
+            using (var ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
+            {
+                //LLEGAN PARAMETROS NO VALIDOS
+
+
+                Image image = Image.FromStream(ms, true); 
+                //return image;
+            }
+        }
+        #endregion
     }
 }

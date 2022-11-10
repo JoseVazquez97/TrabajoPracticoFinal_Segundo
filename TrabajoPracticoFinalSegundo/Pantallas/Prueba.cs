@@ -37,11 +37,19 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private async void Prueba_Load(object sender, EventArgs e)
         {
-            
+            //Este try es importante no sacar xd
+            try
+            {
+                await HomeConection.StartAsync();
+            }
+            catch
+            {
+                MessageBox.Show("Desconectado");
+            }
+
             HomeConection.On<int>("UpdateTurno", pepe =>
             {
-
-                if (LBL_PRUEBA.InvokeRequired) 
+                if (LBL_PRUEBA.InvokeRequired)
                 {
                     try
                     {
@@ -53,7 +61,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     }
                 }
 
-                if (pruebauControl1.InvokeRequired) 
+                if (pruebauControl1.InvokeRequired)
                 {
                     try
                     {
@@ -63,7 +71,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     {
                         MessageBox.Show("Debes cerrar la app");
                     }
-                    
+
                 }
 
             });

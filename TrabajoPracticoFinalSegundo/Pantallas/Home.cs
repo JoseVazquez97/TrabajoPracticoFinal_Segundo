@@ -11,6 +11,19 @@ using TrabajoPracticoFinalSegundo.Clases;
 using System.IO;
 using Microsoft.AspNetCore.SignalR.Client;
 using TrabajoPracticoFinalSegundo.UserControls;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
+using Microsoft.AspNetCore.Http;
+using System.Security.Policy;
+using Microsoft.VisualBasic.ApplicationServices;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Net.PeerToPeer.Collaboration;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace TrabajoPracticoFinalSegundo.Pantallas
 {
@@ -82,52 +95,61 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private async void Home_Load(object sender, EventArgs e)
         {
-            
-
-            HomeConection.On<string,string,string,string>("RecibirImagen", (img1,img2,img3,img4) =>
+            #region COMUNICACION DE DATOS.
+            //Este try es importante no sacar xd
+            try
             {
-                #region Comunicacion entre las webcams
+                await HomeConection.StartAsync();
+            }
+            catch
+            {
+                MessageBox.Show("Nosepuedoconectar");
+            }
 
-
+            #region IMAGE-Com
+            HomeConection.On<string,string,string,string>("RecibirImagen", (img1, img2, img3, img4) =>
+            {
                 if (this.pantallaWeb1.InvokeRequired)
                 {
-                    pantallaWeb1.Invoke(new Action(() => pantallaWeb1.RecibirFrame(img1)));
+                    if (img1 != "x1")
+                    {
+                        pantallaWeb1.Invoke(new Action(() => pantallaWeb1.RecibirFrame(img1)));
+                    }
                 }
-                
+
                 if (this.pantallaWeb2.InvokeRequired)
                 {
-                    pantallaWeb2.Invoke(new Action(() => pantallaWeb2.RecibirFrame(img2)));
+                    if (img2 != "x1")
+                    {
+                        pantallaWeb2.Invoke(new Action(() => pantallaWeb2.RecibirFrame(img2)));
+                    }
                 }
 
                 if (this.pantallaWeb3.InvokeRequired)
                 {
-                    pantallaWeb3.Invoke(new Action(() => pantallaWeb3.RecibirFrame(img3)));
+                    if (img3 != "x1")
+                    {
+                        pantallaWeb3.Invoke(new Action(() => pantallaWeb3.RecibirFrame(img3)));
+                    }
                 }
-
-                try
-                {
-                    mandarImagenes();
-                }
-                catch (Exception ex)
-                {
-
-                }
-
-                #endregion
-
             });
+            #endregion
+
+
+            #endregion
         }
 
         private async void mandarImagenes()
         {
             try
             {
+                
                 string imgUser = "";
                 string imgUser1 = this.pantallaWeb1.DarFrame();
                 string imgUser2 = this.pantallaWeb2.DarFrame();
                 string imgUser3 = this.pantallaWeb3.DarFrame();
 
-                await HomeConection.InvokeAsync("EnviarImagen", imgUser1, imgUser2, imgUser3, imgUser);
+                await HomeConection.InvokeAsync("EnviarImagen", imgUser,imgUser1,imgUser2,imgUser3);
             }
             catch (Exception ex)
             {
@@ -141,7 +163,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void Update_Tick(object sender, EventArgs e)
         {
-            HacerPaso(); 
+            HacerPaso();
+            mandarImagenes();
             segundos++;
         }
 
@@ -210,7 +233,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         }
 
-
+        
 
     }
 }
