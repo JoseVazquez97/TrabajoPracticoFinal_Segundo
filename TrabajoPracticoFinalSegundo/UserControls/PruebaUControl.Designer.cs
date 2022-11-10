@@ -1,6 +1,6 @@
 ﻿namespace TrabajoPracticoFinalSegundo.UserControls
 {
-    partial class Comunicador
+    partial class PruebaUControl
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -28,26 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LABEL_PRUEBA = new System.Windows.Forms.Label();
+            this.lbl_Control = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // LABEL_PRUEBA
+            // lbl_Control
             // 
-            this.LABEL_PRUEBA.AutoSize = true;
-            this.LABEL_PRUEBA.Font = new System.Drawing.Font("Segoe UI", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LABEL_PRUEBA.Location = new System.Drawing.Point(11, 24);
-            this.LABEL_PRUEBA.Name = "LABEL_PRUEBA";
-            this.LABEL_PRUEBA.Size = new System.Drawing.Size(307, 128);
-            this.LABEL_PRUEBA.TabIndex = 0;
-            this.LABEL_PRUEBA.Text = "label1";
+            this.lbl_Control.AutoSize = true;
+            this.lbl_Control.Font = new System.Drawing.Font("BlackPearl", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_Control.Location = new System.Drawing.Point(19, 33);
+            this.lbl_Control.Name = "lbl_Control";
+            this.lbl_Control.Size = new System.Drawing.Size(864, 114);
+            this.lbl_Control.TabIndex = 0;
+            this.lbl_Control.Text = "Control Sample";
             // 
-            // Comunicador
+            // PruebaUControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.LABEL_PRUEBA);
-            this.Name = "Comunicador";
-            this.Size = new System.Drawing.Size(321, 179);
+            this.Controls.Add(this.lbl_Control);
+            this.Name = "PruebaUControl";
+            this.Size = new System.Drawing.Size(955, 181);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -55,6 +55,6 @@
 
         #endregion
 
-        private Label LABEL_PRUEBA;
+        private Label lbl_Control;
     }
 }
