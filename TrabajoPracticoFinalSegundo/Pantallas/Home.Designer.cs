@@ -45,6 +45,7 @@
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.recursosDisplay1 = new TrabajoPracticoFinalSegundo.UserControls.RecursosDisplay();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.dados2 = new TrabajoPracticoFinalSegundo.UserControls.Dados();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -75,6 +76,7 @@
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.urna1);
+            this.flowLayoutPanel1.Controls.Add(this.dados2);
             this.flowLayoutPanel1.Controls.Add(this.turnero1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
@@ -95,7 +97,7 @@
             // turnero1
             // 
             this.turnero1.BackColor = System.Drawing.Color.Green;
-            this.turnero1.Location = new System.Drawing.Point(510, 6);
+            this.turnero1.Location = new System.Drawing.Point(837, 6);
             this.turnero1.Margin = new System.Windows.Forms.Padding(0);
             this.turnero1.Name = "turnero1";
             this.turnero1.Size = new System.Drawing.Size(418, 127);
@@ -209,6 +211,13 @@
             this.flowLayoutPanel5.Size = new System.Drawing.Size(925, 665);
             this.flowLayoutPanel5.TabIndex = 9;
             // 
+            // dados2
+            // 
+            this.dados2.Location = new System.Drawing.Point(513, -13);
+            this.dados2.Name = "dados2";
+            this.dados2.Size = new System.Drawing.Size(321, 143);
+            this.dados2.TabIndex = 4;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -257,5 +266,6 @@
         private UserControls.RecursosDisplay recursosDisplay1;
         private FlowLayoutPanel flowLayoutPanel5;
         private Label LBL_PRUEBA;
+        private UserControls.Dados dados2;
     }
 }
