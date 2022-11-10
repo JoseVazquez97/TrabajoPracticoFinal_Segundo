@@ -20,15 +20,6 @@ function siguienteTurno() {
 
 
 
-
-
-
-
-
-
-
-
-
 function ConexionRechazada() {
     console.log("La conexion fue rechazada");
 }
