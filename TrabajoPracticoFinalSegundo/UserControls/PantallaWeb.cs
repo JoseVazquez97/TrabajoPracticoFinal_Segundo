@@ -28,7 +28,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         }
 
-        public void RecibirImagen(Bitmap mapaDeBits) 
+        public void RecibirFrame(Bitmap mapaDeBits) 
         {
             pictureBox1.BackgroundImage = mapaDeBits;
         }
