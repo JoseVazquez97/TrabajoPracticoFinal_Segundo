@@ -27,9 +27,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            camara = new VideoCapture();
-            
+        {   
 
             frame = new Mat();
 
@@ -47,6 +45,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     avatar.Size = new System.Drawing.Size(100, 70);
                     avatar.Image = resizeImage(Image.FromFile(path + @"\Recursos\Avatars\" + avatar.Name + ".png"), new Size(100, 70));
                     avatar.Click += new EventHandler(this.clickAvatar);
+                    avatar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
                     this.Controls.Add(avatar);
                     c++;
                     y += 106;
@@ -60,9 +59,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void clickAvatar(object sender, EventArgs e)
         {
-            PictureBox avatarClickeado = sender as PictureBox;
-            string path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\";
-            Imagen.Image = Image.FromFile(path + avatarClickeado.Name + ".png");
+            object pictureBox = new PictureBox();
+            if (sender.GetType() == pictureBox.GetType())
+            {
+                PictureBox avatarClickeado = sender as PictureBox;
+                string path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\";
+                Imagen.Image = Image.FromFile(path + avatarClickeado.Name + ".png");
+            }
 
 
 
@@ -70,8 +73,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         private void btnEncender_Click(object sender, EventArgs e)
         {
-
-
+            if(camara != null) camara.Dispose();
+            camara = new VideoCapture();
             this.contador = 0;
             camara.Start();
             if (!timer1.Enabled)
@@ -91,11 +94,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.contador++;   
             camara.Read(frame);
 
-            Imagen.Image = frame.ToBitmap();
-            if (contador == 10)
+            Imagen.Image = resizeImage(frame.ToBitmap(), Imagen.Size);
+            if (contador == 20)
             {
                 camara.Stop();
                 timer1.Stop();
+                camara.Dispose();
             }
 
         }
@@ -114,13 +118,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             Image ImagenRecibida = Image.FromFile(BuscarFoto.FileName);
 
-            if (ImagenRecibida.Size.Width > 2400 || ImagenRecibida.Size.Height > 1700)
+            if (ImagenRecibida.Size.Width > 2300 || ImagenRecibida.Size.Height > 1700)
             {
-                MessageBox.Show("La imagen tiene que tener el tamaño de 2400x1700 o menor");
+                MessageBox.Show("La imagen tiene que tener el tamaño de 2300x1700 o menor");
             }
             else
             {
-                Image imagenProcesada = resizeImage(ImagenRecibida, new Size(240,170));
+                Image imagenProcesada = resizeImage(ImagenRecibida, new Size(230,170));
 
                 Imagen.Image = imagenProcesada;
             }
@@ -158,21 +162,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             camara.Read(frame);
             Imagen.Image = frame.ToBitmap();
-        }
-
-        private void pictureBox10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Avatar1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void ConfirmarSeleccion_Click(object sender, EventArgs e)

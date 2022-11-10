@@ -47,6 +47,7 @@
             // 
             // Imagen
             // 
+            this.Imagen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Imagen.Location = new System.Drawing.Point(74, 70);
             this.Imagen.Name = "Imagen";
             this.Imagen.Size = new System.Drawing.Size(230, 170);
@@ -79,7 +80,7 @@
             this.btn_JugarConFoto.Name = "btn_JugarConFoto";
             this.btn_JugarConFoto.Size = new System.Drawing.Size(215, 77);
             this.btn_JugarConFoto.TabIndex = 3;
-            this.btn_JugarConFoto.Text = "JUGAR CON FOTO";
+            this.btn_JugarConFoto.Text = "Elegir foto del PC";
             this.btn_JugarConFoto.UseVisualStyleBackColor = true;
             this.btn_JugarConFoto.Click += new System.EventHandler(this.btn_JugarConFoto_Click);
             // 
