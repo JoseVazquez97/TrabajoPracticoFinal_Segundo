@@ -12,6 +12,9 @@ namespace WebApi_SingalR_Com.Hubs
             Turno++;
 
             //MANDAR LA ACTUALIZACION
+
+
+
             await Clients.All.SendAsync("UpdateTurno", Turno);
         }
     }

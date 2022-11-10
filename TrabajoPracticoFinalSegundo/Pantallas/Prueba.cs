@@ -35,7 +35,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         }
 
-
         private async void Prueba_Load(object sender, EventArgs e)
         {
             try

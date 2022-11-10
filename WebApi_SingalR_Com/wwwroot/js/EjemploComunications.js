@@ -1,5 +1,4 @@
 ﻿//Generamos la coneXION
-
 var userConection = new signalR.HubConnectionBuilder().withUrl("/Hubs/EjemploHub.cs").build();
 
 //Generar los metodos para recibir datos del hub
