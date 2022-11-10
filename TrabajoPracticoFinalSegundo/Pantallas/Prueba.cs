@@ -37,15 +37,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private async void Prueba_Load(object sender, EventArgs e)
         {
-            try
-            {
-                await HomeConection.StartAsync();
-            }
-            catch
-            {
-                MessageBox.Show("Nosepuedoconectar");
-            }
-
+            
             HomeConection.On<int>("UpdateTurno", pepe =>
             {
 

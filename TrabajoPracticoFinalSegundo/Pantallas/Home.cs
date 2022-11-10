@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using TrabajoPracticoFinalSegundo.Clases;
 using System.IO;
 using Microsoft.AspNetCore.SignalR.Client;
+using TrabajoPracticoFinalSegundo.UserControls;
 
 namespace TrabajoPracticoFinalSegundo.Pantallas
 {
@@ -17,7 +18,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
     {
 
         private string _url = "https://localhost:7170/Hubs/HomeHub.cs";
+        HubConnection HomeConection;
 
+
+        Image miAvatar;
         List<Jugador> jugadores;
         int segundos;
         string path;
@@ -27,11 +31,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         public Home()
         {
             InitializeComponent();
-
-
-            //Si te desconectas segui intentado.
-
-
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
 
             //Carga de componentes.
@@ -43,7 +42,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             int x = (this.Width / 2);
             int y = (this.Height / 2);
 
-            #region CONFIGURACION RESPONSIVA 
+            #region LOADS con configuracion responsiva. 
 
             //RECURSOS
             this.recursosDisplay1.LoadRecursos(flowLayoutPanel4.Width, flowLayoutPanel4.Height);
@@ -72,32 +71,72 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
 
 
-            //Creacion Jugadores.
-            this.jugadores = new List<Jugador>();
+            #region Conexion al hub.
+            HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
 
-            Capitan X = new Capitan();
-            Carpintero Y = new Carpintero();
-
-            jugadores.Add(X);
-            jugadores.Add(Y);
-
-            IniciarJuego();
+            //Si te desconectas segui intentado.
+            HomeConection.Closed +=
+                async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync(); };
+            #endregion
         }
 
         private async void Home_Load(object sender, EventArgs e)
         {
             
+
+            HomeConection.On<string,string,string,string>("RecibirImagen", (img1,img2,img3,img4) =>
+            {
+                #region Comunicacion entre las webcams
+
+
+                if (this.pantallaWeb1.InvokeRequired)
+                {
+                    pantallaWeb1.Invoke(new Action(() => pantallaWeb1.RecibirFrame(img1)));
+                }
+                
+                if (this.pantallaWeb2.InvokeRequired)
+                {
+                    pantallaWeb2.Invoke(new Action(() => pantallaWeb2.RecibirFrame(img2)));
+                }
+
+                if (this.pantallaWeb3.InvokeRequired)
+                {
+                    pantallaWeb3.Invoke(new Action(() => pantallaWeb3.RecibirFrame(img3)));
+                }
+
+                try
+                {
+                    mandarImagenes();
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+                #endregion
+
+            });
+        }
+
+        private async void mandarImagenes()
+        {
+            try
+            {
+                string imgUser = "";
+                string imgUser1 = this.pantallaWeb1.DarFrame();
+                string imgUser2 = this.pantallaWeb2.DarFrame();
+                string imgUser3 = this.pantallaWeb3.DarFrame();
+
+                await HomeConection.InvokeAsync("EnviarImagen", imgUser1, imgUser2, imgUser3, imgUser);
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
 
         #region JUEGO
-
-        private void IniciarJuego() 
-        {
-            this.progress.Visible = true;
-
-
-        }
 
 
         private void Update_Tick(object sender, EventArgs e)
@@ -155,16 +194,23 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
+
+        #region LOADS
+
+        public void AsignarAvatar(Image avatar) 
+        {
+            this.miAvatar = avatar;
+            this.pantallaWeb1.CargarAvatar(this.miAvatar);
+        }
+
+        #endregion
+
         private void barco1_Load(object sender, EventArgs e)
         {
 
         }
 
-        /*
-        private void dados1_Load(object sender, EventArgs e)
-        {
-            //this.dados1.AsignarTurnero(ref this.turnero1);
-        }
-        */
+
+
     }
 }

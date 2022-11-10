@@ -6,14 +6,12 @@ namespace WebApi_SingalR_Com.Hubs
     {
         public static int Turno { get; set; } = 0;
 
-        public async Task EnviarImagen(Bitmap X)
+        public async Task MandarTurno(int turnox)
         {
             Turno = turnox;
             Turno++;
 
             //MANDAR LA ACTUALIZACION
-
-
 
             await Clients.All.SendAsync("UpdateTurno", Turno);
         }

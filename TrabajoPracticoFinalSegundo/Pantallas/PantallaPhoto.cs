@@ -66,11 +66,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 string path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\";
                 Imagen.Image = Image.FromFile(path + avatarClickeado.Name + ".png");
             }
-
-
-
-            
         }
+
         private void btnEncender_Click(object sender, EventArgs e)
         {
             if(camara != null) camara.Dispose();
@@ -167,6 +164,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private void ConfirmarSeleccion_Click(object sender, EventArgs e)
         {
             Home home = new Home();
+            home.AsignarAvatar(this.Imagen.Image);
             home.Show();
 
 

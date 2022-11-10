@@ -1,11 +1,21 @@
 ﻿@page
 
-<p id="v1">1</p>
+<p id="v1">0</p>
+
+<p id="imagen1">x1</p>
+<p id="imagen2">x2</p>
+<p id="imagen3">x3</p>
+<p id="imagen4">x4</p>
 
 <script>
     setInterval(function () {
-        console.log("hola");
         siguienteTurno();
+    }, 1000);
+</script>
+
+<script>
+    setInterval(function () {
+        actualizarImagenes();
     }, 1000);
 </script>
 
@@ -17,5 +27,5 @@
 </style>
 
 <script src="~/js/signalr.js"></script>
-<!--<script src=~/js/HomeComunications.js></script> --> 
+<script src=~/js/HomeComunications.js></script>
 <script src=~/js/EjemploComunications.js></script>

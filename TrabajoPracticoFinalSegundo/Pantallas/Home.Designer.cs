@@ -33,10 +33,10 @@
             this.progress = new System.Windows.Forms.ProgressBar();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.urna1 = new TrabajoPracticoFinalSegundo.UserControls.Urna();
+            this.dados1 = new TrabajoPracticoFinalSegundo.UserControls.Dados();
             this.turnero1 = new TrabajoPracticoFinalSegundo.UserControls.Turnero();
             this.Update = new System.Windows.Forms.Timer(this.components);
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.LBL_PRUEBA = new System.Windows.Forms.Label();
             this.pantallaWeb1 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
             this.pantallaWeb2 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
             this.pantallaWeb3 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
@@ -45,7 +45,7 @@
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.recursosDisplay1 = new TrabajoPracticoFinalSegundo.UserControls.RecursosDisplay();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.dados1 = new TrabajoPracticoFinalSegundo.UserControls.Dados();
+            this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -56,7 +56,7 @@
             // barco1
             // 
             this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Location = new System.Drawing.Point(442, 80);
+            this.barco1.Location = new System.Drawing.Point(442, 208);
             this.barco1.Margin = new System.Windows.Forms.Padding(442, 80, 0, 0);
             this.barco1.Name = "barco1";
             this.barco1.Size = new System.Drawing.Size(360, 754);
@@ -66,7 +66,7 @@
             // progress
             // 
             this.progress.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progress.Location = new System.Drawing.Point(0, 921);
+            this.progress.Location = new System.Drawing.Point(0, 916);
             this.progress.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
             this.progress.Name = "progress";
             this.progress.Size = new System.Drawing.Size(1534, 12);
@@ -80,7 +80,7 @@
             this.flowLayoutPanel1.Controls.Add(this.turnero1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 933);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 928);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1534, 133);
             this.flowLayoutPanel1.TabIndex = 4;
@@ -93,6 +93,14 @@
             this.urna1.Name = "urna1";
             this.urna1.Size = new System.Drawing.Size(510, 127);
             this.urna1.TabIndex = 2;
+            // 
+            // dados1
+            // 
+            this.dados1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dados1.Location = new System.Drawing.Point(513, -13);
+            this.dados1.Name = "dados1";
+            this.dados1.Size = new System.Drawing.Size(321, 143);
+            this.dados1.TabIndex = 3;
             // 
             // turnero1
             // 
@@ -112,31 +120,20 @@
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel2.Controls.Add(this.LBL_PRUEBA);
             this.flowLayoutPanel2.Controls.Add(this.pantallaWeb1);
             this.flowLayoutPanel2.Controls.Add(this.pantallaWeb2);
             this.flowLayoutPanel2.Controls.Add(this.pantallaWeb3);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 921);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 916);
             this.flowLayoutPanel2.TabIndex = 5;
-            // 
-            // LBL_PRUEBA
-            // 
-            this.LBL_PRUEBA.AutoSize = true;
-            this.LBL_PRUEBA.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LBL_PRUEBA.Location = new System.Drawing.Point(3, 0);
-            this.LBL_PRUEBA.Name = "LBL_PRUEBA";
-            this.LBL_PRUEBA.Size = new System.Drawing.Size(98, 32);
-            this.LBL_PRUEBA.TabIndex = 1;
-            this.LBL_PRUEBA.Text = "PRUEBA";
             // 
             // pantallaWeb1
             // 
             this.pantallaWeb1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.pantallaWeb1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pantallaWeb1.Location = new System.Drawing.Point(25, 182);
+            this.pantallaWeb1.Location = new System.Drawing.Point(25, 150);
             this.pantallaWeb1.Margin = new System.Windows.Forms.Padding(25, 150, 25, 40);
             this.pantallaWeb1.Name = "pantallaWeb1";
             this.pantallaWeb1.Size = new System.Drawing.Size(270, 200);
@@ -146,7 +143,7 @@
             // 
             this.pantallaWeb2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.pantallaWeb2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pantallaWeb2.Location = new System.Drawing.Point(25, 447);
+            this.pantallaWeb2.Location = new System.Drawing.Point(25, 415);
             this.pantallaWeb2.Margin = new System.Windows.Forms.Padding(25, 25, 25, 40);
             this.pantallaWeb2.Name = "pantallaWeb2";
             this.pantallaWeb2.Size = new System.Drawing.Size(270, 200);
@@ -156,7 +153,7 @@
             // 
             this.pantallaWeb3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.pantallaWeb3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pantallaWeb3.Location = new System.Drawing.Point(25, 712);
+            this.pantallaWeb3.Location = new System.Drawing.Point(25, 680);
             this.pantallaWeb3.Margin = new System.Windows.Forms.Padding(25, 25, 25, 40);
             this.pantallaWeb3.Name = "pantallaWeb3";
             this.pantallaWeb3.Size = new System.Drawing.Size(270, 200);
@@ -179,7 +176,7 @@
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(1469, 0);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(65, 921);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(65, 916);
             this.flowLayoutPanel3.TabIndex = 7;
             // 
             // flowLayoutPanel4
@@ -204,32 +201,36 @@
             // flowLayoutPanel5
             // 
             this.flowLayoutPanel5.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel5.Controls.Add(this.label1);
             this.flowLayoutPanel5.Controls.Add(this.barco1);
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(325, 107);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(925, 814);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(925, 809);
             this.flowLayoutPanel5.TabIndex = 9;
             // 
-            // dados1
+            // label1
             // 
-            this.dados1.Location = new System.Drawing.Point(513, -13);
-            this.dados1.Name = "dados1";
-            this.dados1.Size = new System.Drawing.Size(321, 143);
-            this.dados1.TabIndex = 3;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(307, 128);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "label1";
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1534, 1066);
+            this.ClientSize = new System.Drawing.Size(1534, 1061);
             this.Controls.Add(this.flowLayoutPanel5);
             this.Controls.Add(this.flowLayoutPanel4);
             this.Controls.Add(this.flowLayoutPanel3);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.progress);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MinimizeBox = false;
             this.Name = "Home";
             this.Text = "Home";
@@ -239,10 +240,10 @@
             this.Load += new System.EventHandler(this.Home_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel5.ResumeLayout(false);
+            this.flowLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -263,8 +264,8 @@
         private FlowLayoutPanel flowLayoutPanel4;
         private UserControls.RecursosDisplay recursosDisplay1;
         private FlowLayoutPanel flowLayoutPanel5;
-        private Label LBL_PRUEBA;
         private UserControls.PantallaWeb pantallaWeb3;
         private UserControls.Dados dados1;
+        private Label label1;
     }
 }
