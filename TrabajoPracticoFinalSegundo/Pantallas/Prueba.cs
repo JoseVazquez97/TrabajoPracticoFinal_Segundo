@@ -14,14 +14,14 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace TrabajoPracticoFinalSegundo.Pantallas
 {
-    public partial class Prueba : Form
+    public partial class Prueba : Form 
     {
-        private string _url = "https://localhost:7170/Hubs/HomeHub.cs";
+        private string _url = "https://localhost:7170/Hubs/EjemploHub.cs";
         HubConnection HomeConection;
-        Dispatcher dispatcher;
 
         public Prueba()
         {
@@ -49,11 +49,33 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<int>("UpdateTurno", pepe =>
             {
-                this.dispatcher.InvokeAsync(() =>
+
+                if (LBL_PRUEBA.InvokeRequired) 
                 {
-                    //var dato = $"{pepe}";
-                    //LBL_PRUEBA.Text = dato;
-                });
+                    try
+                    {
+                        LBL_PRUEBA.Invoke(new Action(() => LBL_PRUEBA.Text = $"{pepe}"));
+                    }
+                    catch 
+                    {
+                        MessageBox.Show("Debes cerrar la app");
+                    }
+                }
+
+                if (pruebauControl1.InvokeRequired) 
+                {
+
+                    try
+                    {
+                        pruebauControl1.Invoke(new Action(() => pruebauControl1.recibirCambio(pepe)));
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Debes cerrar la app");
+                    }
+                    
+                }
+
             });
 
         }

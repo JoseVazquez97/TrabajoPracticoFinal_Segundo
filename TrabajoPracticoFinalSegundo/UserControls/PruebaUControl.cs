@@ -10,23 +10,16 @@ using System.Windows.Forms;
 
 namespace TrabajoPracticoFinalSegundo.UserControls
 {
-    public partial class Comunicador : UserControl
+    public partial class PruebaUControl : UserControl
     {
-        public Comunicador()
+        public PruebaUControl()
         {
             InitializeComponent();
-            
         }
 
-        public ref Label miLabel() 
+        public void recibirCambio(int pepe) 
         {
-            return ref this.LABEL_PRUEBA;
+            this.lbl_Control.Text = pepe.ToString();
         }
-
-        public void siguienteValor(int i)
-        { 
-            this.LABEL_PRUEBA.Text = i.ToString();
-        }
-
     }
 }
