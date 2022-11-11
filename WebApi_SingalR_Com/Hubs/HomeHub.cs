@@ -24,13 +24,14 @@ namespace WebApi_SingalR_Com.Hubs
 
 
         //Turnero
-        public async Task SiguienteTurno(string key, string Turnox)
+        public async Task SiguienteTurno(string rol, string key, string Turnox)
         {
+            Rol = rol;
             Key = key;
             Turno = Turnox;
 
             //MANDAR LA ACTUALIZACION
-            await Clients.All.SendAsync("RecibirTurno", Key, Turno);
+            await Clients.All.SendAsync("RecibirTurno", rol, key, Turnox);
         }
     }
 }

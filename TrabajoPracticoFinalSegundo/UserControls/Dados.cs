@@ -43,6 +43,15 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             dado2.Image = Image.FromFile(this.path + @"\Recursos\Dados\Dado2.bmp");
         }
 
+        public void setEnable(bool x) 
+        {
+            this.anim1.Enabled=x;
+            this.anim2.Enabled=x;
+            this.dado1.Enabled=x;
+            this.dado2.Enabled=x;
+            this.Enabled = x;
+        }
+
         public void AsignarTurnero(ref Turnero x) 
         {
             this.turnero = x;

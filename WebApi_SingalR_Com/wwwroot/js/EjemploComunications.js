@@ -13,6 +13,19 @@ function siguienteTurno()
     userConection.send("MandarTurno", parseInt(value));
 }
 
+function minutos()
+{
+    var segS = parseInt(document.getElementById("v1").innerHTML);
+    var minS = parseInt(document.getElementById("min").innerHTML);
+
+    if (segS >= 60)
+    {
+        document.getElementById("v1").innerHTML = "0";
+        minS++;
+        document.getElementById("min").innerHTML = minS.toString();
+    }
+}
+
 function ConexionRechazada() {
     console.log("La conexion fue rechazada");
 }

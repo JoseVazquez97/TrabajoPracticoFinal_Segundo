@@ -41,6 +41,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         string path;
         int contError;
         int Key;
+        int turno;
 
         //Esto Es un comentario.
 
@@ -50,7 +51,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
             this.contError = 0;
-
 
             #region LOADS DE COMPONENTES 
 
@@ -123,7 +123,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         /// ///////////////////////////////////////////////////////////////
 
-        #region DE ESTA PANTALLA
+        #region USERS_CONTROLS
 
         #region PROGRES_BAR
 
@@ -145,6 +145,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private void dados_Click(object sender, EventArgs e) 
         {
             this.dados1.tirar();
+            mandarInfoDados();
         }
 
         #endregion
@@ -210,20 +211,20 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private async void mandarInfoDados()
         {
+            string rol = this.Rol;
+            string key = this.Key.ToString();
+            string turno = this.turno.ToString();
+
+            try
+            {
+                await HomeConection.InvokeAsync("SiguienteTurno", rol, key, turno);
+            }
+            catch { }
         }
 
         #endregion
 
-        #region Mandar Info Turnero
-
-        private async void mandarInfoTurnero()
-        {
-            try
-            {
-                await HomeConection.InvokeAsync("SiguienteTurno", this.Key, this.turnero1.TURNO);
-            }
-            catch { }
-        }
+        #region INFORMAR - Turneros
 
         #endregion
 
@@ -304,51 +305,59 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             #region TURNERO-COM
 
-            HomeConection.On<string, string>("RecibirTurno", (key, turno) =>
+            HomeConection.On<string, string, string>("RecibirTurno", (rol, key, turno) =>
             {
-                int turnox = Convert.ToInt32(turno);
-                this.Key = Convert.ToInt32(key);
+                int turnox = int.Parse(turno);
+                this.Key = int.Parse(key);
 
-                switch (this.Key)
+                if (this.Rol == rol) //Si el mensaje es para mi rol
                 {
-                    case 1:
-                        if (this.Rol == "Capitan")
-                        {
-                            this.dados1.Enabled = true;
-                        }
-                        else { this.dados1.Enabled = false; }
-                        break;
+                    switch (this.Key)
+                    {
+                        case 1:
+                            if (this.dados1.InvokeRequired)
+                            {
+                                try
+                                {
+                                    dados1.Invoke(new Action(() => dados1.setEnable(true)));
+                                }
+                                catch { }
+                            }
+                            break;
 
-                    case 2:
-                        if (this.Rol == "Carpintero")
-                        {
-                            this.dados1.Enabled = true;
-                        }
-                        else { this.dados1.Enabled = false; }
-                        break;
 
-                    case 3:
-                        if (this.Rol == "Mercader")
+                        case 0:
+                            if (this.dados1.InvokeRequired)
+                            {
+                                try
+                                {
+                                    dados1.Invoke(new Action(() => dados1.setEnable(false)));
+                                }
+                                catch { }
+                            }
+                            break;
+                    }
+                }
+                else // osea, si no es mi rol
+                {
+                    if (this.turno != turnox)  //Pero el turno cambio!!
+                    {
+                        try 
                         {
-                            this.dados1.Enabled = true;
+                            if (this.dados1.InvokeRequired)
+                            {
+                                try
+                                {
+                                    dados1.Invoke(new Action(() => dados1.tirar()));
+                                }
+                                catch { }
+                            }
                         }
-                        else { this.dados1.Enabled = false; }
-                        break;
-
-                    case 4:
-                        if (this.Rol == "Astillero")
-                        {
-                            this.dados1.Enabled = true;
-                        }
-                        else { this.dados1.Enabled = false; }
-                        break;
+                        catch{ }
+                    }
                 }
 
-                try
-                {
-                    turnero1.Invoke(new Action(() => turnero1.TURNO = turnox));
-                }
-                catch { }
+                
             });
             #endregion
         }
@@ -371,6 +380,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             switch (rol)
             {
                 case "Capitan":
+                    this.Key = 1;
                     this.pantallaWeb1.CargarAvatar(this.miAvatar);
                     break;
 

@@ -18,8 +18,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         int turno;
         int Segundos;
 
-        public int TURNO { get { return this.turno; } set {this.turno = value; } }
-
         public Turnero()
         {
             InitializeComponent();
@@ -36,7 +34,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         public void Siguiente() 
         {
-            turno++;
+            this.turno++;
 
             lbl_Turno.Text = turno.ToString();
 
@@ -45,7 +43,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                 turno = 0;
             }
         }
-
 
         private void lbl_Nombre_Click(object sender, EventArgs e)
         {
