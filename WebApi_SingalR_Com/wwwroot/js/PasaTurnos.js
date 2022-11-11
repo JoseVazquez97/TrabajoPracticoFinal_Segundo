@@ -1,27 +1,27 @@
 ﻿//Generamos la coneXION
-var userConection = new signalR.HubConnectionBuilder().withUrl("/Hubs/TurneroHub.cs").build();
+var userConection = new signalR.HubConnectionBuilder().withUrl("/Hubs/HomeHub.cs").build();
 
 //Generar los metodos para recibir datos del hub
-userConection.on("RecibirTurno", (rol, turno) => {
+userConection.on("RecibirTurno", (key,turno) => {
 
     document.getElementById("Turnero").innerHTML = turno
 
-    switch (rol)
+    switch (key)
     {
-        case "Capitan":
-            document.getElementById("Key").innerHTML = "1";
-        break;
-
-        case "Carpintero":
+        case "1":
             document.getElementById("Key").innerHTML = "2";
         break;
 
-        case "Mercader":
+        case "2":
             document.getElementById("Key").innerHTML = "3";
         break;
 
-        case "Artillero":
+        case "3":
             document.getElementById("Key").innerHTML = "4";
+        break;
+
+        case "4":
+            document.getElementById("Key").innerHTML = "1";
         break;
     }
 })
@@ -29,9 +29,11 @@ userConection.on("RecibirTurno", (rol, turno) => {
 //Generar los metodos, para enviar datos hacia el hub
 function actualizarTurneros() {
 
-    const key = document.getElementsByClassName("Keys");
+    var turno = document.getElementById("Turnero");
+    var key = document.getElementById("Keys");
 
-    userConection.send("SiguienteTurno", rol,turno);
+
+    userConection.send("SiguienteTurno", key,turno);
 }
 
 function ConexionRechazada() {

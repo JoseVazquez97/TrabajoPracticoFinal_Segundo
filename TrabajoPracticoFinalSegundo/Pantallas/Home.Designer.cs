@@ -103,6 +103,7 @@
             this.dados1.Size = new System.Drawing.Size(321, 143);
             this.dados1.TabIndex = 3;
             this.dados1.Load += new System.EventHandler(this.dados1_Load);
+            this.dados1.Click += new System.EventHandler(this.dados_Click);
             // 
             // turnero1
             // 

@@ -81,7 +81,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         }
 
 
-        private void Dados_Click(object sender, EventArgs e)
+        public void tirar()
         {
             tiradas = 0;
             TirandoDados.Interval = 50;

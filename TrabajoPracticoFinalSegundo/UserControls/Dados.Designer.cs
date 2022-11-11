@@ -51,7 +51,6 @@
             this.dado1.Size = new System.Drawing.Size(60, 60);
             this.dado1.TabIndex = 0;
             this.dado1.TabStop = false;
-            this.dado1.Click += new System.EventHandler(this.Dados_Click);
             // 
             // dado2
             // 
@@ -60,7 +59,6 @@
             this.dado2.Size = new System.Drawing.Size(60, 60);
             this.dado2.TabIndex = 1;
             this.dado2.TabStop = false;
-            this.dado2.Click += new System.EventHandler(this.Dados_Click);
             // 
             // anim1
             // 
@@ -89,7 +87,6 @@
             this.Controls.Add(this.anim1);
             this.Name = "Dados";
             this.Size = new System.Drawing.Size(321, 143);
-            this.Click += new System.EventHandler(this.Dados_Click);
             ((System.ComponentModel.ISupportInitialize)(this.dado1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dado2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.anim1)).EndInit();

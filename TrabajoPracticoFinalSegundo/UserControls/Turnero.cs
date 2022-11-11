@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,12 +18,12 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         int turno;
         int Segundos;
 
+        public int TURNO { get { return this.turno; } set {this.turno = value; } }
 
         public Turnero()
         {
             InitializeComponent();
             this.turno = 1;
-         
         }
 
         public void LoadTurnero(int tamaTotal, int altoTotal) 
@@ -31,7 +32,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.Height = altoTotal;
 
             this.pictureBox1.Width = tamaTotal / 2;
-
         }
 
         public void Siguiente() 

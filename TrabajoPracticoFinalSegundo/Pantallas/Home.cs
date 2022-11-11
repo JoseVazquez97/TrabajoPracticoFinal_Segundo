@@ -40,6 +40,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         int segundos;
         string path;
         int contError;
+        int Key;
 
         //Esto Es un comentario.
 
@@ -99,6 +100,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
 
 
+        /// ///////////////////////////////////////////////////////////////
+
+
         #region JUEGO (LOOP PRINCIPAL)
 
         private void Update_Tick(object sender, EventArgs e)
@@ -106,8 +110,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             //Adelanta un fragmento de la progress bar
             HacerPaso();
 
-            //Mandamos las imagenes al hub.
+            //Compartimos la informacion
             mandarImagenes();
+            mandarInfoDados();
 
             //Contador de segundos.
             segundos++;
@@ -116,7 +121,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
 
-        #region FUNCIONES
+        /// ///////////////////////////////////////////////////////////////
+
+        #region DE ESTA PANTALLA
 
         #region PROGRES_BAR
 
@@ -129,6 +136,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
             */
             
+        }
+
+        #endregion
+
+        #region DADOS
+
+        private void dados_Click(object sender, EventArgs e) 
+        {
+            this.dados1.tirar();
         }
 
         #endregion
@@ -158,8 +174,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
+        #endregion
+
+        /// ///////////////////////////////////////////////////////////////
+
+        #region SIGNAL R
+
+
         #region ENVIO DE MENSAJES
 
+        #region Mandar Imagenes
         private async void mandarImagenes()
         {
             string imgUser;
@@ -178,8 +202,31 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 await HomeConection.InvokeAsync("EnviarImagen", imgUser, rol);
             }
-            catch { MessageBox.Show("Error en el envio de imagenes."); }
+            catch { if (this.contError == 0) MessageBox.Show("Error en el envio de imagenes."); this.contError++; }
         }
+        #endregion
+
+        #region Mandar Info Dados
+
+        private async void mandarInfoDados()
+        {
+        }
+
+        #endregion
+
+        #region Mandar Info Turnero
+
+        private async void mandarInfoTurnero()
+        {
+            try
+            {
+                await HomeConection.InvokeAsync("SiguienteTurno", this.Key, this.turnero1.TURNO);
+            }
+            catch { }
+        }
+
+        #endregion
+
         #endregion
 
         #region RECEPCION DE MENSAJES
@@ -255,13 +302,63 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             });
             #endregion
 
+            #region TURNERO-COM
 
+            HomeConection.On<string, string>("RecibirTurno", (key, turno) =>
+            {
+                int turnox = Convert.ToInt32(turno);
+                this.Key = Convert.ToInt32(key);
+
+                switch (this.Key)
+                {
+                    case 1:
+                        if (this.Rol == "Capitan")
+                        {
+                            this.dados1.Enabled = true;
+                        }
+                        else { this.dados1.Enabled = false; }
+                        break;
+
+                    case 2:
+                        if (this.Rol == "Carpintero")
+                        {
+                            this.dados1.Enabled = true;
+                        }
+                        else { this.dados1.Enabled = false; }
+                        break;
+
+                    case 3:
+                        if (this.Rol == "Mercader")
+                        {
+                            this.dados1.Enabled = true;
+                        }
+                        else { this.dados1.Enabled = false; }
+                        break;
+
+                    case 4:
+                        if (this.Rol == "Astillero")
+                        {
+                            this.dados1.Enabled = true;
+                        }
+                        else { this.dados1.Enabled = false; }
+                        break;
+                }
+
+                try
+                {
+                    turnero1.Invoke(new Action(() => turnero1.TURNO = turnox));
+                }
+                catch { }
+            });
+            #endregion
         }
 
         #endregion
 
         #endregion
 
+
+        /// ///////////////////////////////////////////////////////////////
 
         #region LOADS
 
