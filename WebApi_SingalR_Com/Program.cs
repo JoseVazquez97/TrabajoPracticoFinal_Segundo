@@ -8,7 +8,6 @@ builder.Services.AddRazorPages();
 //AGREGAMOS SIGNAL R
 builder.Services.AddSignalR();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,5 +31,6 @@ app.MapRazorPages();
 //Luego tenemos que agregar la ruta a la que van a venir los clientes a consultar los datos.
 app.MapHub<EjemploHub>("/Hubs/EjemploHub.cs");
 app.MapHub<HomeHub>("/Hubs/HomeHub.cs");
+app.MapHub<TurneroHub>("/Hubs/TurneroHub.cs");
 
 app.Run();

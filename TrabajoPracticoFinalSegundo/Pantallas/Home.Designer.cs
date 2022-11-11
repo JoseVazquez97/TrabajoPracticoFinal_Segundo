@@ -97,15 +97,17 @@
             // dados1
             // 
             this.dados1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dados1.Location = new System.Drawing.Point(513, -13);
+            this.dados1.Location = new System.Drawing.Point(560, -13);
+            this.dados1.Margin = new System.Windows.Forms.Padding(50, 3, 50, 3);
             this.dados1.Name = "dados1";
             this.dados1.Size = new System.Drawing.Size(321, 143);
             this.dados1.TabIndex = 3;
+            this.dados1.Load += new System.EventHandler(this.dados1_Load);
             // 
             // turnero1
             // 
             this.turnero1.BackColor = System.Drawing.Color.Green;
-            this.turnero1.Location = new System.Drawing.Point(837, 6);
+            this.turnero1.Location = new System.Drawing.Point(931, 6);
             this.turnero1.Margin = new System.Windows.Forms.Padding(0);
             this.turnero1.Name = "turnero1";
             this.turnero1.Size = new System.Drawing.Size(418, 127);

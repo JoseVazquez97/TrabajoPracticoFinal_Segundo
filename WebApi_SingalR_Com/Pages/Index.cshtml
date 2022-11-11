@@ -1,11 +1,20 @@
 ﻿@page
 
+<p>Tiempo Servidor</p>
 <p id="v1">0</p>
 
 <p class="imagen" id="img1">x1</p>
 <p class="imagen" id="img2">x2</p>
 <p class="imagen" id="img3">x3</p>
 <p class="imagen" id="img4">x4</p>
+
+
+<p>Turnero</p>
+
+<p id="Turnero">1</p>
+
+<p class="Keys" id="key">1</p>
+
 
 
 <script>
@@ -16,8 +25,14 @@
 
 <script>
     setInterval(function () {
-        actualizarImagenes();
+        actualizarTurneros();
     }, 1000);
+</script>
+
+<script>
+    setInterval(function () {
+        actualizarImagenes();
+    }, 300);
 </script>
 
 <style>
@@ -29,4 +44,7 @@
 
 <script src="~/js/signalr.js"></script>
 <script src=~/js/HomeComunications.js></script>
-<script src=~/js/EjemploComunications.js></script>
+<script src="~/js/signalr.js"></script>
+<script src="~/js/PasaTurnos.js"></script>
+
+<!--<script src=~/js/EjemploComunications.js></script>-->

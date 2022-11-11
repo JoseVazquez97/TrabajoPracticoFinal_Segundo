@@ -76,7 +76,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             this.urna1.Load_Urna(x, y);
             this.turnero1.LoadTurnero(x, y);
-            this.dados1.CargarTablero(x, y);
+            this.dados1.CargarTablero(x+100, y);
             this.dados1.AsignarTurnero(ref this.turnero1);
 
             //PROGRESSBAR
@@ -296,6 +296,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         }
 
+        private void dados1_Load(object sender, EventArgs e)
+        {
+
+        }
         #endregion
 
 
