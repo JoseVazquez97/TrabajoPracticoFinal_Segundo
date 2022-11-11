@@ -40,13 +40,12 @@
             this.pantallaWeb1 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
             this.pantallaWeb2 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
             this.pantallaWeb3 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
+            this.pantallaWeb4 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
             this.btn_Exit = new System.Windows.Forms.Button();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.recursosDisplay1 = new TrabajoPracticoFinalSegundo.UserControls.RecursosDisplay();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pantallaWeb4 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -57,7 +56,7 @@
             // barco1
             // 
             this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Location = new System.Drawing.Point(442, 208);
+            this.barco1.Location = new System.Drawing.Point(442, 80);
             this.barco1.Margin = new System.Windows.Forms.Padding(442, 80, 0, 0);
             this.barco1.Name = "barco1";
             this.barco1.Size = new System.Drawing.Size(360, 754);
@@ -161,6 +160,15 @@
             this.pantallaWeb3.Size = new System.Drawing.Size(270, 200);
             this.pantallaWeb3.TabIndex = 2;
             // 
+            // pantallaWeb4
+            // 
+            this.pantallaWeb4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.pantallaWeb4.Location = new System.Drawing.Point(25, 730);
+            this.pantallaWeb4.Margin = new System.Windows.Forms.Padding(25, 25, 25, 10);
+            this.pantallaWeb4.Name = "pantallaWeb4";
+            this.pantallaWeb4.Size = new System.Drawing.Size(270, 200);
+            this.pantallaWeb4.TabIndex = 3;
+            // 
             // btn_Exit
             // 
             this.btn_Exit.Location = new System.Drawing.Point(3, 3);
@@ -203,33 +211,12 @@
             // flowLayoutPanel5
             // 
             this.flowLayoutPanel5.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel5.Controls.Add(this.label1);
             this.flowLayoutPanel5.Controls.Add(this.barco1);
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(325, 107);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
             this.flowLayoutPanel5.Size = new System.Drawing.Size(925, 809);
             this.flowLayoutPanel5.TabIndex = 9;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(307, 128);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "label1";
-            // 
-            // pantallaWeb4
-            // 
-            this.pantallaWeb4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.pantallaWeb4.Location = new System.Drawing.Point(25, 730);
-            this.pantallaWeb4.Margin = new System.Windows.Forms.Padding(25, 25, 25, 10);
-            this.pantallaWeb4.Name = "pantallaWeb4";
-            this.pantallaWeb4.Size = new System.Drawing.Size(270, 200);
-            this.pantallaWeb4.TabIndex = 3;
             // 
             // Home
             // 
@@ -254,7 +241,6 @@
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel5.ResumeLayout(false);
-            this.flowLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -277,7 +263,6 @@
         private FlowLayoutPanel flowLayoutPanel5;
         private UserControls.PantallaWeb pantallaWeb3;
         private UserControls.Dados dados1;
-        private Label label1;
         private UserControls.PantallaWeb pantallaWeb4;
     }
 }

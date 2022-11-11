@@ -39,15 +39,21 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         Jugador jugador;
         int segundos;
         string path;
+        int contError;
 
         //Esto Es un comentario.
 
         public Home()
         {
             InitializeComponent();
-            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
 
-            //Carga de componentes.
+            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
+            this.contError = 0;
+
+
+            #region LOADS DE COMPONENTES 
+
+            //PANTALLAS WEB
             this.segundos = 0;
             this.pantallaWeb1.WebLoad();
             this.pantallaWeb2.WebLoad();
@@ -55,8 +61,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             int x = (this.Width / 2);
             int y = (this.Height / 2);
-
-            #region LOADS con configuracion responsiva. 
 
             //RECURSOS
             this.recursosDisplay1.LoadRecursos(flowLayoutPanel4.Width, flowLayoutPanel4.Height);
@@ -84,7 +88,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.progress.Step = 1;
             #endregion
 
-            #region Conexion al hub.
+
+            #region DECLARACION DEL HUB
             HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
 
             //Si te desconectas segui intentado.
@@ -93,116 +98,20 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
         }
 
-        private async void Home_Load(object sender, EventArgs e)
-        {
 
-            #region COMUNICACION DE DATOS.
-            //Este try es importante no sacar xd
-
-            #region CONECTARSE
-            try
-            {
-                await HomeConection.StartAsync();
-            }
-            catch
-            {
-                MessageBox.Show("Nosepuedoconectar");
-            }
-            #endregion
-
-            #region IMAGE-Com
-            HomeConection.On<string,string>("RecibirImagen", (img, rolx) =>
-            {
-                switch (rolx.ToString()) 
-                {
-                    case "Capitan":
-                        if (this.pantallaWeb1.InvokeRequired)
-                        {
-                            try
-                            {
-                                pantallaWeb1.Invoke(new Action(() => pantallaWeb1.RecibirFrame(img.ToString())));
-                            }
-                            catch {}
-                        }
-                        break;
-
-                    case "Carpintero":
-                        if (this.pantallaWeb2.InvokeRequired)
-                        {
-                            try
-                            {
-                               pantallaWeb2.Invoke(new Action(() => pantallaWeb2.RecibirFrame(img.ToString())));
-                            }
-                            catch { }
-                        }
-                        break;
-
-                    case "Mercader":
-                        if (this.pantallaWeb3.InvokeRequired)
-                        {
-                            try
-                            {
-                                pantallaWeb3.Invoke(new Action(() => pantallaWeb3.RecibirFrame(img.ToString())));
-                            }
-                            catch{ }
-                        }
-                        break;
-
-                    case "Artillero":
-                        if (this.pantallaWeb4.InvokeRequired)
-                        {
-                            try
-                            {
-                                pantallaWeb4.Invoke(new Action(() => pantallaWeb4.RecibirFrame(img.ToString())));
-                            }
-                            catch { }
-                        }
-                        break;
-
-                    default:
-                        
-                        break;
-                }
-            });
-            #endregion
-
-
-            #endregion
-        }
-
-        private async void mandarImagenes()
-        {
-            string imgUser;
-            string rol = this.Rol;
-
-            switch(rol)
-            {
-                case "Capitan": imgUser = this.pantallaWeb1.DarFrame(); break;
-                case "Carpintero": imgUser = this.pantallaWeb2.DarFrame(); break;
-                case "Mercader": imgUser = this.pantallaWeb3.DarFrame(); break;
-                case "Artillero": imgUser = this.pantallaWeb4.DarFrame(); break;
-                default: imgUser = "Defaul"; break;
-            };
-
-            try
-            {
-                await HomeConection.InvokeAsync("EnviarImagen", imgUser, rol);
-            }
-            catch {}
-           
-        }
-
-
-        #region JUEGO
-
+        #region JUEGO (LOOP PRINCIPAL)
 
         private void Update_Tick(object sender, EventArgs e)
         {
+            //Adelanta un fragmento de la progress bar
             HacerPaso();
+
+            //Mandamos las imagenes al hub.
             mandarImagenes();
+
+            //Contador de segundos.
             segundos++;
         }
-
 
         #endregion
 
@@ -223,7 +132,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
 
         #endregion
-
 
         #region CERRAR FORM
         private void Home_FormClosed(object sender, FormClosedEventArgs e)
@@ -250,11 +158,114 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
+        #region ENVIO DE MENSAJES
+
+        private async void mandarImagenes()
+        {
+            string imgUser;
+            string rol = this.Rol;
+
+            switch (rol)
+            {
+                case "Capitan": imgUser = this.pantallaWeb1.DarFrame(); break;
+                case "Carpintero": imgUser = this.pantallaWeb2.DarFrame(); break;
+                case "Mercader": imgUser = this.pantallaWeb3.DarFrame(); break;
+                case "Artillero": imgUser = this.pantallaWeb4.DarFrame(); break;
+                default: imgUser = "Defaul"; break;
+            };
+
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarImagen", imgUser, rol);
+            }
+            catch { MessageBox.Show("Error en el envio de imagenes."); }
+        }
+        #endregion
+
+        #region RECEPCION DE MENSAJES
+
+        private async void Home_Load(object sender, EventArgs e)
+        {
+            #region CONECTARSE
+            //Este try es importante no sacar xd
+            try
+            {
+                await HomeConection.StartAsync();
+            }
+            catch
+            {
+                MessageBox.Show("Nosepuedoconectar");
+            }
+            #endregion
+
+            #region IMAGE-COM
+
+            HomeConection.On<string, string>("RecibirImagen", (img, rolx) =>
+            {
+                switch (rolx.ToString())
+                {
+                    case "Capitan":
+                        if (this.pantallaWeb1.InvokeRequired)
+                        {
+                            try
+                            {
+                                pantallaWeb1.Invoke(new Action(() => pantallaWeb1.RecibirFrame(img.ToString())));
+                            }
+                            catch { }
+                        }
+                        break;
+
+                    case "Carpintero":
+                        if (this.pantallaWeb2.InvokeRequired)
+                        {
+                            try
+                            {
+                                pantallaWeb2.Invoke(new Action(() => pantallaWeb2.RecibirFrame(img.ToString())));
+                            }
+                            catch { }
+                        }
+                        break;
+
+                    case "Mercader":
+                        if (this.pantallaWeb3.InvokeRequired)
+                        {
+                            try
+                            {
+                                pantallaWeb3.Invoke(new Action(() => pantallaWeb3.RecibirFrame(img.ToString())));
+                            }
+                            catch { }
+                        }
+                        break;
+
+                    case "Artillero":
+                        if (this.pantallaWeb4.InvokeRequired)
+                        {
+                            try
+                            {
+                                pantallaWeb4.Invoke(new Action(() => pantallaWeb4.RecibirFrame(img.ToString())));
+                            }
+                            catch { }
+                        }
+                        break;
+
+                    default:
+
+                        break;
+                }
+            });
+            #endregion
+
+
+        }
+
+        #endregion
+
         #endregion
 
 
         #region LOADS
 
+        //Funcion llamada desde la pantalla anterior, para definir el rol y el avatar del cliente.
         public void AsignarAvatar(Image avatar,string rol) 
         {
             this.Rol = rol;
@@ -279,14 +290,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
             }
         }
-        #endregion
 
         private void barco1_Load(object sender, EventArgs e)
         {
 
         }
 
-        
+        #endregion
+
 
     }
 }

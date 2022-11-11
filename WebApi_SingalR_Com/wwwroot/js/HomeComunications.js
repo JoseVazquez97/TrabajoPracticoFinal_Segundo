@@ -2,8 +2,11 @@
 var userConection = new signalR.HubConnectionBuilder().withUrl("/Hubs/HomeHub.cs").build();
 
 //Generar los metodos para recibir datos del hub
+
+//Llega como parametros la imagen convertida a string y el rol de donde proviene.
 userConection.on("RecibirImagen", (stringmap, rol) =>
 {
+    //Segun el rol asigno a la etiqueta correspondiente.
     switch (rol) {
         case 'Capitan':
             document.getElementById("img1").innerText = stringmap;
@@ -24,15 +27,19 @@ userConection.on("RecibirImagen", (stringmap, rol) =>
 })
 
 //Generar los metodos, para enviar datos hacia el hub
+//Esta funcion es llamada por el servidor de manera automatica.
 function actualizarImagenes()
 {
-    const imagenes = document.getElementsByClassName("imagen");
     let rol;
     let elemento;
     let stringmap;
 
+    //Cargo un arreglo de etiquetas que pertenecen a la clase "imagen"
+    const imagenes = document.getElementsByClassName("imagen");
+    
     for (var i = 0; i < imagenes.length; i++)
     {
+        //Segun el numero que tiene esta vuelta del loop, asigno un rol y cargo el contenido del elemento.
         switch (i)
         {
             case 0:
@@ -59,8 +66,8 @@ function actualizarImagenes()
                 stringmap = elemento.innerText;
             break;
         }
-        console.log(rol);
 
+        //Finalmente envio el dato a mis clientes.
         userConection.send("EnviarImagen", stringmap, rol);
     }
 }
