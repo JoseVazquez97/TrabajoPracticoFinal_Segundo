@@ -46,6 +46,7 @@
             this.recursosDisplay1 = new TrabajoPracticoFinalSegundo.UserControls.RecursosDisplay();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
+            this.pantallaWeb4 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -123,6 +124,7 @@
             this.flowLayoutPanel2.Controls.Add(this.pantallaWeb1);
             this.flowLayoutPanel2.Controls.Add(this.pantallaWeb2);
             this.flowLayoutPanel2.Controls.Add(this.pantallaWeb3);
+            this.flowLayoutPanel2.Controls.Add(this.pantallaWeb4);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -133,8 +135,8 @@
             // 
             this.pantallaWeb1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.pantallaWeb1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pantallaWeb1.Location = new System.Drawing.Point(25, 150);
-            this.pantallaWeb1.Margin = new System.Windows.Forms.Padding(25, 150, 25, 40);
+            this.pantallaWeb1.Location = new System.Drawing.Point(25, 25);
+            this.pantallaWeb1.Margin = new System.Windows.Forms.Padding(25, 25, 25, 10);
             this.pantallaWeb1.Name = "pantallaWeb1";
             this.pantallaWeb1.Size = new System.Drawing.Size(270, 200);
             this.pantallaWeb1.TabIndex = 0;
@@ -143,8 +145,8 @@
             // 
             this.pantallaWeb2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.pantallaWeb2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pantallaWeb2.Location = new System.Drawing.Point(25, 415);
-            this.pantallaWeb2.Margin = new System.Windows.Forms.Padding(25, 25, 25, 40);
+            this.pantallaWeb2.Location = new System.Drawing.Point(25, 260);
+            this.pantallaWeb2.Margin = new System.Windows.Forms.Padding(25, 25, 25, 10);
             this.pantallaWeb2.Name = "pantallaWeb2";
             this.pantallaWeb2.Size = new System.Drawing.Size(270, 200);
             this.pantallaWeb2.TabIndex = 1;
@@ -153,8 +155,8 @@
             // 
             this.pantallaWeb3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.pantallaWeb3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pantallaWeb3.Location = new System.Drawing.Point(25, 680);
-            this.pantallaWeb3.Margin = new System.Windows.Forms.Padding(25, 25, 25, 40);
+            this.pantallaWeb3.Location = new System.Drawing.Point(25, 495);
+            this.pantallaWeb3.Margin = new System.Windows.Forms.Padding(25, 25, 25, 10);
             this.pantallaWeb3.Name = "pantallaWeb3";
             this.pantallaWeb3.Size = new System.Drawing.Size(270, 200);
             this.pantallaWeb3.TabIndex = 2;
@@ -220,6 +222,15 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "label1";
             // 
+            // pantallaWeb4
+            // 
+            this.pantallaWeb4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.pantallaWeb4.Location = new System.Drawing.Point(25, 730);
+            this.pantallaWeb4.Margin = new System.Windows.Forms.Padding(25, 25, 25, 10);
+            this.pantallaWeb4.Name = "pantallaWeb4";
+            this.pantallaWeb4.Size = new System.Drawing.Size(270, 200);
+            this.pantallaWeb4.TabIndex = 3;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -267,5 +278,6 @@
         private UserControls.PantallaWeb pantallaWeb3;
         private UserControls.Dados dados1;
         private Label label1;
+        private UserControls.PantallaWeb pantallaWeb4;
     }
 }

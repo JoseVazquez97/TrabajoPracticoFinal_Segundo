@@ -38,6 +38,8 @@
             this.ConfirmarSeleccion = new System.Windows.Forms.Button();
             this.TimerCamara = new System.Windows.Forms.Timer(this.components);
             this.labelAvatars = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Imagen)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,11 +117,36 @@
             this.labelAvatars.TabIndex = 5;
             this.labelAvatars.Text = "Avatars Seleccionables";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Capitan",
+            "Carpintero",
+            "Mercader",
+            "Artillero"});
+            this.comboBox1.Location = new System.Drawing.Point(75, 326);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(229, 23);
+            this.comboBox1.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("BlackPearl", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(75, 282);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(228, 34);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Elije tu Rol";
+            // 
             // PantallaPhoto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1056, 562);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.labelAvatars);
             this.Controls.Add(this.ConfirmarSeleccion);
             this.Controls.Add(this.btn_JugarConFoto);
@@ -147,5 +174,7 @@
         private Button ConfirmarSeleccion;
         private System.Windows.Forms.Timer TimerCamara;
         private Label labelAvatars;
+        private ComboBox comboBox1;
+        private Label label1;
     }
 }

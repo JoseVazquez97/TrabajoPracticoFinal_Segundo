@@ -17,6 +17,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
     {
         string path;
         private Mat frame;
+        ImageConverter _imageConverter = new ImageConverter();
 
         public PantallaWeb()
         {
@@ -33,7 +34,9 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public void RecibirFrame(string stringimagen) 
         {
            byte[] imgBytes = Convert.FromBase64String(stringimagen);
-           this.pictureBox1.Image = Base64ToImage(imgBytes);
+           
+           this.pictureBox1.Image = byteArrayToImage(imgBytes);
+            
         }
 
         public string DarFrame() 
@@ -63,18 +66,14 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             }
         }
 
-        private Image Base64ToImage(byte[] imageBytes)
+       
+        public Image byteArrayToImage(byte[] byteArrayIn)
         {
-            // Convert byte[] to Image
-            using (var ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
-            {
-                //LLEGAN PARAMETROS NO VALIDOS
-
-
-                Image image = Image.FromStream(ms, true); 
-                //return image;
-            }
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
         }
+        
         #endregion
     }
 }

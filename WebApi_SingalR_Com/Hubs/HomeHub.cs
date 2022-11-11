@@ -7,21 +7,16 @@ namespace WebApi_SingalR_Com.Hubs
     public class HomeHub : Hub
     {
                                 //imageUCL -> Imagen Cliente
-        public static string imageUCL { get; set; } = "";
+        public static string imagenU1 { get; set; } = "";
+        public static string Rol { get; set; } = "";
 
-        public static string imagenU2 { get; set; } = "";
-        public static string imagenU3 { get; set; } = "";
-        public static string imagenU4 { get; set; } = "";
-
-        public async Task EnviarImagen(string imageUCLx, string imagenU2x, string imagenU3x, string imagenU4x)
+        public async Task EnviarImagen(string imagenU1x, string rol)
         {
-            imageUCL= imageUCLx;
-            imagenU2= imagenU2x;
-            imagenU3= imagenU3x;
-            imagenU4= imagenU4x;
+            imagenU1= imagenU1x;
+            Rol = rol;
 
             //MANDAR LA ACTUALIZACION
-            await Clients.All.SendAsync("RecibirImagen", imageUCL, imagenU2, imagenU3, imagenU4);
+            await Clients.All.SendAsync("RecibirImagen", imagenU1x, rol);
         }
     }
 }

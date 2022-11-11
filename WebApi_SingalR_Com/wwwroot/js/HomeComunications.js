@@ -2,34 +2,67 @@
 var userConection = new signalR.HubConnectionBuilder().withUrl("/Hubs/HomeHub.cs").build();
 
 //Generar los metodos para recibir datos del hub
-userConection.on("RecibirImagen", (stringmap1, stringmap2, stringmap3, stringmap4) =>
+userConection.on("RecibirImagen", (stringmap, rol) =>
 {
-    console.log("mensajesRecibidos");
-    document.getElementById("imagen1").innerHTML = stringmap1;
-    document.getElementById("imagen2").innerHTML = stringmap2;
-    document.getElementById("imagen3").innerHTML = stringmap3;
-    document.getElementById("imagen4").innerHTML = stringmap4;
+    switch (rol) {
+        case 'Capitan':
+            document.getElementById("img1").innerText = stringmap;
+        break;
+
+        case 'Carpintero':
+            document.getElementById("img2").innerText = stringmap;
+        break;
+
+        case 'Mercader':
+            document.getElementById("img3").innerText = stringmap;
+        break;
+
+        case 'Artillero':
+            document.getElementById("img4").innerText = stringmap;
+        break;
+    }
 })
 
 //Generar los metodos, para enviar datos hacia el hub
 function actualizarImagenes()
 {
-    var stringmap1 = document.getElementById("imagen1").innerHTML.toString();
-    var stringmap2 = document.getElementById("imagen2").innerHTML.toString();
-    var stringmap3 = document.getElementById("imagen3").innerHTML.toString();
-    var stringmap4 = document.getElementById("imagen4").innerHTML.toString();
+    const imagenes = document.getElementsByClassName("imagen");
+    let rol;
+    let elemento;
+    let stringmap;
 
-    document.getElementById("imagen1").innerHTML = "";
-    document.getElementById("imagen2").innerHTML = "";
-    document.getElementById("imagen3").innerHTML = "";
-    document.getElementById("imagen4").innerHTML = "";
+    for (var i = 0; i < imagenes.length; i++)
+    {
+        switch (i)
+        {
+            case 0:
+                rol = 'Capitan';
+                elemento = document.getElementById("img1");
+                stringmap = elemento.innerText;
+            break;
 
-    userConection.send("EnviarImagen", stringmap1, stringmap2, stringmap3, stringmap4);
-}
+            case 1:
+                rol = 'Carpintero';
+                elemento = document.getElementById("img2");
+                stringmap = elemento.innerText;
+            break;
 
-function borrarImagenes()
-{
-    
+            case 2:
+                rol = 'Mercader';
+                elemento = document.getElementById("img3");
+                stringmap = elemento.innerText;
+            break;
+
+            case 3:
+                rol = "Artillero";
+                elemento = document.getElementById("img4");
+                stringmap = elemento.innerText;
+            break;
+        }
+        console.log(rol);
+
+        userConection.send("EnviarImagen", stringmap, rol);
+    }
 }
 
 function ConexionRechazada() {

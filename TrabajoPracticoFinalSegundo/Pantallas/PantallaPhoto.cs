@@ -164,7 +164,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private void ConfirmarSeleccion_Click(object sender, EventArgs e)
         {
             Home home = new Home();
-            home.AsignarAvatar(this.Imagen.Image);
+            home.AsignarAvatar(this.Imagen.Image,this.comboBox1.Text);
             home.Show();
 
 

@@ -24,6 +24,7 @@ using System.Net.PeerToPeer.Collaboration;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using System.Reflection.Metadata;
 
 namespace TrabajoPracticoFinalSegundo.Pantallas
 {
@@ -33,9 +34,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private string _url = "https://localhost:7170/Hubs/HomeHub.cs";
         HubConnection HomeConection;
 
-
+        string Rol;
         Image miAvatar;
-        List<Jugador> jugadores;
+        Jugador jugador;
         int segundos;
         string path;
 
@@ -83,7 +84,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.progress.Step = 1;
             #endregion
 
-
             #region Conexion al hub.
             HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
 
@@ -95,8 +95,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private async void Home_Load(object sender, EventArgs e)
         {
+
             #region COMUNICACION DE DATOS.
             //Este try es importante no sacar xd
+
+            #region CONECTARSE
             try
             {
                 await HomeConection.StartAsync();
@@ -105,32 +108,60 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 MessageBox.Show("Nosepuedoconectar");
             }
+            #endregion
 
             #region IMAGE-Com
-            HomeConection.On<string,string,string,string>("RecibirImagen", (img1, img2, img3, img4) =>
+            HomeConection.On<string,string>("RecibirImagen", (img, rolx) =>
             {
-                if (this.pantallaWeb1.InvokeRequired)
+                switch (rolx.ToString()) 
                 {
-                    if (img1 != "x1")
-                    {
-                        pantallaWeb1.Invoke(new Action(() => pantallaWeb1.RecibirFrame(img1)));
-                    }
-                }
+                    case "Capitan":
+                        if (this.pantallaWeb1.InvokeRequired)
+                        {
+                            try
+                            {
+                                pantallaWeb1.Invoke(new Action(() => pantallaWeb1.RecibirFrame(img.ToString())));
+                            }
+                            catch {}
+                        }
+                        break;
 
-                if (this.pantallaWeb2.InvokeRequired)
-                {
-                    if (img2 != "x1")
-                    {
-                        pantallaWeb2.Invoke(new Action(() => pantallaWeb2.RecibirFrame(img2)));
-                    }
-                }
+                    case "Carpintero":
+                        if (this.pantallaWeb2.InvokeRequired)
+                        {
+                            try
+                            {
+                               pantallaWeb2.Invoke(new Action(() => pantallaWeb2.RecibirFrame(img.ToString())));
+                            }
+                            catch { }
+                        }
+                        break;
 
-                if (this.pantallaWeb3.InvokeRequired)
-                {
-                    if (img3 != "x1")
-                    {
-                        pantallaWeb3.Invoke(new Action(() => pantallaWeb3.RecibirFrame(img3)));
-                    }
+                    case "Mercader":
+                        if (this.pantallaWeb3.InvokeRequired)
+                        {
+                            try
+                            {
+                                pantallaWeb3.Invoke(new Action(() => pantallaWeb3.RecibirFrame(img.ToString())));
+                            }
+                            catch{ }
+                        }
+                        break;
+
+                    case "Artillero":
+                        if (this.pantallaWeb4.InvokeRequired)
+                        {
+                            try
+                            {
+                                pantallaWeb4.Invoke(new Action(() => pantallaWeb4.RecibirFrame(img.ToString())));
+                            }
+                            catch { }
+                        }
+                        break;
+
+                    default:
+                        
+                        break;
                 }
             });
             #endregion
@@ -141,20 +172,24 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private async void mandarImagenes()
         {
+            string imgUser;
+            string rol = this.Rol;
+
+            switch(rol)
+            {
+                case "Capitan": imgUser = this.pantallaWeb1.DarFrame(); break;
+                case "Carpintero": imgUser = this.pantallaWeb2.DarFrame(); break;
+                case "Mercader": imgUser = this.pantallaWeb3.DarFrame(); break;
+                case "Artillero": imgUser = this.pantallaWeb4.DarFrame(); break;
+                default: imgUser = "Defaul"; break;
+            };
+
             try
             {
-                
-                string imgUser = "";
-                string imgUser1 = this.pantallaWeb1.DarFrame();
-                string imgUser2 = this.pantallaWeb2.DarFrame();
-                string imgUser3 = this.pantallaWeb3.DarFrame();
-
-                await HomeConection.InvokeAsync("EnviarImagen", imgUser,imgUser1,imgUser2,imgUser3);
+                await HomeConection.InvokeAsync("EnviarImagen", imgUser, rol);
             }
-            catch (Exception ex)
-            {
-
-            }
+            catch {}
+           
         }
 
 
@@ -220,12 +255,30 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region LOADS
 
-        public void AsignarAvatar(Image avatar) 
+        public void AsignarAvatar(Image avatar,string rol) 
         {
+            this.Rol = rol;
             this.miAvatar = avatar;
-            this.pantallaWeb1.CargarAvatar(this.miAvatar);
-        }
 
+            switch (rol)
+            {
+                case "Capitan":
+                    this.pantallaWeb1.CargarAvatar(this.miAvatar);
+                    break;
+
+                case "Carpintero":
+                    this.pantallaWeb2.CargarAvatar(this.miAvatar);
+                    break;
+
+                case "Mercader":
+                    this.pantallaWeb3.CargarAvatar(this.miAvatar);
+                    break;
+
+                case "Artillero":
+                    this.pantallaWeb4.CargarAvatar(this.miAvatar);
+                    break;
+            }
+        }
         #endregion
 
         private void barco1_Load(object sender, EventArgs e)
