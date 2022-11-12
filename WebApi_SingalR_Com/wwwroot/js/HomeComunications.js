@@ -35,7 +35,7 @@ function actualizarImagenes()
     let stringmap;
 
     //Cargo un arreglo de etiquetas que pertenecen a la clase "imagen"
-    const imagenes = document.getElementsByClassName("imagen");
+    let imagenes = document.getElementsByClassName("imagen");
     
     for (var i = 0; i < imagenes.length; i++)
     {
@@ -67,7 +67,7 @@ function actualizarImagenes()
             break;
         }
 
-        //Finalmente envio el dato a mis clientes.
+        //Finalmente envio el dato a mis clientes. Uno a uno.
         userConection.send("EnviarImagen", stringmap, rol);
     }
 }

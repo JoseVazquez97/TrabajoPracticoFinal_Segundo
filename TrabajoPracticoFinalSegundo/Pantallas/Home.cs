@@ -25,6 +25,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Reflection.Metadata;
+using System.CodeDom;
 
 namespace TrabajoPracticoFinalSegundo.Pantallas
 {
@@ -51,7 +52,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
             this.contError = 0;
-
+            
             #region LOADS DE COMPONENTES 
 
             //PANTALLAS WEB
@@ -89,6 +90,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.progress.Step = 1;
             #endregion
 
+            this.turno = turnero1.getTurno();
 
             #region DECLARACION DEL HUB
             HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
@@ -144,8 +146,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void dados_Click(object sender, EventArgs e) 
         {
-            this.dados1.tirar();
-            mandarInfoDados();
+            if (this.dados1.getEnable()) 
+            {
+                this.Key = 0;
+                this.dados1.tirar();
+            }
         }
 
         #endregion
@@ -203,7 +208,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 await HomeConection.InvokeAsync("EnviarImagen", imgUser, rol);
             }
-            catch { if (this.contError == 0) MessageBox.Show("Error en el envio de imagenes."); this.contError++; }
+            catch {  MessageBox.Show("Error en el envio de imagenes."); }
         }
         #endregion
 
@@ -213,13 +218,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             string rol = this.Rol;
             string key = this.Key.ToString();
-            string turno = this.turno.ToString();
+            this.turno = this.turnero1.getTurno();
+            string turn = this.turno.ToString();
 
             try
             {
-                await HomeConection.InvokeAsync("SiguienteTurno", rol, key, turno);
+                await HomeConection.InvokeAsync("SiguienteTurno", rol, turn, key);
             }
-            catch { }
+            catch { MessageBox.Show("El cliente no pudo enviar el mensaje (dados)"); }
         }
 
         #endregion
@@ -305,59 +311,57 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             #region TURNERO-COM
 
-            HomeConection.On<string, string, string>("RecibirTurno", (rol, key, turno) =>
+            HomeConection.On<string, string, string>("RecibirTurno", (rol, turno, key) =>
             {
                 int turnox = int.Parse(turno);
-                this.Key = int.Parse(key);
+                string rolx;
+                string keyx;
 
-                if (this.Rol == rol) //Si el mensaje es para mi rol
+                rolx = rol.ToString();
+                keyx = key.ToString();
+
+                // MessageBox.Show("THIS: "+this.Rol + this.Key + "Y llega" + rolx + keyx);
+
+                if (rolx == this.Rol) 
                 {
-                    switch (this.Key)
-                    {
-                        case 1:
-                            if (this.dados1.InvokeRequired)
-                            {
-                                try
-                                {
-                                    dados1.Invoke(new Action(() => dados1.setEnable(true)));
-                                }
-                                catch { }
-                            }
-                            break;
-
-
-                        case 0:
-                            if (this.dados1.InvokeRequired)
-                            {
-                                try
-                                {
-                                    dados1.Invoke(new Action(() => dados1.setEnable(false)));
-                                }
-                                catch { }
-                            }
-                            break;
-                    }
-                }
-                else // osea, si no es mi rol
+                    this.Key = int.Parse(keyx);
+                }else
                 {
-                    if (this.turno != turnox)  //Pero el turno cambio!!
+                    if (turnox != this.turno) 
                     {
-                        try 
+                        if (this.dados1.InvokeRequired)
                         {
-                            if (this.dados1.InvokeRequired)
+                            try
                             {
-                                try
-                                {
-                                    dados1.Invoke(new Action(() => dados1.tirar()));
-                                }
-                                catch { }
+                                dados1.Invoke(new Action(() => dados1.tirar()));
                             }
+                            catch { MessageBox.Show("No pudo tirar automaticamente los dados."); }
                         }
-                        catch{ }
                     }
                 }
 
-                
+                if (this.Key == 0)
+                {
+                    if (this.dados1.InvokeRequired)
+                    {
+                        try
+                        {
+                            dados1.Invoke(new Action(() => dados1.setEnable(false)));
+                        }
+                        catch { MessageBox.Show("No pudo des-habilitar los dados."); }
+                    }
+                }
+                else 
+                {
+                    if (this.dados1.InvokeRequired)
+                    {
+                        try
+                        {
+                            dados1.Invoke(new Action(() => dados1.setEnable(true)));
+                        }
+                        catch { MessageBox.Show("No pudo habilitar los dados."); }
+                    }
+                }
             });
             #endregion
         }
@@ -385,14 +389,17 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
 
                 case "Carpintero":
+                    this.Key = 0;
                     this.pantallaWeb2.CargarAvatar(this.miAvatar);
                     break;
 
                 case "Mercader":
+                    this.Key = 0;
                     this.pantallaWeb3.CargarAvatar(this.miAvatar);
                     break;
 
                 case "Artillero":
+                    this.Key = 0;
                     this.pantallaWeb4.CargarAvatar(this.miAvatar);
                     break;
             }
