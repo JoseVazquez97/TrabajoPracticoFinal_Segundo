@@ -410,5 +410,40 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
 
+        ///////////////////////////////////////////////////////////////////
+        public int obtenerTurno(int turnoActual)
+        {
+            /*
+             * PARA UTILIZAR ESTO, SERIA ALGO ASI:
+             * SWITCH(obtenerTurno(this.turno))
+             * {
+             *  case 1:
+             *      if (this.rol = "Capitan")
+             *      {
+             *          //habilita control de dados..
+             *      }
+             *      break;
+             *  case 2:
+             *      break;
+             *  case 3:
+             *      break;
+             *  case 4:
+             *      break;
+             * }
+             * 
+             */
+
+            int turnoDevuelto = turnoActual;
+            if(turnoDevuelto > 4)
+            {
+                turnoDevuelto = turnoActual - 4;
+                return obtenerTurno(turnoDevuelto);
+            }
+            else
+            {
+                return turnoDevuelto;
+            }
+        }
+
     }
 }
