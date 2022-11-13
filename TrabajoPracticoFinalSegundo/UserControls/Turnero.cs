@@ -36,7 +36,16 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         {
             this.turno++;
             lbl_Turno.Text = turno.ToString();
+        }
 
+        public void setTurno(int turnox) 
+        {
+            this.turno = turnox;
+        }
+
+        public void setRol(string rol) 
+        {
+            this.lbl_Nombre.Text = rol;
         }
 
         public int getTurno() 

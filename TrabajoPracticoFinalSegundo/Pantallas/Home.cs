@@ -37,10 +37,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         string Rol;
         Image miAvatar;
-        Jugador jugador;
-        int segundos;
         string path;
-        int contError;
         int Key;
         int turno;
 
@@ -51,12 +48,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             InitializeComponent();
 
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
-            this.contError = 0;
             
             #region LOADS DE COMPONENTES 
 
             //PANTALLAS WEB
-            this.segundos = 0;
             this.pantallaWeb1.WebLoad();
             this.pantallaWeb2.WebLoad();
             this.pantallaWeb3.WebLoad();
@@ -79,7 +74,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.urna1.Load_Urna(x, y);
             this.turnero1.LoadTurnero(x, y);
             this.dados1.CargarTablero(x+100, y);
-            this.dados1.AsignarTurnero(ref this.turnero1);
 
             //PROGRESSBAR
             this.progress.Width = this.Width;
@@ -114,10 +108,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             //Compartimos la informacion
             mandarImagenes();
-            mandarInfoDados();
+           
 
-            //Contador de segundos.
-            segundos++;
+        }
+
+        private void Update500ms_Tick(object sender, EventArgs e)
+        {
+            mandarInfoDados();
         }
 
         #endregion
@@ -148,8 +145,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             if (this.dados1.getEnable()) 
             {
-                this.Key = 0;
                 this.dados1.tirar();
+                this.turnero1.Siguiente();
+                this.turno = this.turnero1.getTurno();
             }
         }
 
@@ -189,7 +187,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region ENVIO DE MENSAJES
 
-        #region Mandar Imagenes
+        #region ENVIAR - Imagenes
         private async void mandarImagenes()
         {
             string imgUser;
@@ -212,18 +210,17 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
-        #region Mandar Info Dados
+        #region ENVIAR Click-Dado
 
         private async void mandarInfoDados()
         {
             string rol = this.Rol;
             string key = this.Key.ToString();
-            this.turno = this.turnero1.getTurno();
             string turn = this.turno.ToString();
 
             try
             {
-                await HomeConection.InvokeAsync("SiguienteTurno", rol, turn, key);
+                await HomeConection.InvokeAsync("SiguienteTurno",rol, turn, key);
             }
             catch { MessageBox.Show("El cliente no pudo enviar el mensaje (dados)"); }
         }
@@ -313,57 +310,112 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<string, string, string>("RecibirTurno", (rol, turno, key) =>
             {
-                int turnox = int.Parse(turno);
-                string rolx;
-                string keyx;
 
-                rolx = rol.ToString();
-                keyx = key.ToString();
-
-                // MessageBox.Show("THIS: "+this.Rol + this.Key + "Y llega" + rolx + keyx);
-
-                if (rolx == this.Rol) 
+                if (Convert.ToInt32(turno) > this.turno && rol != this.Rol)
                 {
-                    this.Key = int.Parse(keyx);
-                }else
-                {
-                    if (turnox != this.turno) 
+                    this.turno = Convert.ToInt32(turno);
+
+                    if (this.dados1.InvokeRequired)
                     {
-                        if (this.dados1.InvokeRequired)
+                        try
                         {
-                            try
+                            dados1.Invoke(new Action(() => dados1.tirar()));
+                        }
+                        catch { MessageBox.Show("No pudo tirar automaticamente los dados."); }
+                    }
+
+                    if (this.turnero1.InvokeRequired)
+                    {
+                        try
+                        {
+                            turnero1.Invoke(new Action(() => turnero1.setTurno(this.turno)));
+                        }
+                        catch { }
+                    }
+                }
+                else
+                {
+                    switch (key)
+                    {
+                        case "1":
+                            if (this.Rol == "Capitan")
                             {
-                                dados1.Invoke(new Action(() => dados1.tirar()));
+                                if (this.dados1.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        dados1.Invoke(new Action(() => dados1.setEnable(true)));
+                                    }
+                                    catch { MessageBox.Show("No pudo habilitar los dados."); }
+                                }
                             }
-                            catch { MessageBox.Show("No pudo tirar automaticamente los dados."); }
-                        }
-                    }
-                }
+                            else { desHabilitarDado(); }
+                            break;
 
-                if (this.Key == 0)
-                {
-                    if (this.dados1.InvokeRequired)
-                    {
-                        try
-                        {
-                            dados1.Invoke(new Action(() => dados1.setEnable(false)));
-                        }
-                        catch { MessageBox.Show("No pudo des-habilitar los dados."); }
-                    }
-                }
-                else 
-                {
-                    if (this.dados1.InvokeRequired)
-                    {
-                        try
-                        {
-                            dados1.Invoke(new Action(() => dados1.setEnable(true)));
-                        }
-                        catch { MessageBox.Show("No pudo habilitar los dados."); }
+                        case "2":
+                            if (this.Rol == "Carpintero")
+                            {
+                                if (this.dados1.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        dados1.Invoke(new Action(() => dados1.setEnable(true)));
+                                    }
+                                    catch { MessageBox.Show("No pudo habilitar los dados."); }
+                                }
+                            }
+                            else { desHabilitarDado(); }
+                            break;
+
+                        case "3":
+                            if (this.Rol == "Mercader")
+                            {
+                                if (this.dados1.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        dados1.Invoke(new Action(() => dados1.setEnable(true)));
+                                    }
+                                    catch { MessageBox.Show("No pudo habilitar los dados."); }
+                                }
+                            }
+                            else { desHabilitarDado(); }
+                            break;
+
+                        case "4":
+                            if (this.Rol == "Artillero")
+                            {
+                                if (this.dados1.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        dados1.Invoke(new Action(() => dados1.setEnable(true)));
+                                    }
+                                    catch { MessageBox.Show("No pudo habilitar los dados."); }
+                                }
+                            }
+                            else { desHabilitarDado(); }
+                            break;
                     }
                 }
             });
             #endregion
+        }
+
+        private async void desHabilitarDado()
+        {
+            await Task.Run(() =>
+            {
+                if (this.dados1.InvokeRequired)
+                {
+                    try
+                    {
+                        dados1.Invoke(new Action(() => dados1.setEnable(false)));
+                    }
+                    catch { MessageBox.Show("No pudo des-habilitar los dados."); }
+                }
+
+            });
         }
 
         #endregion
@@ -386,20 +438,21 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 case "Capitan":
                     this.Key = 1;
                     this.pantallaWeb1.CargarAvatar(this.miAvatar);
+                    this.dados1.setEnable(true);
                     break;
 
                 case "Carpintero":
-                    this.Key = 0;
+                    this.Key = 2;
                     this.pantallaWeb2.CargarAvatar(this.miAvatar);
                     break;
 
                 case "Mercader":
-                    this.Key = 0;
+                    this.Key = 3;
                     this.pantallaWeb3.CargarAvatar(this.miAvatar);
                     break;
 
                 case "Artillero":
-                    this.Key = 0;
+                    this.Key = 4;
                     this.pantallaWeb4.CargarAvatar(this.miAvatar);
                     break;
             }
@@ -414,8 +467,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
 
         }
+
         #endregion
 
-
+      
     }
 }

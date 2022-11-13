@@ -24,6 +24,7 @@ userConection.on("RecibirImagen", (stringmap, rol) =>
             document.getElementById("img4").innerText = stringmap;
         break;
     }
+
 })
 
 //Generar los metodos, para enviar datos hacia el hub

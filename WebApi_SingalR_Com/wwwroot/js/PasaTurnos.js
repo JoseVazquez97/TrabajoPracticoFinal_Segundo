@@ -6,89 +6,43 @@ userConection.on("RecibirTurno", (rol, turno, key) => {
 
     let turnoAct = document.getElementById("TurnoActual").innerHTML;
 
-    switch (rol) //Y segun el rol que hizo el cambio paso el turno
+    if (parseInt(turnoAct) < parseInt(turno))
     {
-        case 'Capitan':
-            document.getElementById("key1").innerHTML = key;
+        document.getElementById("TurnoActual").innerText = turno;
 
-            if (parseInt(turno) > turnoAct)
-            {
-                document.getElementById("TurnoActual").innerHTML = turno;
-                document.getElementById("key1").innerHTML = '0';
-                document.getElementById("key2").innerHTML = '1';
-            }
-        break;
+        switch (rol)
+        {
+            case 'Capitan':
+                document.getElementById("key").innerText = '2';
+            break;
 
-        case 'Carpintero':
-            document.getElementById("key2").innerHTML = key;
-            if (parseInt(turno) > turnoAct) {
-                document.getElementById("TurnoActual").innerHTML = turno;
-                document.getElementById("key2").innerHTML = '0';
-                document.getElementById("key3").innerHTML = '1';
-            }
-        break;
+            case 'Carpintero':
+                document.getElementById("key").innerText = '3';
+            break;
 
-        case 'Mercader':
-            document.getElementById("key3").innerHTML = key;
-            if (parseInt(turno) > turnoAct) {
-                document.getElementById("TurnoActual").innerHTML = turno;
-                document.getElementById("key3").innerHTML = '0';
-                document.getElementById("key4").innerHTML = '1';
-            }
-        break;
+            case 'Mercader':
+                document.getElementById("key").innerText = '4';
+            break;
 
-        case 'Astillero':
-            document.getElementById("key4").innerHTML = key;
-            if (parseInt(turno) > turnoAct) {
-                document.getElementById("TurnoActual").innerHTML = turno;
-                document.getElementById("key4").innerHTML = '0';
-                document.getElementById("key1").innerHTML = '1';
-            }
-        break;
-    }
+            case 'Artillero':
+                document.getElementById("key").innerText = '1';
+            break;
+        }
+    } else { }
 })
 
 //Generar los metodos, para enviar datos hacia el hub
-function actualizarTurneros() {
+function actualizarTurneros()
+{
 
+    let rol = 'Refresh';
+    let turno;
     let key;
-    let elemento;
-    let turno = document.getElementById("TurnoActual").innerText;
+ 
+    turno = document.getElementById("TurnoActual").innerText;
+    key = document.getElementById("key").innerText;
 
-    //Cargo un arreglo de etiquetas que pertenecen a la clase "imagen"
-    let roles = document.getElementsByClassName("roles");
-
-    for (var i = 0; i < roles.length; i++) {
-        //Segun el numero que tiene esta vuelta del loop, asigno un rol y cargo el contenido del elemento.
-        switch (i)
-        {
-            case 0:
-                rol = 'Capitan';
-                elemento = document.getElementById("key1");
-                key = elemento.innerText;
-            break;
-
-            case 1:
-                rol = 'Carpintero';
-                elemento = document.getElementById("key2");
-                key = elemento.innerText;
-            break;
-
-            case 2:
-                rol = 'Mercader';
-                elemento = document.getElementById("key3");
-                key = elemento.innerText;
-            break;
-
-            case 3:
-                rol = 'Astillero';
-                elemento = document.getElementById("key4");
-                key = elemento.innerText;
-            break;
-        }
-
-        userConection.send("SiguienteTurno", rol, turno, key);
-    }
+    userConection.send("SiguienteTurno", rol, turno, key);
 }
 
 function ConexionRechazada() {
