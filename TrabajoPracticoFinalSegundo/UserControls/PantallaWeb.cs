@@ -19,6 +19,9 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         string path;
         private Mat frame;
         private VideoCapture camara;
+        private Image imagenActual;
+        private bool jugarCam;
+
         ImageConverter _imageConverter = new ImageConverter();
 
         public PantallaWeb()
@@ -26,6 +29,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             InitializeComponent();
 
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
+            frame = new Mat();
         }
 
         public void WebLoad()
@@ -36,6 +40,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         public void jugarConCamara(bool x) 
         {
+            this.jugarCam = x;
             if (x) 
             {
                 this.camara = new VideoCapture();
@@ -54,6 +59,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public string DarFrame() 
         {
             byte[] arreglo = ImageToByteArray(this.pictureBox1.Image);
+
             string imagenByte = Convert.ToBase64String(arreglo);
             return imagenByte;
         }
@@ -71,11 +77,15 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         #region LA PERDICION
         private byte[] ImageToByteArray(System.Drawing.Image imageIn)
         {
+            byte[] pepe = { 0};
+
             using (var ms = new MemoryStream())
             {
                 imageIn.Save(ms, imageIn.RawFormat);
                 return ms.ToArray();
             }
+
+            
         }
 
        
@@ -121,7 +131,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         private void Camara_Tick(object sender, EventArgs e)
         {
             camara.Read(frame);
-            this.pictureBox1.Image = resizeImage(frame.ToBitmap(), pictureBox1.Size);
+            imagenActual = resizeImage(frame.ToBitmap(), new Size(10, 10));
+            this.pictureBox1.Image = imagenActual;
         }
     }
 }

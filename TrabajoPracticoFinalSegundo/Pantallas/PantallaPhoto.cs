@@ -73,7 +73,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void btnEncender_Click(object sender, EventArgs e)
         {
-            this.jugarCam = true;
+            this.jugarCam = false;
 
 
             if (camara != null) camara.Dispose();
@@ -97,7 +97,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.contador++;   
             camara.Read(frame);
 
-            Imagen.Image = resizeImage(frame.ToBitmap(), Imagen.Size);
+            Imagen.Image = resizeImage(frame.ToBitmap(), new Size(10, 10));
             if (contador == 20)
             {
                 camara.Stop();
