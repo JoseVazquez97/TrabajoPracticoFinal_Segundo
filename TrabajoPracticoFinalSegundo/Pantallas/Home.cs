@@ -412,7 +412,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #region LOADS
 
         //Funcion llamada desde la pantalla anterior, para definir el rol y el avatar del cliente.
-        public void AsignarAvatar(Image avatar,string rol) 
+        public void AsignarAvatar(Image avatar,string rol,bool jugarcam) 
         {
             this.Rol = rol;
             this.miAvatar = avatar;
@@ -422,24 +422,28 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 case "Capitan":
                     this.Key = 1;
                     this.pantallaWeb1.CargarAvatar(this.miAvatar);
+                    this.pantallaWeb1.jugarConCamara(jugarcam);
                     this.dados1.setEnable(true);
                     break;
 
                 case "Carpintero":
                     this.Key = 2;
                     this.pantallaWeb2.CargarAvatar(this.miAvatar);
+                    this.pantallaWeb2.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
                     break;
 
                 case "Mercader":
                     this.Key = 3;
                     this.pantallaWeb3.CargarAvatar(this.miAvatar);
+                    this.pantallaWeb3.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
                     break;
 
                 case "Artillero":
                     this.Key = 4;
                     this.pantallaWeb4.CargarAvatar(this.miAvatar);
+                    this.pantallaWeb4.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
                     break;
             }

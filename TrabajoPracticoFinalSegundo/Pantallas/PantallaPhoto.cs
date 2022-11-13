@@ -19,6 +19,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private VideoCapture camara;
         private Mat frame;
         private int contador;
+        private bool jugarCam;
 
         public PantallaPhoto()
         {
@@ -59,6 +60,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void clickAvatar(object sender, EventArgs e)
         {
+            this.jugarCam = false;
+
             object pictureBox = new PictureBox();
             if (sender.GetType() == pictureBox.GetType())
             {
@@ -70,7 +73,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void btnEncender_Click(object sender, EventArgs e)
         {
-            if(camara != null) camara.Dispose();
+            this.jugarCam = true;
+
+
+            if (camara != null) camara.Dispose();
             camara = new VideoCapture();
             this.contador = 0;
             camara.Start();
@@ -83,7 +89,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void btnApagar_Click(object sender, EventArgs e)
         {
-            //pictureBox1.Image = null;
+            
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -108,6 +114,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void btn_JugarConFoto_Click(object sender, EventArgs e)
         {
+            this.jugarCam = false;
             BuscarFoto.ShowDialog();
         }
 
@@ -164,7 +171,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private void ConfirmarSeleccion_Click(object sender, EventArgs e)
         {
             Home home = new Home();
-            home.AsignarAvatar(this.Imagen.Image,this.comboBox1.Text);
+            home.AsignarAvatar(this.Imagen.Image,this.comboBox1.Text,this.jugarCam);
             home.Show();
 
 

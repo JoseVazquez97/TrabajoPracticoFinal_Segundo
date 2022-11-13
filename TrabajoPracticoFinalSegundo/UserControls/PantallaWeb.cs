@@ -1,4 +1,5 @@
 ﻿using Emgu.CV;
+using Emgu.CV.DepthAI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
     {
         string path;
         private Mat frame;
+        private VideoCapture camara;
         ImageConverter _imageConverter = new ImageConverter();
 
         public PantallaWeb()
@@ -29,6 +31,16 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public void WebLoad()
         {
             pictureBox1.Image = Image.FromFile(this.path + @".\Recursos\Iconos\LogoEjemplo.png");
+        }
+
+
+        public void jugarConCamara(bool x) 
+        {
+            if (x) 
+            {
+                this.camara = new VideoCapture();
+                this.Camara.Start();
+            }
         }
 
         public void RecibirFrame(string stringimagen) 
@@ -73,7 +85,43 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             Image returnImage = Image.FromStream(ms);
             return returnImage;
         }
-        
+
         #endregion
+
+        static Image resizeImage(Image imgToResize, Size size)
+        {
+            //Get the image current width  
+            int sourceWidth = imgToResize.Width;
+            //Get the image current height  
+            int sourceHeight = imgToResize.Height;
+            float nPercent = 0;
+            float nPercentW = 0;
+            float nPercentH = 0;
+            //Calulate  width with new desired size  
+            nPercentW = ((float)size.Width / (float)sourceWidth);
+            //Calculate height with new desired size  
+            nPercentH = ((float)size.Height / (float)sourceHeight);
+            if (nPercentH < nPercentW)
+                nPercent = nPercentH;
+            else
+                nPercent = nPercentW;
+            //New Width  
+            int destWidth = (int)(sourceWidth * nPercent);
+            //New Height  
+            int destHeight = (int)(sourceHeight * nPercent);
+            Bitmap b = new Bitmap(destWidth, destHeight);
+            Graphics g = Graphics.FromImage((System.Drawing.Image)b);
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            // Draw image with new width and height  
+            g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
+            g.Dispose();
+            return (System.Drawing.Image)b;
+        }
+
+        private void Camara_Tick(object sender, EventArgs e)
+        {
+            camara.Read(frame);
+            this.pictureBox1.Image = resizeImage(frame.ToBitmap(), pictureBox1.Size);
+        }
     }
 }
