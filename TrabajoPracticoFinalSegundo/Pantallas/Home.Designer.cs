@@ -46,6 +46,7 @@
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.recursosDisplay1 = new TrabajoPracticoFinalSegundo.UserControls.RecursosDisplay();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.Update500ms = new System.Windows.Forms.Timer(this.components);
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -221,6 +222,12 @@
             this.flowLayoutPanel5.Size = new System.Drawing.Size(925, 809);
             this.flowLayoutPanel5.TabIndex = 9;
             // 
+            // Update500ms
+            // 
+            this.Update500ms.Enabled = true;
+            this.Update500ms.Interval = 500;
+            this.Update500ms.Tick += new System.EventHandler(this.Update500ms_Tick);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -267,5 +274,6 @@
         private UserControls.PantallaWeb pantallaWeb3;
         private UserControls.Dados dados1;
         private UserControls.PantallaWeb pantallaWeb4;
+        private System.Windows.Forms.Timer Update500ms;
     }
 }

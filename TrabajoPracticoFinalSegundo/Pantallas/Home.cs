@@ -25,6 +25,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Reflection.Metadata;
+using System.CodeDom;
 
 namespace TrabajoPracticoFinalSegundo.Pantallas
 {
@@ -36,10 +37,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         string Rol;
         Image miAvatar;
-        Jugador jugador;
-        int segundos;
         string path;
-        int contError;
         int Key;
         int turno;
 
@@ -50,12 +48,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             InitializeComponent();
 
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
-            this.contError = 0;
-
+            
             #region LOADS DE COMPONENTES 
 
             //PANTALLAS WEB
-            this.segundos = 0;
             this.pantallaWeb1.WebLoad();
             this.pantallaWeb2.WebLoad();
             this.pantallaWeb3.WebLoad();
@@ -78,7 +74,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.urna1.Load_Urna(x, y);
             this.turnero1.LoadTurnero(x, y);
             this.dados1.CargarTablero(x+100, y);
-            this.dados1.AsignarTurnero(ref this.turnero1);
 
             //PROGRESSBAR
             this.progress.Width = this.Width;
@@ -89,6 +84,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.progress.Step = 1;
             #endregion
 
+            this.turno = turnero1.getTurno();
 
             #region DECLARACION DEL HUB
             HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
@@ -112,10 +108,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             //Compartimos la informacion
             mandarImagenes();
-            mandarInfoDados();
+           
 
-            //Contador de segundos.
-            segundos++;
+        }
+
+        private void Update500ms_Tick(object sender, EventArgs e)
+        {
+            mandarInfoDados();
         }
 
         #endregion
@@ -144,8 +143,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void dados_Click(object sender, EventArgs e) 
         {
-            this.dados1.tirar();
-            mandarInfoDados();
+            if (this.dados1.getEnable()) 
+            {
+                this.dados1.tirar();
+                this.turnero1.Siguiente();
+                this.turno = this.turnero1.getTurno();
+                this.dados1.setEnable(false);
+            }
         }
 
         #endregion
@@ -184,7 +188,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region ENVIO DE MENSAJES
 
-        #region Mandar Imagenes
+        #region ENVIAR - Imagenes
         private async void mandarImagenes()
         {
             string imgUser;
@@ -203,23 +207,21 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 await HomeConection.InvokeAsync("EnviarImagen", imgUser, rol);
             }
-            catch { if (this.contError == 0) MessageBox.Show("Error en el envio de imagenes."); this.contError++; }
+            catch {  MessageBox.Show("Error en el envio de imagenes."); }
         }
         #endregion
 
-        #region Mandar Info Dados
+        #region ENVIAR Click-Dado
 
         private async void mandarInfoDados()
         {
-            string rol = this.Rol;
-            string key = this.Key.ToString();
-            string turno = this.turno.ToString();
+            string turn = this.turno.ToString();
 
             try
             {
-                await HomeConection.InvokeAsync("SiguienteTurno", rol, key, turno);
+                await HomeConection.InvokeAsync("SiguienteTurno",turn);
             }
-            catch { }
+            catch { MessageBox.Show("El cliente no pudo enviar el mensaje (dados)"); }
         }
 
         #endregion
@@ -305,62 +307,36 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             #region TURNERO-COM
 
-            HomeConection.On<string, string, string>("RecibirTurno", (rol, key, turno) =>
+            HomeConection.On<string>("RecibirTurno", (turno) =>
             {
-                int turnox = int.Parse(turno);
-                this.Key = int.Parse(key);
+                int turnoX = Convert.ToInt32(turno);
 
-                if (this.Rol == rol) //Si el mensaje es para mi rol
+                if (turnoX > this.turno)
                 {
-                    switch (this.Key)
-                    {
-                        case 1:
-                            if (this.dados1.InvokeRequired)
-                            {
-                                try
-                                {
-                                    dados1.Invoke(new Action(() => dados1.setEnable(true)));
-                                }
-                                catch { }
-                            }
-                            break;
+                    this.turno = turnoX;
 
-
-                        case 0:
-                            if (this.dados1.InvokeRequired)
-                            {
-                                try
-                                {
-                                    dados1.Invoke(new Action(() => dados1.setEnable(false)));
-                                }
-                                catch { }
-                            }
-                            break;
-                    }
-                }
-                else // osea, si no es mi rol
-                {
-                    if (this.turno != turnox)  //Pero el turno cambio!!
+                    if (this.dados1.InvokeRequired)
                     {
-                        try 
+                        try
                         {
-                            if (this.dados1.InvokeRequired)
-                            {
-                                try
-                                {
-                                    dados1.Invoke(new Action(() => dados1.tirar()));
-                                }
-                                catch { }
-                            }
+                            dados1.Invoke(new Action(() => dados1.tirar()));
                         }
-                        catch{ }
+                        catch { MessageBox.Show("No pudo tirar automaticamente los dados."); }
+                    }
+
+                    if (this.turnero1.InvokeRequired)
+                    {
+                        try
+                        {
+                            turnero1.Invoke(new Action(() => turnero1.setTurno(turnoX)));
+                        }
+                        catch { MessageBox.Show("No pudo cargar el turno en el turnero."); }
                     }
                 }
-
-                
             });
             #endregion
         }
+
 
         #endregion
 
@@ -382,18 +358,25 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 case "Capitan":
                     this.Key = 1;
                     this.pantallaWeb1.CargarAvatar(this.miAvatar);
+                    this.dados1.setEnable(true);
                     break;
 
                 case "Carpintero":
+                    this.Key = 2;
                     this.pantallaWeb2.CargarAvatar(this.miAvatar);
+                    this.dados1.setEnable(false);
                     break;
 
                 case "Mercader":
+                    this.Key = 3;
                     this.pantallaWeb3.CargarAvatar(this.miAvatar);
+                    this.dados1.setEnable(false);
                     break;
 
                 case "Artillero":
+                    this.Key = 4;
                     this.pantallaWeb4.CargarAvatar(this.miAvatar);
+                    this.dados1.setEnable(false);
                     break;
             }
         }
@@ -407,43 +390,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
 
         }
+
         #endregion
 
-
-        ///////////////////////////////////////////////////////////////////
-        public int obtenerTurno(int turnoActual)
-        {
-            /*
-             * PARA UTILIZAR ESTO, SERIA ALGO ASI:
-             * SWITCH(obtenerTurno(this.turno))
-             * {
-             *  case 1:
-             *      if (this.rol = "Capitan")
-             *      {
-             *          //habilita control de dados..
-             *      }
-             *      break;
-             *  case 2:
-             *      break;
-             *  case 3:
-             *      break;
-             *  case 4:
-             *      break;
-             * }
-             * 
-             */
-
-            int turnoDevuelto = turnoActual;
-            if(turnoDevuelto > 4)
-            {
-                turnoDevuelto = turnoActual - 4;
-                return obtenerTurno(turnoDevuelto);
-            }
-            else
-            {
-                return turnoDevuelto;
-            }
-        }
-
+      
     }
 }

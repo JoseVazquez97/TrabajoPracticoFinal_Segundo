@@ -17,8 +17,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         private int tiradas;
         private int d1;
         private int d2;
-        Turnero turnero;
         string path;
+        private bool cerradura;
 
         public int V1 { get { return this.d1; } }
         public int V2 { get { return this.d2; } }
@@ -50,11 +50,13 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.dado1.Enabled=x;
             this.dado2.Enabled=x;
             this.Enabled = x;
+
+            cerradura = x;
         }
 
-        public void AsignarTurnero(ref Turnero x) 
+        public bool getEnable() 
         {
-            this.turnero = x;
+            return cerradura;
         }
 
         public void CargarTablero(int tamaTotal, int altoTotal)
@@ -89,14 +91,12 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             
         }
 
-
         public void tirar()
         {
             tiradas = 0;
             TirandoDados.Interval = 50;
           
             TirandoDados.Start();
-            this.turnero.Siguiente();
         }
 
 

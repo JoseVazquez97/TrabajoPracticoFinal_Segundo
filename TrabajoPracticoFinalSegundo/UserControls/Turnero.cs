@@ -35,13 +35,23 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public void Siguiente() 
         {
             this.turno++;
-
             lbl_Turno.Text = turno.ToString();
+        }
 
-            if (turno == 4) 
-            {
-                turno = 0;
-            }
+        public void setTurno(int turnox) 
+        {
+            this.turno = turnox;
+            lbl_Turno.Text = this.turno.ToString();
+        }
+
+        public void setRol(string rol) 
+        {
+            this.lbl_Nombre.Text = rol;
+        }
+
+        public int getTurno() 
+        {
+            return this.turno;
         }
 
         private void lbl_Nombre_Click(object sender, EventArgs e)

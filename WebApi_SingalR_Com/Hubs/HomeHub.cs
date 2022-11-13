@@ -9,7 +9,6 @@ namespace WebApi_SingalR_Com.Hubs
                                 //imageUCL -> Imagen Cliente
         public static string imagenU1 { get; set; } = "";
         public static string Rol { get; set; } = "";
-        public static string Key { get; set; } = "";
         public static string Turno { get; set; } = "";
 
         //WebCams
@@ -24,14 +23,12 @@ namespace WebApi_SingalR_Com.Hubs
 
 
         //Turnero
-        public async Task SiguienteTurno(string rol, string key, string Turnox)
+        public async Task SiguienteTurno(string Turnox)
         {
-            Rol = rol;
-            Key = key;
             Turno = Turnox;
 
             //MANDAR LA ACTUALIZACION
-            await Clients.All.SendAsync("RecibirTurno", rol, key, Turnox);
+            await Clients.All.SendAsync("RecibirTurno",Turnox);
         }
     }
 }
