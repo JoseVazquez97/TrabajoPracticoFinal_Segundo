@@ -26,6 +26,8 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Reflection.Metadata;
 using System.CodeDom;
+using System.Drawing.Text;
+using Emgu.CV.Features2D;
 
 namespace TrabajoPracticoFinalSegundo.Pantallas
 {
@@ -149,6 +151,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 this.turnero1.Siguiente();
                 this.turno = this.turnero1.getTurno();
                 this.dados1.setEnable(false);
+            }
+        }
+
+        private void ActivarDado(bool activar)
+        {
+            if (this.dados1.InvokeRequired)
+            {
+                try
+                {
+                    dados1.Invoke(new Action(() => dados1.setEnable(activar)));
+                }
+                catch { MessageBox.Show("No pudo tirar automaticamente los dados."); }
             }
         }
 
@@ -333,9 +347,59 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         catch { MessageBox.Show("No pudo cargar el turno en el turnero."); }
                     }
                 }
+
+
+                switch (obtenerTurno(turnoX))
+                {
+                    case 1:
+                        if (this.Rol == "Capitan")
+                        {
+                            ActivarDado(true);
+                        }
+                        else 
+                        {
+                            ActivarDado(false);
+                        }
+                        break;
+                    case 2:
+                        if (this.Rol == "Carpintero")
+                        {
+                            ActivarDado(true);
+                        }
+                        else
+                        {
+                            ActivarDado(false);
+                        }
+                        break;
+                    case 3:
+                        if (this.Rol == "Mercader")
+                        {
+                            ActivarDado(true);
+                        }
+                        else
+                        {
+                            ActivarDado(false);
+                        }
+                        break;
+                    case 4:
+                        if (this.Rol == "Artillero")
+                        {
+                            ActivarDado(true);
+                        }
+                        else
+                        {
+                            ActivarDado(false);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
             });
             #endregion
         }
+
+
 
 
         #endregion
@@ -393,6 +457,40 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
-      
+        public int obtenerTurno(int turnoActual)
+        {
+            /*
+             * PARA UTILIZAR ESTO, SERIA ALGO ASI:
+             * SWITCH(obtenerTurno(this.turno))
+             * {
+             *  case 1:
+             *      if (this.rol = "Capitan")
+             *      {
+             *          //habilita control de dados..
+             *      }
+             *      break;
+             *  case 2:
+             *      break;
+             *  case 3:
+             *      break;
+             *  case 4:
+             *      break;
+             * }
+             * 
+             */
+
+            int turnoDevuelto = turnoActual;
+            if (turnoDevuelto > 4)
+            {
+                turnoDevuelto = turnoActual - 4;
+                return obtenerTurno(turnoDevuelto);
+            }
+            else
+            {
+                return turnoDevuelto;
+            }
+        }
+
+
     }
 }
