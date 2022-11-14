@@ -12,11 +12,12 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 {
     public partial class Urna : UserControl
     {
-        string resultado;
+        int voto;
 
         public Urna()
         {
             InitializeComponent();
+            this.voto = 9;
         }
 
         #region LOADS
@@ -42,32 +43,24 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         }
         #endregion
 
-
-        private void recibirVoto(bool voto) 
+        public void reiniciarVoto() 
         {
-            if (voto)
-            {
-                resultado = "Si!";
-            }
-            else 
-            {
-                resultado = "No";
-            }
+            this.voto = 9;
         }
 
-        public string emitirResultado() 
+        public int ConsultarVoto() 
         {
-            return this.resultado;
+            return this.voto;
         }
 
         private void btn_Si_Click(object sender, EventArgs e)
         {
-            recibirVoto(true);
+            voto = 1;
         }
 
         private void btn_No_Click(object sender, EventArgs e)
         {
-            recibirVoto(false);
+            voto = 0;
         }
     }
 }

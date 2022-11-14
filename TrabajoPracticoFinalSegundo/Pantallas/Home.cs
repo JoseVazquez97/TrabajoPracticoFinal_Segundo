@@ -28,6 +28,8 @@ using System.Reflection.Metadata;
 using System.CodeDom;
 using System.Drawing.Text;
 using Emgu.CV.Features2D;
+using Emgu.CV.Util;
+using System.Runtime.CompilerServices;
 
 namespace TrabajoPracticoFinalSegundo.Pantallas
 {
@@ -42,6 +44,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         string path;
         int Key;
         int turno;
+        int accionHome;
+        int votosRonda;
+        int desicionCapitan;
 
         //Esto Es un comentario.
 
@@ -50,7 +55,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             InitializeComponent();
 
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
-            
+            this.accionHome = 1;
+
             #region LOADS DE COMPONENTES 
 
             //PANTALLAS WEB
@@ -73,7 +79,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             x = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
             y = this.flowLayoutPanel1.Height;
 
-            this.urna1.Load_Urna(x, y);
+            
             this.turnero1.LoadTurnero(x, y);
             this.dados1.CargarTablero(x+100, y);
 
@@ -106,17 +112,129 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private void Update_Tick(object sender, EventArgs e)
         {
             //Adelanta un fragmento de la progress bar
-            HacerPaso();
+            switch (accionHome) 
+            {
+                case 1:
+                    this.notificador1.Mensaje("El capitan debe decidir");
+                    if(this.Rol == "Capitan") 
+                    {
+                        Desicion();
+                    }
+                    this.accionHome++;
+                    break;
 
-            //Compartimos la informacion
-            mandarImagenes();
-           
+                case 2:
+                    this.notificador1.Mensaje("Tripulantes votan");
+                    if (this.Rol != "Capitan")
+                    {
+                        Votacion();
+                    }
 
+                    if (votosRonda == 0) 
+                    {
+                        EjecutarDesicion();
+                    }
+
+                    votosRonda = 0;
+                    this.accionHome++;
+                    break;
+
+                case 3:
+                    EventoRandom();
+                    HacerPaso();
+                    this.accionHome = 1;
+                    break;
+
+            }
         }
 
         private void Update500ms_Tick(object sender, EventArgs e)
         {
+            //Compartimos la informacion
+            mandarImagenes();
             mandarInfoDados();
+        }
+
+        private void Desicion() 
+        {
+            if (this.Rol == "Capitan") 
+            {
+                do
+                {
+                    this.desicionCapitan = this.urnaCapitan1.ConsultarDesicion();
+                } while (this.urnaCapitan1.ConsultarDesicion() == 0);
+                this.urnaCapitan1.ReiniciarDesicion();
+            }
+        }
+
+        private void EjecutarDesicion() 
+        {
+            switch (this.desicionCapitan) 
+            {
+                case 1:
+                    this.notificador1.Mensaje("El capitan dice: Al NORTE!");
+                    break;
+                case 2:
+                    this.notificador1.Mensaje("El capitan dice: Al ESTE!");
+                    break;
+                case 3:
+                    this.notificador1.Mensaje("El capitan dice: Al OESTE!");
+                    break;
+                case 4:
+                    this.notificador1.Mensaje("El capitan dice: Al SUR!");
+                    break;
+            }
+        }
+
+        private void Votacion() 
+        {
+            if (this.Rol != "Capitan") 
+            {
+                do
+                {
+                } while (this.urna1.ConsultarVoto() != 9);
+                this.votosRonda += this.urna1.ConsultarVoto();
+                this.urna1.reiniciarVoto();
+            }
+        }
+
+        private void EventoRandom() 
+        {
+            Random x = new Random();
+            int evento = x.Next(1, 4);
+
+            switch (evento) 
+            {
+                case 1:
+                    EncontrarIsla();
+                    break;
+
+                case 2:
+                    EncontrarBarco();
+                    break;
+
+                case 3:
+                    EncontrarMar();
+                    break;
+
+                case 4:
+                    break;
+            }
+        }
+
+        private void EncontrarBarco() 
+        {
+
+        }
+
+        private void EncontrarIsla() 
+        {
+            //this.BackgroundImage = fondo con isla
+        }
+
+        private void EncontrarMar() 
+        {
+
         }
 
         #endregion
@@ -136,7 +254,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 this.progress.PerformStep();
             }
             */
-            
         }
 
         #endregion
@@ -424,6 +541,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     this.pantallaWeb1.CargarAvatar(this.miAvatar);
                     this.pantallaWeb1.jugarConCamara(jugarcam);
                     this.dados1.setEnable(true);
+                    loadUrnas(true);
                     break;
 
                 case "Carpintero":
@@ -431,6 +549,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     this.pantallaWeb2.CargarAvatar(this.miAvatar);
                     this.pantallaWeb2.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
+                    loadUrnas(false);
                     break;
 
                 case "Mercader":
@@ -438,6 +557,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     this.pantallaWeb3.CargarAvatar(this.miAvatar);
                     this.pantallaWeb3.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
+                    loadUrnas(false);
                     break;
 
                 case "Artillero":
@@ -445,10 +565,34 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     this.pantallaWeb4.CargarAvatar(this.miAvatar);
                     this.pantallaWeb4.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
+                    loadUrnas(false);
                     break;
             }
         }
 
+        private void loadUrnas(bool x) 
+        {
+            int width = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
+            int heigh = this.flowLayoutPanel1.Height;
+
+            if (x)
+            {
+                this.urnaCapitan1.Enabled = true;
+                this.urnaCapitan1.Visible = true;
+                this.urnaCapitan1.Load_UrnaCapitan(width, heigh);
+                this.urna1.Enabled = false;
+                this.urna1.Visible = false;
+            }
+            else 
+            {
+                this.urnaCapitan1.Enabled = false;
+                this.urnaCapitan1.Visible = false;
+                this.urna1.Load_Urna(width,heigh);
+                this.urna1.Enabled = true;
+                this.urna1.Visible = true;
+            }
+            
+        }
         private void barco1_Load(object sender, EventArgs e)
         {
 
@@ -463,26 +607,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         public int obtenerTurno(int turnoActual)
         {
-            /*
-             * PARA UTILIZAR ESTO, SERIA ALGO ASI:
-             * SWITCH(obtenerTurno(this.turno))
-             * {
-             *  case 1:
-             *      if (this.rol = "Capitan")
-             *      {
-             *          //habilita control de dados..
-             *      }
-             *      break;
-             *  case 2:
-             *      break;
-             *  case 3:
-             *      break;
-             *  case 4:
-             *      break;
-             * }
-             * 
-             */
-
             int turnoDevuelto = turnoActual;
             if (turnoDevuelto > 4)
             {

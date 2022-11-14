@@ -30,23 +30,54 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.Height = altoTotal;
 
             this.pictureBox1.Width = tamaTotal / 2;
+            setRol();
         }
 
         public void Siguiente() 
         {
             this.turno++;
             lbl_Turno.Text = turno.ToString();
+            setRol();
         }
 
         public void setTurno(int turnox) 
         {
             this.turno = turnox;
             lbl_Turno.Text = this.turno.ToString();
+            setRol();
         }
 
-        public void setRol(string rol) 
+        private void setRol() 
         {
-            this.lbl_Nombre.Text = rol;
+            switch (obtenerTurno(this.turno)) 
+            {
+                case 1:
+                    this.lbl_Nombre.Text = "Capitan";
+                    break;
+                case 2:
+                    this.lbl_Nombre.Text = "Carpintero";
+                    break;
+                case 3:
+                    this.lbl_Nombre.Text = "Mercader";
+                    break;
+                case 4:
+                    this.lbl_Nombre.Text = "Artillero";
+                    break;
+            }
+        }
+
+        private int obtenerTurno(int turnoActual)
+        {
+            int turnoDevuelto = turnoActual;
+            if (turnoDevuelto > 4)
+            {
+                turnoDevuelto = turnoActual - 4;
+                return obtenerTurno(turnoDevuelto);
+            }
+            else
+            {
+                return turnoDevuelto;
+            }
         }
 
         public int getTurno() 

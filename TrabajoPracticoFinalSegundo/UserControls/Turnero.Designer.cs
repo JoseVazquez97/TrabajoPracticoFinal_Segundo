@@ -50,7 +50,7 @@
             // 
             this.lbl_Nombre.AutoSize = true;
             this.lbl_Nombre.Font = new System.Drawing.Font("BlackPearl", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbl_Nombre.Location = new System.Drawing.Point(268, 45);
+            this.lbl_Nombre.Location = new System.Drawing.Point(242, 44);
             this.lbl_Nombre.Name = "lbl_Nombre";
             this.lbl_Nombre.Size = new System.Drawing.Size(266, 45);
             this.lbl_Nombre.TabIndex = 1;
