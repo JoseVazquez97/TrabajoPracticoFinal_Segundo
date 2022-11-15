@@ -49,18 +49,21 @@
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.notificador1 = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
             this.Update500ms = new System.Windows.Forms.Timer(this.components);
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.barco2 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
+            this.flowLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // barco1
             // 
             this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Location = new System.Drawing.Point(442, 175);
-            this.barco1.Margin = new System.Windows.Forms.Padding(442, 80, 0, 0);
+            this.barco1.Location = new System.Drawing.Point(400, 80);
+            this.barco1.Margin = new System.Windows.Forms.Padding(400, 80, 0, 0);
             this.barco1.Name = "barco1";
             this.barco1.Size = new System.Drawing.Size(360, 754);
             this.barco1.TabIndex = 0;
@@ -226,11 +229,10 @@
             // 
             this.flowLayoutPanel5.BackColor = System.Drawing.Color.Transparent;
             this.flowLayoutPanel5.Controls.Add(this.notificador1);
-            this.flowLayoutPanel5.Controls.Add(this.barco1);
-            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(325, 107);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(1144, 809);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(1144, 95);
             this.flowLayoutPanel5.TabIndex = 9;
             // 
             // notificador1
@@ -238,7 +240,7 @@
             this.notificador1.BackColor = System.Drawing.Color.Transparent;
             this.notificador1.Location = new System.Drawing.Point(3, 3);
             this.notificador1.Name = "notificador1";
-            this.notificador1.Size = new System.Drawing.Size(1318, 89);
+            this.notificador1.Size = new System.Drawing.Size(1318, 76);
             this.notificador1.TabIndex = 1;
             // 
             // Update500ms
@@ -247,11 +249,32 @@
             this.Update500ms.Interval = 500;
             this.Update500ms.Tick += new System.EventHandler(this.Update500ms_Tick);
             // 
+            // flowLayoutPanel6
+            // 
+            this.flowLayoutPanel6.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel6.Controls.Add(this.barco1);
+            this.flowLayoutPanel6.Controls.Add(this.barco2);
+            this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(325, 202);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(1144, 714);
+            this.flowLayoutPanel6.TabIndex = 10;
+            // 
+            // barco2
+            // 
+            this.barco2.BackColor = System.Drawing.Color.Transparent;
+            this.barco2.Location = new System.Drawing.Point(763, 0);
+            this.barco2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.barco2.Name = "barco2";
+            this.barco2.Size = new System.Drawing.Size(364, 712);
+            this.barco2.TabIndex = 1;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1534, 1061);
+            this.Controls.Add(this.flowLayoutPanel6);
             this.Controls.Add(this.flowLayoutPanel5);
             this.Controls.Add(this.flowLayoutPanel4);
             this.Controls.Add(this.flowLayoutPanel3);
@@ -270,6 +293,7 @@
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel5.ResumeLayout(false);
+            this.flowLayoutPanel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -296,5 +320,7 @@
         private System.Windows.Forms.Timer Update500ms;
         private UserControls.UrnaCapitan urnaCapitan1;
         private UserControls.Notificador notificador1;
+        private FlowLayoutPanel flowLayoutPanel6;
+        private UserControls.Barco barco2;
     }
 }

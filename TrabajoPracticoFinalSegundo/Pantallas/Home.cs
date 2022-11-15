@@ -47,6 +47,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         int accionHome;
         int votosRonda;
         int desicionCapitan;
+        string eventoRandom;
+        int segundos;
 
         //Esto Es un comentario.
 
@@ -56,6 +58,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
             this.accionHome = 1;
+            this.segundos= 0;
 
             #region LOADS DE COMPONENTES 
 
@@ -72,7 +75,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             //BARCO
 
-            this.barco1.loadBarco(this.flowLayoutPanel5.Width,this.flowLayoutPanel5.Height);
+            this.barco1.loadBarco(this.flowLayoutPanel6.Width,this.flowLayoutPanel6.Height);
+            this.barco2.loadBarco(this.flowLayoutPanel6.Width, this.flowLayoutPanel6.Height);
+            this.barco2.Visible= false;
             this.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\FondoHomeDos.jpg");
 
             //BARRA (INFERIOR)
@@ -115,33 +120,51 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             switch (accionHome) 
             {
                 case 1:
-                    this.notificador1.Mensaje("El capitan debe decidir");
-                    if(this.Rol == "Capitan") 
+                    this.notificador1.Mensaje("ORDENES CAPITAN!");
+                    if (this.Rol == "Capitan")
                     {
                         Desicion();
                     }
-                    this.accionHome++;
                     break;
 
                 case 2:
-                    this.notificador1.Mensaje("Tripulantes votan");
                     if (this.Rol != "Capitan")
                     {
                         Votacion();
                     }
-
-                    if (votosRonda == 0) 
+                    else 
                     {
-                        EjecutarDesicion();
+                        this.notificador1.Mensaje("Tus tripulantes estan decidiendo");
                     }
-
-                    votosRonda = 0;
-                    this.accionHome++;
                     break;
 
                 case 3:
+                    if (votosRonda == 0)
+                    {
+                        EjecutarDesicion();
+                    }
+                    votosRonda = 0;
+                    break;
+
+                case 4:
                     EventoRandom();
                     HacerPaso();
+                    break;
+
+                case 5:
+                    this.notificador1.Mensaje("El capitan debe decidir");
+                    if (this.Rol == "Capitan")
+                    {
+                        Desicion();
+                    }
+                    break;
+
+                case 6:
+                    this.notificador1.Mensaje("Ronda de dados");
+                    if (this.Rol == "Capitan")
+                    {
+                        this.dados1.setEnable(true);
+                    }
                     this.accionHome = 1;
                     break;
 
@@ -153,10 +176,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             //Compartimos la informacion
             mandarImagenes();
             mandarInfoDados();
+            this.segundos++;
         }
 
         private void Desicion() 
         {
+            this.Update.Stop();
             if (this.Rol == "Capitan") 
             {
                 do
@@ -165,76 +190,103 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 } while (this.urnaCapitan1.ConsultarDesicion() == 0);
                 this.urnaCapitan1.ReiniciarDesicion();
             }
+            this.accionHome++;
+            this.Update.Start();
         }
 
         private void EjecutarDesicion() 
         {
-            switch (this.desicionCapitan) 
+            switch(this.desicionCapitan)
             {
                 case 1:
                     this.notificador1.Mensaje("El capitan dice: Al NORTE!");
                     break;
+
                 case 2:
                     this.notificador1.Mensaje("El capitan dice: Al ESTE!");
                     break;
+
                 case 3:
                     this.notificador1.Mensaje("El capitan dice: Al OESTE!");
                     break;
+
                 case 4:
                     this.notificador1.Mensaje("El capitan dice: Al SUR!");
                     break;
             }
         }
 
-        private void Votacion() 
+        private void Votacion()
         {
+            this.Update.Stop();
+            this.notificador1.Mensaje("Consejo de Tripulantes");
             if (this.Rol != "Capitan") 
             {
+                /*
                 do
                 {
                 } while (this.urna1.ConsultarVoto() != 9);
                 this.votosRonda += this.urna1.ConsultarVoto();
                 this.urna1.reiniciarVoto();
+                */
             }
+            this.accionHome++;
+            this.Update.Start();
         }
 
         private void EventoRandom() 
         {
+            this.Update.Stop();
             Random x = new Random();
-            int evento = x.Next(1, 4);
+            int evento = x.Next(1, 3);
 
             switch (evento) 
             {
                 case 1:
+                    Viajar();
                     EncontrarIsla();
                     break;
 
                 case 2:
+                    Viajar();
                     EncontrarBarco();
                     break;
 
                 case 3:
+                    Viajar();
                     EncontrarMar();
                     break;
-
-                case 4:
-                    break;
             }
+            this.accionHome++;
+            this.Update.Start();
+        }
+
+        private void Viajar() 
+        {
+            int cont = this.segundos;
+            //this.BackgroundImage = giff;
+            this.notificador1.Mensaje("Viajando");
+            do
+            {
+            } while (cont + 10 != this.segundos);
         }
 
         private void EncontrarBarco() 
         {
-
+            this.eventoRandom = "Barco";
+            this.barco2.Visible = true;
+            
         }
 
         private void EncontrarIsla() 
         {
+            this.eventoRandom = "Isla";
             //this.BackgroundImage = fondo con isla
         }
 
         private void EncontrarMar() 
         {
-
+            this.eventoRandom = "Nada";
         }
 
         #endregion
@@ -540,7 +592,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     this.Key = 1;
                     this.pantallaWeb1.CargarAvatar(this.miAvatar);
                     this.pantallaWeb1.jugarConCamara(jugarcam);
-                    this.dados1.setEnable(true);
+                    this.dados1.setEnable(false);
                     loadUrnas(true);
                     break;
 

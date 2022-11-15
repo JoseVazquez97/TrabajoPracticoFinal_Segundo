@@ -48,13 +48,12 @@
             this.lbl_texto.AutoSize = true;
             this.lbl_texto.BackColor = System.Drawing.Color.Transparent;
             this.lbl_texto.Font = new System.Drawing.Font("BlackPearl", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbl_texto.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lbl_texto.ForeColor = System.Drawing.Color.Black;
             this.lbl_texto.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbl_texto.Location = new System.Drawing.Point(3, 0);
             this.lbl_texto.Name = "lbl_texto";
-            this.lbl_texto.Size = new System.Drawing.Size(1084, 76);
+            this.lbl_texto.Size = new System.Drawing.Size(0, 76);
             this.lbl_texto.TabIndex = 0;
-            this.lbl_texto.Text = "A donde quiere ir el capitan";
             this.lbl_texto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Notificador
