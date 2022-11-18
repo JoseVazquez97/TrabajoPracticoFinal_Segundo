@@ -42,13 +42,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         string Rol;
         Image miAvatar;
         string path;
+        string eventoRandom;
         int Key;
         int turno;
         int accionHome;
         int votosRonda;
         int desicionCapitan;
-        string eventoRandom;
+        int eventoActual;
         int segundos;
+        
 
         //Esto Es un comentario.
 
@@ -57,8 +59,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             InitializeComponent();
 
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
-            this.accionHome = 1;
+            this.eventoActual = 1;
             this.segundos= 0;
+            this.eventoRandom = "Isla";
 
             #region LOADS DE COMPONENTES 
 
@@ -116,59 +119,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void Update_Tick(object sender, EventArgs e)
         {
-            //Adelanta un fragmento de la progress bar
-            switch (accionHome) 
-            {
-                case 1:
-                    this.notificador1.Mensaje("ORDENES CAPITAN!");
-                    if (this.Rol == "Capitan")
-                    {
-                        Desicion();
-                    }
-                    break;
-
-                case 2:
-                    if (this.Rol != "Capitan")
-                    {
-                        Votacion();
-                    }
-                    else 
-                    {
-                        this.notificador1.Mensaje("Tus tripulantes estan decidiendo");
-                    }
-                    break;
-
-                case 3:
-                    if (votosRonda == 0)
-                    {
-                        EjecutarDesicion();
-                    }
-                    votosRonda = 0;
-                    break;
-
-                case 4:
-                    EventoRandom();
-                    HacerPaso();
-                    break;
-
-                case 5:
-                    this.notificador1.Mensaje("El capitan debe decidir");
-                    if (this.Rol == "Capitan")
-                    {
-                        Desicion();
-                    }
-                    break;
-
-                case 6:
-                    this.notificador1.Mensaje("Ronda de dados");
-                    if (this.Rol == "Capitan")
-                    {
-                        this.dados1.setEnable(true);
-                    }
-                    this.accionHome = 1;
-                    break;
-
-            }
         }
 
         private void Update500ms_Tick(object sender, EventArgs e)
@@ -176,49 +126,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             //Compartimos la informacion
             mandarImagenes();
             mandarInfoDados();
+            mandarInfoEvento();
             this.segundos++;
         }
 
-        private void Desicion() 
-        {
-            this.Update.Stop();
-            if (this.Rol == "Capitan") 
-            {
-                do
-                {
-                    this.desicionCapitan = this.urnaCapitan1.ConsultarDesicion();
-                } while (this.urnaCapitan1.ConsultarDesicion() == 0);
-                this.urnaCapitan1.ReiniciarDesicion();
-            }
-            this.accionHome++;
-            this.Update.Start();
-        }
-
-        private void EjecutarDesicion() 
-        {
-            switch(this.desicionCapitan)
-            {
-                case 1:
-                    this.notificador1.Mensaje("El capitan dice: Al NORTE!");
-                    break;
-
-                case 2:
-                    this.notificador1.Mensaje("El capitan dice: Al ESTE!");
-                    break;
-
-                case 3:
-                    this.notificador1.Mensaje("El capitan dice: Al OESTE!");
-                    break;
-
-                case 4:
-                    this.notificador1.Mensaje("El capitan dice: Al SUR!");
-                    break;
-            }
-        }
 
         private void Votacion()
         {
-            this.Update.Stop();
             this.notificador1.Mensaje("Consejo de Tripulantes");
             if (this.Rol != "Capitan") 
             {
@@ -231,12 +145,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 */
             }
             this.accionHome++;
-            this.Update.Start();
         }
 
         private void EventoRandom() 
         {
-            this.Update.Stop();
             Random x = new Random();
             int evento = x.Next(1, 3);
 
@@ -257,31 +169,22 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     EncontrarMar();
                     break;
             }
-            this.accionHome++;
-            this.Update.Start();
         }
 
         private void Viajar() 
         {
-            int cont = this.segundos;
-            //this.BackgroundImage = giff;
-            this.notificador1.Mensaje("Viajando");
-            do
-            {
-            } while (cont + 10 != this.segundos);
+            this.eventoRandom = "Viajando";
         }
 
         private void EncontrarBarco() 
         {
             this.eventoRandom = "Barco";
             this.barco2.Visible = true;
-            
         }
 
         private void EncontrarIsla() 
         {
             this.eventoRandom = "Isla";
-            //this.BackgroundImage = fondo con isla
         }
 
         private void EncontrarMar() 
@@ -409,8 +312,17 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
-        #region INFORMAR - Turneros
+        #region INFORMAR - Evento
+        private async void mandarInfoEvento()
+        {
+            string evento = Convert.ToString(this.eventoActual);
 
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarEvento", evento);
+            }
+            catch { MessageBox.Show("El cliente no pudo enviar el mensaje (evento)"); }
+        }
         #endregion
 
         #endregion
@@ -517,54 +429,68 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     }
                 }
 
-
-                switch (obtenerTurno(turnoX))
+                if (this.eventoActual == 6) 
                 {
-                    case 1:
-                        if (this.Rol == "Capitan")
-                        {
-                            ActivarDado(true);
-                        }
-                        else 
-                        {
-                            ActivarDado(false);
-                        }
-                        break;
-                    case 2:
-                        if (this.Rol == "Carpintero")
-                        {
-                            ActivarDado(true);
-                        }
-                        else
-                        {
-                            ActivarDado(false);
-                        }
-                        break;
-                    case 3:
-                        if (this.Rol == "Mercader")
-                        {
-                            ActivarDado(true);
-                        }
-                        else
-                        {
-                            ActivarDado(false);
-                        }
-                        break;
-                    case 4:
-                        if (this.Rol == "Artillero")
-                        {
-                            ActivarDado(true);
-                        }
-                        else
-                        {
-                            ActivarDado(false);
-                        }
-                        break;
-                    default:
-                        break;
+                    switch (obtenerTurno(turnoX))
+                    {
+                        case 1:
+                            if (this.Rol == "Capitan")
+                            {
+                                ActivarDado(true);
+                            }
+                            else
+                            {
+                                ActivarDado(false);
+                            }
+                            break;
+                        case 2:
+                            if (this.Rol == "Carpintero")
+                            {
+                                ActivarDado(true);
+                            }
+                            else
+                            {
+                                ActivarDado(false);
+                            }
+                            break;
+                        case 3:
+                            if (this.Rol == "Mercader")
+                            {
+                                ActivarDado(true);
+                            }
+                            else
+                            {
+                                ActivarDado(false);
+                            }
+                            break;
+                        case 4:
+                            if (this.Rol == "Artillero")
+                            {
+                                ActivarDado(true);
+                            }
+                            else
+                            {
+                                ActivarDado(false);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 }
 
             });
+            #endregion
+
+            #region EVENTO ACTUAL
+
+            HomeConection.On<string>("RecibirEvento", (evento) =>
+            {
+                if ((int.Parse(evento) > this.eventoActual) || (this.eventoActual == 7 && int.Parse(evento) == 1)) 
+                {
+                    this.eventoActual = Convert.ToInt32(evento);
+                }
+            });
+
             #endregion
         }
 

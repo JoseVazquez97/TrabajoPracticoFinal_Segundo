@@ -11,6 +11,7 @@ namespace WebApi_SingalR_Com.Hubs
         public static string Rol { get; set; } = "";
         public static string Turno { get; set; } = "";
 
+        public static string Evento { get; set; } = "";
         //WebCams
         public async Task EnviarImagen(string imagenU1x, string rol)
         {
@@ -29,6 +30,15 @@ namespace WebApi_SingalR_Com.Hubs
 
             //MANDAR LA ACTUALIZACION
             await Clients.All.SendAsync("RecibirTurno",Turnox);
+        }
+
+        //Eventos
+        public async Task EnviarEvento(string evento)
+        {
+            Evento = evento;
+
+            //MANDAR LA ACTUALIZACION
+            await Clients.All.SendAsync("RecibirEvento", evento);
         }
     }
 }

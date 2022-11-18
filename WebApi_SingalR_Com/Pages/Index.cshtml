@@ -8,12 +8,11 @@
 <p class="imagen" id="img3">x3</p>
 <p class="imagen" id="img4">x4</p>
 
+<p>Evento</p>
+<p id="EventoActual">1</p>
 
 <p>Turnero</p>
-
 <p id="TurnoActual">1</p>
-
-<p id="key">1</p>
 
 <script>
     setInterval(function () {
@@ -33,6 +32,12 @@
     }, 300);
 </script>
 
+<script>
+    setInterval(function () {
+        actualizarEvento();
+    }, 500);
+</script>
+
 <style>
     #v1
     {
@@ -40,7 +45,8 @@
     }
 </style>
 
-<script src="~/js/signalr.js"></script>
+<script src=~/js/signalr.js></script>
 <script src=~/js/HomeComunications.js></script>
-<script src="~/js/PasaTurnos.js"></script>
+<script src=~/js/EventoCom.js></script>
+<script src=~/js/PasaTurnos.js></script>
 <script src=~/js/EjemploComunications.js></script>
