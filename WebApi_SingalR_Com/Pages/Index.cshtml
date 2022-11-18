@@ -11,31 +11,28 @@
 <p>Evento</p>
 <p id="EventoActual">1</p>
 
+<p>Votos</p>
+<p class="voto" id="voto1">0</p>
+<p class="voto" id="voto2">0</p>
+<p class="voto" id="voto3">0</p>
+
 <p>Turnero</p>
 <p id="TurnoActual">1</p>
 
 <script>
-    setInterval(function () {
-        siguienteTurno();
-    }, 1000);
+    setInterval(function () { siguienteTurno(); }, 1000);
 </script>
 
 <script>
-    setInterval(function () {
-        actualizarTurneros();
-    }, 1000);
+    setInterval(function () { actualizarTurneros();}, 1000);
 </script>
 
 <script>
-    setInterval(function () {
-        actualizarImagenes();
-    }, 300);
+    setInterval(function () { actualizarImagenes(); }, 300);
 </script>
 
 <script>
-    setInterval(function () {
-        actualizarEvento();
-    }, 500);
+    setInterval(function () { actualizarEvento(); }, 500);
 </script>
 
 <style>
@@ -48,5 +45,6 @@
 <script src=~/js/signalr.js></script>
 <script src=~/js/HomeComunications.js></script>
 <script src=~/js/EventoCom.js></script>
+<script src=~/js/VotoCom.js></script>
 <script src=~/js/PasaTurnos.js></script>
 <script src=~/js/EjemploComunications.js></script>

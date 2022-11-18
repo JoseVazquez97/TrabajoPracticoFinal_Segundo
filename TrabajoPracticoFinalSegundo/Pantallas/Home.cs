@@ -101,6 +101,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
 
             this.turno = turnero1.getTurno();
+            this.notificador1.Mensaje("¡ORDENES CAPITAN!");
 
             #region DECLARACION DEL HUB
             HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
@@ -127,6 +128,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             mandarImagenes();
             mandarInfoDados();
             mandarInfoEvento();
+            mandarInfoVoto();
             this.segundos++;
         }
 
@@ -325,6 +327,26 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
+        #region INFORMAR - Voto
+        private async void mandarInfoVoto()
+        {
+            string voto = "9";
+            string rol = this.Rol;
+
+            if (this.urna1.ConsultarVoto() != 9) 
+            {
+                voto = Convert.ToString(this.urna1.ConsultarVoto());
+                this.urna1.reiniciarVoto();
+            }
+            
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarVoto", rol, voto);
+            }
+            catch { MessageBox.Show("El cliente no pudo enviar el mensaje (evento)"); }
+        }
+        #endregion
+
         #endregion
 
         #region RECEPCION DE MENSAJES
@@ -429,7 +451,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     }
                 }
 
-                if (this.eventoActual == 6) 
+                if (this.eventoActual == 6) //Si el evento es el evento de guerra.
                 {
                     switch (obtenerTurno(turnoX))
                     {
@@ -485,17 +507,133 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<string>("RecibirEvento", (evento) =>
             {
-                if ((int.Parse(evento) > this.eventoActual) || (this.eventoActual == 7 && int.Parse(evento) == 1)) 
+
+                if ((int.Parse(evento) > this.eventoActual) || (this.eventoActual == 7 && int.Parse(evento) == 1) || (this.eventoActual == 1 && this.Rol == "Capitan")) 
                 {
                     this.eventoActual = Convert.ToInt32(evento);
+
+                    switch (this.eventoActual)
+                    {
+                        case 1:
+                            if (this.notificador1.InvokeRequired)
+                            {
+                                try
+                                {
+                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("¡ORDENES CAPITAN!")));
+                                }
+                                catch { }
+                            }
+
+                            if (this.urnaCapitan1.ConsultarDesicion() != 0) 
+                            {
+                                this.desicionCapitan = this.urnaCapitan1.ConsultarDesicion();
+                                this.urnaCapitan1.ReiniciarDesicion();
+                                this.eventoActual++;
+                                if (this.notificador1.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        notificador1.Invoke(new Action(() => notificador1.Mensaje("¡TRIPULANTES ¿QUE DICEN?!")));
+                                    }
+                                    catch { }
+                                }
+
+                            }
+                            
+                            break;
+
+                        case 2:
+                            if (this.notificador1.InvokeRequired)
+                            {
+                                try
+                                {
+                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("¡TRIPULANTES ¿QUE DICEN?!")));
+                                }
+                                catch { }
+                            }
+                            break;
+
+                        case 3:
+                            if (this.notificador1.InvokeRequired)
+                            {
+                                try
+                                {
+                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("¡EVENTO RANDOM!")));
+                                }
+                                catch { }
+                            }
+                            break;
+
+                        case 4:
+                            if (this.notificador1.InvokeRequired)
+                            {
+                                try
+                                {
+                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("¡ORDENES CAPITAN!")));
+                                }
+                                catch { }
+                            }
+                            break;
+
+                        case 5:
+                            if (this.notificador1.InvokeRequired)
+                            {
+                                try
+                                {
+                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("¡TRIPULANTES ¿QUE OPINAN?!")));
+                                }
+                                catch { }
+                            }
+                            break;
+
+                        case 6:
+                            if (this.notificador1.InvokeRequired)
+                            {
+                                try
+                                {
+                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("¡ATAQUEEEN!")));
+                                }
+                                catch { }
+                            }
+                            break;
+
+                        case 7:
+                            if (this.notificador1.InvokeRequired)
+                            {
+                                try
+                                {
+                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("RESULTADO")));
+                                }
+                                catch { }
+                            }
+                            break;
+                    }
                 }
             });
 
             #endregion
+
+            #region VOTOS-COM
+
+            HomeConection.On<string,string>("RecibirVoto", (rol,voto) =>
+            {
+                int vValor = int.Parse(voto);
+
+                if (vValor != 9) 
+                {
+                    if (this.escrutinio1.InvokeRequired)
+                    {
+                        try
+                        {
+                            escrutinio1.Invoke(new Action(() => escrutinio1.recibirVoto(rol, vValor)));
+                        }
+                        catch { MessageBox.Show("No pudo asignar el voto"); }
+                    }
+                }
+
+            });
+            #endregion
         }
-
-
-
 
         #endregion
 

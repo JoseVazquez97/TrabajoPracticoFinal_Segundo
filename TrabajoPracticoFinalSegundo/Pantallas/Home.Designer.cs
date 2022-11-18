@@ -51,6 +51,7 @@
             this.Update500ms = new System.Windows.Forms.Timer(this.components);
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.barco2 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
+            this.escrutinio1 = new TrabajoPracticoFinalSegundo.UserControls.Escrutinio();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -62,7 +63,7 @@
             // barco1
             // 
             this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Location = new System.Drawing.Point(400, 80);
+            this.barco1.Location = new System.Drawing.Point(400, 167);
             this.barco1.Margin = new System.Windows.Forms.Padding(400, 80, 0, 0);
             this.barco1.Name = "barco1";
             this.barco1.Size = new System.Drawing.Size(360, 754);
@@ -232,7 +233,7 @@
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(325, 107);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(1144, 95);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(1144, 76);
             this.flowLayoutPanel5.TabIndex = 9;
             // 
             // notificador1
@@ -252,22 +253,30 @@
             // flowLayoutPanel6
             // 
             this.flowLayoutPanel6.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel6.Controls.Add(this.escrutinio1);
             this.flowLayoutPanel6.Controls.Add(this.barco1);
             this.flowLayoutPanel6.Controls.Add(this.barco2);
             this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(325, 202);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(325, 183);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(1144, 714);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(1144, 733);
             this.flowLayoutPanel6.TabIndex = 10;
             // 
             // barco2
             // 
             this.barco2.BackColor = System.Drawing.Color.Transparent;
-            this.barco2.Location = new System.Drawing.Point(763, 0);
+            this.barco2.Location = new System.Drawing.Point(763, 87);
             this.barco2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.barco2.Name = "barco2";
             this.barco2.Size = new System.Drawing.Size(364, 712);
             this.barco2.TabIndex = 1;
+            // 
+            // escrutinio1
+            // 
+            this.escrutinio1.Location = new System.Drawing.Point(3, 3);
+            this.escrutinio1.Name = "escrutinio1";
+            this.escrutinio1.Size = new System.Drawing.Size(410, 81);
+            this.escrutinio1.TabIndex = 2;
             // 
             // Home
             // 
@@ -322,5 +331,6 @@
         private UserControls.Notificador notificador1;
         private FlowLayoutPanel flowLayoutPanel6;
         private UserControls.Barco barco2;
+        private UserControls.Escrutinio escrutinio1;
     }
 }
