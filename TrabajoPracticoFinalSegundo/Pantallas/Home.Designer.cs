@@ -51,6 +51,10 @@
             this.Update500ms = new System.Windows.Forms.Timer(this.components);
             this.barco2 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.pBox_Fondo = new System.Windows.Forms.PictureBox();
+            this.noti_Cap = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
+            this.noti_Carp = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
+            this.noti_Mer = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
+            this.noti_Ar = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -88,6 +92,7 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 928);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1478, 133);
             this.flowLayoutPanel1.TabIndex = 4;
@@ -136,13 +141,14 @@
             // 
             // flowLayoutPanel2
             // 
-            this.flowLayoutPanel2.BackColor = System.Drawing.Color.White;
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.Transparent;
             this.flowLayoutPanel2.Controls.Add(this.pantallaWeb1);
             this.flowLayoutPanel2.Controls.Add(this.pantallaWeb2);
             this.flowLayoutPanel2.Controls.Add(this.pantallaWeb3);
             this.flowLayoutPanel2.Controls.Add(this.pantallaWeb4);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 916);
             this.flowLayoutPanel2.TabIndex = 5;
@@ -202,6 +208,7 @@
             this.flowLayoutPanel3.Controls.Add(this.btn_Exit);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(1408, 0);
+            this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel3.MaximumSize = new System.Drawing.Size(70, 0);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(70, 916);
@@ -213,17 +220,18 @@
             this.flowLayoutPanel4.Controls.Add(this.recursosDisplay1);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(325, 0);
+            this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(1083, 107);
             this.flowLayoutPanel4.TabIndex = 8;
             // 
             // recursosDisplay1
             // 
-            this.recursosDisplay1.BackColor = System.Drawing.Color.White;
-            this.recursosDisplay1.Location = new System.Drawing.Point(3, 0);
-            this.recursosDisplay1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.recursosDisplay1.BackColor = System.Drawing.Color.Transparent;
+            this.recursosDisplay1.Location = new System.Drawing.Point(0, 0);
+            this.recursosDisplay1.Margin = new System.Windows.Forms.Padding(0);
             this.recursosDisplay1.Name = "recursosDisplay1";
-            this.recursosDisplay1.Size = new System.Drawing.Size(1080, 105);
+            this.recursosDisplay1.Size = new System.Drawing.Size(1085, 105);
             this.recursosDisplay1.TabIndex = 0;
             // 
             // flowLayoutPanel5
@@ -269,11 +277,47 @@
             this.pBox_Fondo.TabIndex = 11;
             this.pBox_Fondo.TabStop = false;
             // 
+            // noti_Cap
+            // 
+            this.noti_Cap.BackColor = System.Drawing.Color.Transparent;
+            this.noti_Cap.Location = new System.Drawing.Point(199, 47);
+            this.noti_Cap.Name = "noti_Cap";
+            this.noti_Cap.Size = new System.Drawing.Size(400, 150);
+            this.noti_Cap.TabIndex = 12;
+            // 
+            // noti_Carp
+            // 
+            this.noti_Carp.BackColor = System.Drawing.Color.Transparent;
+            this.noti_Carp.Location = new System.Drawing.Point(199, 262);
+            this.noti_Carp.Name = "noti_Carp";
+            this.noti_Carp.Size = new System.Drawing.Size(400, 150);
+            this.noti_Carp.TabIndex = 13;
+            // 
+            // noti_Mer
+            // 
+            this.noti_Mer.BackColor = System.Drawing.Color.Transparent;
+            this.noti_Mer.Location = new System.Drawing.Point(199, 478);
+            this.noti_Mer.Name = "noti_Mer";
+            this.noti_Mer.Size = new System.Drawing.Size(400, 150);
+            this.noti_Mer.TabIndex = 14;
+            // 
+            // noti_Ar
+            // 
+            this.noti_Ar.BackColor = System.Drawing.Color.Transparent;
+            this.noti_Ar.Location = new System.Drawing.Point(199, 692);
+            this.noti_Ar.Name = "noti_Ar";
+            this.noti_Ar.Size = new System.Drawing.Size(400, 150);
+            this.noti_Ar.TabIndex = 15;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1478, 1061);
+            this.Controls.Add(this.noti_Ar);
+            this.Controls.Add(this.noti_Mer);
+            this.Controls.Add(this.noti_Carp);
+            this.Controls.Add(this.noti_Cap);
             this.Controls.Add(this.flowLayoutPanel5);
             this.Controls.Add(this.flowLayoutPanel4);
             this.Controls.Add(this.flowLayoutPanel3);
@@ -323,10 +367,13 @@
         private UserControls.UrnaCapitan urnaCapitan1;
         private UserControls.Barco barco2;
         private PictureBox pBox_Fondo;
-        private UserControls.Notificador notificador1;
+        private UserControls.Notificador noti_Mer;
         private UserControls.Notificador notificador2;
         private UserControls.Notificador notificador3;
         private UserControls.Notificador notificador4;
         private UserControls.Escrutinio escrutinio1;
+        private UserControls.Notificador noti_Cap;
+        private UserControls.Notificador noti_Carp;
+        private UserControls.Notificador noti_Ar;
     }
 }

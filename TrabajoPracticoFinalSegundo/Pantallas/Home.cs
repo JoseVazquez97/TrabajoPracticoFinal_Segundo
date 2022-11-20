@@ -71,14 +71,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             //FONDO
             this.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\FondoHomeDos.jpg");
-            this.pBox_Fondo.Width = this.Width;
-            this.pBox_Fondo.Height = this.Height;
-            //this.pBox_Fondo.Image = Image.FromFile(this.path + @"\Recursos\Fondos\Viajando.gif");
+            this.pBox_Fondo.Width = this.Width - this.flowLayoutPanel2.Width -this.flowLayoutPanel3.Width;
+            this.pBox_Fondo.Height = this.Height - this.flowLayoutPanel4.Height - this.flowLayoutPanel1.Height;
+            int loc1 = this.flowLayoutPanel2.Width;
+            int loc2 = this.flowLayoutPanel4.Height;
+            this.pBox_Fondo.Location = new Point(loc1,loc2);
             this.pBox_Fondo.BackColor = Color.Transparent;
             this.pBox_Fondo.Parent = this;
-            this.flowLayoutPanel5.Parent = this.pBox_Fondo;
-            // this.notificador1.Parent = this.flowLayoutPanel5;
-            this.escrutinio1.Parent = this.flowLayoutPanel5;
 
             //PANTALLAS WEB
             this.pantallaWeb1.WebLoad();
@@ -118,15 +117,41 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.progress.Value = 1;
             this.progress.Step = 1;
 
-            //NOTIFICADOR
-            //this.notificador1.Load_Notificador(this.flowLayoutPanel5.Width);
+            //NOTIFICADORES
+            Point locati;
+            this.flowLayoutPanel2.Parent = this;
+
+            this.noti_Cap.Load_Notificador();
+            this.noti_Cap.Visible = false;
+            this.noti_Cap.Parent = this;
+            locati = this.pantallaWeb1.Location;
+            this.noti_Cap.Location = new Point(locati.X + 255, locati.Y + 20);
+
+            this.noti_Carp.Load_Notificador();
+            this.noti_Carp.Visible = true;
+            this.noti_Carp.Parent = this;
+            locati = this.pantallaWeb2.Location;
+            this.noti_Carp.Location = new Point(locati.X + 255, locati.Y+20);
+            this.noti_Carp.Mensaje("Ordenes capitan!");
+
+            this.noti_Mer.Load_Notificador();
+            this.noti_Mer.Visible = false;
+            this.noti_Mer.Parent = this;
+            locati = this.pantallaWeb3.Location;
+            this.noti_Mer.Location = new Point(locati.X + 255, locati.Y + 20);
+
+            this.noti_Ar.Load_Notificador();
+            this.noti_Ar.Visible = false;
+            this.noti_Ar.Parent = this;
+            locati = this.pantallaWeb4.Location;
+            this.noti_Ar.Location = new Point(locati.X + 255, locati.Y + 20);
 
             #endregion
 
             this.turno = turnero1.getTurno();
             this.escrutinio1.loadEscrutinio(this.flowLayoutPanel5.Width);
             this.escrutinio1.Visible = false;
-            //this.notificador1.Mensaje("¡ORDENES CAPITAN!");
+            
 
             
 
@@ -349,6 +374,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 voto = Convert.ToString(this.urna1.ConsultarVoto());
                 this.urna1.reiniciarVoto();
+
+                
             }
             
             try
@@ -543,15 +570,80 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                     switch (this.eventoActual)
                     {
+                        #region DESICION CAPITAN DIRECCION
                         case 1:
                             if (this.urnaCapitan1.ConsultarDesicion() != 0) 
                             {
                                 this.desicionCapitan = this.urnaCapitan1.ConsultarDesicion();
                                 this.urnaCapitan1.ReiniciarDesicion();
                                 this.eventoActual++;
+
+                                if (this.noti_Carp.InvokeRequired)
+                                {
+                                    try 
+                                    {
+                                        noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = false; }));
+                                    } catch { }
+                                }
+
+                                if (this.noti_Cap.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = true; }));
+                                    }
+                                    catch { }
+                                }
+
+                                switch (this.desicionCapitan) 
+                                {
+                                    case 1:
+                                        if (this.noti_Cap.InvokeRequired)
+                                        {
+                                            try
+                                            {
+                                                noti_Cap.Invoke(new Action(() => { noti_Cap.Mensaje("Al Norte!"); }));
+                                            }
+                                            catch { }
+                                        }
+                                        break;
+                                    case 2:
+                                        if (this.noti_Cap.InvokeRequired)
+                                        {
+                                            try
+                                            {
+                                                noti_Cap.Invoke(new Action(() => { noti_Cap.Mensaje("Al Este!"); }));
+                                            }
+                                            catch { }
+                                        }
+                                        break;
+                                    case 3:
+                                        if (this.noti_Cap.InvokeRequired)
+                                        {
+                                            try
+                                            {
+                                                noti_Cap.Invoke(new Action(() => { noti_Cap.Mensaje("Al Oeste!"); }));
+                                            }
+                                            catch { }
+                                        }
+                                        break;
+                                    case 4:
+                                        if (this.noti_Cap.InvokeRequired)
+                                        {
+                                            try
+                                            {
+                                                noti_Cap.Invoke(new Action(() => { noti_Cap.Mensaje("Al Sur!"); }));
+                                            }
+                                            catch { }
+                                        }
+                                        break;
+                                }
+
                             }
                             break;
+                        #endregion
 
+                        #region VOTACION DE TRIPULANTES
                         case 2:
                             
                             int resultados = 0;
@@ -612,6 +704,42 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                                 catch { }
                             }
 
+                            if (this.noti_Cap.InvokeRequired)
+                            {
+                                try
+                                {
+                                    noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = false; }));
+                                }
+                                catch { }
+                            }
+
+                            if (this.noti_Carp.InvokeRequired)
+                            {
+                                try
+                                {
+                                    noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = false; }));
+                                }
+                                catch { }
+                            }
+
+                            if (this.noti_Mer.InvokeRequired)
+                            {
+                                try
+                                {
+                                    noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = false; }));
+                                }
+                                catch { }
+                            }
+
+                            if (this.noti_Ar.InvokeRequired)
+                            {
+                                try
+                                {
+                                    noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = false; }));
+                                }
+                                catch { }
+                            }
+
                             if (this.pBox_Fondo.InvokeRequired)
                             {
                                 try
@@ -621,7 +749,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                                 catch { }
                             }
                             break;
-
+                        #endregion
                         case 4:
 
                             break;
@@ -659,6 +787,91 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         }
                         catch { MessageBox.Show("No pudo asignar el voto"); }
                     }
+
+                    #region MOSTRAR RESPUESTA!
+                    switch (rol)
+                    {
+                        case "Carpintero":
+                            if (vValor == 0)
+                            {
+                                if (this.noti_Carp.InvokeRequired) 
+                                {
+                                    try 
+                                    {
+                                        noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = true; }));
+                                        noti_Carp.Invoke(new Action(() => { noti_Carp.Mensaje("Ni loco!"); }));
+                                    } catch { }
+                                }
+                            }
+                            else
+                            {
+                                if (this.noti_Carp.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = true; }));
+                                        noti_Carp.Invoke(new Action(() => { noti_Carp.Mensaje("SI CAPITAN!"); }));
+                                    }
+                                    catch { }
+                                }
+                            }
+                            break;
+
+                        case "Mercader":
+                            if (vValor == 0)
+                            {
+                                if (this.noti_Mer.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = true; }));
+                                        noti_Mer.Invoke(new Action(() => { noti_Mer.Mensaje("Ni loco!"); }));
+                                    }
+                                    catch { }
+                                }
+                            }
+                            else
+                            {
+                                if (this.noti_Mer.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = true; }));
+                                        noti_Mer.Invoke(new Action(() => { noti_Mer.Mensaje("SI CAPITAN!"); }));
+                                    }
+                                    catch { }
+                                }
+                            }
+                            break;
+
+                        case "Artillero":
+                            if (vValor == 0)
+                            {
+                                if (this.noti_Ar.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = true; }));
+                                        noti_Ar.Invoke(new Action(() => { noti_Ar.Mensaje("Ni loco!"); }));
+                                    }
+                                    catch { }
+                                }
+                            }
+                            else
+                            {
+                                if (this.noti_Ar.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = true; }));
+                                        noti_Ar.Invoke(new Action(() => { noti_Ar.Mensaje("SI CAPITAN!"); }));
+                                    }
+                                    catch { }
+                                }
+                            }
+                            break;
+                    }
+                    #endregion
                 }
 
             });

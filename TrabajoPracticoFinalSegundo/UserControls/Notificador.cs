@@ -19,14 +19,10 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             InitializeComponent();
         }
 
-        public void Load_Notificador(int tamaTotal) 
+        public void Load_Notificador() 
         {
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
             this.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\Notificador.png");
-            this.Width = tamaTotal;
-            this.Height = 75;
-            this.lbl_texto.Width = tamaTotal;
-            this.lbl_texto.Height = 75;
         }
             
         public void Mensaje(string texto) 
