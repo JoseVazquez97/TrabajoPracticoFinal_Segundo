@@ -61,9 +61,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
             this.eventoActual = 1;
             this.segundos= 0;
-            this.eventoRandom = "Isla";
+            this.eventoRandom = "Null";
+            this.Width = Screen.PrimaryScreen.Bounds.Width;
+            this.Height = Screen.PrimaryScreen.Bounds.Height;
 
             #region LOADS DE COMPONENTES 
+
+            //FONDO
+            this.pBox_Fondo.Width = this.Width;
+            this.pBox_Fondo.Height = this.Height;
 
             //PANTALLAS WEB
             this.pantallaWeb1.WebLoad();
@@ -80,7 +86,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             this.barco1.loadBarco(this.flowLayoutPanel6.Width,this.flowLayoutPanel6.Height);
             this.barco2.loadBarco(this.flowLayoutPanel6.Width, this.flowLayoutPanel6.Height);
-            this.barco2.Visible= false;
+            this.barco2.Visible = false;
             this.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\FondoHomeDos.jpg");
 
             //BARRA (INFERIOR)
@@ -98,10 +104,19 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.progress.Maximum = 100;
             this.progress.Value = 1;
             this.progress.Step = 1;
+
+            //NOTIFICADOR
+            this.notificador1.Load_Notificador(this.flowLayoutPanel5.Width);
+
             #endregion
 
             this.turno = turnero1.getTurno();
+            this.escrutinio1.loadEscrutinio(this.flowLayoutPanel5.Width);
+            this.escrutinio1.Visible = false;
             this.notificador1.Mensaje("¡ORDENES CAPITAN!");
+            this.flowLayoutPanel6.Width = this.flowLayoutPanel5.Width;
+
+            
 
             #region DECLARACION DEL HUB
             HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
@@ -129,46 +144,32 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             mandarInfoDados();
             mandarInfoEvento();
             mandarInfoVoto();
+            mandarInfoEventoRandom();
             this.segundos++;
         }
 
 
-        private void Votacion()
-        {
-            this.notificador1.Mensaje("Consejo de Tripulantes");
-            if (this.Rol != "Capitan") 
-            {
-                /*
-                do
-                {
-                } while (this.urna1.ConsultarVoto() != 9);
-                this.votosRonda += this.urna1.ConsultarVoto();
-                this.urna1.reiniciarVoto();
-                */
-            }
-            this.accionHome++;
-        }
-
         private void EventoRandom() 
         {
             Random x = new Random();
-            int evento = x.Next(1, 3);
+            int evento = x.Next(1, 5);
 
-            switch (evento) 
+            switch (2) 
             {
                 case 1:
-                    Viajar();
                     EncontrarIsla();
                     break;
 
                 case 2:
-                    Viajar();
                     EncontrarBarco();
                     break;
 
                 case 3:
-                    Viajar();
                     EncontrarMar();
+                    break;
+
+                case 4:
+                    this.eventoRandom = "Null";
                     break;
             }
         }
@@ -181,7 +182,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private void EncontrarBarco() 
         {
             this.eventoRandom = "Barco";
-            this.barco2.Visible = true;
         }
 
         private void EncontrarIsla() 
@@ -191,7 +191,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void EncontrarMar() 
         {
-            this.eventoRandom = "Nada";
+            this.eventoRandom = "Mar";
         }
 
         #endregion
@@ -346,6 +346,20 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             catch { MessageBox.Show("El cliente no pudo enviar el mensaje (evento)"); }
         }
         #endregion
+
+        #region INFORMAR - Evento Random
+        private async void mandarInfoEventoRandom()
+        {
+            string evento = this.eventoRandom;
+
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarEventoRandom", evento);
+            }
+            catch { MessageBox.Show("El cliente no pudo enviar el mensaje (evento)"); }
+        }
+        #endregion
+
 
         #endregion
 
@@ -508,9 +522,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             HomeConection.On<string>("RecibirEvento", (evento) =>
             {
 
-                if ((int.Parse(evento) > this.eventoActual) || (this.eventoActual == 7 && int.Parse(evento) == 1) || (this.eventoActual == 1 && this.Rol == "Capitan")) 
+                if ((int.Parse(evento) > this.eventoActual) || (this.eventoActual == 7 && int.Parse(evento) == 1) || (this.eventoActual == 1 && this.Rol == "Capitan") || (this.eventoActual == 2) || (this.eventoActual == 3))
                 {
-                    this.eventoActual = Convert.ToInt32(evento);
+                    if (this.eventoActual < int.Parse(evento) || this.eventoActual == 7 && int.Parse(evento) == 1) 
+                    {
+                        this.eventoActual = Convert.ToInt32(evento);
+                    }
 
                     switch (this.eventoActual)
                     {
@@ -533,42 +550,108 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                                 {
                                     try
                                     {
-                                        notificador1.Invoke(new Action(() => notificador1.Mensaje("¡TRIPULANTES ¿QUE DICEN?!")));
+                                        notificador1.Invoke(new Action(() => notificador1.Visible = false));
                                     }
                                     catch { }
                                 }
 
+                                if (this.escrutinio1.InvokeRequired) 
+                                {
+                                    try
+                                    {
+                                        escrutinio1.Invoke(new Action(() => escrutinio1.Visible = true));
+                                    }
+                                    catch { }
+                                }
                             }
                             
                             break;
 
                         case 2:
+                            
+                            int resultados = 0;
                             if (this.notificador1.InvokeRequired)
                             {
                                 try
                                 {
-                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("¡TRIPULANTES ¿QUE DICEN?!")));
+                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("¡Votacion!")));
                                 }
                                 catch { }
                             }
-                            break;
 
-                        case 3:
                             if (this.notificador1.InvokeRequired)
                             {
                                 try
                                 {
-                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("¡EVENTO RANDOM!")));
+                                    notificador1.Invoke(new Action(() => notificador1.Visible = false));
+                                }
+                                catch { }
+                            }
+
+                            if (this.escrutinio1.InvokeRequired)
+                            {
+                                try
+                                {
+                                    escrutinio1.Invoke(new Action(() => escrutinio1.Visible = true));
+                                }
+                                catch { }
+                            }
+
+
+                            if (this.escrutinio1.InvokeRequired)
+                            {
+                                try
+                                {
+                                    escrutinio1.Invoke(new Action(() => resultados = escrutinio1.confirmarVotacion()));
+                                }
+                                catch { }
+                            }
+
+                            if (resultados != 0) 
+                            {
+                                if (resultados >= 2)
+                                {
+                                    this.eventoActual++;
+                                }
+                                else 
+                                {
+                                    this.eventoActual++;
+                                }
+                            }
+                  
+                            break;
+
+                        case 3:
+                            if (this.Rol == "Capitan") { EventoRandom(); }
+
+                            if (this.escrutinio1.InvokeRequired)
+                            {
+                                try
+                                {
+                                    escrutinio1.Invoke(new Action(() => escrutinio1.reiniciarVotos()));
+                                    escrutinio1.Invoke(new Action(() => escrutinio1.reiniciarCheck()));
+                                    escrutinio1.Invoke(new Action(() => escrutinio1.Visible = false));
+                                }
+                                catch { }
+                            }
+
+                            if (this.pBox_Fondo.InvokeRequired)
+                            {
+                                try
+                                {
+                                    pBox_Fondo.Invoke(new Action(() => pBox_Fondo.Image = Image.FromFile(this.path + @"\Recursos\Fondos\Viajando.gif")));
                                 }
                                 catch { }
                             }
                             break;
 
                         case 4:
+
                             if (this.notificador1.InvokeRequired)
                             {
                                 try
                                 {
+                                    notificador1.Invoke(new Action(() => notificador1.Visible = true));
                                     notificador1.Invoke(new Action(() => notificador1.Mensaje("¡ORDENES CAPITAN!")));
                                 }
                                 catch { }
@@ -631,6 +714,34 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     }
                 }
 
+            });
+            #endregion
+
+            #region EVENTO RANDOM-COM
+
+            HomeConection.On<string>("RecibirEventoRandom", (evento) =>
+            {
+                if (this.Rol != "Capitan") { this.eventoRandom = evento; }
+
+                switch (evento)
+                {
+                    case "Barco":
+                        if (this.barco2.InvokeRequired)
+                        {
+                            try
+                            {
+                                barco2.Invoke(new Action(() => barco2.Visible = true));
+                            }
+                            catch { }
+                        }
+                        break;
+                    case "Isla":
+                        break;
+                    case "Nada":
+                        break;
+                    case "Null":
+                        break;
+                }
             });
             #endregion
         }
@@ -735,6 +846,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
+        private void flowLayoutPanel5_Paint(object sender, PaintEventArgs e)
+        {
+                
+        }
 
+        private void flowLayoutPanel6_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

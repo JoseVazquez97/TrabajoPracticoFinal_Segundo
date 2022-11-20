@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Emgu.CV.Shape;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,46 +13,102 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 {
     public partial class Escrutinio : UserControl
     {
+        int CHECKC;
+        int CHECKM;
+        int CHECKA;
+        int resultado;
+
         public Escrutinio()
         {
             InitializeComponent();
+            this.CHECKC = 0;
+            this.CHECKM = 0;
+            this.CHECKA = 0;
+        }
+
+        public void loadEscrutinio(int tamaTotal)
+        {
+            this.Width = tamaTotal;
+         
+            this.flowLayoutPanel1.Location = new Point(tamaTotal/2 - 200, 0);
+
+            int x = this.flowLayoutPanel1.Width;
+
         }
 
         public void recibirVoto(string rol, int voto)
         {
-            switch (rol) 
+            switch (rol)
             {
                 case "Carpintero":
-                    if (voto == 0)
+                    if (this.CHECKC == 0) 
                     {
-                        this.pictureBox1.BackColor = Color.Red;
+                        if (voto == 0)
+                        {
+                            this.pictureBox1.BackColor = Color.Red;
+                            this.CHECKC++;
+                            this.resultado++;
+                        }
+
+                        if(voto == 1) { this.pictureBox1.BackColor = Color.Green; this.CHECKC++; this.resultado--; }
                     }
-                    else { this.pictureBox1.BackColor = Color.Green; }
                     break;
 
                 case "Mercader":
-                    if (voto == 0)
+                    if (this.CHECKM == 0)
                     {
-                        this.pictureBox1.BackColor = Color.Red;
+                        if (voto == 0)
+                        {
+                            this.pictureBox2.BackColor = Color.Red;
+                            this.CHECKM++;
+                            this.resultado++;
+                        }
+
+                        if (voto == 1) { this.pictureBox2.BackColor = Color.Green; this.CHECKM++; this.resultado--; }
+                    
                     }
-                    else { this.pictureBox1.BackColor = Color.Green; }
                     break;
 
                 case "Artillero":
-                    if (voto == 0)
+                    if (this.CHECKA == 0)
                     {
-                        this.pictureBox1.BackColor = Color.Red;
+                        if (voto == 0)
+                        {
+                            this.pictureBox3.BackColor = Color.Red;
+                            this.CHECKA++;
+                            this.resultado++;
+                        }
+
+                        if (voto == 1) { this.pictureBox3.BackColor = Color.Green; this.CHECKA++; this.resultado--; }
                     }
-                    else { this.pictureBox1.BackColor = Color.Green; }
                     break;
             }
         }
 
         public void reiniciarVotos() 
         {
-            this.pictureBox1.BackColor= Color.White;
-            this.pictureBox2.BackColor = Color.White;
-            this.pictureBox3.BackColor = Color.White;
+            this.pictureBox1.BackColor= Color.Transparent;
+            this.pictureBox2.BackColor = Color.Transparent;
+            this.pictureBox3.BackColor = Color.Transparent;
+        }
+
+        public void reiniciarCheck()
+        {
+            this.CHECKA = 0;
+            this.CHECKC = 0;
+            this.CHECKM = 0;
+        }
+
+        public int confirmarVotacion() 
+        {
+            if ((this.CHECKC > 0) && (this.CHECKA > 0) && (this.CHECKM > 0))
+            {
+                return this.resultado;
+            }
+            else 
+            {
+                return 0;
+            }
         }
     }
 }

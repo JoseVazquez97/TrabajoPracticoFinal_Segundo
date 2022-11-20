@@ -11,6 +11,9 @@
 <p>Evento</p>
 <p id="EventoActual">1</p>
 
+<p>EventoRandom</p>
+<p id="EventoRandom">Isla</p>
+
 <p>Votos</p>
 <p class="voto" id="voto1">0</p>
 <p class="voto" id="voto2">0</p>
@@ -24,7 +27,7 @@
 </script>
 
 <script>
-    setInterval(function () { actualizarTurneros();}, 1000);
+    setInterval(function () { actualizarTurneros();}, 500);
 </script>
 
 <script>
@@ -33,6 +36,14 @@
 
 <script>
     setInterval(function () { actualizarEvento(); }, 500);
+</script>
+
+<script>
+    setInterval(function () { actualizarEventoR(); }, 500);
+</script>
+
+<script>
+    setInterval(function () { actualizarVotos(); }, 500);
 </script>
 
 <style>
@@ -45,6 +56,6 @@
 <script src=~/js/signalr.js></script>
 <script src=~/js/HomeComunications.js></script>
 <script src=~/js/EventoCom.js></script>
-<script src=~/js/VotoCom.js></script>
+<script src=~/js/VotosCom.js></script>
 <script src=~/js/PasaTurnos.js></script>
 <script src=~/js/EjemploComunications.js></script>

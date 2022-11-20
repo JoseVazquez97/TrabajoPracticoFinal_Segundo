@@ -48,23 +48,25 @@
             this.recursosDisplay1 = new TrabajoPracticoFinalSegundo.UserControls.RecursosDisplay();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.notificador1 = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
+            this.escrutinio1 = new TrabajoPracticoFinalSegundo.UserControls.Escrutinio();
             this.Update500ms = new System.Windows.Forms.Timer(this.components);
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.barco2 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
-            this.escrutinio1 = new TrabajoPracticoFinalSegundo.UserControls.Escrutinio();
+            this.pBox_Fondo = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBox_Fondo)).BeginInit();
             this.SuspendLayout();
             // 
             // barco1
             // 
             this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Location = new System.Drawing.Point(400, 167);
-            this.barco1.Margin = new System.Windows.Forms.Padding(400, 80, 0, 0);
+            this.barco1.Location = new System.Drawing.Point(200, 0);
+            this.barco1.Margin = new System.Windows.Forms.Padding(200, 0, 0, 0);
             this.barco1.Name = "barco1";
             this.barco1.Size = new System.Drawing.Size(360, 754);
             this.barco1.TabIndex = 0;
@@ -76,7 +78,7 @@
             this.progress.Location = new System.Drawing.Point(0, 916);
             this.progress.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
             this.progress.Name = "progress";
-            this.progress.Size = new System.Drawing.Size(1534, 12);
+            this.progress.Size = new System.Drawing.Size(1478, 12);
             this.progress.TabIndex = 3;
             // 
             // flowLayoutPanel1
@@ -90,7 +92,7 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 928);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1534, 133);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1478, 133);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // urnaCapitan1
@@ -153,38 +155,38 @@
             this.pantallaWeb1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.pantallaWeb1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pantallaWeb1.Location = new System.Drawing.Point(25, 25);
-            this.pantallaWeb1.Margin = new System.Windows.Forms.Padding(25, 25, 25, 10);
+            this.pantallaWeb1.Margin = new System.Windows.Forms.Padding(25, 25, 25, 5);
             this.pantallaWeb1.Name = "pantallaWeb1";
-            this.pantallaWeb1.Size = new System.Drawing.Size(270, 200);
+            this.pantallaWeb1.Size = new System.Drawing.Size(249, 200);
             this.pantallaWeb1.TabIndex = 0;
             // 
             // pantallaWeb2
             // 
             this.pantallaWeb2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.pantallaWeb2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pantallaWeb2.Location = new System.Drawing.Point(25, 260);
-            this.pantallaWeb2.Margin = new System.Windows.Forms.Padding(25, 25, 25, 10);
+            this.pantallaWeb2.Location = new System.Drawing.Point(25, 240);
+            this.pantallaWeb2.Margin = new System.Windows.Forms.Padding(25, 10, 25, 5);
             this.pantallaWeb2.Name = "pantallaWeb2";
-            this.pantallaWeb2.Size = new System.Drawing.Size(270, 200);
+            this.pantallaWeb2.Size = new System.Drawing.Size(249, 200);
             this.pantallaWeb2.TabIndex = 1;
             // 
             // pantallaWeb3
             // 
             this.pantallaWeb3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.pantallaWeb3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pantallaWeb3.Location = new System.Drawing.Point(25, 495);
-            this.pantallaWeb3.Margin = new System.Windows.Forms.Padding(25, 25, 25, 10);
+            this.pantallaWeb3.Location = new System.Drawing.Point(25, 455);
+            this.pantallaWeb3.Margin = new System.Windows.Forms.Padding(25, 10, 25, 5);
             this.pantallaWeb3.Name = "pantallaWeb3";
-            this.pantallaWeb3.Size = new System.Drawing.Size(270, 200);
+            this.pantallaWeb3.Size = new System.Drawing.Size(249, 200);
             this.pantallaWeb3.TabIndex = 2;
             // 
             // pantallaWeb4
             // 
             this.pantallaWeb4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.pantallaWeb4.Location = new System.Drawing.Point(25, 730);
-            this.pantallaWeb4.Margin = new System.Windows.Forms.Padding(25, 25, 25, 10);
+            this.pantallaWeb4.Location = new System.Drawing.Point(25, 670);
+            this.pantallaWeb4.Margin = new System.Windows.Forms.Padding(25, 10, 25, 5);
             this.pantallaWeb4.Name = "pantallaWeb4";
-            this.pantallaWeb4.Size = new System.Drawing.Size(270, 200);
+            this.pantallaWeb4.Size = new System.Drawing.Size(249, 200);
             this.pantallaWeb4.TabIndex = 3;
             // 
             // btn_Exit
@@ -202,9 +204,10 @@
             this.flowLayoutPanel3.BackColor = System.Drawing.Color.Transparent;
             this.flowLayoutPanel3.Controls.Add(this.btn_Exit);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(1469, 0);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(1408, 0);
+            this.flowLayoutPanel3.MaximumSize = new System.Drawing.Size(70, 0);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(65, 916);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(70, 916);
             this.flowLayoutPanel3.TabIndex = 7;
             // 
             // flowLayoutPanel4
@@ -214,7 +217,7 @@
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(325, 0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(1144, 107);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(1083, 107);
             this.flowLayoutPanel4.TabIndex = 8;
             // 
             // recursosDisplay1
@@ -223,26 +226,36 @@
             this.recursosDisplay1.Location = new System.Drawing.Point(3, 0);
             this.recursosDisplay1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.recursosDisplay1.Name = "recursosDisplay1";
-            this.recursosDisplay1.Size = new System.Drawing.Size(903, 105);
+            this.recursosDisplay1.Size = new System.Drawing.Size(1080, 105);
             this.recursosDisplay1.TabIndex = 0;
             // 
             // flowLayoutPanel5
             // 
             this.flowLayoutPanel5.BackColor = System.Drawing.Color.Transparent;
             this.flowLayoutPanel5.Controls.Add(this.notificador1);
+            this.flowLayoutPanel5.Controls.Add(this.escrutinio1);
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(325, 107);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(1144, 76);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(1083, 84);
             this.flowLayoutPanel5.TabIndex = 9;
+            this.flowLayoutPanel5.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel5_Paint);
             // 
             // notificador1
             // 
             this.notificador1.BackColor = System.Drawing.Color.Transparent;
             this.notificador1.Location = new System.Drawing.Point(3, 3);
             this.notificador1.Name = "notificador1";
-            this.notificador1.Size = new System.Drawing.Size(1318, 76);
+            this.notificador1.Size = new System.Drawing.Size(1080, 73);
             this.notificador1.TabIndex = 1;
+            // 
+            // escrutinio1
+            // 
+            this.escrutinio1.BackColor = System.Drawing.Color.Transparent;
+            this.escrutinio1.Location = new System.Drawing.Point(3, 82);
+            this.escrutinio1.Name = "escrutinio1";
+            this.escrutinio1.Size = new System.Drawing.Size(1080, 88);
+            this.escrutinio1.TabIndex = 2;
             // 
             // Update500ms
             // 
@@ -253,36 +266,37 @@
             // flowLayoutPanel6
             // 
             this.flowLayoutPanel6.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel6.Controls.Add(this.escrutinio1);
             this.flowLayoutPanel6.Controls.Add(this.barco1);
             this.flowLayoutPanel6.Controls.Add(this.barco2);
             this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(325, 183);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(325, 191);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(1144, 733);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(1083, 725);
             this.flowLayoutPanel6.TabIndex = 10;
+            this.flowLayoutPanel6.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel6_Paint);
             // 
             // barco2
             // 
             this.barco2.BackColor = System.Drawing.Color.Transparent;
-            this.barco2.Location = new System.Drawing.Point(763, 87);
-            this.barco2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.barco2.Location = new System.Drawing.Point(563, 3);
             this.barco2.Name = "barco2";
             this.barco2.Size = new System.Drawing.Size(364, 712);
             this.barco2.TabIndex = 1;
             // 
-            // escrutinio1
+            // pBox_Fondo
             // 
-            this.escrutinio1.Location = new System.Drawing.Point(3, 3);
-            this.escrutinio1.Name = "escrutinio1";
-            this.escrutinio1.Size = new System.Drawing.Size(410, 81);
-            this.escrutinio1.TabIndex = 2;
+            this.pBox_Fondo.BackColor = System.Drawing.Color.Transparent;
+            this.pBox_Fondo.Location = new System.Drawing.Point(0, 0);
+            this.pBox_Fondo.Name = "pBox_Fondo";
+            this.pBox_Fondo.Size = new System.Drawing.Size(1478, 1061);
+            this.pBox_Fondo.TabIndex = 11;
+            this.pBox_Fondo.TabStop = false;
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1534, 1061);
+            this.ClientSize = new System.Drawing.Size(1478, 1061);
             this.Controls.Add(this.flowLayoutPanel6);
             this.Controls.Add(this.flowLayoutPanel5);
             this.Controls.Add(this.flowLayoutPanel4);
@@ -290,6 +304,7 @@
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.progress);
             this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.pBox_Fondo);
             this.MinimizeBox = false;
             this.Name = "Home";
             this.Text = "Home";
@@ -303,6 +318,7 @@
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBox_Fondo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -330,7 +346,8 @@
         private UserControls.UrnaCapitan urnaCapitan1;
         private UserControls.Notificador notificador1;
         private FlowLayoutPanel flowLayoutPanel6;
-        private UserControls.Barco barco2;
         private UserControls.Escrutinio escrutinio1;
+        private UserControls.Barco barco2;
+        private PictureBox pBox_Fondo;
     }
 }

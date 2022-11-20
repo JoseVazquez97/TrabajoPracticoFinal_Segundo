@@ -32,6 +32,8 @@
             this.connectButton = new System.Windows.Forms.Button();
             this.sendButton = new System.Windows.Forms.Button();
             this.pruebauControl1 = new TrabajoPracticoFinalSegundo.UserControls.PruebaUControl();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // LBL_PRUEBA
@@ -71,6 +73,14 @@
             this.pruebauControl1.Size = new System.Drawing.Size(955, 181);
             this.pruebauControl1.TabIndex = 4;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(-2, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(1216, 552);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
             // Prueba
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -80,9 +90,11 @@
             this.Controls.Add(this.sendButton);
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.LBL_PRUEBA);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "Prueba";
             this.Text = "Prueba";
             this.Load += new System.EventHandler(this.Prueba_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,5 +106,6 @@
         private Button connectButton;
         private Button sendButton;
         private UserControls.PruebaUControl pruebauControl1;
+        private PictureBox pictureBox1;
     }
 }

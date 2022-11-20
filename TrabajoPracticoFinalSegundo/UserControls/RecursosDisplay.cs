@@ -27,12 +27,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         {
             this.Width = tamaTotal;
             this.Height = alturaTotal;
-            
-            this.flowLayoutPanel1.Height = alturaTotal;
-            this.flowLayoutPanel1.Width = (tamaTotal / 3);
 
-            this.flowLayoutPanel1.Location = new Point(tamaTotal/2,0);
-
+            this.flowLayoutPanel1.Location = new Point(((tamaTotal / 2)-(tamaTotal/7)),0);
 
             this.flowLayoutPanel2.Parent = this.flowLayoutPanel1;
             this.lbl_Tesoro.Parent = this.flowLayoutPanel2;

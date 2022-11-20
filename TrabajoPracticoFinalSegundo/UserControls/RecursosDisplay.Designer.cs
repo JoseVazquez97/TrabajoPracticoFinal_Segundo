@@ -159,7 +159,7 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "RecursosDisplay";
-            this.Size = new System.Drawing.Size(1230, 138);
+            this.Size = new System.Drawing.Size(1230, 108);
             ((System.ComponentModel.ISupportInitialize)(this.p_Tesoro)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p_Planos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p_Madera)).EndInit();

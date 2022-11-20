@@ -13,6 +13,8 @@ namespace WebApi_SingalR_Com.Hubs
         public static string Voto { get; set; } = "";
         public static string Evento { get; set; } = "";
 
+        public static string EventoRandom { get; set; } = "";
+
         //WebCams
         public async Task EnviarImagen(string imagenU1x, string rol)
         {
@@ -39,6 +41,15 @@ namespace WebApi_SingalR_Com.Hubs
 
             //MANDAR LA ACTUALIZACION
             await Clients.All.SendAsync("RecibirEvento", evento);
+        }
+
+        //Evento Random
+        public async Task EnviarEventoRandom(string evento)
+        {
+            EventoRandom = evento;
+
+            //MANDAR LA ACTUALIZACION
+            await Clients.All.SendAsync("RecibirEventoRandom", evento);
         }
 
         //Votos

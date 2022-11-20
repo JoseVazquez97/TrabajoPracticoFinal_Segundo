@@ -4,7 +4,7 @@ var userConection = new signalR.HubConnectionBuilder().withUrl("/Hubs/HomeHub.cs
 //Generar los metodos para recibir datos del hub
 
 //Llega como parametros la imagen convertida a string y el rol de donde proviene.
-userConection.on("RecibirVoto", (voto, rol) =>
+userConection.on("RecibirVoto", (rol, voto) =>
 {
     //Segun el rol asigno a la etiqueta correspondiente.
     switch (rol) {
@@ -33,7 +33,7 @@ function actualizarVotos()
     let voto;
 
     //Cargo un arreglo de etiquetas que pertenecen a la clase "imagen"
-    let votos = document.getElementsByClassName("imagen");
+    let votos = document.getElementsByClassName("voto");
     
     for (var i = 0; i < votos.length; i++)
     {
@@ -57,10 +57,10 @@ function actualizarVotos()
                 elemento = document.getElementById("voto3");
                 voto = elemento.innerText;
             break;
-        }
 
-        //Finalmente envio el dato a mis clientes. Uno a uno.
-        userConection.send("EnviarVoto", voto, rol);
+            //Finalmente envio el dato a mis clientes. Uno a uno.
+            userConection.send("EnviarVoto", rol, voto);
+        }
     }
 }
 

@@ -8,6 +8,13 @@ userConection.on("RecibirEvento", (evento) => {
     document.getElementById("EventoActual").innerText = evento;
 })
 
+userConection.on("RecibirEventoRandom", (evento) => {
+
+    if (evento != "Isla") {
+        document.getElementById("EventoRandom").innerText = evento;
+    }
+})
+
 //Generar los metodos, para enviar datos hacia el hub
 //Esta funcion es llamada por el servidor de manera automatica.
 function actualizarEvento()
@@ -18,6 +25,15 @@ function actualizarEvento()
 
     //Finalmente envio el dato a mis clientes.
     userConection.send("EnviarEvento", evento);
+}
+
+function actualizarEventoR() {
+    let evento;
+    evento = document.getElementById("EventoRandom").innerHTML;
+
+
+    //Finalmente envio el dato a mis clientes.
+    userConection.send("EnviarEventoRandom", evento);
 }
 
 function ConexionRechazada() {

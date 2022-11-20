@@ -45,9 +45,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 x.Show();
                 */
 
+                /*
+                Prueba x = new Prueba();
+                x.Show();
+                */
+
                 PantallaPhoto x = new PantallaPhoto();
                 x.Show();
-
                 this.Close();
             }
         }

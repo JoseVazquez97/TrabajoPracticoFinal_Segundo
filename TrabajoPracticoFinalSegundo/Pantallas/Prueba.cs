@@ -22,16 +22,21 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
     {
         private string _url = "https://localhost:7170/Hubs/EjemploHub.cs";
         HubConnection HomeConection;
+        string path;
 
         public Prueba()
         {
             InitializeComponent();
+
+            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
 
             HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
 
             //Si te desconectas segui intentado.
             HomeConection.Closed +=
                 async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync(); };
+
+            this.pictureBox1.Image = Image.FromFile(this.path + @"\Recursos\Fondos\Viajando.gif");
 
         }
 
