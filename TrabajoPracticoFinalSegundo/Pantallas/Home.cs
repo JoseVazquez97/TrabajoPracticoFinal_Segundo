@@ -65,11 +65,20 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
 
+
+
             #region LOADS DE COMPONENTES 
 
             //FONDO
+            this.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\FondoHomeDos.jpg");
             this.pBox_Fondo.Width = this.Width;
             this.pBox_Fondo.Height = this.Height;
+            //this.pBox_Fondo.Image = Image.FromFile(this.path + @"\Recursos\Fondos\Viajando.gif");
+            this.pBox_Fondo.BackColor = Color.Transparent;
+            this.pBox_Fondo.Parent = this;
+            this.flowLayoutPanel5.Parent = this.pBox_Fondo;
+            // this.notificador1.Parent = this.flowLayoutPanel5;
+            this.escrutinio1.Parent = this.flowLayoutPanel5;
 
             //PANTALLAS WEB
             this.pantallaWeb1.WebLoad();
@@ -84,10 +93,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             //BARCO
 
-            this.barco1.loadBarco(this.flowLayoutPanel6.Width,this.flowLayoutPanel6.Height);
-            this.barco2.loadBarco(this.flowLayoutPanel6.Width, this.flowLayoutPanel6.Height);
+            x = this.Width - 325 - 70;
+
+            this.barco1.loadBarco(x, 1061);
+            this.barco2.loadBarco(x, 1061);
             this.barco2.Visible = false;
-            this.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\FondoHomeDos.jpg");
+            this.barco1.Parent = this.pBox_Fondo;
+            this.barco2.Parent = this.pBox_Fondo;
+
 
             //BARRA (INFERIOR)
             x = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
@@ -106,15 +119,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.progress.Step = 1;
 
             //NOTIFICADOR
-            this.notificador1.Load_Notificador(this.flowLayoutPanel5.Width);
+            //this.notificador1.Load_Notificador(this.flowLayoutPanel5.Width);
 
             #endregion
 
             this.turno = turnero1.getTurno();
             this.escrutinio1.loadEscrutinio(this.flowLayoutPanel5.Width);
             this.escrutinio1.Visible = false;
-            this.notificador1.Mensaje("¡ORDENES CAPITAN!");
-            this.flowLayoutPanel6.Width = this.flowLayoutPanel5.Width;
+            //this.notificador1.Mensaje("¡ORDENES CAPITAN!");
 
             
 
@@ -532,67 +544,32 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     switch (this.eventoActual)
                     {
                         case 1:
-                            if (this.notificador1.InvokeRequired)
-                            {
-                                try
-                                {
-                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("¡ORDENES CAPITAN!")));
-                                }
-                                catch { }
-                            }
-
                             if (this.urnaCapitan1.ConsultarDesicion() != 0) 
                             {
                                 this.desicionCapitan = this.urnaCapitan1.ConsultarDesicion();
                                 this.urnaCapitan1.ReiniciarDesicion();
                                 this.eventoActual++;
-                                if (this.notificador1.InvokeRequired)
-                                {
-                                    try
-                                    {
-                                        notificador1.Invoke(new Action(() => notificador1.Visible = false));
-                                    }
-                                    catch { }
-                                }
-
-                                if (this.escrutinio1.InvokeRequired) 
-                                {
-                                    try
-                                    {
-                                        escrutinio1.Invoke(new Action(() => escrutinio1.Visible = true));
-                                    }
-                                    catch { }
-                                }
                             }
-                            
                             break;
 
                         case 2:
                             
                             int resultados = 0;
-                            if (this.notificador1.InvokeRequired)
-                            {
-                                try
-                                {
-                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("¡Votacion!")));
-                                }
-                                catch { }
-                            }
-
-                            if (this.notificador1.InvokeRequired)
-                            {
-                                try
-                                {
-                                    notificador1.Invoke(new Action(() => notificador1.Visible = false));
-                                }
-                                catch { }
-                            }
 
                             if (this.escrutinio1.InvokeRequired)
                             {
                                 try
                                 {
                                     escrutinio1.Invoke(new Action(() => escrutinio1.Visible = true));
+                                }
+                                catch { }
+                            }
+
+                            if (this.flowLayoutPanel5.InvokeRequired)
+                            {
+                                try
+                                {
+                                    flowLayoutPanel5.Invoke(new Action(() => flowLayoutPanel5.Height = 75));
                                 }
                                 catch { }
                             }
@@ -647,48 +624,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                         case 4:
 
-                            if (this.notificador1.InvokeRequired)
-                            {
-                                try
-                                {
-                                    notificador1.Invoke(new Action(() => notificador1.Visible = true));
-                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("¡ORDENES CAPITAN!")));
-                                }
-                                catch { }
-                            }
                             break;
 
                         case 5:
-                            if (this.notificador1.InvokeRequired)
-                            {
-                                try
-                                {
-                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("¡TRIPULANTES ¿QUE OPINAN?!")));
-                                }
-                                catch { }
-                            }
+
                             break;
 
                         case 6:
-                            if (this.notificador1.InvokeRequired)
-                            {
-                                try
-                                {
-                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("¡ATAQUEEEN!")));
-                                }
-                                catch { }
-                            }
+
                             break;
 
                         case 7:
-                            if (this.notificador1.InvokeRequired)
-                            {
-                                try
-                                {
-                                    notificador1.Invoke(new Action(() => notificador1.Mensaje("RESULTADO")));
-                                }
-                                catch { }
-                            }
+
                             break;
                     }
                 }

@@ -28,21 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.lbl_texto = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel1.Controls.Add(this.lbl_texto);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1062, 91);
-            this.flowLayoutPanel1.TabIndex = 0;
-            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // lbl_texto
             // 
@@ -50,10 +37,10 @@
             this.lbl_texto.Font = new System.Drawing.Font("BlackPearl", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_texto.ForeColor = System.Drawing.Color.Black;
             this.lbl_texto.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lbl_texto.Location = new System.Drawing.Point(3, 0);
+            this.lbl_texto.Location = new System.Drawing.Point(8, 8);
             this.lbl_texto.Name = "lbl_texto";
-            this.lbl_texto.Size = new System.Drawing.Size(1059, 91);
-            this.lbl_texto.TabIndex = 0;
+            this.lbl_texto.Size = new System.Drawing.Size(400, 150);
+            this.lbl_texto.TabIndex = 1;
             this.lbl_texto.Text = "ORDENES CAPITAN!!!";
             this.lbl_texto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -62,17 +49,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.lbl_texto);
             this.Name = "Notificador";
-            this.Size = new System.Drawing.Size(1062, 91);
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.Size = new System.Drawing.Size(400, 150);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private FlowLayoutPanel flowLayoutPanel1;
         private Label lbl_texto;
     }
 }
