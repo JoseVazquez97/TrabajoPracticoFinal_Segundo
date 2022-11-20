@@ -256,7 +256,7 @@
             // Update500ms
             // 
             this.Update500ms.Enabled = true;
-            this.Update500ms.Interval = 500;
+            this.Update500ms.Interval = 300;
             this.Update500ms.Tick += new System.EventHandler(this.Update500ms_Tick);
             // 
             // barco2

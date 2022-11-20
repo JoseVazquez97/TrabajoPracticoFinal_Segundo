@@ -43,6 +43,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         Image miAvatar;
         string path;
         string eventoRandom;
+        string eventoRandomActual;
+
+        bool checkRendimiento;
+
         int Key;
         int turno;
         int accionHome;
@@ -50,7 +54,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         int desicionCapitan;
         int eventoActual;
         int segundos;
-        
+        private string val1;
+        private string val2;
+
 
         //Esto Es un comentario.
 
@@ -64,7 +70,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.eventoRandom = "Null";
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
-
+            this.checkRendimiento = false;
 
 
             #region LOADS DE COMPONENTES 
@@ -177,11 +183,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private void Update500ms_Tick(object sender, EventArgs e)
         {
             //Compartimos la informacion
+            mandarInfoTurnero();
             mandarImagenes();
             mandarInfoDados();
             mandarInfoEvento();
             mandarInfoVoto();
             mandarInfoEventoRandom();
+            mandarInfoDesicion();
             this.segundos++;
         }
 
@@ -338,7 +346,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region ENVIAR Click-Dado
 
-        private async void mandarInfoDados()
+        private async void mandarInfoTurnero()
         {
             string turn = this.turno.ToString();
 
@@ -399,6 +407,48 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
+        #region INFORMAR - Desicion Capitan
+        private async void mandarInfoDesicion()
+        {
+            string orden;
+            if (this.Rol == "Capitan")
+            {
+                orden = Convert.ToString(this.desicionCapitan);
+            }
+            else { orden = "0"; }
+            
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarOrden", orden);
+            }
+            catch { MessageBox.Show("El cliente no pudo enviar el mensaje (orden)"); }
+        }
+        #endregion
+
+        #region INFORMAR - Ultimos Dados
+        private async void mandarInfoDados()
+        {
+            string val1;
+            string val2;
+
+            if (this.dados1.getEnable())
+            {
+                val1 = Convert.ToString(this.dados1.V1);
+                val2 = Convert.ToString(this.dados1.V2);
+            }
+            else 
+            {
+                val1 = "0";
+                val2 = "0";
+            }
+
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarDados", val1,val2);
+            }
+            catch { MessageBox.Show("El cliente no pudo enviar el mensaje (orden)"); }
+        }
+        #endregion
 
         #endregion
 
@@ -504,7 +554,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     }
                 }
 
-                if (this.eventoActual == 6) //Si el evento es el evento de guerra.
+                if (this.eventoActual == 4) //Si el evento es el evento de guerra.
                 {
                     switch (obtenerTurno(turnoX))
                     {
@@ -556,6 +606,17 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             });
             #endregion
 
+            #region DADOS-COM
+            HomeConection.On<string, string>("RecibirDados", (val1, val2) =>
+            {
+                if (val1 != "0" && val2 != "0") 
+                {
+                    this.val1 = val1;
+                    this.val2 = val2;
+                }
+            });
+            #endregion
+
             #region EVENTO ACTUAL
 
             HomeConection.On<string>("RecibirEvento", (evento) =>
@@ -575,7 +636,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             if (this.urnaCapitan1.ConsultarDesicion() != 0) 
                             {
                                 this.desicionCapitan = this.urnaCapitan1.ConsultarDesicion();
-                                this.urnaCapitan1.ReiniciarDesicion();
                                 this.eventoActual++;
 
                                 if (this.noti_Carp.InvokeRequired)
@@ -689,70 +749,112 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             }
                   
                             break;
+                        #endregion
+
+                        #region SELECCION DE EVENTO RANDOM
 
                         case 3:
-                            if (this.Rol == "Capitan") { EventoRandom(); }
-
-                            if (this.escrutinio1.InvokeRequired)
+                            
+                            if (this.checkRendimiento == false) 
                             {
-                                try
+                                if (this.Rol == "Capitan") { EventoRandom(); }
+
+
+                                if (this.urnaCapitan1.InvokeRequired)
                                 {
-                                    escrutinio1.Invoke(new Action(() => escrutinio1.reiniciarVotos()));
-                                    escrutinio1.Invoke(new Action(() => escrutinio1.reiniciarCheck()));
-                                    escrutinio1.Invoke(new Action(() => escrutinio1.Visible = false));
+                                    try
+                                    {
+                                        urnaCapitan1.Invoke(new Action(() => urnaCapitan1.ReiniciarDesicion()));
+                                        urnaCapitan1.Invoke(new Action(() => this.desicionCapitan = urnaCapitan1.ConsultarDesicion()));
+                                    }
+                                    catch { }
                                 }
-                                catch { }
+
+                                if (this.escrutinio1.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        escrutinio1.Invoke(new Action(() => escrutinio1.reiniciarVotos()));
+                                        escrutinio1.Invoke(new Action(() => escrutinio1.reiniciarCheck()));
+                                        escrutinio1.Invoke(new Action(() => escrutinio1.Visible = false));
+                                    }
+                                    catch { }
+                                }
+
+                                if (this.noti_Cap.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = false; }));
+                                    }
+                                    catch { }
+                                }
+
+                                if (this.noti_Carp.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = false; }));
+                                    }
+                                    catch { }
+                                }
+
+                                if (this.noti_Mer.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = false; }));
+                                    }
+                                    catch { }
+                                }
+
+                                if (this.noti_Ar.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = false; }));
+                                    }
+                                    catch { }
+                                }
+
+                                if (this.flowLayoutPanel5.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        flowLayoutPanel5.Invoke(new Action(() => { flowLayoutPanel5.Height = 0; }));
+                                    }
+                                    catch { }
+                                }
+
+                                if (this.pBox_Fondo.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        //pBox_Fondo.Invoke(new Action(() => pBox_Fondo.Image = Image.FromFile(this.path + @"\Recursos\Fondos\Viajando.gif")));
+                                    }
+                                    catch { }
+                                }
+
+                                this.checkRendimiento = true;
+                                this.eventoActual++;
+                            }
+                        break;
+                        #endregion
+
+                        #region PRIMER TIRADA DE DADOS
+                        case 4:
+                            this.checkRendimiento = false;
+
+                            switch (this.eventoRandomActual) 
+                            {
+                                case "Barco":
+                                    this.eventoRandomActual = "Barco";
+                                    
+                                    break;
                             }
 
-                            if (this.noti_Cap.InvokeRequired)
-                            {
-                                try
-                                {
-                                    noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = false; }));
-                                }
-                                catch { }
-                            }
-
-                            if (this.noti_Carp.InvokeRequired)
-                            {
-                                try
-                                {
-                                    noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = false; }));
-                                }
-                                catch { }
-                            }
-
-                            if (this.noti_Mer.InvokeRequired)
-                            {
-                                try
-                                {
-                                    noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = false; }));
-                                }
-                                catch { }
-                            }
-
-                            if (this.noti_Ar.InvokeRequired)
-                            {
-                                try
-                                {
-                                    noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = false; }));
-                                }
-                                catch { }
-                            }
-
-                            if (this.pBox_Fondo.InvokeRequired)
-                            {
-                                try
-                                {
-                                    pBox_Fondo.Invoke(new Action(() => pBox_Fondo.Image = Image.FromFile(this.path + @"\Recursos\Fondos\Viajando.gif")));
-                                }
-                                catch { }
-                            }
                             break;
                         #endregion
-                        case 4:
-
-                            break;
 
                         case 5:
 
@@ -886,6 +988,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 switch (evento)
                 {
                     case "Barco":
+                        this.eventoRandomActual = "Barco";
                         if (this.barco2.InvokeRequired)
                         {
                             try
@@ -904,6 +1007,73 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 }
             });
             #endregion
+
+            #region DESICION CAPITAN
+
+            HomeConection.On<string>("RecibirOrden", (orden) =>
+            {
+                if (orden != "Null" && orden != "0") 
+                {
+                    switch (orden) 
+                    {
+                        case "1":
+                            if (this.noti_Cap.InvokeRequired)
+                            {
+                                try
+                                {
+                                    noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = true; }));
+                                    noti_Cap.Invoke(new Action(() => { noti_Cap.Mensaje("Al Norte!"); }));
+                                }
+                                catch { }
+                            }
+                            break;
+                        case "2":
+                            if (this.noti_Cap.InvokeRequired)
+                            {
+                                try
+                                {
+                                    noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = true; }));
+                                    noti_Cap.Invoke(new Action(() => { noti_Cap.Mensaje("Al Este!"); }));
+                                }
+                                catch { }
+                            }
+                            break;
+                        case "3":
+                            if (this.noti_Cap.InvokeRequired)
+                            {
+                                try
+                                {
+                                    noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = true; }));
+                                    noti_Cap.Invoke(new Action(() => { noti_Cap.Mensaje("Al Oeste!"); }));
+                                }
+                                catch { }
+                            }
+                            break;
+                        case "4":
+                            if (this.noti_Cap.InvokeRequired)
+                            {
+                                try
+                                {
+                                    noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = true; }));
+                                    noti_Cap.Invoke(new Action(() => { noti_Cap.Mensaje("Al Sur!"); }));
+                                }
+                                catch { }
+                            }
+                            break;
+                    }
+
+                    if (this.noti_Carp.InvokeRequired)
+                    {
+                        try
+                        {
+                            noti_Cap.Invoke(new Action(() => { noti_Carp.Visible = true; }));
+                        }
+                        catch { }
+                    }
+                }
+            });
+            #endregion
+
         }
 
         #endregion
@@ -957,7 +1127,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-        private void loadUrnas(bool x) 
+        private void loadUrnas(bool x) //Funcion para hacer los componentes del hud responsivos.
         {
             int width = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
             int heigh = this.flowLayoutPanel1.Height;

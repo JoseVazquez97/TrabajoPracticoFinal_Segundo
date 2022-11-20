@@ -12,6 +12,17 @@ userConection.on("RecibirTurno", (turno) => {
     }
 })
 
+//Recibir valores de dados
+userConection.on("RecibirDados", (val1, val2) => {
+
+    if (val1 != "0" && val2 != "0")
+    {
+        document.getElementById("val1").innerHTML = val1;
+        document.getElementById("val2").innerHTML = val2;
+    }
+})
+
+
 //Generar los metodos, para enviar datos hacia el hub
 function actualizarTurneros()
 {
@@ -20,6 +31,17 @@ function actualizarTurneros()
 
     userConection.send("SiguienteTurno", turno);
 }
+
+//Enviar valores de dados al resto.
+function actualizarDados() {
+    let elemento1 = document.getElementById("val1");
+    let elemento2 = document.getElementById("val2");
+    var val1 = elemento1.innerText;
+    var val2 = elemento2.innerText;
+
+    userConection.send("EnviarDados", val1, val2);
+}
+
 
 function ConexionRechazada() {
     console.log("La conexion fue rechazada");

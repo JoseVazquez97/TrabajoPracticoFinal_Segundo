@@ -15,6 +15,13 @@ userConection.on("RecibirEventoRandom", (evento) => {
     }
 })
 
+userConection.on("RecibirOrden", (orden) => {
+
+    if (orden != "Tripulante") {
+        document.getElementById("Desicion").innerText = orden;
+    }
+})
+
 //Generar los metodos, para enviar datos hacia el hub
 //Esta funcion es llamada por el servidor de manera automatica.
 function actualizarEvento()
@@ -34,6 +41,15 @@ function actualizarEventoR() {
 
     //Finalmente envio el dato a mis clientes.
     userConection.send("EnviarEventoRandom", evento);
+}
+
+function actualizarOrden() {
+    let orden;
+    orden = document.getElementById("Desicion").innerHTML;
+
+
+    //Finalmente envio el dato a mis clientes.
+    userConection.send("EnviarOrden", orden);
 }
 
 function ConexionRechazada() {

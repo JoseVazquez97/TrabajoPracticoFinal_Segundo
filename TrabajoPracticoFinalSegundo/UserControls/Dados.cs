@@ -19,9 +19,11 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         private int d2;
         string path;
         private bool cerradura;
+        private bool Listo;
 
         public int V1 { get { return this.d1; } }
         public int V2 { get { return this.d2; } }
+        public bool LISTO { get { return this.Listo; } }
 
         public Dados()
         {
@@ -34,6 +36,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         public void LoadTablero(object sender, EventArgs e)
         {
+            this.Listo = false;
             anim1.Visible = false;
             anim2.Visible = false;
             anim1.BackColor = Color.Red;
@@ -85,14 +88,18 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         #region FUNCIONALIDAD
         private Image Tirada(int dado)
         {
-            int d = new Random().Next(1, 7);
-            dado = d;
-            return Image.FromFile(this.path + @"\Recursos\Dados\Dado"+d+".bmp");
-            
+            return Image.FromFile(this.path + @"\Recursos\Dados\Dado"+ dado + ".bmp");
+        }
+
+        private int Suerte() 
+        {
+            int d;
+            return d = new Random().Next(1, 7);
         }
 
         public void tirar()
         {
+            this.Listo = false;
             tiradas = 0;
             TirandoDados.Interval = 50;
           
@@ -102,6 +109,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         private void Dados_Try() 
         {
+            this.d1 = Suerte();
+            this.d2 = Suerte();
             this.dado1.Image = Tirada(this.d1);
             this.dado2.Image = Tirada(this.d2);
 
@@ -121,6 +130,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         {
             anim1.Visible = false;
             anim2.Visible = false;
+            this.Listo = true;
         }
         
         private void TirandoDados_Tick(object sender, EventArgs e)

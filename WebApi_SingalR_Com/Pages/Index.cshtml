@@ -3,11 +3,6 @@
 <p>Tiempo Servidor</p>
 <p id="v1">0</p>
 
-<p class="imagen" id="img1">x1</p>
-<p class="imagen" id="img2">x2</p>
-<p class="imagen" id="img3">x3</p>
-<p class="imagen" id="img4">x4</p>
-
 <p>Evento</p>
 <p id="EventoActual">1</p>
 
@@ -22,28 +17,48 @@
 <p>Turnero</p>
 <p id="TurnoActual">1</p>
 
+<p>Orden Capitan</p>
+<p id="Desicion">Null</p>
+
+<p>Dados</p>
+<p class="dado" id="val1">0</p>
+<p class="dado" id="val2">0</p>
+
+<p class="imagen" id="img1">x1</p>
+<p class="imagen" id="img2">x2</p>
+<p class="imagen" id="img3">x3</p>
+<p class="imagen" id="img4">x4</p>
+
 <script>
     setInterval(function () { siguienteTurno(); }, 1000);
 </script>
 
 <script>
-    setInterval(function () { actualizarTurneros();}, 500);
+    setInterval(function () { actualizarTurneros();}, 700);
 </script>
 
 <script>
-    setInterval(function () { actualizarImagenes(); }, 300);
+    setInterval(function () { actualizarImagenes(); }, 700);
 </script>
 
 <script>
-    setInterval(function () { actualizarEvento(); }, 500);
+    setInterval(function () { actualizarEvento(); }, 300);
 </script>
 
 <script>
-    setInterval(function () { actualizarEventoR(); }, 500);
+    setInterval(function () { actualizarEventoR(); }, 300);
 </script>
 
 <script>
-    setInterval(function () { actualizarVotos(); }, 500);
+    setInterval(function () { actualizarDados(); }, 300);
+</script>
+
+<script>
+    setInterval(function () { actualizarVotos(); }, 300);
+</script>
+
+<script>
+    setInterval(function () { actualizarOrden(); }, 700);
 </script>
 
 <style>
