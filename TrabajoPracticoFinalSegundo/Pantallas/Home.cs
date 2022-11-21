@@ -36,6 +36,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
     public partial class Home : Form
     {
 
+        #region ATRIBUTOS DEL FORM CLIENTE
+
         private string _url = "https://localhost:7170/Hubs/HomeHub.cs";
         HubConnection HomeConection;
 
@@ -57,21 +59,22 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private string val1;
         private string val2;
 
-
-        //Esto Es un comentario.
+        #endregion
 
         public Home()
         {
             InitializeComponent();
 
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
+
+            #region ASIGNACION DE PARAMETROS INICIALES
             this.eventoActual = 1;
             this.segundos= 0;
             this.eventoRandom = "Null";
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
             this.checkRendimiento = false;
-
+            #endregion
 
             #region LOADS DE COMPONENTES 
 
@@ -106,13 +109,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.barco1.Parent = this.pBox_Fondo;
             this.barco2.Parent = this.pBox_Fondo;
 
-
             //BARRA (INFERIOR)
             x = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
             y = this.flowLayoutPanel1.Height;
-
             
+            //TURNERO
             this.turnero1.LoadTurnero(x, y);
+
+            //DADOS
             this.dados1.CargarTablero(x+100, y);
 
             //PROGRESSBAR
@@ -152,14 +156,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             locati = this.pantallaWeb4.Location;
             this.noti_Ar.Location = new Point(locati.X + 255, locati.Y + 20);
 
-            #endregion
-
+            //ESCRUTINIO
             this.turno = turnero1.getTurno();
             this.escrutinio1.loadEscrutinio(this.flowLayoutPanel5.Width);
             this.escrutinio1.Visible = false;
-            
 
-            
+            #endregion
 
             #region DECLARACION DEL HUB
             HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
@@ -191,52 +193,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             mandarInfoEventoRandom();
             mandarInfoDesicion();
             this.segundos++;
-        }
-
-
-        private void EventoRandom() 
-        {
-            Random x = new Random();
-            int evento = x.Next(1, 5);
-
-            switch (2) 
-            {
-                case 1:
-                    EncontrarIsla();
-                    break;
-
-                case 2:
-                    EncontrarBarco();
-                    break;
-
-                case 3:
-                    EncontrarMar();
-                    break;
-
-                case 4:
-                    this.eventoRandom = "Null";
-                    break;
-            }
-        }
-
-        private void Viajar() 
-        {
-            this.eventoRandom = "Viajando";
-        }
-
-        private void EncontrarBarco() 
-        {
-            this.eventoRandom = "Barco";
-        }
-
-        private void EncontrarIsla() 
-        {
-            this.eventoRandom = "Isla";
-        }
-
-        private void EncontrarMar() 
-        {
-            this.eventoRandom = "Mar";
         }
 
         #endregion
@@ -381,8 +337,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 voto = Convert.ToString(this.urna1.ConsultarVoto());
                 this.urna1.reiniciarVoto();
-
-                
             }
             
             try
@@ -495,6 +449,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #endregion
+
+        ////////////////////////////////////////////////////
 
         #region RECEPCION DE MENSAJES
 
@@ -1124,7 +1080,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
-
         /// ///////////////////////////////////////////////////////////////
 
         #region LOADS
@@ -1207,7 +1162,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
-        public int obtenerTurno(int turnoActual)
+        /// ////////////////////////////////////////////////////////////////
+
+        #region FUNCIONES PRIVADAS DEL FORM
+        private int obtenerTurno(int turnoActual)
         {
             int turnoDevuelto = turnoActual;
             if (turnoDevuelto > 4)
@@ -1221,6 +1179,51 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
+        private void EventoRandom()
+        {
+            Random x = new Random();
+            int evento = x.Next(1, 5);
+
+            switch (2)
+            {
+                case 1:
+                    EncontrarIsla();
+                    break;
+
+                case 2:
+                    EncontrarBarco();
+                    break;
+
+                case 3:
+                    EncontrarMar();
+                    break;
+
+                case 4:
+                    this.eventoRandom = "Null";
+                    break;
+            }
+        }
+
+        private void Viajar()
+        {
+            this.eventoRandom = "Viajando";
+        }
+
+        private void EncontrarBarco()
+        {
+            this.eventoRandom = "Barco";
+        }
+
+        private void EncontrarIsla()
+        {
+            this.eventoRandom = "Isla";
+        }
+
+        private void EncontrarMar()
+        {
+            this.eventoRandom = "Mar";
+        }
+
         private void flowLayoutPanel5_Paint(object sender, PaintEventArgs e)
         {
                 
@@ -1230,5 +1233,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
 
         }
+        #endregion
+
     }
 }
