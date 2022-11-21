@@ -106,6 +106,15 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             TirandoDados.Start();
         }
 
+        public void tirar(string especial)
+        {
+            this.Listo = false;
+            tiradas = 0;
+            TirandoDados.Interval = 50;
+
+            TirandoDados.Start();
+        }
+
 
         private void Dados_Try() 
         {
@@ -132,7 +141,14 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             anim2.Visible = false;
             this.Listo = true;
         }
-        
+
+        public void AsignarValores(string val1, string val2) 
+        {
+            this.dado1.Image = Tirada(int.Parse(val1));
+            this.dado2.Image = Tirada(int.Parse(val2));
+            TerminarTirada();
+        }
+
         private void TirandoDados_Tick(object sender, EventArgs e)
         {
             Dados_Try();
@@ -151,6 +167,26 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             {
                 TirandoDados.Stop();
                 TerminarTirada();
+            }
+        }
+
+        private void TirandoDados_Tick(object sender, EventArgs e,string especial)
+        {
+            Dados_Try();
+
+            if (tiradas < 8) 
+            {
+                TirandoDados.Interval += 70;
+            }
+            else TirandoDados.Interval += 300;
+
+
+            tiradas++;
+
+
+            if (tiradas >= 9)
+            {
+                TirandoDados.Stop();
             }
         }
         #endregion

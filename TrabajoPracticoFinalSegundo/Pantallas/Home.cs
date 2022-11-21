@@ -318,7 +318,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region SIGNAL R
 
-
         #region ENVIO DE MENSAJES
 
         #region ENVIAR - Imagenes
@@ -428,20 +427,65 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #region INFORMAR - Ultimos Dados
         private async void mandarInfoDados()
         {
-            string val1;
-            string val2;
+            string val1 = "0";
+            string val2 = "0";
+            int leToca;
 
-            if (this.dados1.getEnable())
+            if (this.turnero1.getTurno() == 1)
             {
-                val1 = Convert.ToString(this.dados1.V1);
-                val2 = Convert.ToString(this.dados1.V2);
+                leToca = obtenerTurno(this.turnero1.getTurno());
             }
             else 
             {
-                val1 = "0";
-                val2 = "0";
+                leToca = obtenerTurno(this.turnero1.getTurno()-1);
             }
+            
 
+            switch (leToca) 
+            {
+                case 1:
+                    if (this.Rol == "Capitan") 
+                    {
+                        if (this.dados1.LISTO)
+                        {
+                            val1 = Convert.ToString(this.dados1.V1);
+                            val2 = Convert.ToString(this.dados1.V2);
+                        }
+                    }
+                    break;
+                case 2:
+                    if (this.Rol == "Carpintero") 
+                    {
+                        if (this.dados1.LISTO)
+                        {
+                            val1 = Convert.ToString(this.dados1.V1);
+                            val2 = Convert.ToString(this.dados1.V2);
+                        }
+                    }
+                    
+                    break;
+                case 3:
+                    if (this.Rol == "Mercader")
+                    {
+                        if (this.dados1.LISTO)
+                        {
+                            val1 = Convert.ToString(this.dados1.V1);
+                            val2 = Convert.ToString(this.dados1.V2);
+                        }
+                    }
+                    break;
+                case 4:
+                    if (this.Rol == "Artillero")
+                    {
+                        if (this.dados1.LISTO)
+                        {
+                            val1 = Convert.ToString(this.dados1.V1);
+                            val2 = Convert.ToString(this.dados1.V2);
+                        }
+                    }
+                    break;
+            }
+                
             try
             {
                 await HomeConection.InvokeAsync("EnviarDados", val1,val2);
@@ -611,8 +655,17 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 if (val1 != "0" && val2 != "0") 
                 {
-                    this.val1 = val1;
-                    this.val2 = val2;
+                    if (this.dados1.InvokeRequired)
+                    {
+                        if (this.dados1.LISTO)
+                        {
+                            try
+                            {
+                                dados1.Invoke(new Action(() => dados1.AsignarValores(val1, val2)));
+                            }
+                            catch { }
+                        }
+                    }
                 }
             });
             #endregion
@@ -1061,15 +1114,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             }
                             break;
                     }
-
-                    if (this.noti_Carp.InvokeRequired)
-                    {
-                        try
-                        {
-                            noti_Cap.Invoke(new Action(() => { noti_Carp.Visible = true; }));
-                        }
-                        catch { }
-                    }
                 }
             });
             #endregion
@@ -1150,6 +1194,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
             
         }
+
         private void barco1_Load(object sender, EventArgs e)
         {
 
