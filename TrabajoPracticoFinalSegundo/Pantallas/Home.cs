@@ -993,6 +993,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 if (this.Rol != "Capitan") { this.eventoRandom = evento; }
 
+                #region Variables y Asignaciond de turnos.
                 int leToca = 0;
                 int aux = 0;
                 int val1;
@@ -1016,9 +1017,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 {
                     leToca = obtenerTurno(aux - 1);
                 }
-               
+                #endregion
+
                 switch (evento)
                 {
+                    #region Evento Barco
                     case "Barco":
                         this.eventoRandomActual = "Barco";
                         if (this.barco2.InvokeRequired)
@@ -1091,12 +1094,17 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         }
 
                         break;
+                    #endregion
+
+                    #region Evento Isla
                     case "Isla":
                         break;
+                    #endregion
+
+                    #region Evento Nada
                     case "Nada":
                         break;
-                    case "Null":
-                        break;
+                    #endregion
                 }
             });
             #endregion
