@@ -190,7 +190,7 @@
             // 
             this.noti_Ar.BackColor = System.Drawing.Color.Transparent;
             this.noti_Ar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.noti_Ar.Location = new System.Drawing.Point(197, 78);
+            this.noti_Ar.Location = new System.Drawing.Point(197, 733);
             this.noti_Ar.Name = "noti_Ar";
             this.noti_Ar.Size = new System.Drawing.Size(220, 83);
             this.noti_Ar.TabIndex = 15;
@@ -199,7 +199,7 @@
             // 
             this.noti_Cap.BackColor = System.Drawing.Color.Transparent;
             this.noti_Cap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.noti_Cap.Location = new System.Drawing.Point(197, 726);
+            this.noti_Cap.Location = new System.Drawing.Point(197, 110);
             this.noti_Cap.Name = "noti_Cap";
             this.noti_Cap.Size = new System.Drawing.Size(220, 83);
             this.noti_Cap.TabIndex = 12;
@@ -324,7 +324,7 @@
             this.Barco_Page.Name = "Barco_Page";
             this.Barco_Page.SelectedIndex = 0;
             this.Barco_Page.Size = new System.Drawing.Size(1478, 1061);
-            this.Barco_Page.TabIndex = 17;
+            this.Barco_Page.TabIndex = 18;
             // 
             // Navio_Page
             // 
@@ -426,12 +426,12 @@
         private UserControls.Notificador noti_Cap;
         private UserControls.Notificador noti_Carp;
         private UserControls.Notificador noti_Ar;
+        private Button button1;
+        private Button button2;
         private TabControl Barco_Page;
         private TabPage Navio_Page;
         private UserControls.Barco barco2;
         private UserControls.Barco barco1;
         private TabPage Navegacion_Page;
-        private Button button1;
-        private Button button2;
     }
 }
