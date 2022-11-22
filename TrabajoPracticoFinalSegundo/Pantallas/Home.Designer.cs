@@ -136,7 +136,6 @@
             // Update
             // 
             this.Update.Enabled = true;
-            this.Update.Interval = 7000;
             this.Update.Tick += new System.EventHandler(this.Update_Tick);
             // 
             // flowLayoutPanel2

@@ -34,6 +34,7 @@
             // 
             // btn_Si
             // 
+            this.btn_Si.Font = new System.Drawing.Font("BlackPearl", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_Si.Location = new System.Drawing.Point(3, 3);
             this.btn_Si.Margin = new System.Windows.Forms.Padding(3, 3, 25, 3);
             this.btn_Si.Name = "btn_Si";
@@ -45,11 +46,12 @@
             // 
             // btn_No
             // 
+            this.btn_No.Font = new System.Drawing.Font("BlackPearl", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_No.Location = new System.Drawing.Point(274, 3);
             this.btn_No.Name = "btn_No";
             this.btn_No.Size = new System.Drawing.Size(233, 120);
             this.btn_No.TabIndex = 1;
-            this.btn_No.Text = "... hoy se levanto tonto";
+            this.btn_No.Text = "NO CAPITAN!";
             this.btn_No.UseVisualStyleBackColor = true;
             this.btn_No.Click += new System.EventHandler(this.btn_No_Click);
             // 

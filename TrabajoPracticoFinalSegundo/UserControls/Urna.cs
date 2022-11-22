@@ -13,11 +13,13 @@ namespace TrabajoPracticoFinalSegundo.UserControls
     public partial class Urna : UserControl
     {
         int voto;
+        string tipo;
 
         public Urna()
         {
             InitializeComponent();
             this.voto = 9;
+            this.tipo = "Votacion";
         }
 
         #region LOADS
@@ -40,6 +42,55 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             btn_No.Height = this.Height;
             btn_No.Width = (this.Width / 2);
 
+        }
+
+        public void DesicionesNuevas(string rol) 
+        {
+            this.tipo = "Desicion";
+
+            switch (rol) 
+            {
+                case "Capitan":
+
+                    break;
+
+                case "Carpintero":
+
+                    break;
+
+                case "Mercader":
+
+                    break;
+
+                case "Artillero":
+                    this.btn_Si.Text = "Disparar!";
+                    this.btn_No.Text = "Recargar!";
+                    break;
+            }
+        }
+
+        public string getTipo() 
+        {
+            return this.tipo;
+        }
+
+        public string getMensaje(int x) 
+        {
+            switch (x) 
+            {
+                case 1: return this.btn_Si.Text;
+
+                case 0: return this.btn_No.Text;
+
+                default: return "error";
+            }
+        }
+
+        public void Votacion() 
+        {
+            this.tipo = "Votacion";
+            this.btn_Si.Text = "Si Capitan!";
+            this.btn_No.Text = "No Capitan!";
         }
         #endregion
 
