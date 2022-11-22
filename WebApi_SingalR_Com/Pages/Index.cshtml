@@ -20,6 +20,12 @@
 <p>Orden Capitan</p>
 <p id="Desicion">Null</p>
 
+<p>Barco1</p>
+<p id="barco1"></p>
+
+<p>Barco2</p>
+<p id="barco2"></p>
+
 <p>Dados</p>
 <p class="dado" id="val1">0</p>
 <p class="dado" id="val2">0</p>
@@ -28,6 +34,10 @@
 <p class="imagen" id="img2">x2</p>
 <p class="imagen" id="img3">x3</p>
 <p class="imagen" id="img4">x4</p>
+
+<script>
+    setInterval(function () { actualizarBarcos(); }, 300);
+</script>
 
 <script>
     setInterval(function () { siguienteTurno(); }, 1000);

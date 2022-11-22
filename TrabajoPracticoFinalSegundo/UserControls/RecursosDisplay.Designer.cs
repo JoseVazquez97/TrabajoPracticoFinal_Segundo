@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.lbl_Tesoro = new System.Windows.Forms.Label();
-            this.lbl_Planos = new System.Windows.Forms.Label();
+            this.lbl_Balas = new System.Windows.Forms.Label();
             this.lbl_Maderas = new System.Windows.Forms.Label();
             this.p_Tesoro = new System.Windows.Forms.PictureBox();
-            this.p_Planos = new System.Windows.Forms.PictureBox();
+            this.p_Balas = new System.Windows.Forms.PictureBox();
             this.p_Madera = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.p_Tesoro)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.p_Planos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.p_Balas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p_Madera)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -58,17 +58,17 @@
             this.lbl_Tesoro.TabIndex = 1;
             this.lbl_Tesoro.Text = "0";
             // 
-            // lbl_Planos
+            // lbl_Balas
             // 
-            this.lbl_Planos.AutoSize = true;
-            this.lbl_Planos.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_Planos.Font = new System.Drawing.Font("BlackPearl", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbl_Planos.Location = new System.Drawing.Point(143, 5);
-            this.lbl_Planos.Margin = new System.Windows.Forms.Padding(35, 5, 20, 5);
-            this.lbl_Planos.Name = "lbl_Planos";
-            this.lbl_Planos.Size = new System.Drawing.Size(33, 38);
-            this.lbl_Planos.TabIndex = 2;
-            this.lbl_Planos.Text = "0";
+            this.lbl_Balas.AutoSize = true;
+            this.lbl_Balas.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_Balas.Font = new System.Drawing.Font("BlackPearl", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_Balas.Location = new System.Drawing.Point(143, 5);
+            this.lbl_Balas.Margin = new System.Windows.Forms.Padding(35, 5, 20, 5);
+            this.lbl_Balas.Name = "lbl_Balas";
+            this.lbl_Balas.Size = new System.Drawing.Size(33, 38);
+            this.lbl_Balas.TabIndex = 2;
+            this.lbl_Balas.Text = "0";
             // 
             // lbl_Maderas
             // 
@@ -94,16 +94,16 @@
             this.p_Tesoro.TabIndex = 4;
             this.p_Tesoro.TabStop = false;
             // 
-            // p_Planos
+            // p_Balas
             // 
-            this.p_Planos.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.p_Planos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.p_Planos.Location = new System.Drawing.Point(130, 3);
-            this.p_Planos.Margin = new System.Windows.Forms.Padding(20, 3, 20, 3);
-            this.p_Planos.Name = "p_Planos";
-            this.p_Planos.Size = new System.Drawing.Size(55, 55);
-            this.p_Planos.TabIndex = 5;
-            this.p_Planos.TabStop = false;
+            this.p_Balas.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.p_Balas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.p_Balas.Location = new System.Drawing.Point(130, 3);
+            this.p_Balas.Margin = new System.Windows.Forms.Padding(20, 3, 20, 3);
+            this.p_Balas.Name = "p_Balas";
+            this.p_Balas.Size = new System.Drawing.Size(55, 55);
+            this.p_Balas.TabIndex = 5;
+            this.p_Balas.TabStop = false;
             // 
             // p_Madera
             // 
@@ -132,7 +132,7 @@
             // 
             this.flowLayoutPanel3.BackColor = System.Drawing.Color.Transparent;
             this.flowLayoutPanel3.Controls.Add(this.p_Tesoro);
-            this.flowLayoutPanel3.Controls.Add(this.p_Planos);
+            this.flowLayoutPanel3.Controls.Add(this.p_Balas);
             this.flowLayoutPanel3.Controls.Add(this.p_Madera);
             this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
@@ -144,7 +144,7 @@
             // 
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.Transparent;
             this.flowLayoutPanel2.Controls.Add(this.lbl_Tesoro);
-            this.flowLayoutPanel2.Controls.Add(this.lbl_Planos);
+            this.flowLayoutPanel2.Controls.Add(this.lbl_Balas);
             this.flowLayoutPanel2.Controls.Add(this.lbl_Maderas);
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 59);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
@@ -161,7 +161,7 @@
             this.Name = "RecursosDisplay";
             this.Size = new System.Drawing.Size(1230, 108);
             ((System.ComponentModel.ISupportInitialize)(this.p_Tesoro)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.p_Planos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.p_Balas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p_Madera)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
@@ -173,10 +173,10 @@
 
         #endregion
         private Label lbl_Tesoro;
-        private Label lbl_Planos;
+        private Label lbl_Balas;
         private Label lbl_Maderas;
         private PictureBox p_Tesoro;
-        private PictureBox p_Planos;
+        private PictureBox p_Balas;
         private PictureBox p_Madera;
         private FlowLayoutPanel flowLayoutPanel1;
         private FlowLayoutPanel flowLayoutPanel3;

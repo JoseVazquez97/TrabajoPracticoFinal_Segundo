@@ -180,7 +180,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             //home.CargarImagenUsuario(Imagen.Image);  << Prefiero esto personalmente, asi no interfiere, y es facil de sacar de ser necesario
             //home.IniciarVideo(); << Este podria ser si selecciona estar con camara o en vivo
 
-            this.Dispose();
+            //this.Dispose();
         }
     }
 }

@@ -51,20 +51,23 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             switch (rol) 
             {
                 case "Capitan":
-
+                    this.btn_Si.Text = "Voy a Disparar!";
+                    this.btn_No.Text = "Voy a Recargar!";
                     break;
 
                 case "Carpintero":
-
+                    this.btn_Si.Text = "Voy a Reparar!";
+                    this.btn_No.Text = "Voy a Recargar!";
                     break;
 
                 case "Mercader":
-
+                    this.btn_Si.Text = "Voy a Disparar!";
+                    this.btn_No.Text = "Voy a Recargar!";
                     break;
 
                 case "Artillero":
-                    this.btn_Si.Text = "Disparar!";
-                    this.btn_No.Text = "Recargar!";
+                    this.btn_Si.Text = "Voy a Disparar!";
+                    this.btn_No.Text = "Voy a Recargar!";
                     break;
             }
         }

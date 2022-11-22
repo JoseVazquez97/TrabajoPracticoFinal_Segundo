@@ -326,7 +326,6 @@
             this.Controls.Add(this.progress);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.pBox_Fondo);
-            this.MinimizeBox = false;
             this.Name = "Home";
             this.Text = "Home";
             this.TopMost = true;

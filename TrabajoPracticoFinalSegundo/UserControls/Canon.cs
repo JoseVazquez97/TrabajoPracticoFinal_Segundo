@@ -30,8 +30,29 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.Visible = true;
             this.danio = 0;
             this.nivel = 0;
+
+            this.lbl_Muni.Parent = this.p_Box;
         }
 
+        public void setMuni(string valor) 
+        {
+            this.lbl_Muni.Text = valor;
+        }
+
+        public void gastarMuni() 
+        {
+            this.lbl_Muni.Text = "0";
+        }
+
+        public void regargarMuni() 
+        {
+            this.lbl_Muni.Text = "1";
+        }
+
+        public int consultarMuni() 
+        {
+            return int.Parse(this.lbl_Muni.Text);
+        }
 
         public void subirNivel()
         {

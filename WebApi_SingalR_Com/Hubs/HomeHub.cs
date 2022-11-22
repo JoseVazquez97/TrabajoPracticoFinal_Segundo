@@ -16,6 +16,8 @@ namespace WebApi_SingalR_Com.Hubs
         public static string Evento { get; set; } = "";
         public static string Orden { get; set; } = "";
         public static string EventoRandom { get; set; } = "";
+        public static string Barco1 { get; set; } = "";
+        public static string Barco2 { get; set; } = "";
 
         //WebCams
         public async Task EnviarImagen(string imagenU1x, string rol)
@@ -81,6 +83,16 @@ namespace WebApi_SingalR_Com.Hubs
 
             //MANDAR LA ACTUALIZACION
             await Clients.All.SendAsync("RecibirDados", val1, val2);
+        }
+
+        //Barco
+        public async Task EnviarBarcos(string barco1, string barco2)
+        {
+            Barco1 = barco1;
+            Barco2 = barco2;
+
+            //MANDAR LA ACTUALIZACION
+            await Clients.All.SendAsync("RecibirBarcos", barco1, barco2);
         }
     }
 }

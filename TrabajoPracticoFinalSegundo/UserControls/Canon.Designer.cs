@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.p_Box = new System.Windows.Forms.PictureBox();
+            this.lbl_Muni = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.p_Box)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,12 +45,25 @@
             this.p_Box.TabIndex = 0;
             this.p_Box.TabStop = false;
             // 
+            // lbl_Muni
+            // 
+            this.lbl_Muni.AutoSize = true;
+            this.lbl_Muni.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_Muni.Font = new System.Drawing.Font("BlackPearl", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_Muni.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Muni.Location = new System.Drawing.Point(74, 38);
+            this.lbl_Muni.Name = "lbl_Muni";
+            this.lbl_Muni.Size = new System.Drawing.Size(21, 29);
+            this.lbl_Muni.TabIndex = 1;
+            this.lbl_Muni.Text = "1";
+            // 
             // Canon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Controls.Add(this.lbl_Muni);
             this.Controls.Add(this.p_Box);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -57,11 +71,13 @@
             this.Size = new System.Drawing.Size(170, 67);
             ((System.ComponentModel.ISupportInitialize)(this.p_Box)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private PictureBox p_Box;
+        private Label lbl_Muni;
     }
 }

@@ -27,6 +27,21 @@ userConection.on("RecibirImagen", (stringmap, rol) =>
 
 })
 
+userConection.on("RecibirBarcos", (barco1, barco2) => {
+
+    document.getElementById("barco1").innerText = barco1;
+    document.getElementById("barco2").innerText = barco2;
+
+})
+
+function actualizarBarcos()
+{
+    let Barco1 = document.getElementById("barco1").innerText;
+    let Barco2 = document.getElementById("barco2").innerText;
+
+    userConection.send("EnviarBarcos", stringmap, rol);
+}
+
 //Generar los metodos, para enviar datos hacia el hub
 //Esta funcion es llamada por el servidor de manera automatica.
 function actualizarImagenes()

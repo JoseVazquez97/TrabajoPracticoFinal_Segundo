@@ -33,15 +33,66 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.flowLayoutPanel2.Parent = this.flowLayoutPanel1;
             this.lbl_Tesoro.Parent = this.flowLayoutPanel2;
             this.lbl_Maderas.Parent = this.flowLayoutPanel2;
-            this.lbl_Planos.Parent = this.flowLayoutPanel2;
+            this.lbl_Balas.Parent = this.flowLayoutPanel2;
 
             this.p_Madera.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Iconos\Madera.png");
             this.p_Tesoro.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Iconos\Oro.jpg");
-            this.p_Planos.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Iconos\Plano.png");
+            this.p_Balas.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Iconos\Balas.png");
 
         }
 
+        public void extraerRecurso(string cual, int cant) 
+        {
+            int aux = 0;
 
+            switch (cual) 
+            {
+                case "Oro":
+                    aux = int.Parse(this.lbl_Tesoro.Text) - cant;
+                    this.lbl_Tesoro.Text = aux.ToString();
+                    break;
+
+                case "Madera":
+                    aux = int.Parse(this.lbl_Maderas.Text) - cant;
+                    this.lbl_Maderas.Text = aux.ToString();
+                    break;
+
+                case "Bala":
+                    aux = int.Parse(this.lbl_Balas.Text) - cant;
+                    this.lbl_Balas.Text = aux.ToString();
+                    break;
+            }
+        }
+
+        public void cargarRecurso(string cual, int cant)
+        {
+            int aux = 0;
+
+            switch (cual)
+            {
+                case "Oro":
+                    aux = int.Parse(this.lbl_Tesoro.Text) + cant;
+                    this.lbl_Tesoro.Text = aux.ToString();
+                    break;
+
+                case "Madera":
+                    aux = int.Parse(this.lbl_Maderas.Text) + cant;
+                    this.lbl_Maderas.Text = aux.ToString();
+                    break;
+
+                case "Bala":
+                    aux = int.Parse(this.lbl_Balas.Text) + cant;
+                    this.lbl_Balas.Text = aux.ToString();
+                    break;
+            }
+        }
+
+        public void consultarRecursos() 
+        {
+            string mensaje;
+
+            mensaje = this.lbl_Tesoro.Text + ";" + this.lbl_Maderas.Text + ";" + this.lbl_Balas.Text;
+        }
 
     }
 }
