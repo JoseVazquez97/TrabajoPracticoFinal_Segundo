@@ -16,18 +16,20 @@ namespace TrabajoPracticoFinalSegundo.UserControls
     {
         Almacen almacen;
         string path;
+        int Vida;
+        int Danio;
 
         public Barco()
         {
             InitializeComponent();
             this.almacen = new Almacen();
-
+            this.Vida = 100;
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
         }
 
-        public void loadBarco() 
+        public void loadBarcoEnemigo() 
         {
-            this.pic_Barco.Image = Image.FromFile(this.path + @"\Recursos\BarcO\BARCO_BaseUno.png");
+            this.pic_Barco.Image = Image.FromFile(this.path + @"\Recursos\BarcO\BARCO_BaseDos.png");
 
             canon1.esIzquierdo();
             canon2.esDerecho();
@@ -38,9 +40,34 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             canon2.Parent = pic_Barco;
             canon3.Parent = pic_Barco;
             canon4.Parent = pic_Barco;
+            progressBar1.Parent = pic_Barco;
         }
 
-        public void loadBarco(int tamaAncho, int alturaMaxima)
+        public void RecibirDanio(int danio) 
+        {
+            this.Vida -= danio;
+            if (this.Vida >= 0)
+            {
+                this.progressBar1.Value = this.Vida;
+            }
+            else 
+            {
+                this.progressBar1.Value = 0;
+            }
+        }
+
+        public void ReiniciarVida() 
+        {
+            this.Vida = 100;
+            this.progressBar1.Value = 100;
+        }
+
+        public int ConsultarDanio() 
+        {
+            return this.Danio;
+        }
+
+        public void loadBarco()
         {
             this.pic_Barco.Image = Image.FromFile(this.path + @"\Recursos\BarcO\BARCO_BaseUno.png");
 
@@ -53,6 +80,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             canon2.Parent = pic_Barco;
             canon3.Parent = pic_Barco;
             canon4.Parent = pic_Barco;
+
+            progressBar1.Parent = pic_Barco;
         }
     }
 }

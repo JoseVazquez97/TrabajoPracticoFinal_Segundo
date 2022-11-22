@@ -48,7 +48,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         string eventoRandomActual;
 
         bool checkRendimiento;
-
+        bool accionRealizada;
+        
         int Key;
         int turno;
         int accionHome;
@@ -74,6 +75,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
             this.checkRendimiento = false;
+            this.accionRealizada = false;
             #endregion
 
             #region LOADS DE COMPONENTES 
@@ -103,8 +105,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             x = this.Width - 325 - 70;
 
-            this.barco1.loadBarco(x, 1061);
-            this.barco2.loadBarco(x, 1061);
+            this.barco1.loadBarco();
+            this.barco2.loadBarcoEnemigo();
+           
             this.barco2.Visible = false;
             this.barco1.Parent = this.pBox_Fondo;
             this.barco2.Parent = this.pBox_Fondo;
@@ -172,9 +175,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
         }
 
-
         /// ///////////////////////////////////////////////////////////////
-
 
         #region JUEGO (LOOP PRINCIPAL)
 
@@ -196,7 +197,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
 
         #endregion
-
 
         /// ///////////////////////////////////////////////////////////////
 
@@ -394,7 +394,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 leToca = obtenerTurno(this.turnero1.getTurno()-1);
             }
             
-
             switch (leToca) 
             {
                 case 1:
@@ -994,6 +993,30 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 if (this.Rol != "Capitan") { this.eventoRandom = evento; }
 
+                int leToca = 0;
+                int aux = 0;
+                int val1;
+                int val2;
+
+
+                if (this.turnero1.InvokeRequired)
+                {
+                    try
+                    {
+                        turnero1.Invoke(new Action(() => aux = turnero1.getTurno()));
+                    }
+                    catch { }
+                }
+
+                if (aux == 1)
+                {
+                    leToca = obtenerTurno(aux);
+                }
+                else
+                {
+                    leToca = obtenerTurno(aux - 1);
+                }
+               
                 switch (evento)
                 {
                     case "Barco":
@@ -1006,6 +1029,67 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             }
                             catch { }
                         }
+
+                        switch (leToca) 
+                        {
+                            case 1:
+                                if (this.Rol == "Capitan") 
+                                {
+
+                                }
+                            break;
+
+                            case 2:
+                                if (this.Rol == "Carpintero")
+                                {
+
+                                }
+                                break;
+
+                            case 3:
+                                if (this.Rol == "Mercader")
+                                {
+
+                                }
+                                else 
+                                {
+                                    this.accionRealizada = false;
+                                }
+                                break;
+
+                            case 4:
+                                if (this.Rol == "Artillero")
+                                {
+                                    if (this.dados1.InvokeRequired) 
+                                    {
+                                        if (this.dados1.LISTO) 
+                                        {
+                                            try
+                                            {
+                                                val1 = this.dados1.V1;
+                                                val2 = this.dados1.V2;
+                                            }
+                                            catch { }
+
+                                            if (this.accionRealizada == false) 
+                                            {
+                                                if (this.barco2.InvokeRequired)
+                                                {
+                                                    try
+                                                    {
+                                                        barco2.Invoke(new Action(() => barco2.RecibirDanio(10)));
+                                                        this.accionRealizada = true;
+                                                    }
+                                                    catch { }
+                                                }
+                                            }
+                                            
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+
                         break;
                     case "Isla":
                         break;

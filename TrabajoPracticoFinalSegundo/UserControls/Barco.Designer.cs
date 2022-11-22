@@ -33,6 +33,7 @@
             this.canon2 = new TrabajoPracticoFinalSegundo.UserControls.Canon();
             this.canon3 = new TrabajoPracticoFinalSegundo.UserControls.Canon();
             this.canon4 = new TrabajoPracticoFinalSegundo.UserControls.Canon();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Barco)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,11 +91,20 @@
             this.canon4.Size = new System.Drawing.Size(170, 67);
             this.canon4.TabIndex = 4;
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(0, 689);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(364, 23);
+            this.progressBar1.TabIndex = 5;
+            this.progressBar1.Value = 100;
+            // 
             // Barco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.canon4);
             this.Controls.Add(this.canon3);
             this.Controls.Add(this.canon2);
@@ -114,5 +124,6 @@
         public Canon canon2;
         public Canon canon3;
         public Canon canon4;
+        private ProgressBar progressBar1;
     }
 }

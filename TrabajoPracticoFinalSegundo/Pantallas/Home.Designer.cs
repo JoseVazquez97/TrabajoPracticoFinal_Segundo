@@ -66,10 +66,10 @@
             // barco1
             // 
             this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Location = new System.Drawing.Point(528, 194);
+            this.barco1.Location = new System.Drawing.Point(535, 47);
             this.barco1.Margin = new System.Windows.Forms.Padding(200, 0, 0, 0);
             this.barco1.Name = "barco1";
-            this.barco1.Size = new System.Drawing.Size(360, 754);
+            this.barco1.Size = new System.Drawing.Size(360, 721);
             this.barco1.TabIndex = 0;
             this.barco1.Load += new System.EventHandler(this.barco1_Load);
             // 
@@ -262,7 +262,7 @@
             // barco2
             // 
             this.barco2.BackColor = System.Drawing.Color.Transparent;
-            this.barco2.Location = new System.Drawing.Point(891, 54);
+            this.barco2.Location = new System.Drawing.Point(948, 47);
             this.barco2.Name = "barco2";
             this.barco2.Size = new System.Drawing.Size(364, 712);
             this.barco2.TabIndex = 1;
