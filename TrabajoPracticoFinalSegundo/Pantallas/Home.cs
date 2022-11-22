@@ -82,14 +82,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #region LOADS DE COMPONENTES 
 
             //FONDO
-            this.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\FondoHomeDos.jpg");
-            this.pBox_Fondo.Width = this.Width - this.flowLayoutPanel2.Width -this.flowLayoutPanel3.Width;
-            this.pBox_Fondo.Height = this.Height - this.flowLayoutPanel4.Height - this.flowLayoutPanel1.Height;
+            this.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\Madera.jpg");
+            this.Navio_Page.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\FondoHomeDos.jpg");
+            this.Navegacion_Page.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\FondoHomeDos.jpg");
             int loc1 = this.flowLayoutPanel2.Width;
             int loc2 = this.flowLayoutPanel4.Height;
-            this.pBox_Fondo.Location = new Point(loc1,loc2);
-            this.pBox_Fondo.BackColor = Color.Transparent;
-            this.pBox_Fondo.Parent = this;
 
             //PANTALLAS WEB
             this.pantallaWeb1.WebLoad();
@@ -99,8 +96,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             int x = (this.Width / 2);
             int y = (this.Height / 2);
 
-            //RECURSOS
+            //RECURSOS Y CAMBIOS DE PAG
             this.recursosDisplay1.LoadRecursos(flowLayoutPanel4.Width, flowLayoutPanel4.Height);
+            this.button1.Width = flowLayoutPanel4.Width / 3;
+            this.button2.Width = flowLayoutPanel4.Width / 3;
 
             //BARCO
 
@@ -110,8 +109,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.barco2.loadBarcoEnemigo();
            
             this.barco2.Visible = false;
-            this.barco1.Parent = this.pBox_Fondo;
-            this.barco2.Parent = this.pBox_Fondo;
 
             //BARRA (INFERIOR)
             x = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
@@ -852,6 +849,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                                     catch { }
                                 }
 
+                                /*
                                 if (this.pBox_Fondo.InvokeRequired)
                                 {
                                     try
@@ -860,7 +858,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                                     }
                                     catch { }
                                 }
-
+                                */
                                 this.checkRendimiento = true;
                                 this.eventoActual++;
                             }
@@ -928,6 +926,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     #region MOSTRAR RESPUESTA!
                     switch (rol)
                     {
+
                         case "Carpintero":
                             #region RESCATAR MENSAJE
 
@@ -1416,6 +1415,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
+        #region CAMBIO DE TAB!
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Barco_Page.SelectTab(0);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Barco_Page.SelectTab(1);
+        }
+        #endregion 
+
         private void EventoRandom()
         {
             Random x = new Random();
@@ -1549,5 +1560,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
+        private void noti_Cap_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }

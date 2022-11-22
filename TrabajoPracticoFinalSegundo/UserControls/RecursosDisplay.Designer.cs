@@ -122,7 +122,7 @@
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel3);
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel2);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(454, 0);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(30, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(296, 106);
@@ -159,7 +159,7 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "RecursosDisplay";
-            this.Size = new System.Drawing.Size(1230, 108);
+            this.Size = new System.Drawing.Size(363, 108);
             ((System.ComponentModel.ISupportInitialize)(this.p_Tesoro)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p_Balas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p_Madera)).EndInit();

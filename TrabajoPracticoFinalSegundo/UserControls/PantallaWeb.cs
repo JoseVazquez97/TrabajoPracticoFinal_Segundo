@@ -28,6 +28,11 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         {
             InitializeComponent();
 
+            //De esta manera consigo los valores de resolucion de la pantalla.
+            System.Drawing.Size value = new System.Drawing.Size(); 
+            value.Width = Screen.PrimaryScreen.WorkingArea.Width;
+            value.Height = Screen.PrimaryScreen.WorkingArea.Height;
+
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
             frame = new Mat();
         }

@@ -34,12 +34,12 @@
             // lbl_texto
             // 
             this.lbl_texto.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_texto.Font = new System.Drawing.Font("BlackPearl", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_texto.Font = new System.Drawing.Font("BlackPearl", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_texto.ForeColor = System.Drawing.Color.Black;
             this.lbl_texto.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbl_texto.Location = new System.Drawing.Point(0, 0);
             this.lbl_texto.Name = "lbl_texto";
-            this.lbl_texto.Size = new System.Drawing.Size(400, 150);
+            this.lbl_texto.Size = new System.Drawing.Size(220, 83);
             this.lbl_texto.TabIndex = 1;
             this.lbl_texto.Text = "ORDENES CAPITAN!!!";
             this.lbl_texto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -49,9 +49,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Controls.Add(this.lbl_texto);
             this.Name = "Notificador";
-            this.Size = new System.Drawing.Size(400, 150);
+            this.Size = new System.Drawing.Size(220, 83);
             this.ResumeLayout(false);
 
         }

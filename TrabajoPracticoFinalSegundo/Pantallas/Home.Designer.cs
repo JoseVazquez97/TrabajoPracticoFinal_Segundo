@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.barco1 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.progress = new System.Windows.Forms.ProgressBar();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.urnaCapitan1 = new TrabajoPracticoFinalSegundo.UserControls.UrnaCapitan();
@@ -42,36 +41,32 @@
             this.pantallaWeb2 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
             this.pantallaWeb3 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
             this.pantallaWeb4 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
+            this.noti_Ar = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
+            this.noti_Cap = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
             this.btn_Exit = new System.Windows.Forms.Button();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.recursosDisplay1 = new TrabajoPracticoFinalSegundo.UserControls.RecursosDisplay();
+            this.button2 = new System.Windows.Forms.Button();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.escrutinio1 = new TrabajoPracticoFinalSegundo.UserControls.Escrutinio();
             this.Update500ms = new System.Windows.Forms.Timer(this.components);
-            this.barco2 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
-            this.pBox_Fondo = new System.Windows.Forms.PictureBox();
-            this.noti_Cap = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
             this.noti_Carp = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
             this.noti_Mer = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
-            this.noti_Ar = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
+            this.Barco_Page = new System.Windows.Forms.TabControl();
+            this.Navio_Page = new System.Windows.Forms.TabPage();
+            this.barco2 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
+            this.barco1 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
+            this.Navegacion_Page = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBox_Fondo)).BeginInit();
+            this.Barco_Page.SuspendLayout();
+            this.Navio_Page.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // barco1
-            // 
-            this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Location = new System.Drawing.Point(535, 47);
-            this.barco1.Margin = new System.Windows.Forms.Padding(200, 0, 0, 0);
-            this.barco1.Name = "barco1";
-            this.barco1.Size = new System.Drawing.Size(360, 721);
-            this.barco1.TabIndex = 0;
-            this.barco1.Load += new System.EventHandler(this.barco1_Load);
             // 
             // progress
             // 
@@ -191,6 +186,24 @@
             this.pantallaWeb4.Size = new System.Drawing.Size(249, 200);
             this.pantallaWeb4.TabIndex = 3;
             // 
+            // noti_Ar
+            // 
+            this.noti_Ar.BackColor = System.Drawing.Color.Transparent;
+            this.noti_Ar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.noti_Ar.Location = new System.Drawing.Point(197, 78);
+            this.noti_Ar.Name = "noti_Ar";
+            this.noti_Ar.Size = new System.Drawing.Size(220, 83);
+            this.noti_Ar.TabIndex = 15;
+            // 
+            // noti_Cap
+            // 
+            this.noti_Cap.BackColor = System.Drawing.Color.Transparent;
+            this.noti_Cap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.noti_Cap.Location = new System.Drawing.Point(197, 726);
+            this.noti_Cap.Name = "noti_Cap";
+            this.noti_Cap.Size = new System.Drawing.Size(220, 83);
+            this.noti_Cap.TabIndex = 12;
+            // 
             // btn_Exit
             // 
             this.btn_Exit.Location = new System.Drawing.Point(3, 3);
@@ -216,7 +229,9 @@
             // flowLayoutPanel4
             // 
             this.flowLayoutPanel4.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel4.Controls.Add(this.button1);
             this.flowLayoutPanel4.Controls.Add(this.recursosDisplay1);
+            this.flowLayoutPanel4.Controls.Add(this.button2);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(325, 0);
             this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
@@ -224,14 +239,36 @@
             this.flowLayoutPanel4.Size = new System.Drawing.Size(1083, 107);
             this.flowLayoutPanel4.TabIndex = 8;
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("BlackPearl", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.Location = new System.Drawing.Point(3, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(302, 101);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "NAVIO";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // recursosDisplay1
             // 
             this.recursosDisplay1.BackColor = System.Drawing.Color.Transparent;
-            this.recursosDisplay1.Location = new System.Drawing.Point(0, 0);
+            this.recursosDisplay1.Location = new System.Drawing.Point(308, 0);
             this.recursosDisplay1.Margin = new System.Windows.Forms.Padding(0);
             this.recursosDisplay1.Name = "recursosDisplay1";
-            this.recursosDisplay1.Size = new System.Drawing.Size(1085, 105);
+            this.recursosDisplay1.Size = new System.Drawing.Size(498, 109);
             this.recursosDisplay1.TabIndex = 0;
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("BlackPearl", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button2.Location = new System.Drawing.Point(809, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(271, 101);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "MAPA";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // flowLayoutPanel5
             // 
@@ -258,55 +295,76 @@
             this.Update500ms.Interval = 300;
             this.Update500ms.Tick += new System.EventHandler(this.Update500ms_Tick);
             // 
-            // barco2
-            // 
-            this.barco2.BackColor = System.Drawing.Color.Transparent;
-            this.barco2.Location = new System.Drawing.Point(948, 47);
-            this.barco2.Name = "barco2";
-            this.barco2.Size = new System.Drawing.Size(364, 712);
-            this.barco2.TabIndex = 1;
-            // 
-            // pBox_Fondo
-            // 
-            this.pBox_Fondo.BackColor = System.Drawing.Color.Transparent;
-            this.pBox_Fondo.Location = new System.Drawing.Point(317, 110);
-            this.pBox_Fondo.Name = "pBox_Fondo";
-            this.pBox_Fondo.Size = new System.Drawing.Size(1085, 809);
-            this.pBox_Fondo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBox_Fondo.TabIndex = 11;
-            this.pBox_Fondo.TabStop = false;
-            // 
-            // noti_Cap
-            // 
-            this.noti_Cap.BackColor = System.Drawing.Color.Transparent;
-            this.noti_Cap.Location = new System.Drawing.Point(199, 47);
-            this.noti_Cap.Name = "noti_Cap";
-            this.noti_Cap.Size = new System.Drawing.Size(400, 150);
-            this.noti_Cap.TabIndex = 12;
-            // 
             // noti_Carp
             // 
             this.noti_Carp.BackColor = System.Drawing.Color.Transparent;
-            this.noti_Carp.Location = new System.Drawing.Point(199, 262);
+            this.noti_Carp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.noti_Carp.Location = new System.Drawing.Point(197, 286);
             this.noti_Carp.Name = "noti_Carp";
-            this.noti_Carp.Size = new System.Drawing.Size(400, 150);
+            this.noti_Carp.Size = new System.Drawing.Size(220, 83);
             this.noti_Carp.TabIndex = 13;
             // 
             // noti_Mer
             // 
             this.noti_Mer.BackColor = System.Drawing.Color.Transparent;
-            this.noti_Mer.Location = new System.Drawing.Point(199, 478);
+            this.noti_Mer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.noti_Mer.Location = new System.Drawing.Point(197, 504);
             this.noti_Mer.Name = "noti_Mer";
-            this.noti_Mer.Size = new System.Drawing.Size(400, 150);
+            this.noti_Mer.Size = new System.Drawing.Size(220, 83);
             this.noti_Mer.TabIndex = 14;
             // 
-            // noti_Ar
+            // Barco_Page
             // 
-            this.noti_Ar.BackColor = System.Drawing.Color.Transparent;
-            this.noti_Ar.Location = new System.Drawing.Point(199, 692);
-            this.noti_Ar.Name = "noti_Ar";
-            this.noti_Ar.Size = new System.Drawing.Size(400, 150);
-            this.noti_Ar.TabIndex = 15;
+            this.Barco_Page.AccessibleDescription = "";
+            this.Barco_Page.Controls.Add(this.Navio_Page);
+            this.Barco_Page.Controls.Add(this.Navegacion_Page);
+            this.Barco_Page.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Barco_Page.Font = new System.Drawing.Font("BlackPearl", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Barco_Page.Location = new System.Drawing.Point(0, 0);
+            this.Barco_Page.Name = "Barco_Page";
+            this.Barco_Page.SelectedIndex = 0;
+            this.Barco_Page.Size = new System.Drawing.Size(1478, 1061);
+            this.Barco_Page.TabIndex = 17;
+            // 
+            // Navio_Page
+            // 
+            this.Navio_Page.Controls.Add(this.barco2);
+            this.Navio_Page.Controls.Add(this.barco1);
+            this.Navio_Page.Location = new System.Drawing.Point(4, 31);
+            this.Navio_Page.Name = "Navio_Page";
+            this.Navio_Page.Padding = new System.Windows.Forms.Padding(3);
+            this.Navio_Page.Size = new System.Drawing.Size(1470, 1026);
+            this.Navio_Page.TabIndex = 0;
+            this.Navio_Page.Text = "Navio";
+            this.Navio_Page.UseVisualStyleBackColor = true;
+            // 
+            // barco2
+            // 
+            this.barco2.BackColor = System.Drawing.Color.Transparent;
+            this.barco2.Location = new System.Drawing.Point(1072, 104);
+            this.barco2.Margin = new System.Windows.Forms.Padding(0);
+            this.barco2.Name = "barco2";
+            this.barco2.Size = new System.Drawing.Size(302, 531);
+            this.barco2.TabIndex = 3;
+            // 
+            // barco1
+            // 
+            this.barco1.BackColor = System.Drawing.Color.Transparent;
+            this.barco1.Location = new System.Drawing.Point(663, 169);
+            this.barco1.Margin = new System.Windows.Forms.Padding(0);
+            this.barco1.Name = "barco1";
+            this.barco1.Size = new System.Drawing.Size(302, 604);
+            this.barco1.TabIndex = 2;
+            // 
+            // Navegacion_Page
+            // 
+            this.Navegacion_Page.Location = new System.Drawing.Point(4, 31);
+            this.Navegacion_Page.Name = "Navegacion_Page";
+            this.Navegacion_Page.Padding = new System.Windows.Forms.Padding(3);
+            this.Navegacion_Page.Size = new System.Drawing.Size(1470, 1026);
+            this.Navegacion_Page.TabIndex = 1;
+            this.Navegacion_Page.Text = "Navegacion";
+            this.Navegacion_Page.UseVisualStyleBackColor = true;
             // 
             // Home
             // 
@@ -316,16 +374,14 @@
             this.Controls.Add(this.noti_Ar);
             this.Controls.Add(this.noti_Mer);
             this.Controls.Add(this.noti_Carp);
-            this.Controls.Add(this.noti_Cap);
             this.Controls.Add(this.flowLayoutPanel5);
+            this.Controls.Add(this.noti_Cap);
             this.Controls.Add(this.flowLayoutPanel4);
             this.Controls.Add(this.flowLayoutPanel3);
             this.Controls.Add(this.flowLayoutPanel2);
-            this.Controls.Add(this.barco2);
-            this.Controls.Add(this.barco1);
             this.Controls.Add(this.progress);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.pBox_Fondo);
+            this.Controls.Add(this.Barco_Page);
             this.Name = "Home";
             this.Text = "Home";
             this.TopMost = true;
@@ -337,14 +393,13 @@
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pBox_Fondo)).EndInit();
+            this.Barco_Page.ResumeLayout(false);
+            this.Navio_Page.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private UserControls.Barco barco1;
         public ProgressBar progress;
         private FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Timer Update;
@@ -363,8 +418,6 @@
         private UserControls.PantallaWeb pantallaWeb4;
         private System.Windows.Forms.Timer Update500ms;
         private UserControls.UrnaCapitan urnaCapitan1;
-        private UserControls.Barco barco2;
-        private PictureBox pBox_Fondo;
         private UserControls.Notificador noti_Mer;
         private UserControls.Notificador notificador2;
         private UserControls.Notificador notificador3;
@@ -373,5 +426,12 @@
         private UserControls.Notificador noti_Cap;
         private UserControls.Notificador noti_Carp;
         private UserControls.Notificador noti_Ar;
+        private TabControl Barco_Page;
+        private TabPage Navio_Page;
+        private UserControls.Barco barco2;
+        private UserControls.Barco barco1;
+        private TabPage Navegacion_Page;
+        private Button button1;
+        private Button button2;
     }
 }

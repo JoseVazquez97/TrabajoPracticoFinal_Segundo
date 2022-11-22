@@ -33,12 +33,15 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
             canon1.esIzquierdo();
             canon2.esDerecho();
-            canon3.esDerecho();
+            canon5.esDerecho();
             canon4.esIzquierdo();
+
+            canon5.Location = new Point(172, 100);
+            canon2.Location = new Point(172, 238);
 
             canon1.Parent = pic_Barco;
             canon2.Parent = pic_Barco;
-            canon3.Parent = pic_Barco;
+            canon5.Parent = pic_Barco;
             canon4.Parent = pic_Barco;
             progressBar1.Parent = pic_Barco;
         }
@@ -54,9 +57,9 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             {
                 this.canon2.gastarMuni();
                 return true;
-            } else if (this.canon3.consultarMuni() == 1)
+            } else if (this.canon5.consultarMuni() == 1)
             {
-                this.canon3.gastarMuni();
+                this.canon5.gastarMuni();
                 return true;
             } else if (this.canon4.consultarMuni() == 1) 
             {
@@ -82,9 +85,9 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                 this.canon2.regargarMuni();
                 return true;
             }
-            else if (this.canon3.consultarMuni() == 0)
+            else if (this.canon5.consultarMuni() == 0)
             {
-                this.canon3.regargarMuni();
+                this.canon5.regargarMuni();
                 return true;
             }
             else if (this.canon4.consultarMuni() == 0)
@@ -100,8 +103,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         public string ConsultarEstado() 
         {
-            string mensaje;
-            mensaje = this.canon1.consultarMuni() + ";" + this.canon2.consultarMuni() + ";" + this.canon3.consultarMuni() + ";" + this.canon4.consultarMuni() + ";" + this.Vida + ";";
+            string mensaje = "";
+            mensaje = this.canon1.consultarMuni() + ";" + this.canon2.consultarMuni() + ";" + this.canon5.consultarMuni() + ";" + this.canon4.consultarMuni() + ";" + this.Vida + ";";
             return mensaje;
         }
 
@@ -130,7 +133,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                             break;
 
                         case 3:
-                            this.canon3.setMuni(aux);
+                            this.canon5.setMuni(aux);
                             break;
 
                         case 4:
@@ -177,15 +180,33 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
             canon1.esIzquierdo();
             canon2.esDerecho();
-            canon3.esDerecho();
+            canon5.esDerecho();
             canon4.esIzquierdo();
 
             canon1.Parent = pic_Barco;
             canon2.Parent = pic_Barco;
-            canon3.Parent = pic_Barco;
+            canon5.Parent = pic_Barco;
             canon4.Parent = pic_Barco;
 
+            canon5.Location = new Point(172, 200);
+            canon2.Location = new Point(172, 308);
+
             progressBar1.Parent = pic_Barco;
+        }
+
+        private void canon1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pic_Barco_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void canon2_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

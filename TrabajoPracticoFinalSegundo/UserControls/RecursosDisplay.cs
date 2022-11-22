@@ -25,10 +25,10 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         public void LoadRecursos(int tamaTotal, int alturaTotal) 
         {
-            this.Width = tamaTotal;
+            this.Width = (tamaTotal / 3);
             this.Height = alturaTotal;
 
-            this.flowLayoutPanel1.Location = new Point(((tamaTotal / 2)-(tamaTotal/7)),0);
+            this.flowLayoutPanel1.Location = new Point(((this.Width / 4)-(this.Width/7)),0);
 
             this.flowLayoutPanel2.Parent = this.flowLayoutPanel1;
             this.lbl_Tesoro.Parent = this.flowLayoutPanel2;

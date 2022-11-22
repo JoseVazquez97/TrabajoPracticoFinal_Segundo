@@ -30,7 +30,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.Visible = true;
             this.danio = 0;
             this.nivel = 0;
-
             this.lbl_Muni.Parent = this.p_Box;
         }
 
@@ -42,11 +41,13 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public void gastarMuni() 
         {
             this.lbl_Muni.Text = "0";
+            this.lbl_Muni.Image = Image.FromFile(this.path + @"\Recursos\Caniones\Alerta.png");
         }
 
         public void regargarMuni() 
         {
             this.lbl_Muni.Text = "1";
+            this.lbl_Muni.Image = null;
         }
 
         public int consultarMuni() 
@@ -61,12 +62,14 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         
         public void esDerecho()
         {
-             this.p_Box.Image = Image.FromFile(this.path + @"\Recursos\Caniones\CanionBase.png");
+            this.p_Box.Image = Image.FromFile(this.path + @"\Recursos\Caniones\CanionBase.png");
+            this.lbl_Muni.Location = new Point(54, 20);
         }
 
         public void esIzquierdo() 
         {
-             this.p_Box.Image = Image.FromFile(this.path + @"\Recursos\Caniones\CanionBaseIzquierdo.png");
+            this.p_Box.Image = Image.FromFile(this.path + @"\Recursos\Caniones\CanionBaseIzquierdo.png");
+            this.lbl_Muni.Location = new Point(54, 20);
         }
 
         private string UpdatearImagen()
@@ -84,6 +87,9 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             return path;
         }
 
-        
+        private void lbl_Muni_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
