@@ -59,6 +59,8 @@
             this.barco2 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.barco1 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.Navegacion_Page = new System.Windows.Forms.TabPage();
+            this.tablero_Mapa = new System.Windows.Forms.TableLayoutPanel();
+            this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -66,15 +68,16 @@
             this.flowLayoutPanel5.SuspendLayout();
             this.Barco_Page.SuspendLayout();
             this.Navio_Page.SuspendLayout();
+            this.Navegacion_Page.SuspendLayout();
             this.SuspendLayout();
             // 
             // progress
             // 
             this.progress.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progress.Location = new System.Drawing.Point(0, 916);
+            this.progress.Location = new System.Drawing.Point(325, 916);
             this.progress.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
             this.progress.Name = "progress";
-            this.progress.Size = new System.Drawing.Size(1478, 12);
+            this.progress.Size = new System.Drawing.Size(1083, 12);
             this.progress.TabIndex = 3;
             // 
             // flowLayoutPanel1
@@ -144,7 +147,7 @@
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 916);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 928);
             this.flowLayoutPanel2.TabIndex = 5;
             // 
             // pantallaWeb1
@@ -223,7 +226,7 @@
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel3.MaximumSize = new System.Drawing.Size(70, 0);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(70, 916);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(70, 928);
             this.flowLayoutPanel3.TabIndex = 7;
             // 
             // flowLayoutPanel4
@@ -256,13 +259,13 @@
             this.recursosDisplay1.Location = new System.Drawing.Point(308, 0);
             this.recursosDisplay1.Margin = new System.Windows.Forms.Padding(0);
             this.recursosDisplay1.Name = "recursosDisplay1";
-            this.recursosDisplay1.Size = new System.Drawing.Size(498, 109);
+            this.recursosDisplay1.Size = new System.Drawing.Size(427, 109);
             this.recursosDisplay1.TabIndex = 0;
             // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("BlackPearl", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(809, 3);
+            this.button2.Location = new System.Drawing.Point(738, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(271, 101);
             this.button2.TabIndex = 2;
@@ -320,11 +323,12 @@
             this.Barco_Page.Controls.Add(this.Navegacion_Page);
             this.Barco_Page.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Barco_Page.Font = new System.Drawing.Font("BlackPearl", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Barco_Page.Location = new System.Drawing.Point(0, 0);
+            this.Barco_Page.Location = new System.Drawing.Point(325, 107);
             this.Barco_Page.Name = "Barco_Page";
             this.Barco_Page.SelectedIndex = 0;
-            this.Barco_Page.Size = new System.Drawing.Size(1478, 1061);
+            this.Barco_Page.Size = new System.Drawing.Size(1083, 821);
             this.Barco_Page.TabIndex = 18;
+            this.Barco_Page.TabStop = false;
             // 
             // Navio_Page
             // 
@@ -333,7 +337,7 @@
             this.Navio_Page.Location = new System.Drawing.Point(4, 31);
             this.Navio_Page.Name = "Navio_Page";
             this.Navio_Page.Padding = new System.Windows.Forms.Padding(3);
-            this.Navio_Page.Size = new System.Drawing.Size(1470, 1026);
+            this.Navio_Page.Size = new System.Drawing.Size(1075, 786);
             this.Navio_Page.TabIndex = 0;
             this.Navio_Page.Text = "Navio";
             this.Navio_Page.UseVisualStyleBackColor = true;
@@ -341,30 +345,62 @@
             // barco2
             // 
             this.barco2.BackColor = System.Drawing.Color.Transparent;
-            this.barco2.Location = new System.Drawing.Point(1072, 104);
+            this.barco2.Location = new System.Drawing.Point(679, 3);
             this.barco2.Margin = new System.Windows.Forms.Padding(0);
             this.barco2.Name = "barco2";
-            this.barco2.Size = new System.Drawing.Size(302, 531);
+            this.barco2.Size = new System.Drawing.Size(366, 607);
             this.barco2.TabIndex = 3;
             // 
             // barco1
             // 
             this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Location = new System.Drawing.Point(663, 169);
+            this.barco1.Location = new System.Drawing.Point(261, 102);
             this.barco1.Margin = new System.Windows.Forms.Padding(0);
             this.barco1.Name = "barco1";
-            this.barco1.Size = new System.Drawing.Size(302, 604);
+            this.barco1.Size = new System.Drawing.Size(366, 607);
             this.barco1.TabIndex = 2;
             // 
             // Navegacion_Page
             // 
+            this.Navegacion_Page.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Navegacion_Page.Controls.Add(this.tablero_Mapa);
             this.Navegacion_Page.Location = new System.Drawing.Point(4, 31);
             this.Navegacion_Page.Name = "Navegacion_Page";
             this.Navegacion_Page.Padding = new System.Windows.Forms.Padding(3);
-            this.Navegacion_Page.Size = new System.Drawing.Size(1470, 1026);
+            this.Navegacion_Page.Size = new System.Drawing.Size(1075, 786);
             this.Navegacion_Page.TabIndex = 1;
             this.Navegacion_Page.Text = "Navegacion";
             this.Navegacion_Page.UseVisualStyleBackColor = true;
+            // 
+            // tablero_Mapa
+            // 
+            this.tablero_Mapa.ColumnCount = 10;
+            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablero_Mapa.Location = new System.Drawing.Point(3, 3);
+            this.tablero_Mapa.Name = "tablero_Mapa";
+            this.tablero_Mapa.RowCount = 10;
+            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tablero_Mapa.Size = new System.Drawing.Size(1069, 780);
+            this.tablero_Mapa.TabIndex = 0;
             // 
             // Home
             // 
@@ -374,14 +410,14 @@
             this.Controls.Add(this.noti_Ar);
             this.Controls.Add(this.noti_Mer);
             this.Controls.Add(this.noti_Carp);
-            this.Controls.Add(this.flowLayoutPanel5);
             this.Controls.Add(this.noti_Cap);
-            this.Controls.Add(this.flowLayoutPanel4);
-            this.Controls.Add(this.flowLayoutPanel3);
-            this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.progress);
-            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.Barco_Page);
+            this.Controls.Add(this.flowLayoutPanel5);
+            this.Controls.Add(this.flowLayoutPanel4);
+            this.Controls.Add(this.flowLayoutPanel2);
+            this.Controls.Add(this.flowLayoutPanel3);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "Home";
             this.Text = "Home";
             this.TopMost = true;
@@ -395,6 +431,7 @@
             this.flowLayoutPanel5.ResumeLayout(false);
             this.Barco_Page.ResumeLayout(false);
             this.Navio_Page.ResumeLayout(false);
+            this.Navegacion_Page.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -429,9 +466,11 @@
         private Button button1;
         private Button button2;
         private TabControl Barco_Page;
+        private TabPage Navegacion_Page;
         private TabPage Navio_Page;
         private UserControls.Barco barco2;
         private UserControls.Barco barco1;
-        private TabPage Navegacion_Page;
+        private PageSetupDialog pageSetupDialog1;
+        private TableLayoutPanel tablero_Mapa;
     }
 }

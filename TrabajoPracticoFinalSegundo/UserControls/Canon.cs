@@ -16,10 +16,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         int danio;
         int nivel;
-        Image imagen;
         string path;
 
-        public Image IMG { get { return this.imagen; } set{ this.imagen = value; } }
 
         public Canon()
         {

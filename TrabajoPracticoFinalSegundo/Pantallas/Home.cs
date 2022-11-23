@@ -81,12 +81,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             #region LOADS DE COMPONENTES 
 
-            //FONDO
+            //FONDOS
             this.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\Madera.jpg");
             this.Navio_Page.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\FondoHomeDos.jpg");
-            this.Navegacion_Page.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\FondoHomeDos.jpg");
+            this.Navegacion_Page.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\mapax.png");
             int loc1 = this.flowLayoutPanel2.Width;
             int loc2 = this.flowLayoutPanel4.Height;
+            this.Barco_Page.SelectTab(0);
 
             //PANTALLAS WEB
             this.pantallaWeb1.WebLoad();

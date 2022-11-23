@@ -37,7 +37,6 @@
             // 
             this.p_Box.BackColor = System.Drawing.Color.Transparent;
             this.p_Box.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.p_Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.p_Box.InitialImage = null;
             this.p_Box.Location = new System.Drawing.Point(0, 0);
             this.p_Box.Name = "p_Box";
