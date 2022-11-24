@@ -382,7 +382,6 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "Home";
             this.Text = "Home";
-            this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Home_FormClosed);
             this.Load += new System.EventHandler(this.Home_Load);
