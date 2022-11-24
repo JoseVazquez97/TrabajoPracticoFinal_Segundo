@@ -75,7 +75,7 @@
             this.btn_Apagar.TabIndex = 2;
             this.btn_Apagar.Text = "Jugar con Camara";
             this.btn_Apagar.UseVisualStyleBackColor = true;
-            this.btn_Apagar.Click += new System.EventHandler(this.btnEncender_Click);
+            this.btn_Apagar.Click += new System.EventHandler(this.btnJugarConCamara_Click);
             // 
             // btn_JugarConFoto
             // 

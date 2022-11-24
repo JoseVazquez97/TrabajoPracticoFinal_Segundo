@@ -44,7 +44,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     avatar.Location = new System.Drawing.Point(x, y);
                     avatar.Name = "avatar" + c;
                     avatar.Size = new System.Drawing.Size(100, 70);
-                    avatar.Image = resizeImage(Image.FromFile(path + @"\Recursos\Avatars\" + avatar.Name + ".png"), new Size(100, 70));
+                    avatar.Image = new Bitmap(Image.FromFile(path + @"\Recursos\Avatars\" + avatar.Name + ".png"), new Size(100, 80));
                     avatar.Click += new EventHandler(this.clickAvatar);
                     avatar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
                     this.Controls.Add(avatar);
@@ -87,7 +87,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             timer1.Start();
         }
 
-        private void btnApagar_Click(object sender, EventArgs e)
+        private void btnJugarConCamara_Click(object sender, EventArgs e)
         {
             
         }
@@ -97,7 +97,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.contador++;   
             camara.Read(frame);
 
-            Imagen.Image = resizeImage(frame.ToBitmap(), new Size(10, 10));
+            Imagen.Image = new Bitmap(frame.ToBitmap(), new Size(80, 80));
             if (contador == 20)
             {
                 camara.Stop();
@@ -128,57 +128,30 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
             else
             {
-                Image imagenProcesada = resizeImage(ImagenRecibida, new Size(230,170));
+                Image imagenProcesada = new Bitmap(ImagenRecibida, new Size(80, 80));
 
                 Imagen.Image = imagenProcesada;
             }
         }
-        static Image resizeImage(Image imgToResize, Size size)
-        {
-            //Get the image current width  
-            int sourceWidth = imgToResize.Width;
-            //Get the image current height  
-            int sourceHeight = imgToResize.Height;
-            float nPercent = 0;
-            float nPercentW = 0;
-            float nPercentH = 0;
-            //Calulate  width with new desired size  
-            nPercentW = ((float)size.Width / (float)sourceWidth);
-            //Calculate height with new desired size  
-            nPercentH = ((float)size.Height / (float)sourceHeight);
-            if (nPercentH < nPercentW)
-                nPercent = nPercentH;
-            else
-                nPercent = nPercentW;
-            //New Width  
-            int destWidth = (int)(sourceWidth * nPercent);
-            //New Height  
-            int destHeight = (int)(sourceHeight * nPercent);
-            Bitmap b = new Bitmap(destWidth, destHeight);
-            Graphics g = Graphics.FromImage((System.Drawing.Image)b);
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            // Draw image with new width and height  
-            g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
-            g.Dispose();
-            return (System.Drawing.Image)b;
-        }
         private void TimerCamara_Tick(object sender, EventArgs e)
         {
             camara.Read(frame);
-            Imagen.Image = frame.ToBitmap();
+            Imagen.Image = new Bitmap(frame.ToBitmap(), new Size(80, 80));
+            this.jugarCam = true;
         }
 
         private void ConfirmarSeleccion_Click(object sender, EventArgs e)
         {
             Home home = new Home();
+
+            Imagen.Image = new Bitmap(Imagen.Image, new Size(100, 70));
+            if (File.Exists(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png"))
+                File.Delete(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
+            Imagen.Image.Save(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
+            Imagen.Image = Image.FromFile(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
+
             home.AsignarAvatar(this.Imagen.Image,this.comboBox1.Text,this.jugarCam);
             home.Show();
-
-
-            /*Cuando este bien decidido, esto prodia hacerse de varias formas*/
-            //Home home = new Home(Imagen.Image);
-            //home.CargarImagenUsuario(Imagen.Image);  << Prefiero esto personalmente, asi no interfiere, y es facil de sacar de ser necesario
-            //home.IniciarVideo(); << Este podria ser si selecciona estar con camara o en vivo
 
             //this.Dispose();
         }
