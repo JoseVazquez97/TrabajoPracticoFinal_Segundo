@@ -34,6 +34,14 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public void setMuni(string valor) 
         {
             this.lbl_Muni.Text = valor;
+            if (valor == "0")
+            {
+                this.lbl_Muni.Image = Image.FromFile(this.path + @"\Recursos\Caniones\Alerta.png");
+            }
+            else 
+            {
+                this.lbl_Muni.Image = null;
+            }
         }
 
         public void gastarMuni() 

@@ -75,7 +75,7 @@
             this.flowLayoutPanel1.Controls.Add(this.pictureBox1);
             this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
             this.flowLayoutPanel1.Controls.Add(this.pictureBox3);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(392, 3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(40, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(303, 85);
             this.flowLayoutPanel1.TabIndex = 3;
@@ -87,7 +87,7 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "Escrutinio";
-            this.Size = new System.Drawing.Size(767, 88);
+            this.Size = new System.Drawing.Size(383, 88);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();

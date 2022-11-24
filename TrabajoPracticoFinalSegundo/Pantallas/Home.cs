@@ -99,8 +99,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             //RECURSOS Y CAMBIOS DE PAG
             this.recursosDisplay1.LoadRecursos(flowLayoutPanel4.Width, flowLayoutPanel4.Height);
-            this.button1.Width = flowLayoutPanel4.Width / 3;
-            this.button2.Width = flowLayoutPanel4.Width / 3;
 
             //BARCO
 
@@ -160,7 +158,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             //ESCRUTINIO
             this.turno = turnero1.getTurno();
-            this.escrutinio1.loadEscrutinio(this.flowLayoutPanel5.Width);
+            this.escrutinio1.loadEscrutinio(this.flowLayoutPanel4.Width);
             this.escrutinio1.Visible = false;
 
             #endregion
@@ -742,15 +740,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                                 catch { }
                             }
 
-                            if (this.flowLayoutPanel5.InvokeRequired)
+                            if (this.recursosDisplay1.InvokeRequired)
                             {
                                 try
                                 {
-                                    flowLayoutPanel5.Invoke(new Action(() => flowLayoutPanel5.Height = 85));
+                                    escrutinio1.Invoke(new Action(() => recursosDisplay1.Visible = false));
                                 }
                                 catch { }
                             }
-
 
                             if (this.escrutinio1.InvokeRequired)
                             {
@@ -841,15 +838,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                                     catch { }
                                 }
 
-                                if (this.flowLayoutPanel5.InvokeRequired)
-                                {
-                                    try
-                                    {
-                                        flowLayoutPanel5.Invoke(new Action(() => { flowLayoutPanel5.Height = 0; }));
-                                    }
-                                    catch { }
-                                }
-
                                 /*
                                 if (this.pBox_Fondo.InvokeRequired)
                                 {
@@ -927,6 +915,31 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     #region MOSTRAR RESPUESTA!
                     switch (rol)
                     {
+                        case "Capitan":
+                            #region RESCATAR MENSAJE
+
+                            if (this.urna1.InvokeRequired)
+                            {
+                                try
+                                {
+                                    urna1.Invoke(new Action(() => mensaje = urna1.getMensaje(vValor)));
+                                }
+                                catch { }
+                            }
+
+                            #endregion
+
+                            if (this.noti_Cap.InvokeRequired)
+                            {
+                                try
+                                {
+                                    noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = true; }));
+                                    noti_Cap.Invoke(new Action(() => { noti_Cap.Mensaje(mensaje); }));
+                                }
+                                catch { }
+                            }
+                            break;
+
 
                         case "Carpintero":
                             #region RESCATAR MENSAJE
@@ -942,28 +955,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                             #endregion
 
-                            if (vValor == 0)
+                            if (this.noti_Carp.InvokeRequired) 
                             {
-                                if (this.noti_Carp.InvokeRequired) 
+                                try 
                                 {
-                                    try 
-                                    {
-                                        noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = true; }));
-                                        noti_Carp.Invoke(new Action(() => { noti_Carp.Mensaje(mensaje); }));
-                                    } catch { }
-                                }
-                            }
-                            else
-                            {
-                                if (this.noti_Carp.InvokeRequired)
-                                {
-                                    try
-                                    {
-                                        noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = true; }));
-                                        noti_Carp.Invoke(new Action(() => { noti_Carp.Mensaje(mensaje); }));
-                                    }
-                                    catch { }
-                                }
+                                    noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = true; }));
+                                    noti_Carp.Invoke(new Action(() => { noti_Carp.Mensaje(mensaje); }));
+                                } catch { }
                             }
                             break;
 
@@ -981,29 +979,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                             #endregion
 
-                            if (vValor == 0)
+
+                            if (this.noti_Mer.InvokeRequired)
                             {
-                                if (this.noti_Mer.InvokeRequired)
+                                try
                                 {
-                                    try
-                                    {
-                                        noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = true; }));
-                                        noti_Mer.Invoke(new Action(() => { noti_Mer.Mensaje(mensaje); }));
-                                    }
-                                    catch { }
+                                    noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = true; }));
+                                    noti_Mer.Invoke(new Action(() => { noti_Mer.Mensaje(mensaje); }));
                                 }
-                            }
-                            else
-                            {
-                                if (this.noti_Mer.InvokeRequired)
-                                {
-                                    try
-                                    {
-                                        noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = true; }));
-                                        noti_Mer.Invoke(new Action(() => { noti_Mer.Mensaje(mensaje); }));
-                                    }
-                                    catch { }
-                                }
+                                catch { }
                             }
                             break;
 
@@ -1021,29 +1005,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                             #endregion
 
-                            if (vValor == 0)
+                            if (this.noti_Ar.InvokeRequired)
                             {
-                                if (this.noti_Ar.InvokeRequired)
+                                try
                                 {
-                                    try
-                                    {
-                                        noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = true; }));
-                                        noti_Ar.Invoke(new Action(() => { noti_Ar.Mensaje(mensaje); }));
-                                    }
-                                    catch { }
+                                    noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = true; }));
+                                    noti_Ar.Invoke(new Action(() => { noti_Ar.Mensaje(mensaje); }));
                                 }
-                            }
-                            else
-                            {
-                                if (this.noti_Ar.InvokeRequired)
-                                {
-                                    try
-                                    {
-                                        noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = true; }));
-                                        noti_Ar.Invoke(new Action(() => { noti_Ar.Mensaje(mensaje); }));
-                                    }
-                                    catch { }
-                                }
+                                catch { }
                             }
                             break;
                     }
@@ -1088,7 +1057,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                 switch (evento)
                 {
-                    #region Evento Barco
+                    #region Evento Barco Enemigo
                     case "Barco":
                         this.eventoRandomActual = "Barco";
                         if (this.barco2.InvokeRequired)
@@ -1109,7 +1078,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                                     ACCION_TURNO_BARCO();
                                 }
                                 else { this.accionRealizada = false; }
-                                
+
+                                if (this.urnaCapitan1.InvokeRequired)
+                                {
+                                    try
+                                    {
+                                        urnaCapitan1.Invoke(new Action(() => urnaCapitan1.Visible = false)) ;
+                                        urna1.Invoke(new Action(() => urna1.Visible = true));
+                                    }
+                                    catch { }
+                                }
 
                                 if (this.Rol == "Carpintero")
                                 {
@@ -1453,29 +1431,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-        private void Ataque() 
-        {
-            if (this.barco2.InvokeRequired)
-            {
-                try
-                {
-
-                    barco2.Invoke(new Action(() => barco2.RecibirDanio(10)));
-                    this.accionRealizada = true;
-
-                    if (this.noti_Ar.InvokeRequired)
-                    {
-                        try
-                        {
-                            noti_Ar.Invoke(new Action(() => noti_Ar.Visible = false));
-                        }
-                        catch { }
-                    }
-                }
-                catch { }
-            }
-        }
-
         private void ACCION_TURNO_BARCO()
         {
             bool sePudoRealizar = false;
@@ -1501,9 +1456,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                                     try
                                     {
                                         barco1.Invoke(new Action(() => sePudoRealizar = barco1.Recargar()));
+                                        this.accionRealizada = true;
                                     }
                                     catch { }
                                 }
+                                mandarInfoBarcos();
                                 break;
 
                             case 1:
@@ -1513,6 +1470,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                                     try
                                     {
                                         barco1.Invoke(new Action(() => sePudoRealizar = barco1.Disparar()));
+                                        this.accionRealizada = true;
                                     }
                                     catch { }
                                 }
@@ -1520,6 +1478,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                                 if (sePudoRealizar)
                                 {
                                     Ataque();
+                                    
                                 }
 
                                 mandarInfoBarcos();
@@ -1527,6 +1486,28 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         }
                     }
                 }
+            }
+        }
+
+        private void Ataque()
+        {
+            if (this.barco2.InvokeRequired)
+            {
+                try
+                {
+
+                    barco2.Invoke(new Action(() => barco2.RecibirDanio(10)));
+                    
+                    if (this.noti_Ar.InvokeRequired)
+                    {
+                        try
+                        {
+                            noti_Ar.Invoke(new Action(() => noti_Ar.Visible = false));
+                        }
+                        catch { }
+                    }
+                }
+                catch { }
             }
         }
 

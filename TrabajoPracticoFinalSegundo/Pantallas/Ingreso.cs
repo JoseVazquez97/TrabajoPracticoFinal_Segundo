@@ -1,5 +1,8 @@
 using TrabajoPracticoFinalSegundo.Pantallas;
 using System.IO;
+using Emgu.CV.Dnn;
+using Emgu.CV.Face;
+using System.Diagnostics;
 
 namespace TrabajoPracticoFinalSegundo
 {
@@ -38,10 +41,14 @@ namespace TrabajoPracticoFinalSegundo
 
         private void btn_Host_Click(object sender, EventArgs e)
         {
+
+            //System.Diagnostics.Process.Start(@"C:\Users\JVazquez\source\repos\TrabajoPracticoFinal_Segundo\WebApi_SingalR_Com\bin\Debug\net6.0\WebApi_SignalR_Com.exe");
+            /*
             Pantalla_Host x = new Pantalla_Host();
             x.Show();
 
             this.Hide();
+            */
         }
 
         private void btn_Unirse_Click(object sender, EventArgs e)

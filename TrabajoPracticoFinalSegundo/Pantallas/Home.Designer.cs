@@ -46,10 +46,7 @@
             this.btn_Exit = new System.Windows.Forms.Button();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
             this.recursosDisplay1 = new TrabajoPracticoFinalSegundo.UserControls.RecursosDisplay();
-            this.button2 = new System.Windows.Forms.Button();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.escrutinio1 = new TrabajoPracticoFinalSegundo.UserControls.Escrutinio();
             this.Update500ms = new System.Windows.Forms.Timer(this.components);
             this.noti_Carp = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
@@ -65,7 +62,6 @@
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
-            this.flowLayoutPanel5.SuspendLayout();
             this.Barco_Page.SuspendLayout();
             this.Navio_Page.SuspendLayout();
             this.Navegacion_Page.SuspendLayout();
@@ -232,9 +228,8 @@
             // flowLayoutPanel4
             // 
             this.flowLayoutPanel4.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel4.Controls.Add(this.button1);
             this.flowLayoutPanel4.Controls.Add(this.recursosDisplay1);
-            this.flowLayoutPanel4.Controls.Add(this.button2);
+            this.flowLayoutPanel4.Controls.Add(this.escrutinio1);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(325, 0);
             this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
@@ -242,55 +237,22 @@
             this.flowLayoutPanel4.Size = new System.Drawing.Size(1083, 107);
             this.flowLayoutPanel4.TabIndex = 8;
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("BlackPearl", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(302, 101);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "NAVIO";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // recursosDisplay1
             // 
             this.recursosDisplay1.BackColor = System.Drawing.Color.Transparent;
-            this.recursosDisplay1.Location = new System.Drawing.Point(308, 0);
+            this.recursosDisplay1.Location = new System.Drawing.Point(0, 0);
             this.recursosDisplay1.Margin = new System.Windows.Forms.Padding(0);
             this.recursosDisplay1.Name = "recursosDisplay1";
             this.recursosDisplay1.Size = new System.Drawing.Size(427, 109);
             this.recursosDisplay1.TabIndex = 0;
             // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("BlackPearl", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(738, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(271, 101);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "MAPA";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // flowLayoutPanel5
-            // 
-            this.flowLayoutPanel5.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel5.Controls.Add(this.escrutinio1);
-            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(325, 107);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(1083, 0);
-            this.flowLayoutPanel5.TabIndex = 9;
-            this.flowLayoutPanel5.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel5_Paint);
-            // 
             // escrutinio1
             // 
             this.escrutinio1.BackColor = System.Drawing.Color.Transparent;
-            this.escrutinio1.Location = new System.Drawing.Point(3, 3);
+            this.escrutinio1.Location = new System.Drawing.Point(430, 3);
             this.escrutinio1.Name = "escrutinio1";
-            this.escrutinio1.Size = new System.Drawing.Size(1080, 87);
-            this.escrutinio1.TabIndex = 2;
+            this.escrutinio1.Size = new System.Drawing.Size(383, 104);
+            this.escrutinio1.TabIndex = 3;
             // 
             // Update500ms
             // 
@@ -413,7 +375,6 @@
             this.Controls.Add(this.noti_Cap);
             this.Controls.Add(this.progress);
             this.Controls.Add(this.Barco_Page);
-            this.Controls.Add(this.flowLayoutPanel5);
             this.Controls.Add(this.flowLayoutPanel4);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel3);
@@ -428,7 +389,6 @@
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel5.ResumeLayout(false);
             this.Barco_Page.ResumeLayout(false);
             this.Navio_Page.ResumeLayout(false);
             this.Navegacion_Page.ResumeLayout(false);
@@ -449,7 +409,6 @@
         private UserControls.PantallaWeb pantallaWeb2;
         private FlowLayoutPanel flowLayoutPanel4;
         private UserControls.RecursosDisplay recursosDisplay1;
-        private FlowLayoutPanel flowLayoutPanel5;
         private UserControls.PantallaWeb pantallaWeb3;
         private UserControls.Dados dados1;
         private UserControls.PantallaWeb pantallaWeb4;
@@ -459,12 +418,9 @@
         private UserControls.Notificador notificador2;
         private UserControls.Notificador notificador3;
         private UserControls.Notificador notificador4;
-        private UserControls.Escrutinio escrutinio1;
         private UserControls.Notificador noti_Cap;
         private UserControls.Notificador noti_Carp;
         private UserControls.Notificador noti_Ar;
-        private Button button1;
-        private Button button2;
         private TabControl Barco_Page;
         private TabPage Navegacion_Page;
         private TabPage Navio_Page;
@@ -472,5 +428,6 @@
         private UserControls.Barco barco1;
         private PageSetupDialog pageSetupDialog1;
         private TableLayoutPanel tablero_Mapa;
+        private UserControls.Escrutinio escrutinio1;
     }
 }
