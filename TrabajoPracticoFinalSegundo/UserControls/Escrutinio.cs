@@ -28,9 +28,9 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         public void loadEscrutinio(int tamaTotal)
         {
-            this.Width = tamaTotal;
-         
-            this.flowLayoutPanel1.Location = new Point(tamaTotal/2 - 200, 0);
+            this.Width = (tamaTotal / 3);
+
+            this.flowLayoutPanel1.Location = new Point(0, 0);
 
             int x = this.flowLayoutPanel1.Width;
 

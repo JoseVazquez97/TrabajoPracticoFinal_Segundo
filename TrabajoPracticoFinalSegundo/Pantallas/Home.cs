@@ -80,6 +80,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
 
             #region LOADS DE COMPONENTES 
+            //FlowLayout4 (Recursos y escrutinio)
+            this.flowLayoutPanel4.Padding = new System.Windows.Forms.Padding() { Left = this.flowLayoutPanel4.Width / 3 + 100 };
 
             //FONDOS
             this.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\Madera.jpg");

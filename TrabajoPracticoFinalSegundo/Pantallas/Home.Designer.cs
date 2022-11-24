@@ -46,8 +46,8 @@
             this.btn_Exit = new System.Windows.Forms.Button();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.recursosDisplay1 = new TrabajoPracticoFinalSegundo.UserControls.RecursosDisplay();
             this.escrutinio1 = new TrabajoPracticoFinalSegundo.UserControls.Escrutinio();
+            this.recursosDisplay1 = new TrabajoPracticoFinalSegundo.UserControls.RecursosDisplay();
             this.Update500ms = new System.Windows.Forms.Timer(this.components);
             this.noti_Carp = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
             this.noti_Mer = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
@@ -228,31 +228,32 @@
             // flowLayoutPanel4
             // 
             this.flowLayoutPanel4.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel4.Controls.Add(this.recursosDisplay1);
             this.flowLayoutPanel4.Controls.Add(this.escrutinio1);
+            this.flowLayoutPanel4.Controls.Add(this.recursosDisplay1);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(325, 0);
             this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(1083, 107);
             this.flowLayoutPanel4.TabIndex = 8;
             // 
-            // recursosDisplay1
-            // 
-            this.recursosDisplay1.BackColor = System.Drawing.Color.Transparent;
-            this.recursosDisplay1.Location = new System.Drawing.Point(0, 0);
-            this.recursosDisplay1.Margin = new System.Windows.Forms.Padding(0);
-            this.recursosDisplay1.Name = "recursosDisplay1";
-            this.recursosDisplay1.Size = new System.Drawing.Size(427, 109);
-            this.recursosDisplay1.TabIndex = 0;
-            // 
             // escrutinio1
             // 
             this.escrutinio1.BackColor = System.Drawing.Color.Transparent;
-            this.escrutinio1.Location = new System.Drawing.Point(430, 3);
+            this.escrutinio1.Location = new System.Drawing.Point(3, 3);
             this.escrutinio1.Name = "escrutinio1";
-            this.escrutinio1.Size = new System.Drawing.Size(383, 104);
+            this.escrutinio1.Size = new System.Drawing.Size(383, 101);
             this.escrutinio1.TabIndex = 3;
+            // 
+            // recursosDisplay1
+            // 
+            this.recursosDisplay1.BackColor = System.Drawing.Color.Transparent;
+            this.recursosDisplay1.Location = new System.Drawing.Point(389, 0);
+            this.recursosDisplay1.Margin = new System.Windows.Forms.Padding(0);
+            this.recursosDisplay1.Name = "recursosDisplay1";
+            this.recursosDisplay1.Size = new System.Drawing.Size(356, 104);
+            this.recursosDisplay1.TabIndex = 0;
             // 
             // Update500ms
             // 
