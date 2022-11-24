@@ -87,12 +87,44 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             }
         }
 
-        public void consultarRecursos() 
+        #region SIGNALR
+
+        public string consultarRecursos() 
         {
             string mensaje;
 
-            mensaje = this.lbl_Tesoro.Text + ";" + this.lbl_Maderas.Text + ";" + this.lbl_Balas.Text;
+            mensaje = this.lbl_Tesoro.Text + ";" + this.lbl_Maderas.Text + ";" + this.lbl_Balas.Text + ";";
+            return mensaje;
         }
+
+        public void RecibirRecurso(string recursos) 
+        {
+            string aux = "";
+            int cont = 0;
+
+            for (int i = 0; i < recursos.Length; i++)
+            {
+                if (recursos[i] != ';')
+                {
+                    aux += recursos[i].ToString();
+                    
+                }
+                else 
+                {
+                    cont++;
+
+                    switch (cont) 
+                    {
+                        case 1: this.lbl_Tesoro.Text = aux; break;
+                        case 2: this.lbl_Maderas.Text = aux; break;
+                        case 3: this.lbl_Balas.Text = aux; break;
+                    }
+                    aux = "";
+                }
+            }
+        }
+
+        #endregion
 
     }
 }

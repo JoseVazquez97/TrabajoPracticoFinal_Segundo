@@ -34,7 +34,21 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.canon3.Parent = this.pic_Barco;
             this.canon4.Parent = this.pic_Barco;
         }
-    
+
+        public bool Curar()
+        {
+
+            if (this.progressBar1.Value <= this.Vida - 10)
+            {
+                this.progressBar1.Value = this.Vida + 10;
+                this.recDispley.extraerRecurso("Madera", 1);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public bool Disparar()
         {

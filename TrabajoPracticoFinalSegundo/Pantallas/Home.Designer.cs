@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.progress = new System.Windows.Forms.ProgressBar();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.urnaCapitan1 = new TrabajoPracticoFinalSegundo.UserControls.UrnaCapitan();
             this.urna1 = new TrabajoPracticoFinalSegundo.UserControls.Urna();
@@ -67,18 +66,9 @@
             this.Navegacion_Page.SuspendLayout();
             this.SuspendLayout();
             // 
-            // progress
-            // 
-            this.progress.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progress.Location = new System.Drawing.Point(325, 916);
-            this.progress.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
-            this.progress.Name = "progress";
-            this.progress.Size = new System.Drawing.Size(1083, 12);
-            this.progress.TabIndex = 3;
-            // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.flowLayoutPanel1.Controls.Add(this.urnaCapitan1);
             this.flowLayoutPanel1.Controls.Add(this.urna1);
             this.flowLayoutPanel1.Controls.Add(this.dados1);
@@ -100,7 +90,7 @@
             // 
             // urna1
             // 
-            this.urna1.BackColor = System.Drawing.Color.Navy;
+            this.urna1.BackColor = System.Drawing.Color.Transparent;
             this.urna1.Location = new System.Drawing.Point(516, 6);
             this.urna1.Margin = new System.Windows.Forms.Padding(0);
             this.urna1.Name = "urna1";
@@ -374,7 +364,6 @@
             this.Controls.Add(this.noti_Mer);
             this.Controls.Add(this.noti_Carp);
             this.Controls.Add(this.noti_Cap);
-            this.Controls.Add(this.progress);
             this.Controls.Add(this.Barco_Page);
             this.Controls.Add(this.flowLayoutPanel4);
             this.Controls.Add(this.flowLayoutPanel2);
@@ -397,7 +386,6 @@
         }
 
         #endregion
-        public ProgressBar progress;
         private FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Timer Update;
         private FlowLayoutPanel flowLayoutPanel2;

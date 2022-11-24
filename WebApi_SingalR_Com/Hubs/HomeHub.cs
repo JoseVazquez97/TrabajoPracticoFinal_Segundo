@@ -19,6 +19,20 @@ namespace WebApi_SingalR_Com.Hubs
         public static string Barco1 { get; set; } = "";
         public static string Barco2 { get; set; } = "";
 
+        public static string Recursos { get; set; } = "";
+
+
+        //Recursos
+        public async Task EnviarRecursos(string recursos)
+        {
+            Recursos = recursos;
+            
+
+            //MANDAR LA ACTUALIZACION
+            await Clients.All.SendAsync("RecibirRecursos", recursos);
+        }
+
+
         //WebCams
         public async Task EnviarImagen(string imagenU1x, string rol)
         {

@@ -14,12 +14,14 @@ namespace TrabajoPracticoFinalSegundo.UserControls
     {
         int voto;
         string tipo;
+        string path;
 
         public Urna()
         {
             InitializeComponent();
             this.voto = 9;
             this.tipo = "Votacion";
+            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
         }
 
         #region LOADS
@@ -33,15 +35,15 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.Width = tamaTotal;
             this.Height = altoTotal;
 
-            btn_Si.Location = new Point(0,0);
-            btn_Si.Height = this.Height;
-            btn_Si.Width = (this.Width/2);
-            
+            int x = tamaTotal / 2 - btn_Si.Width / 2;
+            int y = altoTotal / 2 - btn_Si.Width / 5;
 
-            btn_No.Location = new Point(this.Width/2, 0);
-            btn_No.Height = this.Height;
-            btn_No.Width = (this.Width / 2);
 
+            btn_Si.Location = new Point(x-150,y);
+            btn_No.Location = new Point(x+150,y);
+
+            btn_No.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Iconos\BotonUno.png");
+            btn_Si.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Iconos\BotonUno.png");
         }
 
         public void DesicionesNuevas(string rol) 
