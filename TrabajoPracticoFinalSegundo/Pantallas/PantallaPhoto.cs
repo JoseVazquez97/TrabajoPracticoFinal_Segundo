@@ -47,6 +47,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     avatar.Image = new Bitmap(Image.FromFile(path + @"\Recursos\Avatars\" + avatar.Name + ".png"), new Size(100, 80));
                     avatar.Click += new EventHandler(this.clickAvatar);
                     avatar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+                    avatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
                     this.Controls.Add(avatar);
                     c++;
                     y += 106;
