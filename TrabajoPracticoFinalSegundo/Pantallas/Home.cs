@@ -106,7 +106,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             x = this.Width - 325 - 70;
 
-            this.barco1.loadBarco();
+            this.barco1.loadBarco(ref this.recursosDisplay1);
             this.barco2.loadBarcoEnemigo();
            
             this.barco2.Visible = false;
@@ -763,37 +763,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             {
                                 if (this.Rol == "Capitan") 
                                 {
-                                    if (this.urnaCapitan1.InvokeRequired)
-                                    {
-                                        try
-                                        {
-                                            urnaCapitan1.Invoke(new Action(() => urnaCapitan1.ReiniciarDesicion()));
-                                        }
-                                        catch { }
-                                    }
-
                                     EventoRandom();
                                     SwitchUrnaCap(true);
                                 }
 
-                                if (this.escrutinio1.InvokeRequired)
-                                {
-                                    try
-                                    {
-                                        escrutinio1.Invoke(new Action(() => escrutinio1.reiniciarVotos()));
-                                        escrutinio1.Invoke(new Action(() => escrutinio1.reiniciarCheck()));
-                                        escrutinio1.Invoke(new Action(() => escrutinio1.Visible = false));
-                                        urna1.Invoke(new Action(() => escrutinio1.Visible = false));
-                                    }
-                                    catch { }
-                                }
-
-                                SpawnearNoti("Capitan", false);
-                                SpawnearNoti("Carpintero", false);
-                                SpawnearNoti("Mercader", false);
-                                SpawnearNoti("Artillero", false);
-                                
-
+                                SwitchEscrutinio(false);
+                                QuitarTodasLasNotis();
+                           
                                 this.checkRendimiento = true;
                                 this.eventoActual++;
                             }
@@ -803,6 +779,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         #region PRIMER TIRADA DE DADOS
                         case 4:
                             this.checkRendimiento = false;
+
+                            
 
                             switch (this.eventoRandomActual) 
                             {
@@ -1296,6 +1274,121 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
+        private void SwitchEscrutinio(bool cual)
+        {
+            //TRUE ES --> ABRIR VOTACION
+            if (this.escrutinio1.InvokeRequired)
+            {
+                try
+                {
+                    escrutinio1.Invoke(new Action(() => escrutinio1.Visible = cual));
+                }
+                catch { }
+            }
+
+            if (this.recursosDisplay1.InvokeRequired)
+            {
+                try
+                {
+                    recursosDisplay1.Invoke(new Action(() => recursosDisplay1.Visible = !cual));
+                }
+                catch { }
+            }
+        }
+
+        private void QuitarTodasLasNotis()
+        {
+            SpawnearNoti("Capitan", false);
+            SpawnearNoti("Carpintero", false);
+            SpawnearNoti("Mercader", false);
+            SpawnearNoti("Artillero", false);
+        }
+
+        private void SpawnearNoti(string rol, bool visible)
+        {
+            switch (rol)
+            {
+                case "Capitan":
+                    if (this.noti_Cap.InvokeRequired)
+                    {
+                        try
+                        {
+                            noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = visible; }));
+                        }
+                        catch { }
+                    }
+                    break;
+
+                case "Carpintero":
+                    if (this.noti_Carp.InvokeRequired)
+                    {
+                        try
+                        {
+                            noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = visible; }));
+                        }
+                        catch { }
+                    }
+                    break;
+
+                case "Mercader":
+                    if (this.noti_Mer.InvokeRequired)
+                    {
+                        try
+                        {
+                            noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = visible; }));
+                        }
+                        catch { }
+                    }
+                    break;
+
+                case "Artillero":
+                    if (this.noti_Ar.InvokeRequired)
+                    {
+                        try
+                        {
+                            noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = visible; }));
+                        }
+                        catch { }
+                    }
+                    break;
+            }
+        }
+
+        private void SwitchUrnaCap(bool cual)
+        {
+            if (this.urnaCapitan1.InvokeRequired)
+            {
+                try
+                {
+                    urnaCapitan1.Invoke(new Action(() => urnaCapitan1.Visible = !cual));
+                    urnaCapitan1.Invoke(new Action(() => urnaCapitan1.Enabled = !cual));
+                }
+                catch { }
+            }
+
+            if (this.urna1.InvokeRequired)
+            {
+                try
+                {
+                    urna1.Invoke(new Action(() => urna1.Visible = cual));
+                    urna1.Invoke(new Action(() => urna1.Enabled = cual));
+                    urna1.Invoke(new Action(() => urna1.reiniciarVoto()));
+                    urna1.Invoke(new Action(() => urna1.DesicionesNuevas(this.Rol)));
+                }
+                catch { }
+            }
+        }
+
+        private void noti_Cap_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
         #region CAMBIO DE TAB!
         private void button1_Click(object sender, EventArgs e)
         {
@@ -1429,120 +1522,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
 
-        private void SwitchEscrutinio(bool cual) 
-        {
-            //TRUE ES --> ABRIR VOTACION
-            if (this.escrutinio1.InvokeRequired)
-            {
-                try
-                {
-                    escrutinio1.Invoke(new Action(() => escrutinio1.Visible = cual));
-                }
-                catch { }
-            }
-
-            if (this.recursosDisplay1.InvokeRequired)
-            {
-                try
-                {
-                    recursosDisplay1.Invoke(new Action(() => recursosDisplay1.Visible = !cual));
-                }
-                catch { }
-            }
-        }
-
-        private void QuitarTodasLasNotis() 
-        {
-            SpawnearNoti("Capitan", false);
-            SpawnearNoti("Carpintero", false);
-            SpawnearNoti("Mercader", false);
-            SpawnearNoti("Artillero", false);
-        }
-
-        private void SpawnearNoti(string rol,bool visible) 
-        {
-            switch (rol) 
-            {
-                case "Capitan":
-                    if (this.noti_Cap.InvokeRequired)
-                    {
-                        try
-                        {
-                            noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = visible; }));
-                        }
-                        catch { }
-                    }
-                    break;
-
-                case "Carpintero":
-                    if (this.noti_Carp.InvokeRequired)
-                    {
-                        try
-                        {
-                            noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = visible; }));
-                        }
-                        catch { }
-                    }
-                    break;
-
-                case "Mercader":
-                    if (this.noti_Mer.InvokeRequired)
-                    {
-                        try
-                        {
-                            noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = visible; }));
-                        }
-                        catch { }
-                    }
-                    break;
-
-                case "Artillero":
-                    if (this.noti_Ar.InvokeRequired)
-                    {
-                        try
-                        {
-                            noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = visible; }));
-                        }
-                        catch { }
-                    }
-                    break;
-            }
-        }
-
-        private void SwitchUrnaCap(bool cual) 
-        {
-            if (this.urnaCapitan1.InvokeRequired)
-            {
-                try
-                {
-                    urnaCapitan1.Invoke(new Action(() => urnaCapitan1.Visible = !cual));
-                    urnaCapitan1.Invoke(new Action(() => urnaCapitan1.Enabled = !cual));
-                }
-                catch { }
-            }
-
-            if (this.urna1.InvokeRequired)
-            {
-                try
-                {
-                    urna1.Invoke(new Action(() => urna1.Visible = cual));
-                    urna1.Invoke(new Action(() => urna1.Enabled = cual));
-                    urna1.Invoke(new Action(() => urna1.reiniciarVoto()));
-                    urna1.Invoke(new Action(() => urna1.DesicionesNuevas(this.Rol)));
-                }
-                catch { }
-            }
-        }
-
-        private void noti_Cap_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         
     }

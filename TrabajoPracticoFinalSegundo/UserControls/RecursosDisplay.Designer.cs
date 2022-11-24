@@ -50,37 +50,37 @@
             this.lbl_Tesoro.AutoSize = true;
             this.lbl_Tesoro.BackColor = System.Drawing.Color.Transparent;
             this.lbl_Tesoro.Font = new System.Drawing.Font("BlackPearl", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbl_Tesoro.Location = new System.Drawing.Point(35, 5);
-            this.lbl_Tesoro.Margin = new System.Windows.Forms.Padding(35, 5, 35, 5);
+            this.lbl_Tesoro.Location = new System.Drawing.Point(15, 5);
+            this.lbl_Tesoro.Margin = new System.Windows.Forms.Padding(15, 5, 35, 5);
             this.lbl_Tesoro.Name = "lbl_Tesoro";
             this.lbl_Tesoro.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.lbl_Tesoro.Size = new System.Drawing.Size(38, 38);
+            this.lbl_Tesoro.Size = new System.Drawing.Size(65, 38);
             this.lbl_Tesoro.TabIndex = 1;
-            this.lbl_Tesoro.Text = "0";
+            this.lbl_Tesoro.Text = "100";
             // 
             // lbl_Balas
             // 
             this.lbl_Balas.AutoSize = true;
             this.lbl_Balas.BackColor = System.Drawing.Color.Transparent;
             this.lbl_Balas.Font = new System.Drawing.Font("BlackPearl", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbl_Balas.Location = new System.Drawing.Point(143, 5);
-            this.lbl_Balas.Margin = new System.Windows.Forms.Padding(35, 5, 20, 5);
+            this.lbl_Balas.Location = new System.Drawing.Point(130, 5);
+            this.lbl_Balas.Margin = new System.Windows.Forms.Padding(15, 5, 20, 5);
             this.lbl_Balas.Name = "lbl_Balas";
-            this.lbl_Balas.Size = new System.Drawing.Size(33, 38);
+            this.lbl_Balas.Size = new System.Drawing.Size(49, 38);
             this.lbl_Balas.TabIndex = 2;
-            this.lbl_Balas.Text = "0";
+            this.lbl_Balas.Text = "20";
             // 
             // lbl_Maderas
             // 
             this.lbl_Maderas.AutoSize = true;
             this.lbl_Maderas.BackColor = System.Drawing.Color.Transparent;
             this.lbl_Maderas.Font = new System.Drawing.Font("BlackPearl", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbl_Maderas.Location = new System.Drawing.Point(236, 5);
+            this.lbl_Maderas.Location = new System.Drawing.Point(239, 5);
             this.lbl_Maderas.Margin = new System.Windows.Forms.Padding(40, 5, 0, 5);
             this.lbl_Maderas.Name = "lbl_Maderas";
-            this.lbl_Maderas.Size = new System.Drawing.Size(33, 38);
+            this.lbl_Maderas.Size = new System.Drawing.Size(32, 38);
             this.lbl_Maderas.TabIndex = 3;
-            this.lbl_Maderas.Text = "0";
+            this.lbl_Maderas.Text = "5";
             // 
             // p_Tesoro
             // 
