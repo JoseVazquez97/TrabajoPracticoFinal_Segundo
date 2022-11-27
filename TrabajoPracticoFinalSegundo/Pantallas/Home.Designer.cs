@@ -87,6 +87,7 @@
             this.urnaCapitan1.Name = "urnaCapitan1";
             this.urnaCapitan1.Size = new System.Drawing.Size(510, 124);
             this.urnaCapitan1.TabIndex = 4;
+            this.urnaCapitan1.Load += new System.EventHandler(this.urnaCapitan1_Load);
             // 
             // urna1
             // 
@@ -120,6 +121,7 @@
             // Update
             // 
             this.Update.Enabled = true;
+            this.Update.Interval = 1000;
             this.Update.Tick += new System.EventHandler(this.Update_Tick);
             // 
             // flowLayoutPanel2
