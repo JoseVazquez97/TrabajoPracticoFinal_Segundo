@@ -11,8 +11,6 @@ using TrabajoPracticoFinalSegundo.Clases;
 using System.IO;
 using Microsoft.AspNetCore.SignalR.Client;
 using TrabajoPracticoFinalSegundo.UserControls;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
 using Microsoft.AspNetCore.Http;
 using System.Security.Policy;
 using Microsoft.VisualBasic.ApplicationServices;
@@ -38,7 +36,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region ATRIBUTOS DEL FORM CLIENTE
 
-        private string _url = "https://localhost:7170/Hubs/HomeHub.cs";
+        private string _url = "https://blazorserversignal2022.azurewebsites.net/homeHub";
         HubConnection HomeConection;
 
         string Rol;

@@ -35,8 +35,4 @@
     <Folder Include="Recursos\Dados\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\WebApi_SingalR_Com\WebApi_SingalR_Com.csproj" />
-  </ItemGroup>
-
 </Project>
