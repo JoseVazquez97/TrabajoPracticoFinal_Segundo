@@ -34,7 +34,6 @@
             this.urna1 = new TrabajoPracticoFinalSegundo.UserControls.Urna();
             this.dados1 = new TrabajoPracticoFinalSegundo.UserControls.Dados();
             this.turnero1 = new TrabajoPracticoFinalSegundo.UserControls.Turnero();
-            this.Update = new System.Windows.Forms.Timer(this.components);
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.pantallaWeb1 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
             this.pantallaWeb2 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
@@ -87,7 +86,6 @@
             this.urnaCapitan1.Name = "urnaCapitan1";
             this.urnaCapitan1.Size = new System.Drawing.Size(510, 124);
             this.urnaCapitan1.TabIndex = 4;
-            this.urnaCapitan1.Load += new System.EventHandler(this.urnaCapitan1_Load);
             // 
             // urna1
             // 
@@ -117,12 +115,6 @@
             this.turnero1.Name = "turnero1";
             this.turnero1.Size = new System.Drawing.Size(550, 127);
             this.turnero1.TabIndex = 3;
-            // 
-            // Update
-            // 
-            this.Update.Enabled = true;
-            this.Update.Interval = 1000;
-            this.Update.Tick += new System.EventHandler(this.Update_Tick);
             // 
             // flowLayoutPanel2
             // 
@@ -389,7 +381,6 @@
 
         #endregion
         private FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Timer Update;
         private FlowLayoutPanel flowLayoutPanel2;
         private Button btn_Exit;
         private FlowLayoutPanel flowLayoutPanel3;

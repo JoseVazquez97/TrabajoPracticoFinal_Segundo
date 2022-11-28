@@ -14,6 +14,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
     {
         int desicion;
         Notificador noti_cap;
+        Turnero turn;
 
         public UrnaCapitan()
         {
@@ -21,11 +22,12 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.desicion= 1;
         }
 
-        public void Load_UrnaCapitan(int tamaTotal, int altoTotal, ref Notificador noticap)
+        public void Load_UrnaCapitan(int tamaTotal, int altoTotal, ref Notificador noticap, ref Turnero turnero)
         {
             this.Width = tamaTotal;
             this.Height = altoTotal;
             this.noti_cap = noticap;
+            this.turn = turnero;
         }
 
         public int ConsultarDesicion() 
@@ -44,6 +46,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.desicion= 1;
             this.noti_cap.Visible = true;
             this.noti_cap.MensajeArmadoCap(1);
+            this.turn.Siguiente();
+            ReiniciarDesicion();
         }
 
         private void btn_Este_Click(object sender, EventArgs e)
@@ -51,6 +55,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.desicion= 2;
             this.noti_cap.Visible = true;
             this.noti_cap.MensajeArmadoCap(2);
+            this.turn.Siguiente();
+            ReiniciarDesicion();
         }
 
         private void btn_Oeste_Click(object sender, EventArgs e)
@@ -58,6 +64,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.desicion= 3;
             this.noti_cap.Visible = true;
             this.noti_cap.MensajeArmadoCap(3);
+            this.turn.Siguiente();
+            ReiniciarDesicion();
         }
 
         private void btn_Sur_Click(object sender, EventArgs e)
@@ -65,6 +73,10 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.desicion = 4;
             this.noti_cap.Visible = true;
             this.noti_cap.MensajeArmadoCap(4);
+            this.turn.Siguiente();
+            ReiniciarDesicion();
         }
+
+
     }
 }

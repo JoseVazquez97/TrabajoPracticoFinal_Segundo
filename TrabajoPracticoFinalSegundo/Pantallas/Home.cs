@@ -43,14 +43,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private Image miAvatar;
         private string path;
         private bool checkRendimiento;
-        private bool accionRealizada;
+        
 
         private int Key;
         private int turno;
         private string eventoActual;
-        private string eventoRandom;
-        private string notificacion;
         private int desicionCapitan;
+        private string notificacion;
+        private string accionRealizada;
+
+        private string eventoRandom;
         private int desicionIndividual;
         private string val1;
         private string val2;
@@ -69,7 +71,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
             this.checkRendimiento = false;
-            this.accionRealizada = false;
+            this.notificacion = "0";
+            this.accionRealizada = "0";
             #endregion
 
             #region LOADS DE COMPONENTES 
@@ -164,32 +167,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region JUEGO (LOOP PRINCIPAL)
 
-        private void Update_Tick(object sender, EventArgs e)
-        {
-            
-        }
-
         private void Update500ms_Tick(object sender, EventArgs e)
         {
             mandarImagenes();
-            switch (obtenerTurno(this.turno)) 
+            HabilitarDados(obtenerTurno(this.turno));
+
+            if (this.Key == 1) 
             {
-                case 1:
-                    activarDados(1);
-                    break;
-
-                case 2:
-                    activarDados(2);
-                    break;
-
-                case 3:
-                    activarDados(3);
-                    break;
-
-                case 4:
-                    activarDados(4);
-                    break;
+                if (this.urnaCapitan1.ConsultarDesicion() != 0) { EnviarEstadoSR(); }
             }
+            
         }
 
         #endregion
@@ -296,7 +283,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #region ENVIAR - EstadoActual
-        private async Task EnviarEstado()
+        private async void EnviarEstadoSR()
         {
             string usr = this.Key.ToString();
             string msg = GenerarEstado();
@@ -452,12 +439,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             // 0.Turno , 1.DesicionCapitan , 2.Notificacion , 3.EventoActual
 
-            if (user == "1") //Si es el capitan.
+            if (parametros[3] == "Orden") //Si estamos en el evento Orden
             {
-                if (parametros[3] == "Orden") //Si estamos en el evento Orden
+                if (user != "1" && parametros[4] != "1") //Si no es el capitan.
                 {
-                    if (this.turno > int.Parse(parametros[0])) 
+                    if (this.turno < int.Parse(parametros[0]))
                     {
+                        this.turno = int.Parse(parametros[0]);
                         SiguienteTurno();
 
                         NotificarOrden(1, int.Parse(parametros[1]));
@@ -466,8 +454,32 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         SpawnearNoti(2, false);
                         SpawnearNoti(3, false);
                         SpawnearNoti(4, false);
+                        this.accionRealizada = "1";
+                       
                     }
                 }
+            }
+        }
+
+        private void HabilitarDados(int x) 
+        {
+            switch(x)
+            {
+                case 1:
+                    activarDados(1);
+                    break;
+
+                case 2:
+                    activarDados(2);
+                    break;
+
+                case 3:
+                    activarDados(3);
+                    break;
+
+                case 4:
+                    activarDados(4);
+                    break;
             }
         }
 
@@ -480,7 +492,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 this.urnaCapitan1.Enabled = true;
                 this.urnaCapitan1.Visible = true;
-                this.urnaCapitan1.Load_UrnaCapitan(width, heigh, ref this.noti_Cap);
+                this.urnaCapitan1.Load_UrnaCapitan(width, heigh, ref this.noti_Cap, ref this.turnero1);
                 this.urna1.Enabled = false;
                 this.urna1.Visible = false;
             }
@@ -516,8 +528,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 {
                     aux += msg[i];
                 }
-                else { aux = ""; }
-                parametros.Add(aux);
+                else 
+                {
+                    parametros.Add(aux); 
+                    aux = ""; 
+                }
             }
 
             return parametros;
@@ -556,7 +571,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 if (this.turnero1.InvokeRequired)
                 {
                     this.turnero1.Invoke(new Action(() => this.turnero1.Siguiente()));
-                    this.turno++;
                 }
             }
             catch { }
@@ -565,10 +579,72 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private string GenerarEstado() 
         {
             string mensaje = "";
+            
 
-            mensaje = this.turnero1.getTurno().ToString() + ";"+ this.desicionCapitan +";" + this.notificacion + ";" + this.eventoActual + ";";
+            this.desicionCapitan = this.urnaCapitan1.ConsultarDesicion();
+
+
+            mensaje = this.turnero1.getTurno().ToString() + ";"+ this.desicionCapitan +";" + this.notificacion + ";" + this.eventoActual + ";" + this.accionRealizada + ";";
 
             return mensaje;
+        }
+        private void activarDados(int key)
+        {
+            if (this.Key == key)
+            {
+                this.dados1.setEnable(true);
+            }
+            else { this.dados1.setEnable(false); }
+        }
+
+        private void SpawnearNoti(int rol, bool visible)
+        {
+            switch (rol)
+            {
+                case 1:
+                    if (this.noti_Cap.InvokeRequired)
+                    {
+                        try
+                        {
+                            noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = visible; }));
+                        }
+                        catch { }
+                    }
+                    break;
+
+                case 2:
+                    if (this.noti_Carp.InvokeRequired)
+                    {
+                        try
+                        {
+                            noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = visible; }));
+                        }
+                        catch { }
+                    }
+                    break;
+
+                case 3:
+                    if (this.noti_Mer.InvokeRequired)
+                    {
+                        try
+                        {
+                            noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = visible; }));
+                        }
+                        catch { }
+                    }
+                    break;
+
+                case 4:
+                    if (this.noti_Ar.InvokeRequired)
+                    {
+                        try
+                        {
+                            noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = visible; }));
+                        }
+                        catch { }
+                    }
+                    break;
+            }
         }
 
         private int obtenerTurno(int turnoActual)
@@ -629,55 +705,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             SpawnearNoti(4, false);
         }
 
-        private void SpawnearNoti(int rol, bool visible)
-        {
-            switch (rol)
-            {
-                case 1:
-                    if (this.noti_Cap.InvokeRequired)
-                    {
-                        try
-                        {
-                            noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = visible; }));
-                        }
-                        catch { }
-                    }
-                    break;
 
-                case 2:
-                    if (this.noti_Carp.InvokeRequired)
-                    {
-                        try
-                        {
-                            noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = visible; }));
-                        }
-                        catch { }
-                    }
-                    break;
-
-                case 3:
-                    if (this.noti_Mer.InvokeRequired)
-                    {
-                        try
-                        {
-                            noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = visible; }));
-                        }
-                        catch { }
-                    }
-                    break;
-
-                case 4:
-                    if (this.noti_Ar.InvokeRequired)
-                    {
-                        try
-                        {
-                            noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = visible; }));
-                        }
-                        catch { }
-                    }
-                    break;
-            }
-        }
 
         private void SwitchUrnaCap(bool cual)
         {
@@ -712,15 +740,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             switch (2)
             {
                 case 1:
-                    EncontrarIsla();
+                    //EncontrarIsla();
                     break;
 
                 case 2:
-                    EncontrarBarco();
+                    //EncontrarBarco();
                     break;
 
                 case 3:
-                    EncontrarMar();
+                    //EncontrarMar();
                     break;
 
                 case 4:
@@ -729,14 +757,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-        private void activarDados(int key)
-        {
-            if (this.Key == key)
-            {
-                this.dados1.setEnable(true);
-            }
-            else { this.dados1.setEnable(false); }
-        }
+
+        #endregion
+
+        /*
         private void ACCION_TURNO_BARCO()
         {
 
@@ -871,7 +895,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         }
 
-        #endregion
+        
 
+        */
     }
 }
