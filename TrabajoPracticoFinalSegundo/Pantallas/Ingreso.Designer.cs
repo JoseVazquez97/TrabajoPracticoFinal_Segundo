@@ -35,12 +35,16 @@
             // 
             // btn_Ingresar
             // 
-            this.btn_Ingresar.Location = new System.Drawing.Point(904, 708);
+            this.btn_Ingresar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btn_Ingresar.FlatAppearance.BorderSize = 0;
+            this.btn_Ingresar.Font = new System.Drawing.Font("BlackPearl", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_Ingresar.ForeColor = System.Drawing.Color.Yellow;
+            this.btn_Ingresar.Location = new System.Drawing.Point(895, 667);
             this.btn_Ingresar.Name = "btn_Ingresar";
             this.btn_Ingresar.Size = new System.Drawing.Size(266, 56);
             this.btn_Ingresar.TabIndex = 0;
             this.btn_Ingresar.Text = "Ingresar";
-            this.btn_Ingresar.UseVisualStyleBackColor = true;
+            this.btn_Ingresar.UseVisualStyleBackColor = false;
             this.btn_Ingresar.Click += new System.EventHandler(this.btn_Ingresar_Click);
             // 
             // btn_Host
@@ -67,7 +71,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            // this.BackgroundImage = global::TrabajoPracticoFinalSegundo.Properties.Resources.FONDO_Ingreso;
             this.ClientSize = new System.Drawing.Size(1454, 814);
             this.Controls.Add(this.btn_Unirse);
             this.Controls.Add(this.btn_Host);

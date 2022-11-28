@@ -25,7 +25,30 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
 
             InitializeComponent();
+            this.comboBox1.SelectedItem = "Capitan";
         }
+
+
+        #region Hacer el Formulario Arrastrable
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        private void FormMove_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+        #endregion
+
 
         private void Form1_Load(object sender, EventArgs e)
         {   
@@ -33,7 +56,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             frame = new Mat();
 
             //106 a la derecha y hacia abajo -- 421; 70 posicion inicial
-            int x = 421, y = 70, c = 1;
+            int x = 421, y = 160, c = 1;
             string path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
             for (int i = 0; i < 5; i++)
             {
@@ -53,7 +76,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     y += 106;
                 }
                 x += 106;
-                y = 70;
+                y = 160;
             }
             
 
@@ -155,6 +178,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             home.Show();
 
             //this.Dispose();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
