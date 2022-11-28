@@ -36,11 +36,11 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         }
 
-        public void recibirVoto(string rol, int voto)
+        public void recibirVoto(int rol, int voto)
         {
             switch (rol)
             {
-                case "Carpintero":
+                case 1:
                     if (this.CHECKC == 0) 
                     {
                         if (voto == 0)
@@ -54,7 +54,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                     }
                     break;
 
-                case "Mercader":
+                case 2:
                     if (this.CHECKM == 0)
                     {
                         if (voto == 0)
@@ -69,7 +69,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                     }
                     break;
 
-                case "Artillero":
+                case 3:
                     if (this.CHECKA == 0)
                     {
                         if (voto == 0)

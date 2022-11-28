@@ -19,7 +19,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public Urna()
         {
             InitializeComponent();
-            this.voto = 9;
+            this.voto = 0;
             this.tipo = "Votacion";
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
         }
@@ -44,6 +44,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
             btn_No.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Iconos\BotonUno.png");
             btn_Si.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Iconos\BotonUno.png");
+
         }
 
         public void DesicionesNuevas(string rol) 
@@ -85,7 +86,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             {
                 case 1: return this.btn_Si.Text;
 
-                case 0: return this.btn_No.Text;
+                case 2: return this.btn_No.Text;
 
                 default: return "error";
             }
@@ -101,7 +102,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         public void reiniciarVoto() 
         {
-            this.voto = 9;
+            this.voto = 0;
         }
 
         public int ConsultarVoto() 
@@ -116,7 +117,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         private void btn_No_Click(object sender, EventArgs e)
         {
-            voto = 0;
+            voto = 2;
         }
     }
 }
