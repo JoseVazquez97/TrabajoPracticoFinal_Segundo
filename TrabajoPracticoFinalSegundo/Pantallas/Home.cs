@@ -41,7 +41,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private string Rol;
         private Image miAvatar;
-        private string path;
         private bool checkRendimiento;
 
 
@@ -64,8 +63,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             InitializeComponent();
 
-            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
-
             #region ASIGNACION DE PARAMETROS INICIALES
             this.eventoActual = "Orden";
             this.eventoRandom = "Isla";
@@ -83,9 +80,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.flowLayoutPanel4.Padding = new System.Windows.Forms.Padding() { Left = this.flowLayoutPanel4.Width / 3 + 100 };
 
             //FONDOS
-            this.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\Madera.jpg");
-            this.Navio_Page.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\FondoHomeDos.jpg");
-            this.Navegacion_Page.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\mapax.png");
+            this.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\Madera.jpg");
+            this.Navio_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\FondoHomeDos.jpg");
+            this.Navegacion_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\mapax.png");
             int loc1 = this.flowLayoutPanel2.Width;
             int loc2 = this.flowLayoutPanel4.Height;
             this.Barco_Page.SelectTab(0);
@@ -185,8 +182,26 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
 
                 case "Batalla":
-                    HabilitarDados(obtenerTurno(this.turno));
-                    if (this.dados1.LISTO) { EnviarEstadoSR(); }
+                    int letoca = obtenerTurno(this.turno);
+                    HabilitarDados(letoca);
+                    EnviarEstadoSR();
+
+                    switch (letoca) 
+                    {
+                        case 1:
+                            if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
+                            break;
+                        case 2:
+                            if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
+                            break;
+                        case 3:
+                            if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
+                            break;
+                        case 4:
+                            if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
+                            break;
+                    }
+                   
                     break;
             }
             
@@ -310,6 +325,25 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
+        #region ENVIAR - EstadoActual
+        private async void EnviarDadosCL()
+        {
+            ConsultarValorDado();
+
+            string usr = this.Key.ToString();
+            string val1 = this.val1;
+            string val2 = this.val2; 
+            
+
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarDados", usr, val1, val2);
+            }
+            catch { MessageBox.Show("Error en el envio de Dados."); }
+        }
+
+        #endregion
+        
         #endregion
 
 
@@ -397,6 +431,27 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 ImpactarEnCliente(usr, parametros);
             });
             #endregion
+
+            #region DADOS-COM
+
+            HomeConection.On<string, string, string>("RecibirDados", (usr, val1, val2) =>
+            {
+                if (int.Parse(usr) != this.Key) 
+                {
+                    if (this.dados1.InvokeRequired)
+                    {
+                        if (this.dados1.LISTO) 
+                        {
+                            try 
+                            {
+                                this.dados1.Invoke(new Action(() => this.dados1.AsignarValores(val1,val2)));
+                            } catch { }
+                        }
+                    }
+                }
+                
+            });
+            #endregion
         }
 
         #endregion
@@ -467,7 +522,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                         if (int.Parse(parametros[2]) != 0)
                         {
-                            NotificarOrden(1, int.Parse(parametros[2]));
+                            NotificarOrdenCap(int.Parse(parametros[2]));
                         }
 
                         SpawnearNoti(1, true);
@@ -545,35 +600,37 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             // 0.Turno , 1.DesicionCapitan , 2.Notificacion , 3.EventoActual, 4.AccionRealizada, 5.DesicionIndividual, 6.AccionBot, 7.Dado1, 8.Dado2
             //Evento batalla
-            if (this.turno < int.Parse(parametros[0]))
+            if (parametros[3] == "Batalla" && parametros[3] == this.eventoActual)
             {
-                if (parametros[3] == "Batalla" && parametros[3] == this.eventoActual)
+                AparecerBarcoEnemigo();
+
+                if (this.turno < int.Parse(parametros[0]))
                 {
-                    AparecerBarcoEnemigo();
-                    TirarDadosAuto(parametros[7], parametros[8]);
+                    TirarDadosAuto();
                     SiguienteTurno();
-
-                    switch (user)
-                    {
-                        case "1":
-
-                            break;
-
-                        case "2":
-
-                            break;
-
-                        case "3":
-
-                            break;
-
-                        case "4":
-
-                            break;
-                    }
-
                 }
+                   
+                switch (user)
+                {
+                    case "1":
+
+                        break;
+
+                    case "2":
+
+                        break;
+
+                    case "3":
+
+                        break;
+
+                    case "4":
+
+                        break;
+                }
+
             }
+   
         }
 
         private void AparecerBarcoEnemigo()
@@ -691,6 +748,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             return parametros;
         }
 
+        private void NotificarOrdenCap(int x) 
+        {
+            if (this.noti_Cap.InvokeRequired)
+            {
+                try
+                {
+                    this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmadoCap(x)));
+                }
+                catch { }
+            }
+        }
+
         private void NotificarOrden(int quien, int x) 
         {
             switch (quien) 
@@ -700,7 +769,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     {
                         try
                         {
-                            this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmadoCap(x)));
+                            this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmado(x)));
                         }
                         catch { }
                     }
@@ -738,14 +807,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-        private void TirarDadosAuto(string val1, string val2) 
+        private void TirarDadosAuto() 
         {
             if (this.dados1.InvokeRequired) 
             {
                 try 
                 {
                     this.dados1.Invoke(new Action(() => this.dados1.tirar()));
-                    this.dados1.Invoke(new Action(() => this.dados1.AsignarValores(val1, val2)));
                 } catch { }
             }
         }
@@ -785,15 +853,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                 case "Batalla":
                     this.notificacion = this.urna1.ConsultarVoto().ToString();
-                    this.val1 = this.dados1.V1.ToString();
-                    this.val2 = this.dados1.V2.ToString();
+                    SpawnearNoti(this.Key, true);
+                    NotificarOrden(this.Key, int.Parse(this.notificacion));
                     break;
             }
 
 
-            mensaje = this.turnero1.getTurno().ToString()+";"+this.desicionCapitan+";" 
-                + this.notificacion+";"+this.eventoActual+";"+this.accionRealizada+";" 
-                + this.desicionIndividual+";"+this.accionBot+";"+this.val1+";"+this.val2+";";
+            mensaje = this.turnero1.getTurno().ToString() + ";" + this.desicionCapitan + ";"
+                + this.notificacion + ";" + this.eventoActual + ";" + this.accionRealizada + ";"
+                + this.desicionIndividual + ";" + this.accionBot + ";";
 
             return mensaje;
         }
@@ -965,38 +1033,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-
         #endregion
-        private string ConsultarValorDado(int cual) 
+        private void ConsultarValorDado() 
         {
-            string val = "1";
-            if (this.dados1.InvokeRequired) 
+            try
             {
-                if (this.dados1.LISTO) 
-                {
-                    switch (cual)
-                    {
-                        case 1:
-                            try
-                            {
-                                this.dados1.Invoke(new Action(() => val = this.dados1.V1.ToString()));
-                            }
-                            catch { }
-                            break;
-
-                        case 2:
-                            try
-                            {
-                                this.dados1.Invoke(new Action(() => val = this.dados1.V2.ToString()));
-                            }
-                            catch { }
-                            break;
-                    }
-                }
+                this.dados1.Invoke(new Action(() => this.val1 = this.dados1.V1.ToString()));
+                this.dados1.Invoke(new Action(() => this.val2 = this.dados1.V2.ToString()));
             }
-                
-
-            return val;
+            catch { }
         }
 
         private void ACCION_TURNO_BARCO()
