@@ -5,7 +5,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
     public partial class Barco : UserControl
     {
         Almacen almacen;
-        string path;
         int Vida;
         int Danio;
         RecursosDisplay recDispley;
@@ -16,13 +15,12 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             InitializeComponent();
             this.almacen = new Almacen();
             this.Vida = 100;
-            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
 
         }
 
         public void loadBarcoEnemigo()
         {
-            this.pic_Barco.Image = Image.FromFile(this.path + @"\Recursos\BarcO\BARCO_BaseDos.png");
+            this.pic_Barco.Image = Image.FromFile(@".\Recursos\BarcO\BARCO_BaseDos.png");
 
             this.canon1.esDerecho();
             this.canon2.esDerecho();
@@ -189,7 +187,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public void loadBarco(ref RecursosDisplay x)
         {
             this.recDispley = x;
-            this.pic_Barco.Image = Image.FromFile(this.path + @"\Recursos\BarcO\BARCO_BaseUno.png");
+            this.pic_Barco.Image = Image.FromFile(@".\Recursos\BarcO\BARCO_BaseUno.png");
 
             this.canon1.esDerecho();
             this.canon2.esDerecho();

@@ -14,14 +14,12 @@ namespace TrabajoPracticoFinalSegundo.UserControls
     {
         int voto;
         string tipo;
-        string path;
 
         public Urna()
         {
             InitializeComponent();
             this.voto = 0;
             this.tipo = "Votacion";
-            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
         }
 
         #region LOADS
@@ -42,8 +40,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             btn_Si.Location = new Point(x-150,y);
             btn_No.Location = new Point(x+150,y);
 
-            btn_No.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Iconos\BotonUno.png");
-            btn_Si.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Iconos\BotonUno.png");
+            btn_No.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\BotonUno.png");
+            btn_Si.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\BotonUno.png");
 
         }
 

@@ -57,7 +57,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             //106 a la derecha y hacia abajo -- 421; 70 posicion inicial
             int x = 421, y = 160, c = 1;
-            string path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
             for (int i = 0; i < 5; i++)
             {
                 
@@ -67,7 +66,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     avatar.Location = new System.Drawing.Point(x, y);
                     avatar.Name = "avatar" + c;
                     avatar.Size = new System.Drawing.Size(100, 70);
-                    avatar.Image = new Bitmap(Image.FromFile(path + @"\Recursos\Avatars\" + avatar.Name + ".png"), new Size(100, 80));
+                    avatar.Image = new Bitmap(Image.FromFile(@".\Recursos\Avatars\" + avatar.Name + ".png"), new Size(100, 80));
                     avatar.Click += new EventHandler(this.clickAvatar);
                     avatar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
                     avatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -90,7 +89,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             if (sender.GetType() == pictureBox.GetType())
             {
                 PictureBox avatarClickeado = sender as PictureBox;
-                string path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\";
+                string path = @".\Recursos\Avatars\";
                 Imagen.Image = Image.FromFile(path + avatarClickeado.Name + ".png");
             }
         }

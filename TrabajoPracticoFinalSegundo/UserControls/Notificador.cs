@@ -12,8 +12,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 {
     public partial class Notificador : UserControl
     {
-        string path;
-
         public Notificador()
         {
             InitializeComponent();
@@ -21,8 +19,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         public void Load_Notificador() 
         {
-            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
-            this.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Fondos\Notificador22.png");
+            this.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\Notificador22.png");
         }
 
         public void MensajeArmadoCap(int x)

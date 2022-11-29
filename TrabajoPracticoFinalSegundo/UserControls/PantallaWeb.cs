@@ -16,7 +16,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 {
     public partial class PantallaWeb : UserControl
     {
-        string path;
         private Mat frame;
         private VideoCapture camara;
         private Image imagenActual;
@@ -33,13 +32,12 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             value.Width = Screen.PrimaryScreen.WorkingArea.Width;
             value.Height = Screen.PrimaryScreen.WorkingArea.Height;
 
-            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
             frame = new Mat();
         }
 
         public void WebLoad()
         {
-            pictureBox1.Image = Image.FromFile(this.path + @".\Recursos\Iconos\LogoEjemplo.png");
+            pictureBox1.Image = Image.FromFile(@".\Recursos\Iconos\LogoEjemplo.png");
         }
 
 

@@ -35,4 +35,62 @@
     <Folder Include="Recursos\Dados\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar1.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar10.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar11.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar12.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar13.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar14.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar15.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar2.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar3.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar4.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar5.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar6.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar7.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar8.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar9.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatarArtillero.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatarCapitan.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatarCarpintero.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatarMercader.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Barco\barco - copia - copia.jpg" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Barco\barco.jpg" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Barco\BARCO_Base.jpg" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Barco\BARCO_BaseDos.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Barco\BARCO_BaseUno.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Barco\Canion.jpg" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\blackpearl-font.zip" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Caniones\Alerta.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Caniones\CanionBase.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Caniones\CanionBaseIzquierdo.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Dados\Dado1.bmp" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Dados\Dado2.bmp" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Dados\Dado3.bmp" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Dados\Dado4.bmp" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Dados\Dado5.bmp" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Dados\Dado6.bmp" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\FondoHomeDos.jpg" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\FONDO_Home.jpg" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\FONDO_Ingreso.jpg" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\Madera.jpg" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\mapax.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\Notificador.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\Notificador22.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\Notificador33.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\Viajando.gif" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\ASSETS - copia.jpg" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\ASSETS.jpg" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\Balas.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\BotonUno.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\LogoEjemplo.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\Madera.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\Oro.jpg" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\Plano.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Logos\LOGO_Gregoire.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Logos\LOGO_Manija.png" />
+  </ItemGroup>
+
 </Project>

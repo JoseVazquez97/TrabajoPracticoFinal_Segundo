@@ -43,7 +43,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                 case 1:
                     if (this.CHECKC == 0) 
                     {
-                        if (voto == 0)
+                        if (voto == 2)
                         {
                             this.pictureBox1.BackColor = Color.Red;
                             this.CHECKC++;
@@ -57,7 +57,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                 case 2:
                     if (this.CHECKM == 0)
                     {
-                        if (voto == 0)
+                        if (voto == 2)
                         {
                             this.pictureBox2.BackColor = Color.Red;
                             this.CHECKM++;
@@ -65,14 +65,13 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                         }
 
                         if (voto == 1) { this.pictureBox2.BackColor = Color.Green; this.CHECKM++; this.resultado--; }
-                    
                     }
                     break;
 
                 case 3:
                     if (this.CHECKA == 0)
                     {
-                        if (voto == 0)
+                        if (voto == 2)
                         {
                             this.pictureBox3.BackColor = Color.Red;
                             this.CHECKA++;

@@ -17,7 +17,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         private int tiradas;
         private int d1;
         private int d2;
-        string path;
         private bool cerradura;
         private bool Listo;
 
@@ -28,7 +27,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public Dados()
         {
             InitializeComponent();
-            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
         }
 
 
@@ -42,8 +40,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             anim1.BackColor = Color.Red;
             anim2.BackColor = Color.Red;
 
-            dado1.Image = Image.FromFile(this.path + @"\Recursos\Dados\Dado1.bmp");
-            dado2.Image = Image.FromFile(this.path + @"\Recursos\Dados\Dado2.bmp");
+            dado1.Image = Image.FromFile(@".\Recursos\Dados\Dado1.bmp");
+            dado2.Image = Image.FromFile(@".\Recursos\Dados\Dado2.bmp");
         }
 
         public void setEnable(bool x) 
@@ -72,8 +70,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             anim1.BackColor = Color.Red;
             anim2.BackColor = Color.Red;
 
-            dado1.Image = Image.FromFile(this.path + @"\Recursos\Dados\Dado1.bmp");
-            dado2.Image = Image.FromFile(this.path + @"\Recursos\Dados\Dado2.bmp");
+            dado1.Image = Image.FromFile(@".\Recursos\Dados\Dado1.bmp");
+            dado2.Image = Image.FromFile(@".\Recursos\Dados\Dado2.bmp");
 
             int x = Convert.ToInt32(this.Width / 2);
 
@@ -88,7 +86,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         #region FUNCIONALIDAD
         private Image Tirada(int dado)
         {
-            return Image.FromFile(this.path + @"\Recursos\Dados\Dado"+ dado + ".bmp");
+            return Image.FromFile(@".\Recursos\Dados\Dado"+ dado + ".bmp");
         }
 
         private int Suerte() 
@@ -106,7 +104,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             TirandoDados.Start();
         }
 
-        public void tirar(string especial)
+        public void tirar(string val1, string val2)
         {
             this.Listo = false;
             tiradas = 0;

@@ -14,13 +14,9 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 {
     public partial class RecursosDisplay : UserControl
     {
-        string path;
-
         public RecursosDisplay()
         {
             InitializeComponent();
-
-            this.path = Directory.GetParent(Directory.GetParent("..").ToString()).ToString();
         }
 
         public void LoadRecursos(int tamaTotal, int alturaTotal) 
@@ -35,9 +31,9 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.lbl_Maderas.Parent = this.flowLayoutPanel2;
             this.lbl_Balas.Parent = this.flowLayoutPanel2;
 
-            this.p_Madera.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Iconos\Madera.png");
-            this.p_Tesoro.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Iconos\Oro.jpg");
-            this.p_Balas.BackgroundImage = Image.FromFile(this.path + @"\Recursos\Iconos\Balas.png");
+            this.p_Madera.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\Madera.png");
+            this.p_Tesoro.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\Oro.jpg");
+            this.p_Balas.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\Balas.png");
 
         }
 

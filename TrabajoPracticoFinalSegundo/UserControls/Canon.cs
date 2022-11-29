@@ -16,14 +16,10 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         int danio;
         int nivel;
-        string path;
-
 
         public Canon()
         {
             InitializeComponent();
-
-            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
 
             this.Visible = true;
             this.danio = 0;
@@ -36,7 +32,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.lbl_Muni.Text = valor;
             if (valor == "0")
             {
-                this.lbl_Muni.Image = Image.FromFile(this.path + @"\Recursos\Caniones\Alerta.png");
+                this.lbl_Muni.Image = Image.FromFile(@".\Recursos\Caniones\Alerta.png");
             }
             else 
             {
@@ -47,7 +43,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public void gastarMuni() 
         {
             this.lbl_Muni.Text = "0";
-            this.lbl_Muni.Image = Image.FromFile(this.path + @"\Recursos\Caniones\Alerta.png");
+            this.lbl_Muni.Image = Image.FromFile(@".\Recursos\Caniones\Alerta.png");
         }
 
         public void regargarMuni() 
@@ -68,13 +64,13 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         
         public void esDerecho()
         {
-            this.p_Box.Image = Image.FromFile(this.path + @"\Recursos\Caniones\CanionBase.png");
+            this.p_Box.Image = Image.FromFile(@".\Recursos\Caniones\CanionBase.png");
             this.lbl_Muni.Location = new Point(54, 20);
         }
 
         public void esIzquierdo() 
         {
-            this.p_Box.Image = Image.FromFile(this.path + @"\Recursos\Caniones\CanionBaseIzquierdo.png");
+            this.p_Box.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseIzquierdo.png");
             this.lbl_Muni.Location = new Point(54, 20);
         }
 
