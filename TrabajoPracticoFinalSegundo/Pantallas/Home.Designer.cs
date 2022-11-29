@@ -51,10 +51,10 @@
             this.noti_Mer = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
             this.Barco_Page = new System.Windows.Forms.TabControl();
             this.Navio_Page = new System.Windows.Forms.TabPage();
+            this.barco1 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.Navegacion_Page = new System.Windows.Forms.TabPage();
             this.tablero_Mapa = new System.Windows.Forms.TableLayoutPanel();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
-            this.barco1 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -287,6 +287,14 @@
             this.Navio_Page.Text = "Navio";
             this.Navio_Page.UseVisualStyleBackColor = true;
             // 
+            // barco1
+            // 
+            this.barco1.BackColor = System.Drawing.Color.Transparent;
+            this.barco1.Location = new System.Drawing.Point(310, 127);
+            this.barco1.Name = "barco1";
+            this.barco1.Size = new System.Drawing.Size(366, 607);
+            this.barco1.TabIndex = 0;
+            // 
             // Navegacion_Page
             // 
             this.Navegacion_Page.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -329,14 +337,6 @@
             this.tablero_Mapa.Size = new System.Drawing.Size(1069, 780);
             this.tablero_Mapa.TabIndex = 0;
             // 
-            // barco1
-            // 
-            this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Location = new System.Drawing.Point(310, 127);
-            this.barco1.Name = "barco1";
-            this.barco1.Size = new System.Drawing.Size(366, 607);
-            this.barco1.TabIndex = 0;
-            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -355,6 +355,7 @@
             this.Text = "Home";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Home_FormClosed);
+            this.Load += new System.EventHandler(this.Home_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);

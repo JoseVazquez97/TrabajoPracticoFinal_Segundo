@@ -176,12 +176,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             Imagen.Image = Image.FromFile(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
 
             home.AsignarAvatar(this.Imagen.Image,this.comboBox1.Text,this.jugarCam);
-            home.EmpezarConeccion();
             x.Show();
             home.Show();
-            
-
-            //this.Dispose();
+            this.Dispose();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

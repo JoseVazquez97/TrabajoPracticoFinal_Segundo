@@ -347,22 +347,21 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
 
         #endregion
-        
+
         #endregion
 
 
         ////////////////////////////////////////////////////
 
         #region RECEPCION DE MENSAJES
-
-        public async void EmpezarConeccion()
+        
+        private async void Home_Load(object sender, EventArgs e)
         {
             #region CONECTARSE
             //Este try es importante no sacar xd
             try
             {
                 await HomeConection.StartAsync();
-                this.conectado = true;
             }
             catch
             {
@@ -370,7 +369,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
             #endregion
 
-            
+            this.conectado = true;
 
             #region IMAGE-COM
 
@@ -1053,5 +1052,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             catch { }
         }
 
+        
     }
 }
