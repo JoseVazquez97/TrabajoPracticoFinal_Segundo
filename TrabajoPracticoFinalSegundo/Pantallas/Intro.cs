@@ -15,13 +15,27 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
     {
         Ingreso ing;
         int cont;
-        string path;
+        string path;int TIPO;
 
         public Intro(Ingreso ing)
         {
             InitializeComponent();
             this.ing = ing;
             this.cont = 0;
+            this.TIPO = 1;
+
+            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
+
+            p_boxUno.Location = new Point((((this.Width) / 2) - 50), (this.Height / 2));
+
+            p_boxUno.Image = Image.FromFile(this.path + @"\Recursos\Logos\LOGO_Manija.png");
+        }
+
+        public Intro()
+        {
+            InitializeComponent();
+            this.cont = 0;
+            this.TIPO = 2;
 
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
 
@@ -49,10 +63,17 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 Prueba x = new Prueba();
                 x.Show();
                 */
-
-                PantallaPhoto x = new PantallaPhoto();
-                x.Show();
-                this.Close();
+                if (this.TIPO == 1)
+                {
+                    PantallaPhoto x = new PantallaPhoto();
+                    x.Show();
+                    this.Close();
+                }
+                else 
+                {
+                    this.Close();
+                }
+                
             }
         }
 

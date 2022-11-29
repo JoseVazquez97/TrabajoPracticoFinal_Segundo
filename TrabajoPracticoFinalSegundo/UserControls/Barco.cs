@@ -1,36 +1,60 @@
-﻿using TrabajoPracticoFinalSegundo.Clases;
-
-namespace TrabajoPracticoFinalSegundo.UserControls
+﻿namespace TrabajoPracticoFinalSegundo.UserControls
 {
     public partial class Barco : UserControl
     {
-        Almacen almacen;
         int Vida;
         int Danio;
         RecursosDisplay recDispley;
+        int muni1;
+        int muni4;
+        int muni3;
+        int muni2;
+
 
         public Barco()
         {
 
             InitializeComponent();
-            this.almacen = new Almacen();
             this.Vida = 100;
+
+            loadImagenesCanion();
+        }
+
+        private async void loadImagenesCanion()
+        {
+            await Task.Run(new Action(cargarImagenes));
+        }
+
+        private void Barco_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cargarImagenes()
+        {
+            this.pictureBox1.Parent = this.pic_Barco;
+            this.pictureBox2.Parent = this.pic_Barco;
+            this.pictureBox3.Parent = this.pic_Barco;
+            this.pictureBox4.Parent = this.pic_Barco;
+            string path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
+            this.pictureBox1.Image = Image.FromFile(path + @"\Recursos\Caniones\CanionBase.png");
+            this.pictureBox2.Image = Image.FromFile(path + @"\Recursos\Caniones\CanionBase.png");
+            this.pictureBox3.Image = Image.FromFile(path + @"\Recursos\Caniones\CanionBaseIzquierdo.png");
+            this.pictureBox4.Image = Image.FromFile(path + @"\Recursos\Caniones\CanionBaseIzquierdo.png");
+
+        }
+
+
+        public void loadBarco(ref RecursosDisplay x)
+        {
+            this.recDispley = x;
+            this.pic_Barco.Image = Image.FromFile(@".\Recursos\BarcO\BARCO_BaseUno.png");
 
         }
 
         public void loadBarcoEnemigo()
         {
             this.pic_Barco.Image = Image.FromFile(@".\Recursos\BarcO\BARCO_BaseDos.png");
-
-            this.canon1.esDerecho();
-            this.canon2.esDerecho();
-            this.canon3.esIzquierdo();
-            this.canon4.esIzquierdo();
-
-            this.canon1.Parent = this.pic_Barco;
-            this.canon2.Parent = this.pic_Barco;
-            this.canon3.Parent = this.pic_Barco;
-            this.canon4.Parent = this.pic_Barco;
         }
 
         public bool Curar()
@@ -50,25 +74,25 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         public bool Disparar()
         {
-  
-            if (this.canon1.consultarMuni() == 1)
+
+            if (this.muni1 == 1)
             {
-                this.canon1.gastarMuni();
+                this.muni1 = 0;
                 return true;
             }
-            else if (this.canon2.consultarMuni() == 1)
+            else if (this.muni2 == 1)
             {
-                this.canon2.gastarMuni();
+                this.muni2 = 0;
                 return true;
             }
-            else if (this.canon3.consultarMuni() == 1)
+            else if (this.muni3 == 1)
             {
-                this.canon3.gastarMuni();
+                this.muni3 = 0;
                 return true;
             }
-            else if (this.canon4.consultarMuni() == 1)
+            else if (this.muni4 == 1)
             {
-                this.canon4.gastarMuni();
+                this.muni4 = 0;
                 return true;
             }
             else
@@ -79,29 +103,29 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         public bool Recargar()
         {
-            
-            if (this.canon1.consultarMuni() == 0)
+
+            if (this.muni1 == 0)
             {
                 this.recDispley.extraerRecurso("Bala", 1);
-                this.canon1.regargarMuni();
+                this.muni1++;
                 return true;
             }
-            else if (this.canon2.consultarMuni() == 0)
+            else if (this.muni2 == 0)
             {
                 this.recDispley.extraerRecurso("Bala", 1);
-                this.canon2.regargarMuni();
+                this.muni2++;
                 return true;
             }
-            else if (this.canon3.consultarMuni() == 0)
+            else if (this.muni3 == 0)
             {
                 this.recDispley.extraerRecurso("Bala", 1);
-                this.canon3.regargarMuni();
+                this.muni3++;
                 return true;
             }
-            else if (this.canon4.consultarMuni() == 0)
+            else if (this.muni4 == 0)
             {
                 this.recDispley.extraerRecurso("Bala", 1);
-                this.canon4.regargarMuni();
+                this.muni4++;
                 return true;
             }
             else
@@ -113,7 +137,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public string ConsultarEstado()
         {
             string mensaje = "";
-            mensaje = this.canon1.consultarMuni() + ";" + this.canon2.consultarMuni() + ";" + this.canon3.consultarMuni() + ";" + this.canon4.consultarMuni() + ";" + this.Vida + ";";
+            mensaje = this.muni1 + ";" + this.muni2 + ";" + this.muni3 + ";" + this.muni4 + ";" + this.Vida + ";";
             return mensaje;
         }
 
@@ -134,19 +158,19 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                     switch (cont)
                     {
                         case 1:
-                            this.canon1.setMuni(aux);
+                            this.muni1 = int.Parse(aux);
                             break;
 
                         case 2:
-                            this.canon2.setMuni(aux);
+                            this.muni2 = int.Parse(aux);
                             break;
 
                         case 3:
-                            this.canon3.setMuni(aux);
+                            this.muni3 = int.Parse(aux);
                             break;
 
                         case 4:
-                            this.canon4.setMuni(aux);
+                            this.muni4 = int.Parse(aux);
                             break;
 
                         case 5:
@@ -184,21 +208,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             return this.Danio;
         }
 
-        public void loadBarco(ref RecursosDisplay x)
-        {
-            this.recDispley = x;
-            this.pic_Barco.Image = Image.FromFile(@".\Recursos\BarcO\BARCO_BaseUno.png");
-
-            this.canon1.esDerecho();
-            this.canon2.esDerecho();
-            this.canon3.esIzquierdo();
-            this.canon4.esIzquierdo();
-
-            this.canon1.Parent = this.pic_Barco;
-            this.canon2.Parent = this.pic_Barco;
-            this.canon3.Parent = this.pic_Barco;
-            this.canon4.Parent = this.pic_Barco;
-        }
 
         private void canon1_Load(object sender, EventArgs e)
         {
@@ -224,5 +233,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         {
 
         }
+
+
     }
 }

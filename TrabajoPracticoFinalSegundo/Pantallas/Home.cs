@@ -42,7 +42,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private string Rol;
         private Image miAvatar;
         private bool checkRendimiento;
-
+        private bool conectado;
 
         private int Key;
         private int turno;
@@ -62,7 +62,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         public Home()
         {
             InitializeComponent();
+            this.conectado = false;
 
+            
             #region ASIGNACION DE PARAMETROS INICIALES
             this.eventoActual = "Orden";
             this.eventoRandom = "Isla";
@@ -74,6 +76,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.val1 = "0";
             this.val2 = "0";
             #endregion
+
+            #region DECLARACION DEL HUB
+            HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
+
+            //Si te desconectas segui intentado.
+            HomeConection.Closed +=
+                async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync(); };
+            #endregion
+
 
             #region LOADS DE COMPONENTES 
             //FlowLayout4 (Recursos y escrutinio)
@@ -98,14 +109,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             //RECURSOS Y CAMBIOS DE PAG
             this.recursosDisplay1.LoadRecursos(flowLayoutPanel4.Width, flowLayoutPanel4.Height);
 
-            //BARCO
-
-            x = this.Width - 325 - 70;
-
+            //BARCOS
             this.barco1.loadBarco(ref this.recursosDisplay1);
-            this.barco2.loadBarcoEnemigo();
-
-            this.barco2.Visible = false;
 
             //BARRA (INFERIOR)
             x = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
@@ -153,15 +158,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.escrutinio1.Visible = false;
 
             #endregion
+            
 
-            #region DECLARACION DEL HUB
-            HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
-
-            //Si te desconectas segui intentado.
-            HomeConection.Closed +=
-                async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync(); };
-            #endregion
         }
+
 
         /// ///////////////////////////////////////////////////////////////
 
@@ -169,42 +169,46 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void Update500ms_Tick(object sender, EventArgs e)
         {
-            mandarImagenes();
-
-            switch (this.eventoActual) 
+            if (conectado) 
             {
-                case "Orden":
-                    EnviarEstadoSR();
-                    break;
+                mandarImagenes();
 
-                case "Votacion":
-                    EnviarEstadoSR();
-                    break;
+                switch (this.eventoActual)
+                {
+                    case "Orden":
+                        EnviarEstadoSR();
+                        break;
 
-                case "Batalla":
-                    int letoca = obtenerTurno(this.turno);
-                    HabilitarDados(letoca);
-                    EnviarEstadoSR();
+                    case "Votacion":
+                        EnviarEstadoSR();
+                        break;
 
-                    switch (letoca) 
-                    {
-                        case 1:
-                            if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
-                            break;
-                        case 2:
-                            if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
-                            break;
-                        case 3:
-                            if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
-                            break;
-                        case 4:
-                            if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
-                            break;
-                    }
-                   
-                    break;
+                    case "Batalla":
+                        int letoca = obtenerTurno(this.turno);
+                        HabilitarDados(letoca);
+                        EnviarEstadoSR();
+
+                        switch (letoca)
+                        {
+                            case 1:
+                                if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
+                                break;
+                            case 2:
+                                if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
+                                break;
+                            case 3:
+                                if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
+                                break;
+                            case 4:
+                                if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
+                                break;
+                        }
+
+                        break;
+                }
+
             }
-            
+
         }
 
         #endregion
@@ -351,19 +355,22 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region RECEPCION DE MENSAJES
 
-        private async void Home_Load(object sender, EventArgs e)
+        public async void EmpezarConeccion()
         {
             #region CONECTARSE
             //Este try es importante no sacar xd
             try
             {
                 await HomeConection.StartAsync();
+                this.conectado = true;
             }
             catch
             {
                 MessageBox.Show("Nosepuedoconectar");
             }
             #endregion
+
+            
 
             #region IMAGE-COM
 
@@ -635,6 +642,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void AparecerBarcoEnemigo()
         {
+            /*
             if (this.barco2.InvokeRequired)
             {
                 try
@@ -643,6 +651,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 }
                 catch { }
             }
+            */
         }
 
         private void HabilitarDados(int x)
@@ -1044,83 +1053,5 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             catch { }
         }
 
-        private void ACCION_TURNO_BARCO()
-        {
-
-            if (this.dados1.InvokeRequired)
-            {
-                if (this.dados1.LISTO)
-                {
-                    try
-                    {
-                        this.val1 = this.dados1.V1.ToString();
-                        this.val2 = this.dados1.V2.ToString();
-                    }
-                    catch { }
-
-                    switch (this.desicionIndividual)
-                    {
-                        case 2:
-                            if (this.barco1.InvokeRequired)
-                            {
-                                try
-                                {
-                                    barco1.Invoke(new Action(() => barco1.Recargar()));
-                                    this.accionRealizada = "1";
-                                    
-                                }
-                                catch { }
-                            }
-                            break;
-
-                        case 1:
-
-                            if (this.barco1.InvokeRequired)
-                            {
-                                try
-                                {
-                                    if (this.Rol == "Carpintero")
-                                    {
-                                        barco1.Invoke(new Action(() => barco1.Curar()));
-                                        Ataque(2);
-                                    }
-                                    else 
-                                    {
-                                        barco1.Invoke(new Action(() => barco1.Disparar()));
-                                        Ataque(1);
-                                    }
-                                        
-                                    this.accionRealizada = "1";
-                                }
-                                catch { }
-                            }
-                            break;
-                    }
-                }
-            }
-        }
-
-        private void Ataque(int x)
-        {
-            if (this.barco2.InvokeRequired)
-            {
-                try
-                {
-                    switch (x) 
-                    {
-                        case 1:
-                            barco2.Invoke(new Action(() => barco2.RecibirDanio(10)));
-                            break;
-
-                        case 2:
-
-
-                            break;
-
-                    }
-                }
-                catch { }
-            }
-        }
     }
 }

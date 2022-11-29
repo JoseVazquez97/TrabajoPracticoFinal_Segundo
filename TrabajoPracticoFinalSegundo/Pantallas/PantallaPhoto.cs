@@ -20,12 +20,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private Mat frame;
         private int contador;
         private bool jugarCam;
+        Home home;
 
         public PantallaPhoto()
         {
 
             InitializeComponent();
             this.comboBox1.SelectedItem = "Capitan";
+            home = new Home();
         }
 
 
@@ -165,7 +167,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void ConfirmarSeleccion_Click(object sender, EventArgs e)
         {
-            Home home = new Home();
+            Intro x = new Intro();
 
             Imagen.Image = new Bitmap(Imagen.Image, new Size(100, 70));
             if (File.Exists(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png"))
@@ -174,7 +176,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             Imagen.Image = Image.FromFile(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
 
             home.AsignarAvatar(this.Imagen.Image,this.comboBox1.Text,this.jugarCam);
+            home.EmpezarConeccion();
+            x.Show();
             home.Show();
+            
 
             //this.Dispose();
         }

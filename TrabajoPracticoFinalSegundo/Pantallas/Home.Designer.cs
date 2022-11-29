@@ -51,11 +51,10 @@
             this.noti_Mer = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
             this.Barco_Page = new System.Windows.Forms.TabControl();
             this.Navio_Page = new System.Windows.Forms.TabPage();
-            this.barco2 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
-            this.barco1 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.Navegacion_Page = new System.Windows.Forms.TabPage();
             this.tablero_Mapa = new System.Windows.Forms.TableLayoutPanel();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
+            this.barco1 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -279,7 +278,6 @@
             // 
             // Navio_Page
             // 
-            this.Navio_Page.Controls.Add(this.barco2);
             this.Navio_Page.Controls.Add(this.barco1);
             this.Navio_Page.Location = new System.Drawing.Point(4, 31);
             this.Navio_Page.Name = "Navio_Page";
@@ -288,24 +286,6 @@
             this.Navio_Page.TabIndex = 0;
             this.Navio_Page.Text = "Navio";
             this.Navio_Page.UseVisualStyleBackColor = true;
-            // 
-            // barco2
-            // 
-            this.barco2.BackColor = System.Drawing.Color.Transparent;
-            this.barco2.Location = new System.Drawing.Point(679, 3);
-            this.barco2.Margin = new System.Windows.Forms.Padding(0);
-            this.barco2.Name = "barco2";
-            this.barco2.Size = new System.Drawing.Size(366, 607);
-            this.barco2.TabIndex = 3;
-            // 
-            // barco1
-            // 
-            this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Location = new System.Drawing.Point(261, 102);
-            this.barco1.Margin = new System.Windows.Forms.Padding(0);
-            this.barco1.Name = "barco1";
-            this.barco1.Size = new System.Drawing.Size(366, 607);
-            this.barco1.TabIndex = 2;
             // 
             // Navegacion_Page
             // 
@@ -349,6 +329,14 @@
             this.tablero_Mapa.Size = new System.Drawing.Size(1069, 780);
             this.tablero_Mapa.TabIndex = 0;
             // 
+            // barco1
+            // 
+            this.barco1.BackColor = System.Drawing.Color.Transparent;
+            this.barco1.Location = new System.Drawing.Point(310, 127);
+            this.barco1.Name = "barco1";
+            this.barco1.Size = new System.Drawing.Size(366, 607);
+            this.barco1.TabIndex = 0;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -367,7 +355,6 @@
             this.Text = "Home";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Home_FormClosed);
-            this.Load += new System.EventHandler(this.Home_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
@@ -396,19 +383,15 @@
         private System.Windows.Forms.Timer Update500ms;
         private UserControls.UrnaCapitan urnaCapitan1;
         private UserControls.Notificador noti_Mer;
-        private UserControls.Notificador notificador2;
-        private UserControls.Notificador notificador3;
-        private UserControls.Notificador notificador4;
         private UserControls.Notificador noti_Cap;
         private UserControls.Notificador noti_Carp;
         private UserControls.Notificador noti_Ar;
         private TabControl Barco_Page;
         private TabPage Navegacion_Page;
         private TabPage Navio_Page;
-        private UserControls.Barco barco2;
-        private UserControls.Barco barco1;
         private PageSetupDialog pageSetupDialog1;
         private TableLayoutPanel tablero_Mapa;
         private UserControls.Escrutinio escrutinio1;
+        private UserControls.Barco barco1;
     }
 }
