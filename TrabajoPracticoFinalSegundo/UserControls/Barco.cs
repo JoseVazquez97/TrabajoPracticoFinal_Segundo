@@ -10,24 +10,11 @@
         int muni3;
         int muni2;
 
-
         public Barco()
         {
 
             InitializeComponent();
             this.Vida = 100;
-
-            loadImagenesCanion();
-        }
-
-        private async void loadImagenesCanion()
-        {
-            await Task.Run(new Action(cargarImagenes));
-        }
-
-        private void Barco_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void cargarImagenes()
@@ -36,25 +23,24 @@
             this.pictureBox2.Parent = this.pic_Barco;
             this.pictureBox3.Parent = this.pic_Barco;
             this.pictureBox4.Parent = this.pic_Barco;
-            string path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
-            this.pictureBox1.Image = Image.FromFile(path + @"\Recursos\Caniones\CanionBase.png");
-            this.pictureBox2.Image = Image.FromFile(path + @"\Recursos\Caniones\CanionBase.png");
-            this.pictureBox3.Image = Image.FromFile(path + @"\Recursos\Caniones\CanionBaseIzquierdo.png");
-            this.pictureBox4.Image = Image.FromFile(path + @"\Recursos\Caniones\CanionBaseIzquierdo.png");
+            this.pictureBox1.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseDerecho.png");
+            this.pictureBox2.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseDerecho.png");
+            this.pictureBox3.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseIzquierdo.png");
+            this.pictureBox4.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseIzquierdo.png");
 
         }
-
 
         public void loadBarco(ref RecursosDisplay x)
         {
             this.recDispley = x;
             this.pic_Barco.Image = Image.FromFile(@".\Recursos\BarcO\BARCO_BaseUno.png");
-
+            cargarImagenes(); 
         }
 
         public void loadBarcoEnemigo()
         {
             this.pic_Barco.Image = Image.FromFile(@".\Recursos\BarcO\BARCO_BaseDos.png");
+            cargarImagenes();
         }
 
         public bool Curar()

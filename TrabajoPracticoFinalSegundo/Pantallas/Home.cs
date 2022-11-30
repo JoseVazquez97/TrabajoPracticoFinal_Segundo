@@ -63,7 +63,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             InitializeComponent();
             this.conectado = false;
-
             
             #region ASIGNACION DE PARAMETROS INICIALES
             this.eventoActual = "Orden";
@@ -85,15 +84,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync(); };
             #endregion
 
-
             #region LOADS DE COMPONENTES 
             //FlowLayout4 (Recursos y escrutinio)
             this.flowLayoutPanel4.Padding = new System.Windows.Forms.Padding() { Left = this.flowLayoutPanel4.Width / 3 + 100 };
 
             //FONDOS
             this.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\Madera.jpg");
-            this.Navio_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\FondoHomeDos.jpg");
-            this.Navegacion_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\mapax.png");
+            Navio_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\FondoHomeDos.jpg");
+            Navegacion_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\mapax.png");
             int loc1 = this.flowLayoutPanel2.Width;
             int loc2 = this.flowLayoutPanel4.Height;
             this.Barco_Page.SelectTab(0);
@@ -158,15 +156,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.escrutinio1.Visible = false;
 
             #endregion
-            
-
         }
-
 
         /// ///////////////////////////////////////////////////////////////
 
-        #region JUEGO (LOOP PRINCIPAL)
+        #region JUEGO
 
+        #region UPDATE-GAME (LOOP PRINCIPAL)
         private void Update500ms_Tick(object sender, EventArgs e)
         {
             if (conectado) 
@@ -203,6 +199,135 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                                 if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
                                 break;
                         }
+                        break;
+                }
+            }
+        }
+        #endregion
+
+        #region IMPACTAR EN FORM
+        private void ImpactarEnCliente(string user, List<string> parametros)
+        {
+            // Index de parametros
+            // 0.Turno , 1.DesicionCapitan , 2.Notificacion , 3.EventoActual, 4.AccionRealizada, 5.DesicionIndividual, 6.AccionBot
+
+            //Evento ORDEN
+            if (this.turno < int.Parse(parametros[0])) //Si el turno de este cliente es menor del que me llega sucedio algo...
+            {
+                if (this.eventoActual == "Orden" && this.eventoActual == parametros[3]) //Si estamos en el evento orden
+                {
+                    if (user == "1") //Y el capitan nos envia mensaje.
+                    {
+                        this.turno = int.Parse(parametros[0]); //Igualamos el turno
+
+                        if (this.Key != 1)
+                        {
+                            SiguienteTurno();
+                        }
+
+                        if (int.Parse(parametros[2]) != 0)
+                        {
+                            NotificarOrdenCap(int.Parse(parametros[2]));
+                        }
+
+                        SpawnearNoti(1, true);
+                        SpawnearNoti(2, false);
+                        SpawnearNoti(3, false);
+                        SpawnearNoti(4, false);
+                        SwitchUrnaCap(true);
+
+                        this.eventoActual = "Votacion";
+                    }
+                }
+            }
+
+            //Evento VOTACION
+            if (parametros[3] == "Votacion" && parametros[3] == this.eventoActual)
+            {
+                SwitchEscrutinio(true);
+
+                switch (this.Key)
+                {
+                    case 2:
+                        MensajesVotacion(); //Escribe los mensajes Si capitan y No capitan en la urna1
+                        break;
+
+                    case 3:
+                        MensajesVotacion();
+                        break;
+
+                    case 4:
+                        MensajesVotacion();
+                        break;
+
+                    default:
+                        break;
+                }
+
+                if (int.Parse(parametros[2]) != 0)
+                {
+                    switch (user)
+                    {
+                        case "2":
+                            SpawnearNoti(2, true);
+                            NotificarOrden(2, int.Parse(parametros[2]));
+                            CargarVoto(1, int.Parse(parametros[2]));
+                            SiguienteTurno();
+                            break;
+
+                        case "3":
+                            SpawnearNoti(3, true);
+                            NotificarOrden(3, int.Parse(parametros[2]));
+                            CargarVoto(2, int.Parse(parametros[2]));
+                            SiguienteTurno();
+                            break;
+
+                        case "4":
+                            SpawnearNoti(4, true);
+                            NotificarOrden(4, int.Parse(parametros[2]));
+                            CargarVoto(3, int.Parse(parametros[2]));
+                            SiguienteTurno();
+                            break;
+                    }
+
+
+                    if (this.escrutinio1.confirmarVotacion() != 0)
+                    {
+                        this.eventoActual = "Batalla";
+                        SwitchEscrutinio(false);
+                        this.escrutinio1.reiniciarVotos();
+                        this.escrutinio1.reiniciarCheck();
+                        QuitarTodasLasNotis();
+                    }
+                }
+            }
+
+            //Evento BATALLA
+            if (parametros[3] == "Batalla" && parametros[3] == this.eventoActual)
+            {
+                AparecerBarcoEnemigo();
+
+                if (this.turno < int.Parse(parametros[0]))
+                {
+                    TirarDadosAuto();
+                    SiguienteTurno();
+                }
+
+                switch (user)
+                {
+                    case "1":
+
+                        break;
+
+                    case "2":
+
+                        break;
+
+                    case "3":
+
+                        break;
+
+                    case "4":
 
                         break;
                 }
@@ -210,6 +335,44 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
 
         }
+        #endregion
+
+        #region GENERAR - MENSAJE
+        private string GenerarEstado()
+        {
+            string mensaje = "";
+
+            switch (this.eventoActual) //Segun el evento donde me encuentro
+            {
+                case "Orden":
+                    if (this.Key == 1)
+                    {
+                        this.desicionCapitan = this.urnaCapitan1.ConsultarDesicion();
+                        this.notificacion = this.urnaCapitan1.ConsultarDesicion().ToString();
+                        this.urna1.reiniciarVoto();
+                    }
+                    break;
+
+                case "Votacion":
+                    this.notificacion = this.urna1.ConsultarVoto().ToString();
+                    this.urna1.reiniciarVoto();
+                    break;
+
+                case "Batalla":
+                    this.notificacion = this.urna1.ConsultarVoto().ToString();
+                    SpawnearNoti(this.Key, true);
+                    NotificarOrden(this.Key, int.Parse(this.notificacion));
+                    break;
+            }
+
+
+            mensaje = this.turnero1.getTurno().ToString() + ";" + this.desicionCapitan + ";"
+                + this.notificacion + ";" + this.eventoActual + ";" + this.accionRealizada + ";"
+                + this.desicionIndividual + ";" + this.accionBot + ";";
+
+            return mensaje;
+        }
+        #endregion
 
         #endregion
 
@@ -255,31 +418,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 catch { MessageBox.Show("No pudo tirar automaticamente los dados."); }
             }
         }
-
-        #endregion
-
-        #region CERRAR FORM
-        private void Home_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void btn_Exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void salirAlIngresoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void btn_Exit_Click_1(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-
 
         #endregion
 
@@ -329,7 +467,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
-        #region ENVIAR - EstadoActual
+        #region ENVIAR - Dados
         private async void EnviarDadosCL()
         {
             ConsultarValorDado();
@@ -466,7 +604,32 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region FUNCIONES PRIVADAS DEL FORM
 
-        //Funcion llamada desde la pantalla anterior, para definir el rol y el avatar del cliente.
+        #region CERRAR FORM
+        private void Home_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btn_Exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void salirAlIngresoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btn_Exit_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+
+
+        #endregion
+
+        #region ASIGNACION AVATAR
         public void AsignarAvatar(Image avatar, string rol, bool jugarcam)
         {
             this.Rol = rol;
@@ -507,137 +670,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
             }
         }
-
-        private void ImpactarEnCliente(string user, List<string> parametros)
-        {
-            // 0.Turno , 1.DesicionCapitan , 2.Notificacion , 3.EventoActual, 4.AccionRealizada, 5.DesicionIndividual, 6.AccionBot
-
-            //Evento inicial Orden
-            if (this.turno < int.Parse(parametros[0])) //Si el turno de este cliente es menor del que me llega sucedio algo...
-            {
-                if (this.eventoActual == "Orden" && this.eventoActual == parametros[3]) //Si estamos en el evento orden
-                {
-                    if (user == "1") //Y el capitan nos envia mensaje.
-                    {
-                        this.turno = int.Parse(parametros[0]); //Igualamos el turno
-
-                        if (this.Key != 1)
-                        {
-                            SiguienteTurno();
-                        }
-
-                        if (int.Parse(parametros[2]) != 0)
-                        {
-                            NotificarOrdenCap(int.Parse(parametros[2]));
-                        }
-
-                        SpawnearNoti(1, true);
-                        SpawnearNoti(2, false);
-                        SpawnearNoti(3, false);
-                        SpawnearNoti(4, false);
-                        SwitchUrnaCap(true);
-
-                        this.eventoActual = "Votacion";
-                    }
-                }
-            }
-
-            // 0.Turno , 1.DesicionCapitan , 2.Notificacion , 3.EventoActual, 4.AccionRealizada, 5.DesicionIndividual, 6.AccionBot
-            //Evento votacion
-            if (parametros[3] == "Votacion" && parametros[3] == this.eventoActual)
-            {
-                SwitchEscrutinio(true);
-
-                switch (this.Key)
-                {
-                    case 2:
-                        MensajesVotacion(); //Escribe los mensajes Si capitan y No capitan en la urna1
-                        break;
-
-                    case 3:
-                        MensajesVotacion();
-                        break;
-
-                    case 4:
-                        MensajesVotacion();
-                        break;
-
-                    default:
-                        break;
-                }
-
-                if (int.Parse(parametros[2]) != 0)
-                {
-                    switch (user)
-                    {
-                        case "2":
-                            SpawnearNoti(2, true);
-                            NotificarOrden(2, int.Parse(parametros[2]));
-                            CargarVoto(1, int.Parse(parametros[2]));
-                            SiguienteTurno();
-                            break;
-
-                        case "3":
-                            SpawnearNoti(3, true);
-                            NotificarOrden(3, int.Parse(parametros[2]));
-                            CargarVoto(2, int.Parse(parametros[2]));
-                            SiguienteTurno();
-                            break;
-
-                        case "4":
-                            SpawnearNoti(4, true);
-                            NotificarOrden(4, int.Parse(parametros[2]));
-                            CargarVoto(3, int.Parse(parametros[2]));
-                            SiguienteTurno();
-                            break;
-                    }
-
-
-                    if (this.escrutinio1.confirmarVotacion() != 0)
-                    {
-                        this.eventoActual = "Batalla";
-                        SwitchEscrutinio(false);
-                        this.escrutinio1.reiniciarVotos();
-                        this.escrutinio1.reiniciarCheck();
-                        QuitarTodasLasNotis();
-                    }
-                }
-            }
-
-            // 0.Turno , 1.DesicionCapitan , 2.Notificacion , 3.EventoActual, 4.AccionRealizada, 5.DesicionIndividual, 6.AccionBot, 7.Dado1, 8.Dado2
-            //Evento batalla
-            if (parametros[3] == "Batalla" && parametros[3] == this.eventoActual)
-            {
-                AparecerBarcoEnemigo();
-
-                if (this.turno < int.Parse(parametros[0]))
-                {
-                    TirarDadosAuto();
-                    SiguienteTurno();
-                }
-                   
-                switch (user)
-                {
-                    case "1":
-
-                        break;
-
-                    case "2":
-
-                        break;
-
-                    case "3":
-
-                        break;
-
-                    case "4":
-
-                        break;
-                }
-
-            }
-   
-        }
+        #endregion
 
         private void AparecerBarcoEnemigo()
         {
@@ -708,13 +741,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 this.urna1.Enabled = true;
                 this.urna1.Visible = true;
             }
-            
         }
 
         private void CargarVoto(int key, int accion) 
         {
-
-
             if (this.escrutinio1.InvokeRequired) 
             {
                 try 
@@ -723,11 +753,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 }
                 catch { }
             }
-        }
-
-        private void barco1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void dados1_Load(object sender, EventArgs e)
@@ -837,41 +862,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 }
             }
             catch { }
-        }
-
-        private string GenerarEstado() 
-        {
-            string mensaje = "";
-
-            switch (this.eventoActual) //Segun el evento donde me encuentro
-            {
-                case "Orden":
-                    if (this.Key == 1)
-                    {
-                        this.desicionCapitan = this.urnaCapitan1.ConsultarDesicion();
-                        this.notificacion = this.urnaCapitan1.ConsultarDesicion().ToString();
-                        this.urna1.reiniciarVoto();
-                    }
-                    break;
-
-                case "Votacion":
-                    this.notificacion = this.urna1.ConsultarVoto().ToString();
-                    this.urna1.reiniciarVoto();
-                    break;
-
-                case "Batalla":
-                    this.notificacion = this.urna1.ConsultarVoto().ToString();
-                    SpawnearNoti(this.Key, true);
-                    NotificarOrden(this.Key, int.Parse(this.notificacion));
-                    break;
-            }
-
-
-            mensaje = this.turnero1.getTurno().ToString() + ";" + this.desicionCapitan + ";"
-                + this.notificacion + ";" + this.eventoActual + ";" + this.accionRealizada + ";"
-                + this.desicionIndividual + ";" + this.accionBot + ";";
-
-            return mensaje;
         }
 
         private int ConsultarDesicion()

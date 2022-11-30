@@ -265,6 +265,7 @@
             // Barco_Page
             // 
             this.Barco_Page.AccessibleDescription = "";
+            this.Barco_Page.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.Barco_Page.Controls.Add(this.Navio_Page);
             this.Barco_Page.Controls.Add(this.Navegacion_Page);
             this.Barco_Page.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -279,10 +280,10 @@
             // Navio_Page
             // 
             this.Navio_Page.Controls.Add(this.barco1);
-            this.Navio_Page.Location = new System.Drawing.Point(4, 31);
+            this.Navio_Page.Location = new System.Drawing.Point(4, 34);
             this.Navio_Page.Name = "Navio_Page";
             this.Navio_Page.Padding = new System.Windows.Forms.Padding(3);
-            this.Navio_Page.Size = new System.Drawing.Size(1075, 786);
+            this.Navio_Page.Size = new System.Drawing.Size(1075, 783);
             this.Navio_Page.TabIndex = 0;
             this.Navio_Page.Text = "Navio";
             this.Navio_Page.UseVisualStyleBackColor = true;
@@ -290,7 +291,7 @@
             // barco1
             // 
             this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Location = new System.Drawing.Point(310, 127);
+            this.barco1.Location = new System.Drawing.Point(394, 43);
             this.barco1.Name = "barco1";
             this.barco1.Size = new System.Drawing.Size(366, 607);
             this.barco1.TabIndex = 0;
@@ -299,10 +300,10 @@
             // 
             this.Navegacion_Page.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Navegacion_Page.Controls.Add(this.tablero_Mapa);
-            this.Navegacion_Page.Location = new System.Drawing.Point(4, 31);
+            this.Navegacion_Page.Location = new System.Drawing.Point(4, 34);
             this.Navegacion_Page.Name = "Navegacion_Page";
             this.Navegacion_Page.Padding = new System.Windows.Forms.Padding(3);
-            this.Navegacion_Page.Size = new System.Drawing.Size(1075, 786);
+            this.Navegacion_Page.Size = new System.Drawing.Size(1075, 783);
             this.Navegacion_Page.TabIndex = 1;
             this.Navegacion_Page.Text = "Navegacion";
             this.Navegacion_Page.UseVisualStyleBackColor = true;
@@ -334,7 +335,7 @@
             this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.Size = new System.Drawing.Size(1069, 780);
+            this.tablero_Mapa.Size = new System.Drawing.Size(1069, 777);
             this.tablero_Mapa.TabIndex = 0;
             // 
             // Home
@@ -388,11 +389,11 @@
         private UserControls.Notificador noti_Carp;
         private UserControls.Notificador noti_Ar;
         private TabControl Barco_Page;
-        private TabPage Navegacion_Page;
-        private TabPage Navio_Page;
         private PageSetupDialog pageSetupDialog1;
         private TableLayoutPanel tablero_Mapa;
         private UserControls.Escrutinio escrutinio1;
+        private TabPage Navegacion_Page;
+        private TabPage Navio_Page;
         private UserControls.Barco barco1;
     }
 }

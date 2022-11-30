@@ -65,6 +65,7 @@
     <None Include="bin\Debug\net6.0-windows\Recursos\blackpearl-font.zip" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Caniones\Alerta.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Caniones\CanionBase.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Caniones\CanionBaseDerecho.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Caniones\CanionBaseIzquierdo.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Dados\Dado1.bmp" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Dados\Dado2.bmp" />
