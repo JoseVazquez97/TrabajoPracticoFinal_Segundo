@@ -12,7 +12,6 @@
 
         public Barco()
         {
-
             InitializeComponent();
             this.Vida = 100;
         }
@@ -123,7 +122,7 @@
         public string ConsultarEstado()
         {
             string mensaje = "";
-            mensaje = this.muni1 + ";" + this.muni2 + ";" + this.muni3 + ";" + this.muni4 + ";" + this.Vida + ";";
+            mensaje = this.muni1 + "," + this.muni2 + "," + this.muni3 + "," + this.muni4 + "," + this.Vida + ",";
             return mensaje;
         }
 
@@ -134,7 +133,7 @@
 
             for (int i = 0; i < estado.Length; i++)
             {
-                if (estado[i] != ';')
+                if (estado[i] != ',')
                 {
                     aux += estado[i];
                 }

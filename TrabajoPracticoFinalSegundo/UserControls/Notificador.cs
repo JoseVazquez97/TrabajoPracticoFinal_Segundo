@@ -41,17 +41,30 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             }
         }
 
-        public void MensajeArmado(int x) 
+        public void MensajeArmado(int x,string evento) 
         {
             switch (x) 
             {
                 case 1:
-                    this.lbl_texto.Text = "Si Capitan!";
+                    if (evento != "Batalla")
+                    {
+                        this.lbl_texto.Text = "Si Capitan!";
+                    }
+                    else 
+                    {
+                        this.lbl_texto.Text = "Voy a disparar!";
+                    }
                     break;
 
-
                 case 2:
-                    this.lbl_texto.Text = "Estas loco!";
+                    if (evento != "Batalla")
+                    {
+                        this.lbl_texto.Text = "Estas loco!";
+                    }
+                    else
+                    {
+                        this.lbl_texto.Text = "Voy a Recargar!";
+                    }
                     break;
 
                 case 3:

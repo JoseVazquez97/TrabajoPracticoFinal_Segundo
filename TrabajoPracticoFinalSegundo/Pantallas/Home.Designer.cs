@@ -55,6 +55,7 @@
             this.Navegacion_Page = new System.Windows.Forms.TabPage();
             this.tablero_Mapa = new System.Windows.Forms.TableLayoutPanel();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
+            this.barco2 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -103,7 +104,6 @@
             this.dados1.Name = "dados1";
             this.dados1.Size = new System.Drawing.Size(334, 143);
             this.dados1.TabIndex = 3;
-            this.dados1.Load += new System.EventHandler(this.dados1_Load);
             this.dados1.Click += new System.EventHandler(this.dados_Click);
             // 
             // turnero1
@@ -279,6 +279,7 @@
             // 
             // Navio_Page
             // 
+            this.Navio_Page.Controls.Add(this.barco2);
             this.Navio_Page.Controls.Add(this.barco1);
             this.Navio_Page.Location = new System.Drawing.Point(4, 34);
             this.Navio_Page.Name = "Navio_Page";
@@ -291,7 +292,7 @@
             // barco1
             // 
             this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Location = new System.Drawing.Point(394, 43);
+            this.barco1.Location = new System.Drawing.Point(258, 68);
             this.barco1.Name = "barco1";
             this.barco1.Size = new System.Drawing.Size(366, 607);
             this.barco1.TabIndex = 0;
@@ -337,6 +338,14 @@
             this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tablero_Mapa.Size = new System.Drawing.Size(1069, 777);
             this.tablero_Mapa.TabIndex = 0;
+            // 
+            // barco2
+            // 
+            this.barco2.BackColor = System.Drawing.Color.Transparent;
+            this.barco2.Location = new System.Drawing.Point(703, -31);
+            this.barco2.Name = "barco2";
+            this.barco2.Size = new System.Drawing.Size(366, 607);
+            this.barco2.TabIndex = 1;
             // 
             // Home
             // 
@@ -395,5 +404,6 @@
         private TabPage Navegacion_Page;
         private TabPage Navio_Page;
         private UserControls.Barco barco1;
+        private UserControls.Barco barco2;
     }
 }

@@ -41,21 +41,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private string Rol;
         private Image miAvatar;
-        private bool checkRendimiento;
         private bool conectado;
 
         private int Key;
-        private int turno;
+        private int Turno;
         private string eventoActual;
-        private int desicionCapitan;
         private string notificacion;
-        private string accionRealizada;
         private string accionBot;
 
-        private string eventoRandom;
-        private int desicionIndividual;
         private string val1;
         private string val2;
+        private string estadoBarco;
+        private string estadoBarco2;
 
         #endregion
 
@@ -66,22 +63,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             
             #region ASIGNACION DE PARAMETROS INICIALES
             this.eventoActual = "Orden";
-            this.eventoRandom = "Isla";
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
-            this.checkRendimiento = false;
             this.notificacion = "1";
-            this.accionRealizada = "0";
             this.val1 = "0";
             this.val2 = "0";
-            #endregion
-
-            #region DECLARACION DEL HUB
-            HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
-
-            //Si te desconectas segui intentado.
-            HomeConection.Closed +=
-                async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync(); };
             #endregion
 
             #region LOADS DE COMPONENTES 
@@ -109,6 +95,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             //BARCOS
             this.barco1.loadBarco(ref this.recursosDisplay1);
+            this.barco2.loadBarcoEnemigo();
+            this.barco2.Visible = false;
 
             //BARRA (INFERIOR)
             x = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
@@ -151,11 +139,20 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.noti_Ar.Location = new Point(locati.X + 255, locati.Y + 20);
 
             //ESCRUTINIO
-            this.turno = turnero1.getTurno();
+            this.Turno = turnero1.getTurno();
             this.escrutinio1.loadEscrutinio(this.flowLayoutPanel4.Width);
             this.escrutinio1.Visible = false;
 
             #endregion
+
+            #region DECLARACION DEL HUB
+            HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
+
+            //Si te desconectas segui intentado.
+            HomeConection.Closed +=
+                async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync(); };
+            #endregion
+
         }
 
         /// ///////////////////////////////////////////////////////////////
@@ -180,24 +177,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         break;
 
                     case "Batalla":
-                        int letoca = obtenerTurno(this.turno);
-                        HabilitarDados(letoca);
+                        int letoca = obtenerTurno(this.Turno);
                         EnviarEstadoSR();
 
-                        switch (letoca)
+                        if (letoca == this.Key)
                         {
-                            case 1:
-                                if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
-                                break;
-                            case 2:
-                                if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
-                                break;
-                            case 3:
-                                if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
-                                break;
-                            case 4:
-                                if (letoca == this.Key) { if (this.dados1.LISTO) { EnviarDadosCL(); } }
-                                break;
+                            HabilitarDados(letoca);
+                            if (this.dados1.LISTO)
+                            {
+                                EnviarDadosCL();
+                            }
                         }
                         break;
                 }
@@ -209,25 +198,28 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private void ImpactarEnCliente(string user, List<string> parametros)
         {
             // Index de parametros
-            // 0.Turno , 1.DesicionCapitan , 2.Notificacion , 3.EventoActual, 4.AccionRealizada, 5.DesicionIndividual, 6.AccionBot
+            // 0.Turno , 1.Notificacion , 2.EventoActual, 3.EstadoBarco1, 4.EstadoBarco2
+            int turno = int.Parse(parametros[0]);
+            int key = int.Parse(user);
+            int noti = int.Parse(parametros[1]);
 
-            //Evento ORDEN
-            if (this.turno < int.Parse(parametros[0])) //Si el turno de este cliente es menor del que me llega sucedio algo...
+            #region EVENTO ORDEN
+            if (this.Turno < turno) //Si el turno de este cliente es menor del que me llega sucedio algo...
             {
-                if (this.eventoActual == "Orden" && this.eventoActual == parametros[3]) //Si estamos en el evento orden
+                if (this.eventoActual == "Orden" && this.eventoActual == parametros[2]) //Si estamos en el evento orden
                 {
                     if (user == "1") //Y el capitan nos envia mensaje.
                     {
-                        this.turno = int.Parse(parametros[0]); //Igualamos el turno
+                        this.Turno = turno; //Igualamos el turno
 
                         if (this.Key != 1)
                         {
                             SiguienteTurno();
                         }
 
-                        if (int.Parse(parametros[2]) != 0)
+                        if (noti != 0)
                         {
-                            NotificarOrdenCap(int.Parse(parametros[2]));
+                            NotificarOrdenCap(noti);
                         }
 
                         SpawnearNoti(1, true);
@@ -240,9 +232,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     }
                 }
             }
+            #endregion
 
-            //Evento VOTACION
-            if (parametros[3] == "Votacion" && parametros[3] == this.eventoActual)
+            #region EVENTO VOTACION
+            if (parametros[2] == "Votacion" && parametros[2] == this.eventoActual)
             {
                 SwitchEscrutinio(true);
 
@@ -264,32 +257,28 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         break;
                 }
 
-                if (int.Parse(parametros[2]) != 0)
+                if (noti != 0)
                 {
                     switch (user)
                     {
                         case "2":
-                            SpawnearNoti(2, true);
-                            NotificarOrden(2, int.Parse(parametros[2]));
-                            CargarVoto(1, int.Parse(parametros[2]));
+                            RecibirNotificacion(key, noti);
                             SiguienteTurno();
+                            CargarVoto(1, noti);
                             break;
 
                         case "3":
-                            SpawnearNoti(3, true);
-                            NotificarOrden(3, int.Parse(parametros[2]));
-                            CargarVoto(2, int.Parse(parametros[2]));
+                            RecibirNotificacion(key, noti);
                             SiguienteTurno();
+                            CargarVoto(2, noti);
                             break;
 
                         case "4":
-                            SpawnearNoti(4, true);
-                            NotificarOrden(4, int.Parse(parametros[2]));
-                            CargarVoto(3, int.Parse(parametros[2]));
+                            RecibirNotificacion(key, noti);
                             SiguienteTurno();
+                            CargarVoto(3, noti);
                             break;
                     }
-
 
                     if (this.escrutinio1.confirmarVotacion() != 0)
                     {
@@ -297,43 +286,38 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         SwitchEscrutinio(false);
                         this.escrutinio1.reiniciarVotos();
                         this.escrutinio1.reiniciarCheck();
+                        this.notificacion = "0";
                         QuitarTodasLasNotis();
                     }
                 }
             }
+            #endregion
 
-            //Evento BATALLA
-            if (parametros[3] == "Batalla" && parametros[3] == this.eventoActual)
+            #region EVENTO BATALLA
+            if (parametros[2] == "Batalla" && parametros[2] == this.eventoActual)
             {
                 AparecerBarcoEnemigo();
 
-                if (this.turno < int.Parse(parametros[0]))
+                if (noti != 0) 
                 {
-                    TirarDadosAuto();
-                    SiguienteTurno();
+                    RecibirNotificacion(key, noti);
                 }
 
-                switch (user)
+                if (this.Turno < turno)
                 {
-                    case "1":
+                    TirarDadosAuto(); SiguienteTurno();
 
-                        break;
-
-                    case "2":
-
-                        break;
-
-                    case "3":
-
-                        break;
-
-                    case "4":
-
-                        break;
+                    if (this.dados1.LISTO) 
+                    {
+                        if (noti != 0) 
+                        {
+                            AccionContraBarco(key, noti);
+                            QuitarTodasLasNotis();
+                        }
+                    }
                 }
-
             }
-
+            #endregion
         }
         #endregion
 
@@ -347,7 +331,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 case "Orden":
                     if (this.Key == 1)
                     {
-                        this.desicionCapitan = this.urnaCapitan1.ConsultarDesicion();
                         this.notificacion = this.urnaCapitan1.ConsultarDesicion().ToString();
                         this.urna1.reiniciarVoto();
                     }
@@ -360,15 +343,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                 case "Batalla":
                     this.notificacion = this.urna1.ConsultarVoto().ToString();
-                    SpawnearNoti(this.Key, true);
-                    NotificarOrden(this.Key, int.Parse(this.notificacion));
+                    this.urna1.reiniciarVoto();
+                    this.estadoBarco = this.barco1.ConsultarEstado();
+                    this.estadoBarco2 = this.barco2.ConsultarEstado();
                     break;
             }
 
 
-            mensaje = this.turnero1.getTurno().ToString() + ";" + this.desicionCapitan + ";"
-                + this.notificacion + ";" + this.eventoActual + ";" + this.accionRealizada + ";"
-                + this.desicionIndividual + ";" + this.accionBot + ";";
+            mensaje = this.turnero1.getTurno().ToString() + ";" + this.notificacion + ";" + this.eventoActual + ";" 
+                    + this.estadoBarco + ";" + this.estadoBarco2 + ";";
 
             return mensaje;
         }
@@ -402,20 +385,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 this.dados1.tirar();
                 this.turnero1.Siguiente();
-                this.turno = this.turnero1.getTurno();
+                this.Turno = this.turnero1.getTurno();
+                this.notificacion = this.urna1.ConsultarVoto().ToString();
                 this.dados1.setEnable(false);
-            }
-        }
-
-        private void ActivarDado(bool activar)
-        {
-            if (this.dados1.InvokeRequired)
-            {
-                try
-                {
-                    dados1.Invoke(new Action(() => dados1.setEnable(activar)));
-                }
-                catch { MessageBox.Show("No pudo tirar automaticamente los dados."); }
             }
         }
 
@@ -470,18 +442,21 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #region ENVIAR - Dados
         private async void EnviarDadosCL()
         {
-            ConsultarValorDado();
-
-            string usr = this.Key.ToString();
-            string val1 = this.val1;
-            string val2 = this.val2; 
-            
-
-            try
+            if (this.dados1.LISTO) 
             {
-                await HomeConection.InvokeAsync("EnviarDados", usr, val1, val2);
+                ConsultarValorDado();
+
+                string usr = this.Key.ToString();
+                string val1 = this.val1;
+                string val2 = this.val2;
+
+
+                try
+                {
+                    await HomeConection.InvokeAsync("EnviarDados", usr, val1, val2);
+                }
+                catch { MessageBox.Show("Error en el envio de Dados."); }
             }
-            catch { MessageBox.Show("Error en el envio de Dados."); }
         }
 
         #endregion
@@ -630,7 +605,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #region ASIGNACION AVATAR
-        public void AsignarAvatar(Image avatar, string rol, bool jugarcam)
+        public void AsignarAvatar(Image avatar, string rol, bool jugarcam) //Funcion ejecutada desde la pantalla anterior
         {
             this.Rol = rol;
             this.miAvatar = avatar;
@@ -672,9 +647,93 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
-        private void AparecerBarcoEnemigo()
+
+        private void ImpactarBarcos(string BEstado1, string BEstado2) //Se encarga de recibir el estaddo de los barcos.
         {
-            /*
+            if (this.barco1.InvokeRequired) 
+            {
+                this.barco2.Invoke(new Action(() => { this.barco1.RecibirEstado(BEstado2); }));
+                this.barco1.Invoke(new Action(() => { this.barco1.RecibirEstado(BEstado1); }));
+            }
+        }
+
+        private void AccionContraBarco(int rol, int parametro) //Decide segun el rol y la desicion tomada, que accion tomar sobre el barco enemigo
+        {
+            switch (parametro) 
+            {
+                case 1:
+                    switch (rol)
+                    {
+                        case 1:
+                            Atacar();
+                            break;
+
+                        case 2:
+                            Curar();
+                            break;
+
+                        case 3:
+                            Atacar();
+                            break;
+
+                        case 4:
+                            Atacar();
+                            break;
+                    }
+                    break;
+
+                case 2:
+                    switch (rol)
+                    {
+                        case 1:
+                            Recargar();
+                            break;
+
+                        case 2:
+                            Recargar();
+                            break;
+
+                        case 3:
+                            Recargar();
+                            break;
+
+                        case 4:
+                            Recargar();
+                            break;
+                    }
+                    break;
+            }
+        }
+
+        private void Recargar() //LLama a la funcion Recargar del barco1
+        {
+            if (this.barco1.InvokeRequired) 
+            {
+                this.barco1.Invoke(new Action(() => { this.barco1.Recargar(); }));
+            }
+        }
+
+        private void Curar() //LLama a la funcion curar del barco1
+        {
+            if (this.barco1.InvokeRequired)
+            {
+                this.barco1.Invoke(new Action(() => { this.barco1.Curar(); }));
+            }
+        }
+
+        private void Atacar() //LLama a la funcion recibir danio del barco2 
+        {
+            if (this.barco2.InvokeRequired)
+            {
+                try 
+                {
+                    this.barco2.Invoke(new Action(() => { this.barco2.RecibirDanio(10); }));
+                } catch { }
+            }
+        }
+        
+        private void AparecerBarcoEnemigo() //Hace visible el barco enemigo
+        {
             if (this.barco2.InvokeRequired)
             {
                 try
@@ -683,10 +742,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 }
                 catch { }
             }
-            */
         }
 
-        private void HabilitarDados(int x)
+        private void RecibirNotificacion(int usr, int parametro) //Hace visible y muestra el mensaje que llega por parametro las notificaciones
+        {
+            NotificarOrden(usr, parametro);
+            SpawnearNoti(usr, true);
+        }
+
+        private void HabilitarDados(int x) //Habilita el UC dados segun a quien le toca
         {
             switch (x)
             {
@@ -708,7 +772,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-        private void MensajesVotacion()
+        private void MensajesVotacion() //Establece los mensajes de las urnas
         {
             if (this.urna1.InvokeRequired) 
             {
@@ -730,6 +794,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 this.urnaCapitan1.Enabled = true;
                 this.urnaCapitan1.Visible = true;
                 this.urnaCapitan1.Load_UrnaCapitan(width, heigh, ref this.noti_Cap, ref this.turnero1, ref this.notificacion);
+                this.urna1.Load_Urna(width, heigh, ref this.noti_Cap);
                 this.urna1.Enabled = false;
                 this.urna1.Visible = false;
             }
@@ -737,13 +802,27 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 this.urnaCapitan1.Enabled = false;
                 this.urnaCapitan1.Visible = false;
-                this.urna1.Load_Urna(width,heigh);
+
+                switch (this.Key) 
+                {
+                    case 2:
+                        this.urna1.Load_Urna(width, heigh,ref this.noti_Carp);
+                        break;
+
+                    case 3:
+                        this.urna1.Load_Urna(width, heigh, ref this.noti_Mer);
+                        break;
+
+                    case 4:
+                        this.urna1.Load_Urna(width, heigh, ref this.noti_Ar);
+                        break;
+                }
                 this.urna1.Enabled = true;
                 this.urna1.Visible = true;
             }
         }
 
-        private void CargarVoto(int key, int accion) 
+        private void CargarVoto(int key, int accion) //Carga los votos al escrutinio
         {
             if (this.escrutinio1.InvokeRequired) 
             {
@@ -755,12 +834,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-        private void dados1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private List<string> obternerParam(string msg) 
+        private List<string> obternerParam(string msg) // Desglosa el mensaje recibido de otros clientes
         {
             List<string> parametros = new List<string>();
             string aux = "";
@@ -781,7 +855,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             return parametros;
         }
 
-        private void NotificarOrdenCap(int x) 
+        private void NotificarOrdenCap(int x) //Establece un mensaje prearmado en la notificacion del capitan
         {
             if (this.noti_Cap.InvokeRequired)
             {
@@ -793,7 +867,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-        private void NotificarOrden(int quien, int x) 
+        private void NotificarOrden(int quien, int x) //Establece el mensaje de la notificacion, teniendo en cuenta el evento.
         {
             switch (quien) 
             {
@@ -802,7 +876,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     {
                         try
                         {
-                            this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmado(x)));
+                            this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmado(x, this.eventoActual)));
                         }
                         catch { }
                     }
@@ -812,7 +886,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     {
                         try
                         {
-                            this.noti_Carp.Invoke(new Action(() => noti_Carp.MensajeArmado(x)));
+                            this.noti_Carp.Invoke(new Action(() => noti_Carp.MensajeArmado(x, this.eventoActual)));
                         }
                         catch { }
                     }
@@ -822,7 +896,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     {
                         try
                         {
-                            this.noti_Mer.Invoke(new Action(() => noti_Mer.MensajeArmado(x)));
+                            this.noti_Mer.Invoke(new Action(() => noti_Mer.MensajeArmado(x, this.eventoActual)));
                         }
                         catch { }
                     }
@@ -832,7 +906,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     {
                         try
                         {
-                            this.noti_Ar.Invoke(new Action(() => noti_Ar.MensajeArmado(x)));
+                            this.noti_Ar.Invoke(new Action(() => noti_Ar.MensajeArmado(x, this.eventoActual)));
                         }
                         catch { }
                     }
@@ -840,7 +914,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-        private void TirarDadosAuto() 
+        private void TirarDadosAuto() // Ejecuta de manera automatica una tirada de dados.
         {
             if (this.dados1.InvokeRequired) 
             {
@@ -851,34 +925,32 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-        private void SiguienteTurno() 
+        private void SiguienteTurno() // Hace que el form avance al siguiente turno
         {
             try
             {
                 if (this.turnero1.InvokeRequired)
                 {
                     this.turnero1.Invoke(new Action(() => this.turnero1.Siguiente()));
-                    this.turnero1.Invoke(new Action(() => this.turno = this.turnero1.getTurno()));
+                    this.turnero1.Invoke(new Action(() => this.Turno = this.turnero1.getTurno()));
                 }
             }
             catch { }
         }
 
-        private int ConsultarDesicion()
+        private void ConsultarDesicion() // Asigna al atributo del form "notificacion", la seleccion de la urna
         {
-            int desicion = 0;
             if (this.urna1.InvokeRequired)
             {
                 try
                 {
-                    this.urna1.Invoke(new Action(() => desicion = this.urna1.ConsultarVoto()));
+                    this.urna1.Invoke(new Action(() => { this.notificacion = this.urna1.ConsultarVoto().ToString(); }));
                 }
                 catch { }
             }
-            return desicion;
         }
 
-        private void activarDados(int key)
+        private void activarDados(int key) // Activa el user control dados, segun la key
         {
             if (this.Key == key)
             {
@@ -887,7 +959,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             else { this.dados1.setEnable(false); }
         }
 
-        private void SpawnearNoti(int rol, bool visible)
+        private void SpawnearNoti(int rol, bool visible) //Hace visible o invisible una notificacion especificada en parametros
         {
             switch (rol)
             {
@@ -937,7 +1009,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-        private int obtenerTurno(int turnoActual)
+        private int obtenerTurno(int turnoActual) // Sin importar el numero de turno, devuelve 1,2,3 o 4
         {
             int turnoDevuelto = turnoActual;
             if (turnoDevuelto > 4)
@@ -951,7 +1023,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-        private void SwitchEscrutinio(bool cual)
+        private void SwitchEscrutinio(bool cual) // Intercambia visibiliadad entre el escrutinio y los recursos
         {
             //TRUE ES --> ABRIR VOTACION
             if (this.escrutinio1.InvokeRequired)
@@ -973,15 +1045,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-        private void QuitarTodasLasNotis()
+        private void QuitarTodasLasNotis() //Quita todas las notificaciones del form, y establece el atributo a 0
         {
+            this.notificacion = "0";
             SpawnearNoti(1, false);
             SpawnearNoti(2, false);
             SpawnearNoti(3, false);
             SpawnearNoti(4, false);
         }
 
-        private void SwitchUrnaCap(bool cual)
+        private void SwitchUrnaCap(bool cual) // Intercambia visibilidad entre la urna normal y la de capitan
         {
             if (this.urnaCapitan1.InvokeRequired)
             {
@@ -1005,34 +1078,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 catch { }
             }
         }
-
-        private void EventoRandom()
-        {
-            Random x = new Random();
-            int evento = x.Next(1, 5);
-
-            switch (2)
-            {
-                case 1:
-                    //EncontrarIsla();
-                    break;
-
-                case 2:
-                    //EncontrarBarco();
-                    break;
-
-                case 3:
-                    //EncontrarMar();
-                    break;
-
-                case 4:
-                    this.eventoRandom = "Null";
-                    break;
-            }
-        }
-
-        #endregion
-        private void ConsultarValorDado() 
+        
+        private void ConsultarValorDado()  // Asigna a los atributos del form val1 y val2 los valores de los dados.
         {
             try
             {
@@ -1042,6 +1089,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             catch { }
         }
 
-        
+        #endregion
     }
 }

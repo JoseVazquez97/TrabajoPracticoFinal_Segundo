@@ -14,6 +14,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
     {
         int voto;
         string tipo;
+        Notificador notificador;
 
         public Urna()
         {
@@ -28,8 +29,10 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             
         }
 
-        public void Load_Urna(int tamaTotal, int altoTotal)
+        public void Load_Urna(int tamaTotal, int altoTotal, ref Notificador noti)
         {
+            this.notificador = noti;
+
             this.Width = tamaTotal;
             this.Height = altoTotal;
 
@@ -111,11 +114,13 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         private void btn_Si_Click(object sender, EventArgs e)
         {
             voto = 1;
+            this.notificador.Visible = true;
         }
 
         private void btn_No_Click(object sender, EventArgs e)
         {
             voto = 2;
+            this.notificador.Visible = true;
         }
     }
 }
