@@ -22,7 +22,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         public int V1 { get { return this.d1; } }
         public int V2 { get { return this.d2; } }
-        public bool LISTO { get { return this.Listo; } }
+        public bool LISTO { get { return this.Listo; } set { this.Listo = value; } }
 
         public Dados()
         {

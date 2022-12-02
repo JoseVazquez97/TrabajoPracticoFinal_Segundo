@@ -177,17 +177,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         break;
 
                     case "Batalla":
-                        int letoca = obtenerTurno(this.Turno);
+                        HabilitarDados();
                         EnviarEstadoSR();
-
-                        if (letoca == this.Key)
-                        {
-                            HabilitarDados(letoca);
-                            if (this.dados1.LISTO)
-                            {
-                                EnviarDadosCL();
-                            }
-                        }
+                        EnviarDadosCL(); 
                         break;
                 }
             }
@@ -199,8 +191,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             // Index de parametros
             // 0.Turno , 1.Notificacion , 2.EventoActual, 3.EstadoBarco1, 4.EstadoBarco2
-            int turno = int.Parse(parametros[0]);
+            
             int key = int.Parse(user);
+            int turno = int.Parse(parametros[0]);
             int noti = int.Parse(parametros[1]);
 
             #region EVENTO ORDEN
@@ -306,15 +299,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 if (this.Turno < turno)
                 {
                     TirarDadosAuto(); SiguienteTurno();
-
-                    if (this.dados1.LISTO) 
-                    {
-                        if (noti != 0) 
-                        {
-                            AccionContraBarco(key, noti);
-                            QuitarTodasLasNotis();
-                        }
-                    }
                 }
             }
             #endregion
@@ -344,14 +328,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 case "Batalla":
                     this.notificacion = this.urna1.ConsultarVoto().ToString();
                     this.urna1.reiniciarVoto();
-                    this.estadoBarco = this.barco1.ConsultarEstado();
-                    this.estadoBarco2 = this.barco2.ConsultarEstado();
                     break;
             }
 
 
-            mensaje = this.turnero1.getTurno().ToString() + ";" + this.notificacion + ";" + this.eventoActual + ";" 
-                    + this.estadoBarco + ";" + this.estadoBarco2 + ";";
+            mensaje = this.turnero1.getTurno().ToString() + ";" + this.notificacion + ";" + this.eventoActual + ";";
 
             return mensaje;
         }
@@ -385,9 +366,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 this.dados1.tirar();
                 this.turnero1.Siguiente();
-                this.Turno = this.turnero1.getTurno();
-                this.notificacion = this.urna1.ConsultarVoto().ToString();
-                this.dados1.setEnable(false);
+                this.Turno++;
             }
         }
 
@@ -449,7 +428,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 string usr = this.Key.ToString();
                 string val1 = this.val1;
                 string val2 = this.val2;
-
+                this.dados1.LISTO = false;
 
                 try
                 {
@@ -652,8 +631,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             if (this.barco1.InvokeRequired) 
             {
-                this.barco2.Invoke(new Action(() => { this.barco1.RecibirEstado(BEstado2); }));
-                this.barco1.Invoke(new Action(() => { this.barco1.RecibirEstado(BEstado1); }));
+                try 
+                {
+                    this.barco1.Invoke(new Action(() => { this.barco1.RecibirEstado(BEstado1); }));
+                } catch { }
+            }
+
+            if (this.barco2.InvokeRequired) 
+            {
+                try 
+                {
+                    this.barco2.Invoke(new Action(() => { this.barco1.RecibirEstado(BEstado2); }));
+                } catch { }
             }
         }
 
@@ -750,9 +739,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             SpawnearNoti(usr, true);
         }
 
-        private void HabilitarDados(int x) //Habilita el UC dados segun a quien le toca
+        private void HabilitarDados() //Habilita el UC dados segun a quien le toca
         {
-            switch (x)
+            int turno = obtenerTurno(this.turnero1.getTurno());
+
+            switch (turno)
             {
                 case 1:
                     activarDados(1);
