@@ -180,6 +180,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     case "Batalla":
                         HabilitarDados();
                         EnviarEstadoSR();
+
+                        if (this.dados1.LISTO) 
+                        {
+
+                        }
                         break;
                 }
             }
@@ -190,7 +195,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private void ImpactarEnCliente(string user, List<string> parametros)
         {
             // Index de parametros
-            // 0.Turno , 1.Notificacion , 2.EventoActual, 3.EstadoBarco1, 4.EstadoBarco2
+            // 0.Turno , 1.Notificacion , 2.EventoActual
 
             int key = int.Parse(user);
             int turno = int.Parse(parametros[0]);
