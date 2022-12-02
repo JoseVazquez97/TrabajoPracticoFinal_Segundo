@@ -60,7 +60,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             InitializeComponent();
             this.conectado = false;
-            
+
             #region ASIGNACION DE PARAMETROS INICIALES
             this.eventoActual = "Orden";
             this.Width = Screen.PrimaryScreen.Bounds.Width;
@@ -162,9 +162,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #region UPDATE-GAME (LOOP PRINCIPAL)
         private void Update500ms_Tick(object sender, EventArgs e)
         {
-            if (conectado) 
+            if (conectado)
             {
                 mandarImagenes();
+                this.notificacion = ConsultarDesicion();
 
                 switch (this.eventoActual)
                 {
@@ -179,7 +180,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     case "Batalla":
                         HabilitarDados();
                         EnviarEstadoSR();
-                        EnviarDadosCL(); 
                         break;
                 }
             }
@@ -191,7 +191,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             // Index de parametros
             // 0.Turno , 1.Notificacion , 2.EventoActual, 3.EstadoBarco1, 4.EstadoBarco2
-            
+
             int key = int.Parse(user);
             int turno = int.Parse(parametros[0]);
             int noti = int.Parse(parametros[1]);
@@ -291,14 +291,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 AparecerBarcoEnemigo();
 
-                if (noti != 0) 
+                if (noti != 0)
                 {
                     RecibirNotificacion(key, noti);
                 }
 
                 if (this.Turno < turno)
                 {
-                    TirarDadosAuto(); SiguienteTurno();
+                    AccionContraBarco(int.Parse(user), parametros[1]);
                 }
             }
             #endregion
@@ -326,55 +326,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
 
                 case "Batalla":
-                    this.notificacion = this.urna1.ConsultarVoto().ToString();
-                    this.urna1.reiniciarVoto();
                     break;
             }
 
-
             mensaje = this.turnero1.getTurno().ToString() + ";" + this.notificacion + ";" + this.eventoActual + ";";
-
             return mensaje;
         }
         #endregion
 
         #endregion
-
-        /// ///////////////////////////////////////////////////////////////
-
-        #region USERS_CONTROLS
-
-        #region PROGRES_BAR
-
-        private void HacerPaso()
-        {
-            /*
-            if () 
-            {
-                this.progress.PerformStep();
-            }
-            */
-        }
-
-        #endregion
-
-        #region DADOS
-
-        private void dados_Click(object sender, EventArgs e)
-        {
-            if (this.dados1.getEnable())
-            {
-                this.dados1.tirar();
-                this.turnero1.Siguiente();
-                this.Turno++;
-            }
-        }
-
-        #endregion
-
-        #endregion
-
-        /// ///////////////////////////////////////////////////////////////
 
         #region SIGNAL R
 
@@ -415,29 +375,28 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
             catch { MessageBox.Show("Error en el envio de Estado."); }
         }
-
         #endregion
 
         #region ENVIAR - Dados
         private async void EnviarDadosCL()
         {
-            if (this.dados1.LISTO) 
-            {
-                ConsultarValorDado();
 
-                string usr = this.Key.ToString();
-                string val1 = this.val1;
-                string val2 = this.val2;
-                this.dados1.LISTO = false;
-
-                try
-                {
-                    await HomeConection.InvokeAsync("EnviarDados", usr, val1, val2);
-                }
-                catch { MessageBox.Show("Error en el envio de Dados."); }
-            }
         }
+        #endregion
 
+        #region ENVIAR - Barcos
+        private async void EnviarBarcos()
+        {
+            string usr = this.Key.ToString();
+            string b1 = this.barco1.ConsultarEstado();
+            string b2 = this.barco2.ConsultarEstado();
+
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarBarcos", usr, b1, b2);
+            }
+            catch { MessageBox.Show("Error en el envio de Dados."); }
+        }
         #endregion
 
         #endregion
@@ -446,7 +405,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         ////////////////////////////////////////////////////
 
         #region RECEPCION DE MENSAJES
-        
+
         private async void Home_Load(object sender, EventArgs e)
         {
             #region CONECTARSE
@@ -530,24 +489,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             });
             #endregion
 
-            #region DADOS-COM
+            #region BARCOS-COM
+            HomeConection.On<string, string>("RecibirBarcos", (barc1, barc2) =>
+            {
+                ImpactarBarcos(barc1, barc2);
+            });
+            #endregion
 
+            #region DADOS-COM
             HomeConection.On<string, string, string>("RecibirDados", (usr, val1, val2) =>
             {
-                if (int.Parse(usr) != this.Key) 
-                {
-                    if (this.dados1.InvokeRequired)
-                    {
-                        if (this.dados1.LISTO) 
-                        {
-                            try 
-                            {
-                                this.dados1.Invoke(new Action(() => this.dados1.AsignarValores(val1,val2)));
-                            } catch { }
-                        }
-                    }
-                }
-                
             });
             #endregion
         }
@@ -626,31 +577,33 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
-
+        #region BARCOS
         private void ImpactarBarcos(string BEstado1, string BEstado2) //Se encarga de recibir el estaddo de los barcos.
         {
-            if (this.barco1.InvokeRequired) 
+            if (this.barco1.InvokeRequired)
             {
-                try 
+                try
                 {
                     this.barco1.Invoke(new Action(() => { this.barco1.RecibirEstado(BEstado1); }));
-                } catch { }
+                }
+                catch { }
             }
 
-            if (this.barco2.InvokeRequired) 
+            if (this.barco2.InvokeRequired)
             {
-                try 
+                try
                 {
-                    this.barco2.Invoke(new Action(() => { this.barco1.RecibirEstado(BEstado2); }));
-                } catch { }
+                    this.barco2.Invoke(new Action(() => { this.barco2.RecibirEstado(BEstado2); }));
+                }
+                catch { }
             }
         }
 
-        private void AccionContraBarco(int rol, int parametro) //Decide segun el rol y la desicion tomada, que accion tomar sobre el barco enemigo
+        private void AccionContraBarco(int rol, string parametro) //Decide segun el rol y la desicion tomada, que accion tomar sobre el barco enemigo
         {
-            switch (parametro) 
+            switch (parametro)
             {
-                case 1:
+                case "1":
                     switch (rol)
                     {
                         case 1:
@@ -671,7 +624,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     }
                     break;
 
-                case 2:
+                case "2":
                     switch (rol)
                     {
                         case 1:
@@ -696,7 +649,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void Recargar() //LLama a la funcion Recargar del barco1
         {
-            if (this.barco1.InvokeRequired) 
+            if (this.barco1.InvokeRequired)
             {
                 this.barco1.Invoke(new Action(() => { this.barco1.Recargar(); }));
             }
@@ -714,13 +667,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             if (this.barco2.InvokeRequired)
             {
-                try 
+                try
                 {
                     this.barco2.Invoke(new Action(() => { this.barco2.RecibirDanio(10); }));
-                } catch { }
+                }
+                catch { }
             }
         }
-        
+
         private void AparecerBarcoEnemigo() //Hace visible el barco enemigo
         {
             if (this.barco2.InvokeRequired)
@@ -728,6 +682,49 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 try
                 {
                     barco2.Invoke(new Action(() => this.barco2.Visible = true));
+                }
+                catch { }
+            }
+        }
+        #endregion
+
+        #region DADOS
+        private void dados_Click(object sender, EventArgs e)
+        {
+            if (this.dados1.getEnable())
+            {
+                this.dados1.tirar();
+                SiguienteTurno();
+                AccionContraBarco(this.Key, this.notificacion);
+            }
+        }
+
+        private void ConsultarValorDado()  // Asigna a los atributos del form val1 y val2 los valores de los dados.
+        {
+            try
+            {
+                this.dados1.Invoke(new Action(() => this.val1 = this.dados1.V1.ToString()));
+                this.dados1.Invoke(new Action(() => this.val2 = this.dados1.V2.ToString()));
+            }
+            catch { }
+        }
+
+        private void activarDados(int key) // Activa el user control dados, segun la key
+        {
+            if (this.Key == key)
+            {
+                this.dados1.setEnable(true);
+            }
+            else { this.dados1.setEnable(false); }
+        }
+
+        private void TirarDadosAuto() // Ejecuta de manera automatica una tirada de dados.
+        {
+            if (this.dados1.InvokeRequired)
+            {
+                try
+                {
+                    this.dados1.Invoke(new Action(() => this.dados1.tirar()));
                 }
                 catch { }
             }
@@ -763,9 +760,20 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
+        #endregion
+
+        #region NOTIFICACIONES
+        private void QuitarTodasLasNotis() //Quita todas las notificaciones del form, y establece el atributo a 0
+        {
+            SpawnearNoti(1, false);
+            SpawnearNoti(2, false);
+            SpawnearNoti(3, false);
+            SpawnearNoti(4, false);
+        }
+
         private void MensajesVotacion() //Establece los mensajes de las urnas
         {
-            if (this.urna1.InvokeRequired) 
+            if (this.urna1.InvokeRequired)
             {
                 try
                 {
@@ -773,181 +781,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 }
                 catch { }
             }
-        }
-
-        private void loadUrnas(bool x) //Funcion para hacer los componentes del hud responsivos.
-        {
-            int width = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
-            int heigh = this.flowLayoutPanel1.Height;
-
-            if (x)
-            {
-                this.urnaCapitan1.Enabled = true;
-                this.urnaCapitan1.Visible = true;
-                this.urnaCapitan1.Load_UrnaCapitan(width, heigh, ref this.noti_Cap, ref this.turnero1, ref this.notificacion);
-                this.urna1.Load_Urna(width, heigh, ref this.noti_Cap);
-                this.urna1.Enabled = false;
-                this.urna1.Visible = false;
-            }
-            else 
-            {
-                this.urnaCapitan1.Enabled = false;
-                this.urnaCapitan1.Visible = false;
-
-                switch (this.Key) 
-                {
-                    case 2:
-                        this.urna1.Load_Urna(width, heigh,ref this.noti_Carp);
-                        break;
-
-                    case 3:
-                        this.urna1.Load_Urna(width, heigh, ref this.noti_Mer);
-                        break;
-
-                    case 4:
-                        this.urna1.Load_Urna(width, heigh, ref this.noti_Ar);
-                        break;
-                }
-                this.urna1.Enabled = true;
-                this.urna1.Visible = true;
-            }
-        }
-
-        private void CargarVoto(int key, int accion) //Carga los votos al escrutinio
-        {
-            if (this.escrutinio1.InvokeRequired) 
-            {
-                try 
-                {
-                    escrutinio1.Invoke(new Action(() => this.escrutinio1.recibirVoto(key, accion)));
-                }
-                catch { }
-            }
-        }
-
-        private List<string> obternerParam(string msg) // Desglosa el mensaje recibido de otros clientes
-        {
-            List<string> parametros = new List<string>();
-            string aux = "";
-
-            for (int i = 0; i < msg.Length; i++)
-            {
-                if (msg[i] != ';')
-                {
-                    aux += msg[i];
-                }
-                else 
-                {
-                    parametros.Add(aux); 
-                    aux = ""; 
-                }
-            }
-
-            return parametros;
-        }
-
-        private void NotificarOrdenCap(int x) //Establece un mensaje prearmado en la notificacion del capitan
-        {
-            if (this.noti_Cap.InvokeRequired)
-            {
-                try
-                {
-                    this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmadoCap(x)));
-                }
-                catch { }
-            }
-        }
-
-        private void NotificarOrden(int quien, int x) //Establece el mensaje de la notificacion, teniendo en cuenta el evento.
-        {
-            switch (quien) 
-            {
-                case 1:
-                    if (this.noti_Cap.InvokeRequired)
-                    {
-                        try
-                        {
-                            this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmado(x, this.eventoActual)));
-                        }
-                        catch { }
-                    }
-                    break;
-                case 2:
-                    if (this.noti_Carp.InvokeRequired)
-                    {
-                        try
-                        {
-                            this.noti_Carp.Invoke(new Action(() => noti_Carp.MensajeArmado(x, this.eventoActual)));
-                        }
-                        catch { }
-                    }
-                    break;
-                case 3:
-                    if (this.noti_Mer.InvokeRequired)
-                    {
-                        try
-                        {
-                            this.noti_Mer.Invoke(new Action(() => noti_Mer.MensajeArmado(x, this.eventoActual)));
-                        }
-                        catch { }
-                    }
-                    break;
-                case 4:
-                    if (this.noti_Ar.InvokeRequired)
-                    {
-                        try
-                        {
-                            this.noti_Ar.Invoke(new Action(() => noti_Ar.MensajeArmado(x, this.eventoActual)));
-                        }
-                        catch { }
-                    }
-                    break;
-            }
-        }
-
-        private void TirarDadosAuto() // Ejecuta de manera automatica una tirada de dados.
-        {
-            if (this.dados1.InvokeRequired) 
-            {
-                try 
-                {
-                    this.dados1.Invoke(new Action(() => this.dados1.tirar()));
-                } catch { }
-            }
-        }
-
-        private void SiguienteTurno() // Hace que el form avance al siguiente turno
-        {
-            try
-            {
-                if (this.turnero1.InvokeRequired)
-                {
-                    this.turnero1.Invoke(new Action(() => this.turnero1.Siguiente()));
-                    this.turnero1.Invoke(new Action(() => this.Turno = this.turnero1.getTurno()));
-                }
-            }
-            catch { }
-        }
-
-        private void ConsultarDesicion() // Asigna al atributo del form "notificacion", la seleccion de la urna
-        {
-            if (this.urna1.InvokeRequired)
-            {
-                try
-                {
-                    this.urna1.Invoke(new Action(() => { this.notificacion = this.urna1.ConsultarVoto().ToString(); }));
-                }
-                catch { }
-            }
-        }
-
-        private void activarDados(int key) // Activa el user control dados, segun la key
-        {
-            if (this.Key == key)
-            {
-                this.dados1.setEnable(true);
-            }
-            else { this.dados1.setEnable(false); }
         }
 
         private void SpawnearNoti(int rol, bool visible) //Hace visible o invisible una notificacion especificada en parametros
@@ -1000,49 +833,72 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-        private int obtenerTurno(int turnoActual) // Sin importar el numero de turno, devuelve 1,2,3 o 4
+        private void NotificarOrdenCap(int x) //Establece un mensaje prearmado en la notificacion del capitan
         {
-            int turnoDevuelto = turnoActual;
-            if (turnoDevuelto > 4)
-            {
-                turnoDevuelto = turnoActual - 4;
-                return obtenerTurno(turnoDevuelto);
-            }
-            else
-            {
-                return turnoDevuelto;
-            }
-        }
-
-        private void SwitchEscrutinio(bool cual) // Intercambia visibiliadad entre el escrutinio y los recursos
-        {
-            //TRUE ES --> ABRIR VOTACION
-            if (this.escrutinio1.InvokeRequired)
+            if (this.noti_Cap.InvokeRequired)
             {
                 try
                 {
-                    escrutinio1.Invoke(new Action(() => escrutinio1.Visible = cual));
-                }
-                catch { }
-            }
-
-            if (this.recursosDisplay1.InvokeRequired)
-            {
-                try
-                {
-                    recursosDisplay1.Invoke(new Action(() => recursosDisplay1.Visible = !cual));
+                    this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmadoCap(x)));
                 }
                 catch { }
             }
         }
 
-        private void QuitarTodasLasNotis() //Quita todas las notificaciones del form, y establece el atributo a 0
+        private void NotificarOrden(int quien, int x) //Establece el mensaje de la notificacion, teniendo en cuenta el evento.
         {
-            this.notificacion = "0";
-            SpawnearNoti(1, false);
-            SpawnearNoti(2, false);
-            SpawnearNoti(3, false);
-            SpawnearNoti(4, false);
+            switch (quien)
+            {
+                case 1:
+                    if (this.noti_Cap.InvokeRequired)
+                    {
+                        try
+                        {
+                            this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmado(x, this.eventoActual)));
+                        }
+                        catch { }
+                    }
+                    break;
+                case 2:
+                    if (this.noti_Carp.InvokeRequired)
+                    {
+                        try
+                        {
+                            this.noti_Carp.Invoke(new Action(() => noti_Carp.MensajeArmado(x, this.eventoActual)));
+                        }
+                        catch { }
+                    }
+                    break;
+                case 3:
+                    if (this.noti_Mer.InvokeRequired)
+                    {
+                        try
+                        {
+                            this.noti_Mer.Invoke(new Action(() => noti_Mer.MensajeArmado(x, this.eventoActual)));
+                        }
+                        catch { }
+                    }
+                    break;
+                case 4:
+                    if (this.noti_Ar.InvokeRequired)
+                    {
+                        try
+                        {
+                            this.noti_Ar.Invoke(new Action(() => noti_Ar.MensajeArmado(x, this.eventoActual)));
+                        }
+                        catch { }
+                    }
+                    break;
+            }
+        }
+        #endregion
+
+        #region URNAS
+        private string ConsultarDesicion() // Asigna al atributo del form "notificacion", la seleccion de la urna
+        {
+            string DES = "0";
+            DES = this.urna1.ConsultarVoto().ToString();
+            return DES;
         }
 
         private void SwitchUrnaCap(bool cual) // Intercambia visibilidad entre la urna normal y la de capitan
@@ -1069,16 +925,134 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 catch { }
             }
         }
-        
-        private void ConsultarValorDado()  // Asigna a los atributos del form val1 y val2 los valores de los dados.
+
+        private void loadUrnas(bool x) //Funcion para hacer los componentes del hud responsivos.
+        {
+            int width = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
+            int heigh = this.flowLayoutPanel1.Height;
+
+            if (x)
+            {
+                this.urnaCapitan1.Enabled = true;
+                this.urnaCapitan1.Visible = true;
+                this.urnaCapitan1.Load_UrnaCapitan(width, heigh, ref this.noti_Cap, ref this.turnero1, ref this.notificacion);
+                this.urna1.Load_Urna(width, heigh, ref this.noti_Cap);
+                this.urna1.Enabled = false;
+                this.urna1.Visible = false;
+            }
+            else
+            {
+                this.urnaCapitan1.Enabled = false;
+                this.urnaCapitan1.Visible = false;
+
+                switch (this.Key)
+                {
+                    case 2:
+                        this.urna1.Load_Urna(width, heigh, ref this.noti_Carp);
+                        break;
+
+                    case 3:
+                        this.urna1.Load_Urna(width, heigh, ref this.noti_Mer);
+                        break;
+
+                    case 4:
+                        this.urna1.Load_Urna(width, heigh, ref this.noti_Ar);
+                        break;
+                }
+                this.urna1.Enabled = true;
+                this.urna1.Visible = true;
+            }
+        }
+
+        private void CargarVoto(int key, int accion) //Carga los votos al escrutinio
+        {
+            if (this.escrutinio1.InvokeRequired)
+            {
+                try
+                {
+                    escrutinio1.Invoke(new Action(() => this.escrutinio1.recibirVoto(key, accion)));
+                }
+                catch { }
+            }
+        }
+        #endregion
+
+        #region DESGLOSAR MENSAJE
+        private List<string> obternerParam(string msg) // Desglosa el mensaje recibido de otros clientes
+        {
+            List<string> parametros = new List<string>();
+            string aux = "";
+
+            for (int i = 0; i < msg.Length; i++)
+            {
+                if (msg[i] != ';')
+                {
+                    aux += msg[i];
+                }
+                else
+                {
+                    parametros.Add(aux);
+                    aux = "";
+                }
+            }
+
+            return parametros;
+        }
+        #endregion
+
+        #region TURNERO
+        private int obtenerTurno(int turnoActual) // Sin importar el numero de turno, devuelve 1,2,3 o 4
+        {
+            int turnoDevuelto = turnoActual;
+            if (turnoDevuelto > 4)
+            {
+                turnoDevuelto = turnoActual - 4;
+                return obtenerTurno(turnoDevuelto);
+            }
+            else
+            {
+                return turnoDevuelto;
+            }
+        }
+
+        private void SiguienteTurno() // Hace que el form avance al siguiente turno
         {
             try
             {
-                this.dados1.Invoke(new Action(() => this.val1 = this.dados1.V1.ToString()));
-                this.dados1.Invoke(new Action(() => this.val2 = this.dados1.V2.ToString()));
+                if (this.turnero1.InvokeRequired)
+                {
+                    this.turnero1.Invoke(new Action(() => this.turnero1.Siguiente()));
+                    this.turnero1.Invoke(new Action(() => this.Turno = this.turnero1.getTurno()));
+                }
             }
             catch { }
         }
+
+        #endregion
+
+        #region ESCRUTINIO
+        private void SwitchEscrutinio(bool cual) // Intercambia visibiliadad entre el escrutinio y los recursos
+        {
+            //TRUE ES --> ABRIR VOTACION
+            if (this.escrutinio1.InvokeRequired)
+            {
+                try
+                {
+                    escrutinio1.Invoke(new Action(() => escrutinio1.Visible = cual));
+                }
+                catch { }
+            }
+
+            if (this.recursosDisplay1.InvokeRequired)
+            {
+                try
+                {
+                    recursosDisplay1.Invoke(new Action(() => recursosDisplay1.Visible = !cual));
+                }
+                catch { }
+            }
+        }
+        #endregion
 
         #endregion
     }

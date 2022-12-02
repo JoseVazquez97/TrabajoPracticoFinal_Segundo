@@ -44,6 +44,7 @@
             // pic_Barco
             // 
             this.pic_Barco.BackColor = System.Drawing.Color.Transparent;
+            this.pic_Barco.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pic_Barco.Location = new System.Drawing.Point(32, 0);
             this.pic_Barco.Name = "pic_Barco";
             this.pic_Barco.Size = new System.Drawing.Size(303, 607);
@@ -62,7 +63,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(173, 172);
+            this.pictureBox1.Location = new System.Drawing.Point(225, 172);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(141, 62);
             this.pictureBox1.TabIndex = 6;
@@ -70,11 +71,12 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(173, 274);
+            this.pictureBox2.Location = new System.Drawing.Point(225, 274);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(141, 62);
             this.pictureBox2.TabIndex = 7;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox3
             // 
@@ -96,12 +98,12 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.pic_Barco);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.pic_Barco);
             this.Name = "Barco";
             this.Size = new System.Drawing.Size(366, 607);
             ((System.ComponentModel.ISupportInitialize)(this.pic_Barco)).EndInit();
