@@ -58,6 +58,7 @@
     <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatarMercader.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Barco\barco - copia - copia.jpg" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Barco\barco.jpg" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Barco\BarcoGrande.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Barco\BARCO_Base.jpg" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Barco\BARCO_BaseDos.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Barco\BARCO_BaseUno.png" />
