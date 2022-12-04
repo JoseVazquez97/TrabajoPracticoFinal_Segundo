@@ -100,7 +100,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             this.jugarCam = false;
 
-
             if (camara != null) camara.Dispose();
             camara = new VideoCapture();
             this.contador = 0;
@@ -119,7 +118,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            this.contador++;   
+            this.contador++;
             camara.Read(frame);
 
             Imagen.Image = new Bitmap(frame.ToBitmap(), new Size(80, 80));
@@ -129,7 +128,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 timer1.Stop();
                 camara.Dispose();
             }
-
         }
 
         private void PantallaPhoto_FormClosed(object sender, FormClosedEventArgs e)
@@ -168,17 +166,20 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private void ConfirmarSeleccion_Click(object sender, EventArgs e)
         {
             Intro x = new Intro();
+            try
+            {
+                Imagen.Image = new Bitmap(Imagen.Image, new Size(100, 70));
+                if (File.Exists(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png"))
+                    File.Delete(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
+                Imagen.Image.Save(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
+                Imagen.Image = Image.FromFile(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
 
-            Imagen.Image = new Bitmap(Imagen.Image, new Size(100, 70));
-            if (File.Exists(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png"))
-                File.Delete(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
-            Imagen.Image.Save(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
-            Imagen.Image = Image.FromFile(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
-
-            home.AsignarAvatar(this.Imagen.Image,this.comboBox1.Text,this.jugarCam);
-            x.Show();
-            home.Show();
-            this.Dispose();
+                home.AsignarAvatar(this.Imagen.Image, this.comboBox1.Text, this.jugarCam);
+                x.Show();
+                home.Show();
+                this.Dispose();
+            }
+            catch { MessageBox.Show("El rol ya esta ocupado."); }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

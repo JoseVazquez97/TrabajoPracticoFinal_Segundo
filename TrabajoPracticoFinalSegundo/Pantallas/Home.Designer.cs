@@ -51,11 +51,11 @@
             this.noti_Mer = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
             this.Barco_Page = new System.Windows.Forms.TabControl();
             this.Navio_Page = new System.Windows.Forms.TabPage();
+            this.barco2 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.barco1 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.Navegacion_Page = new System.Windows.Forms.TabPage();
-            this.tablero_Mapa = new System.Windows.Forms.TableLayoutPanel();
+            this.ucMapa1 = new GeneradorMapa.UCMapa();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
-            this.barco2 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -99,6 +99,7 @@
             // dados1
             // 
             this.dados1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dados1.LISTO = false;
             this.dados1.Location = new System.Drawing.Point(1076, -13);
             this.dados1.Margin = new System.Windows.Forms.Padding(50, 3, 50, 3);
             this.dados1.Name = "dados1";
@@ -241,7 +242,6 @@
             // Update500ms
             // 
             this.Update500ms.Enabled = true;
-            this.Update500ms.Interval = 300;
             this.Update500ms.Tick += new System.EventHandler(this.Update500ms_Tick);
             // 
             // noti_Carp
@@ -289,10 +289,18 @@
             this.Navio_Page.Text = "Navio";
             this.Navio_Page.UseVisualStyleBackColor = true;
             // 
+            // barco2
+            // 
+            this.barco2.BackColor = System.Drawing.Color.Transparent;
+            this.barco2.Location = new System.Drawing.Point(703, -31);
+            this.barco2.Name = "barco2";
+            this.barco2.Size = new System.Drawing.Size(366, 607);
+            this.barco2.TabIndex = 1;
+            // 
             // barco1
             // 
             this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Location = new System.Drawing.Point(258, 68);
+            this.barco1.Location = new System.Drawing.Point(264, 68);
             this.barco1.Name = "barco1";
             this.barco1.Size = new System.Drawing.Size(366, 607);
             this.barco1.TabIndex = 0;
@@ -300,7 +308,7 @@
             // Navegacion_Page
             // 
             this.Navegacion_Page.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Navegacion_Page.Controls.Add(this.tablero_Mapa);
+            this.Navegacion_Page.Controls.Add(this.ucMapa1);
             this.Navegacion_Page.Location = new System.Drawing.Point(4, 34);
             this.Navegacion_Page.Name = "Navegacion_Page";
             this.Navegacion_Page.Padding = new System.Windows.Forms.Padding(3);
@@ -309,43 +317,15 @@
             this.Navegacion_Page.Text = "Navegacion";
             this.Navegacion_Page.UseVisualStyleBackColor = true;
             // 
-            // tablero_Mapa
+            // ucMapa1
             // 
-            this.tablero_Mapa.ColumnCount = 10;
-            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablero_Mapa.Location = new System.Drawing.Point(3, 3);
-            this.tablero_Mapa.Name = "tablero_Mapa";
-            this.tablero_Mapa.RowCount = 10;
-            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tablero_Mapa.Size = new System.Drawing.Size(1069, 777);
-            this.tablero_Mapa.TabIndex = 0;
-            // 
-            // barco2
-            // 
-            this.barco2.BackColor = System.Drawing.Color.Transparent;
-            this.barco2.Location = new System.Drawing.Point(703, -31);
-            this.barco2.Name = "barco2";
-            this.barco2.Size = new System.Drawing.Size(366, 607);
-            this.barco2.TabIndex = 1;
+            this.ucMapa1.BackColor = System.Drawing.Color.Navy;
+            this.ucMapa1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucMapa1.Location = new System.Drawing.Point(3, 3);
+            this.ucMapa1.Margin = new System.Windows.Forms.Padding(7, 4, 7, 4);
+            this.ucMapa1.Name = "ucMapa1";
+            this.ucMapa1.Size = new System.Drawing.Size(1069, 777);
+            this.ucMapa1.TabIndex = 0;
             // 
             // Home
             // 
@@ -399,11 +379,11 @@
         private UserControls.Notificador noti_Ar;
         private TabControl Barco_Page;
         private PageSetupDialog pageSetupDialog1;
-        private TableLayoutPanel tablero_Mapa;
         private UserControls.Escrutinio escrutinio1;
         private TabPage Navegacion_Page;
         private TabPage Navio_Page;
         private UserControls.Barco barco1;
         private UserControls.Barco barco2;
+        private GeneradorMapa.UCMapa ucMapa1;
     }
 }

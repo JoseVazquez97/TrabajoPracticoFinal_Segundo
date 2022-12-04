@@ -3,7 +3,8 @@
     public partial class Barco : UserControl
     {
         int Vida;
-        int Danio;
+        int Acciones;
+
         RecursosDisplay recDispley;
         int muni1;
         int muni4;
@@ -14,6 +15,13 @@
         {
             InitializeComponent();
             this.Vida = 100;
+            this.Acciones = 0;
+            int muni1 = 1;
+            int muni4 = 1;
+            int muni3 = 1;
+            int muni2 = 1;
+
+            int Danio = 10;
         }
 
         private void cargarImagenes()
@@ -22,10 +30,10 @@
             this.pictureBox2.Parent = this.pic_Barco;
             this.pictureBox3.Parent = this.pic_Barco;
             this.pictureBox4.Parent = this.pic_Barco;
-            this.pictureBox1.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseDerecho.png");
-            this.pictureBox2.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseDerecho.png");
-            this.pictureBox3.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseIzquierdo.png");
-            this.pictureBox4.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseIzquierdo.png");
+           // this.pictureBox1.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseDerecho.png");
+            //this.pictureBox2.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseDerecho.png");
+           // this.pictureBox3.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseIzquierdo.png");
+           // this.pictureBox4.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseIzquierdo.png");
 
         }
 
@@ -124,48 +132,62 @@
         public string ConsultarEstado()
         {
             string mensaje = "";
-            mensaje = this.muni1 + "," + this.muni2 + "," + this.muni3 + "," + this.muni4 + "," + this.Vida + ",";
+            mensaje = $"{muni4}-{muni3}-{muni2}-{muni1}-{Vida}-{Acciones}-";
             return mensaje;
+        }
+
+        private List<string> obternerParam(string msg) // Desglosa el mensaje recibido de otros clientes
+        {
+            List<string> parametros = new List<string>();
+            string aux = "";
+
+            for (int i = 0; i < msg.Length; i++)
+            {
+                if (msg[i] != '-')
+                {
+                    aux += msg[i];
+                }
+                else
+                {
+                    parametros.Add(aux);
+                    aux = "";
+                }
+            }
+
+            return parametros;
         }
 
         public void RecibirEstado(string estado)
         {
-            string aux = "";
-            int cont = 0;
-
-            for (int i = 0; i < estado.Length; i++)
+            List<string> parametros = obternerParam(estado);
+            for (int i = 0; i < parametros.Count; i++)
             {
-                if (estado[i] != ',')
+                switch (i) 
                 {
-                    aux += estado[i];
-                }
-                else
-                {
-                    cont++;
-                    switch (cont)
-                    {
-                        case 1:
-                            this.muni1 = int.Parse(aux);
-                            break;
+                    case 0:
+                        this.muni1 = int.Parse(parametros[i]);
+                        break;
 
-                        case 2:
-                            this.muni2 = int.Parse(aux);
-                            break;
+                    case 1:
+                        this.muni2 = int.Parse(parametros[i]);
+                        break;
 
-                        case 3:
-                            this.muni3 = int.Parse(aux);
-                            break;
+                    case 2:
+                        this.muni3 = int.Parse(parametros[i]);
+                        break;
 
-                        case 4:
-                            this.muni4 = int.Parse(aux);
-                            break;
+                    case 3:
+                        this.muni4 = int.Parse(parametros[i]);
+                        break;
 
-                        case 5:
-                            this.Vida = int.Parse(aux);
-                            this.progressBar1.Value = this.Vida;
-                            break;
-                    }
-                    aux = "";
+                    case 4:
+                        this.Vida = int.Parse(parametros[i]);
+                        break;
+
+                    case 5:
+                        this.Acciones = int.Parse(parametros[i]);
+                        break;
+                        
                 }
             }
         }
@@ -190,10 +212,6 @@
             this.progressBar1.Value = 100;
         }
 
-        public int ConsultarDanio()
-        {
-            return this.Danio;
-        }
 
 
         private void canon1_Load(object sender, EventArgs e)

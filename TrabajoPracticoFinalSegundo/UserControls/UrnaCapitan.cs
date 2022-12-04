@@ -21,7 +21,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public UrnaCapitan()
         {
             InitializeComponent();
-            this.desicion= 1;
+            this.desicion = 0;
         }
 
         public void Load_UrnaCapitan(int tamaTotal, int altoTotal, ref Notificador noticap, ref Turnero turnero, ref string noti)
@@ -54,7 +54,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         private void btn_Este_Click(object sender, EventArgs e)
         {
-            this.desicion= 2;
+            this.desicion= 3;
             this.noti_cap.Visible = true;
             this.noti_cap.MensajeArmadoCap(2);
             this.turn.Siguiente();
@@ -62,7 +62,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         private void btn_Oeste_Click(object sender, EventArgs e)
         {
-            this.desicion= 3;
+            this.desicion= 2;
             this.noti_cap.Visible = true;
             this.noti_cap.MensajeArmadoCap(3);
             this.turn.Siguiente();

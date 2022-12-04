@@ -28,7 +28,7 @@ namespace GeneradorMapa
          *  ESO ES TODO...
          * 
          */
-        public void CargarImagenBarco(string path);
+        public void CargarImagenBarco();
         public void GenerarMapa();
         public void CargarMapa(string mapa);
         public string ObtenerMapa();
@@ -73,9 +73,9 @@ namespace GeneradorMapa
             
         }
 
-        public void CargarImagenBarco(string path)
+        public void CargarImagenBarco()
         {
-            this.barco = Image.FromFile(path);
+            this.barco = Image.FromFile(@".\Recursos\Barco\BarcoChiquito.png");
             this.direccionActual = Direccion.Norte;
         }
 
@@ -204,22 +204,7 @@ namespace GeneradorMapa
 
         public void Movimiento(int d)
         {
-            switch (direccionActual)
-            {
-                case Direccion.Norte:
-                    break;
-                case Direccion.Sur:
-                    barco.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                    break;
-                case Direccion.Este:
-                    barco.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    break;
-                case Direccion.Oeste:
-                    barco.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                    break;
-                default:
-                    break;
-            }
+           
             switch (d)
             {
                 case 1:
@@ -244,6 +229,23 @@ namespace GeneradorMapa
                 default:
                     throw new IndexOutOfRangeException();
             }
+            switch (direccionActual)
+            {
+                case Direccion.Norte:
+                    break;
+                case Direccion.Sur:
+                    barco.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                    break;
+                case Direccion.Este:
+                    barco.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    break;
+                case Direccion.Oeste:
+                    barco.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    break;
+                default:
+                    break;
+            }
+
             this.mapa = "";
             for (sbyte y = 0; y < 10; y++)
             {

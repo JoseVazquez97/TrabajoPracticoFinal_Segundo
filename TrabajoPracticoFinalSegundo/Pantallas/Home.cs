@@ -45,9 +45,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private int Key;
         private int Turno;
+        private string bar1;
+        private string bar2;
         private string eventoActual;
         private string notificacion;
         private string accionBot;
+
+        private bool mFlag;
 
         private string val1;
         private string val2;
@@ -66,6 +70,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
             this.notificacion = "1";
+            this.mFlag = false;
             this.val1 = "0";
             this.val2 = "0";
             #endregion
@@ -152,7 +157,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             HomeConection.Closed +=
                 async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync(); };
             #endregion
-
         }
 
         /// ///////////////////////////////////////////////////////////////
@@ -171,20 +175,49 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 {
                     case "Orden":
                         EnviarEstadoSR();
+                        if (this.Key == 1)
+                        {
+                            if (!this.mFlag) 
+                            {
+                                ucMapa1.CargarImagenBarco();
+                                EnviarCambiosMapa();
+                                this.mFlag = true;
+                            }
+                        }
+                        else 
+                        {
+                            if (!this.mFlag)
+                            {
+                                ConsultarMapa();
+                                ucMapa1.CargarImagenBarco();
+                                this.mFlag = true;
+                            }
+                        }
                         break;
 
                     case "Votacion":
                         EnviarEstadoSR();
+
                         break;
 
                     case "Batalla":
-                        HabilitarDados();
-                        EnviarEstadoSR();
+                        HabilitarDados(this.Key);
 
-                        if (this.dados1.LISTO) 
+                        if (this.dados1.getEnable())
+                        {
+                            if (this.dados1.LISTO)
+                            {
+                                EnviarDadosCL();
+                                SiguienteTurno();
+                                this.Turno++;
+                            }
+                        }
+                        else 
                         {
 
                         }
+                        
+                        EnviarEstadoSR();
                         break;
                 }
             }
@@ -237,6 +270,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 SwitchEscrutinio(true);
 
+                #region actualizacion de urna
                 switch (this.Key)
                 {
                     case 2:
@@ -254,6 +288,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     default:
                         break;
                 }
+                #endregion
 
                 if (noti != 0)
                 {
@@ -281,6 +316,29 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     if (this.escrutinio1.confirmarVotacion() != 0)
                     {
                         this.eventoActual = "Batalla";
+
+                        if (this.Key == 1)
+                        {
+                            int x = urnaCapitan1.ConsultarDesicion();
+
+                            try 
+                            {
+                                this.ucMapa1.Invoke(new Action(() => this.ucMapa1.Movimiento(x)));
+                                this.ucMapa1.Invoke(new Action(() => this.ucMapa1.CargarImagenBarco()));
+                            }
+                            catch { MessageBox.Show("No pudo mostrarse el mapa"); }
+                            EnviarCambiosMapa();
+                        }
+                        else 
+                        {
+                            ConsultarMapa();
+                            try
+                            {
+                                this.ucMapa1.Invoke(new Action(() => this.ucMapa1.CargarImagenBarco()));
+                            }
+                            catch { MessageBox.Show("No pudo mostrarse el mapa"); }
+                        }
+
                         SwitchEscrutinio(false);
                         this.escrutinio1.reiniciarVotos();
                         this.escrutinio1.reiniciarCheck();
@@ -294,16 +352,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #region EVENTO BATALLA
             if (parametros[2] == "Batalla" && parametros[2] == this.eventoActual)
             {
-                AparecerBarcoEnemigo();
-
                 if (noti != 0)
                 {
                     RecibirNotificacion(key, noti);
-                }
-
-                if (this.Turno < turno)
-                {
-                    AccionContraBarco(int.Parse(user), parametros[1]);
                 }
             }
             #endregion
@@ -382,25 +433,59 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
+        #region ENVIAR - Mapa
+        private async void EnviarCambiosMapa() 
+        {
+            string usr = this.Key.ToString();
+            string mapa = ucMapa1.ObtenerMapa();
+
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarMapa", usr, mapa);
+            }
+            catch { MessageBox.Show("Error en el envio del Mapa."); }
+        }
+        #endregion
+
         #region ENVIAR - Dados
         private async void EnviarDadosCL()
+        {
+            string usr = this.Key.ToString();
+            string val1 = "";
+            string val2 = "";
+
+            if (this.dados1.LISTO)
+            {
+                val1 = this.dados1.V1.ToString();
+                val2 = this.dados1.V2.ToString();
+
+                if (val1 != "0" && val2 != "0")
+                {
+                    try
+                    {
+                        await HomeConection.InvokeAsync("EnviarDados", usr, val1, val2);
+                    }
+                    catch { MessageBox.Show("Error en el envio de dados."); }
+                }
+            }
+        }
+        #endregion
+
+        #region ENVIAR - Barcos
+        private async void EnviarDados()
         {
 
         }
         #endregion
 
-        #region ENVIAR - Barcos
-        private async void EnviarBarcos()
+        #region CONSULTAR - Mapa
+        private async void ConsultarMapa() 
         {
-            string usr = this.Key.ToString();
-            string b1 = this.barco1.ConsultarEstado();
-            string b2 = this.barco2.ConsultarEstado();
-
             try
             {
-                await HomeConection.InvokeAsync("EnviarBarcos", usr, b1, b2);
+                await HomeConection.InvokeAsync("ConsultarMap");
             }
-            catch { MessageBox.Show("Error en el envio de Dados."); }
+            catch { MessageBox.Show("Error en la consulta del mapa"); }
         }
         #endregion
 
@@ -484,6 +569,30 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             });
             #endregion
 
+            #region MAPA-COM
+            HomeConection.On<string, string>("RecibirMapa", (key, mapa) =>
+            {
+                if (key == "1") 
+                {
+                    try 
+                    {
+                        this.ucMapa1.Invoke(new Action(() => this.ucMapa1.CargarMapa(mapa)));
+                    }catch { MessageBox.Show("No pudo asignar el mapa!"); }
+                }
+            });
+            #endregion
+
+            #region MAPA-CONS
+            HomeConection.On<string>("RecibirCMapa", (mapa) =>
+            {
+                try
+                {
+                    this.ucMapa1.Invoke(new Action(() => this.ucMapa1.CargarMapa(mapa)));
+                }
+                catch { MessageBox.Show("No pudo asignar el mapa!"); }
+            });
+            #endregion
+
             #region ESTADO-COM
 
             HomeConection.On<string, string>("RecibirEstado", (usr, msg) =>
@@ -494,16 +603,19 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             });
             #endregion
 
-            #region BARCOS-COM
-            HomeConection.On<string, string>("RecibirBarcos", (barc1, barc2) =>
-            {
-                ImpactarBarcos(barc1, barc2);
-            });
-            #endregion
-
             #region DADOS-COM
             HomeConection.On<string, string, string>("RecibirDados", (usr, val1, val2) =>
             {
+                
+                
+            });
+            #endregion
+
+            #region DADOS-CONS
+            HomeConection.On<string, string>("RecibirCDados", (val1, val2) =>
+            {
+                
+
             });
             #endregion
         }
@@ -552,6 +664,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     this.pantallaWeb1.CargarAvatar(this.miAvatar);
                     this.pantallaWeb1.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
+                    ucMapa1.GenerarMapa();
                     loadUrnas(true);
                     break;
 
@@ -582,136 +695,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
-        #region BARCOS
-        private void ImpactarBarcos(string BEstado1, string BEstado2) //Se encarga de recibir el estaddo de los barcos.
-        {
-            if (this.barco1.InvokeRequired)
-            {
-                try
-                {
-                    this.barco1.Invoke(new Action(() => { this.barco1.RecibirEstado(BEstado1); }));
-                }
-                catch { }
-            }
-
-            if (this.barco2.InvokeRequired)
-            {
-                try
-                {
-                    this.barco2.Invoke(new Action(() => { this.barco2.RecibirEstado(BEstado2); }));
-                }
-                catch { }
-            }
-        }
-
-        private void AccionContraBarco(int rol, string parametro) //Decide segun el rol y la desicion tomada, que accion tomar sobre el barco enemigo
-        {
-            switch (parametro)
-            {
-                case "1":
-                    switch (rol)
-                    {
-                        case 1:
-                            Atacar();
-                            break;
-
-                        case 2:
-                            Curar();
-                            break;
-
-                        case 3:
-                            Atacar();
-                            break;
-
-                        case 4:
-                            Atacar();
-                            break;
-                    }
-                    break;
-
-                case "2":
-                    switch (rol)
-                    {
-                        case 1:
-                            Recargar();
-                            break;
-
-                        case 2:
-                            Recargar();
-                            break;
-
-                        case 3:
-                            Recargar();
-                            break;
-
-                        case 4:
-                            Recargar();
-                            break;
-                    }
-                    break;
-            }
-        }
-
-        private void Recargar() //LLama a la funcion Recargar del barco1
-        {
-            if (this.barco1.InvokeRequired)
-            {
-                this.barco1.Invoke(new Action(() => { this.barco1.Recargar(); }));
-            }
-        }
-
-        private void Curar() //LLama a la funcion curar del barco1
-        {
-            if (this.barco1.InvokeRequired)
-            {
-                this.barco1.Invoke(new Action(() => { this.barco1.Curar(); }));
-            }
-        }
-
-        private void Atacar() //LLama a la funcion recibir danio del barco2 
-        {
-            if (this.barco2.InvokeRequired)
-            {
-                try
-                {
-                    this.barco2.Invoke(new Action(() => { this.barco2.RecibirDanio(10); }));
-                }
-                catch { }
-            }
-        }
-
-        private void AparecerBarcoEnemigo() //Hace visible el barco enemigo
-        {
-            if (this.barco2.InvokeRequired)
-            {
-                try
-                {
-                    barco2.Invoke(new Action(() => this.barco2.Visible = true));
-                }
-                catch { }
-            }
-        }
-        #endregion
-
         #region DADOS
         private void dados_Click(object sender, EventArgs e)
         {
             if (this.dados1.getEnable())
             {
                 this.dados1.tirar();
-                SiguienteTurno();
-                AccionContraBarco(this.Key, this.notificacion);
             }
-        }
-
-        private void ConsultarValorDado()  // Asigna a los atributos del form val1 y val2 los valores de los dados.
-        {
-            try
-            {
-                this.dados1.Invoke(new Action(() => this.val1 = this.dados1.V1.ToString()));
-                this.dados1.Invoke(new Action(() => this.val2 = this.dados1.V2.ToString()));
-            }
-            catch { }
         }
 
         private void activarDados(int key) // Activa el user control dados, segun la key
@@ -735,15 +725,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
-        private void RecibirNotificacion(int usr, int parametro) //Hace visible y muestra el mensaje que llega por parametro las notificaciones
+        private void HabilitarDados(int x) //Habilita el UC dados segun a quien le toca
         {
-            NotificarOrden(usr, parametro);
-            SpawnearNoti(usr, true);
-        }
-
-        private void HabilitarDados() //Habilita el UC dados segun a quien le toca
-        {
-            int turno = obtenerTurno(this.turnero1.getTurno());
+            int turno = x;
 
             switch (turno)
             {
@@ -776,6 +760,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             SpawnearNoti(4, false);
         }
 
+        private void RecibirNotificacion(int usr, int parametro) //Hace visible y muestra el mensaje que llega por parametro las notificaciones
+        {
+            NotificarOrden(usr, parametro);
+            SpawnearNoti(usr, true);
+        }
         private void MensajesVotacion() //Establece los mensajes de las urnas
         {
             if (this.urna1.InvokeRequired)
@@ -1024,11 +1013,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             try
             {
-                if (this.turnero1.InvokeRequired)
-                {
-                    this.turnero1.Invoke(new Action(() => this.turnero1.Siguiente()));
-                    this.turnero1.Invoke(new Action(() => this.Turno = this.turnero1.getTurno()));
-                }
+                this.turnero1.Invoke(new Action(() => this.turnero1.Siguiente()));
             }
             catch { }
         }
