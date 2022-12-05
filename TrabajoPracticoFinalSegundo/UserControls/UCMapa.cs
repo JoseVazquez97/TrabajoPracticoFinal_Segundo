@@ -206,7 +206,22 @@ namespace GeneradorMapa
 
         public void Movimiento(int d)
         {
-           
+            switch (direccionActual)
+            {
+                case Direccion.Norte:
+                    break;
+                case Direccion.Sur:
+                    barco.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                    break;
+                case Direccion.Este:
+                    barco.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    break;
+                case Direccion.Oeste:
+                    barco.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    break;
+                default:
+                    break;
+            }
             switch (d)
             {
                 case 1:
@@ -230,22 +245,6 @@ namespace GeneradorMapa
                     break;
                 default:
                     throw new IndexOutOfRangeException();
-            }
-            switch (direccionActual)
-            {
-                case Direccion.Norte:
-                    break;
-                case Direccion.Sur:
-                    barco.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                    break;
-                case Direccion.Este:
-                    barco.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    break;
-                case Direccion.Oeste:
-                    barco.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                    break;
-                default:
-                    break;
             }
 
             this.mapa = "";
@@ -458,7 +457,7 @@ namespace GeneradorMapa
                         lugarActual = obtenerTipo(celda.Text);
                         //celda.BackColor = Color.Transparent;
                         celda.BackgroundImage = barco;
-                        celda.BackgroundImageLayout = ImageLayout.Stretch;
+                        celda.BackgroundImageLayout = ImageLayout.Center;
                         celda.Text = "B";
                         break;
                     default:
