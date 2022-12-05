@@ -56,7 +56,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         {
             this.desicion= 3;
             this.noti_cap.Visible = true;
-            this.noti_cap.MensajeArmadoCap(2);
+            this.noti_cap.MensajeArmadoCap(3);
             this.turn.Siguiente();
         }
 
@@ -64,7 +64,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         {
             this.desicion= 2;
             this.noti_cap.Visible = true;
-            this.noti_cap.MensajeArmadoCap(3);
+            this.noti_cap.MensajeArmadoCap(2);
             this.turn.Siguiente();
         }
 

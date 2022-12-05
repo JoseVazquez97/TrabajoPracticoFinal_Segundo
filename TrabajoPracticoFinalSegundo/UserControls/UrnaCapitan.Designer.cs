@@ -36,41 +36,45 @@
             // 
             // btn_Norte
             // 
+            this.btn_Norte.Font = new System.Drawing.Font("BlackPearl", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_Norte.Location = new System.Drawing.Point(218, 3);
             this.btn_Norte.Name = "btn_Norte";
             this.btn_Norte.Size = new System.Drawing.Size(75, 66);
             this.btn_Norte.TabIndex = 0;
-            this.btn_Norte.Text = "Ir al Norte";
+            this.btn_Norte.Text = "NORTE";
             this.btn_Norte.UseVisualStyleBackColor = true;
             this.btn_Norte.Click += new System.EventHandler(this.btn_Norte_Click);
             // 
             // btn_Oeste
             // 
+            this.btn_Oeste.Font = new System.Drawing.Font("BlackPearl", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_Oeste.Location = new System.Drawing.Point(299, 46);
             this.btn_Oeste.Name = "btn_Oeste";
             this.btn_Oeste.Size = new System.Drawing.Size(75, 60);
             this.btn_Oeste.TabIndex = 1;
-            this.btn_Oeste.Text = "Ir al Oeste";
+            this.btn_Oeste.Text = "ESTE";
             this.btn_Oeste.UseVisualStyleBackColor = true;
             this.btn_Oeste.Click += new System.EventHandler(this.btn_Oeste_Click);
             // 
             // btn_Este
             // 
+            this.btn_Este.Font = new System.Drawing.Font("BlackPearl", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_Este.Location = new System.Drawing.Point(137, 46);
             this.btn_Este.Name = "btn_Este";
             this.btn_Este.Size = new System.Drawing.Size(75, 60);
             this.btn_Este.TabIndex = 2;
-            this.btn_Este.Text = "Ir al Este";
+            this.btn_Este.Text = "OESTE";
             this.btn_Este.UseVisualStyleBackColor = true;
             this.btn_Este.Click += new System.EventHandler(this.btn_Este_Click);
             // 
             // btn_Sur
             // 
+            this.btn_Sur.Font = new System.Drawing.Font("BlackPearl", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_Sur.Location = new System.Drawing.Point(218, 85);
             this.btn_Sur.Name = "btn_Sur";
             this.btn_Sur.Size = new System.Drawing.Size(75, 62);
             this.btn_Sur.TabIndex = 3;
-            this.btn_Sur.Text = "Ir al Sur";
+            this.btn_Sur.Text = "SUR";
             this.btn_Sur.UseVisualStyleBackColor = true;
             this.btn_Sur.Click += new System.EventHandler(this.btn_Sur_Click);
             // 

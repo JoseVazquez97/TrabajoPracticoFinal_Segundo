@@ -665,7 +665,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<string>("RecibirCMov", (mov) =>
             {
-                int x = int.Parse(mov);
+                int x = 0;
+                try 
+                {
+                     x = int.Parse(mov);
+                }
+                catch { MessageBox.Show("No se puede convertir a int el movimiento"); }
+               
 
                 if (!movFlag) 
                 {
@@ -822,6 +828,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             NotificarOrden(usr, parametro);
             SpawnearNoti(usr, true);
         }
+
         private void MensajesVotacion() //Establece los mensajes de las urnas
         {
             if (this.urna1.InvokeRequired)
