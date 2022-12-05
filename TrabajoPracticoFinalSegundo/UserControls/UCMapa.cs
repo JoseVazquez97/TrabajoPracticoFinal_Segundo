@@ -243,8 +243,8 @@ namespace GeneradorMapa
                     Sur();
                     direccionActual = Direccion.Sur;
                     break;
-                default:
-                    throw new IndexOutOfRangeException();
+                
+                    
             }
 
             this.mapa = "";

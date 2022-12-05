@@ -51,8 +51,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private string notificacion;
         private string accionBot;
 
-        private bool movFlag;
-        private bool mFlag;
+        private bool enventoFlag; //Flag de evento
+        private bool accionFlag; //Flag de danio
+        private bool eFlag; //Flag de evento random
+        private bool movFlag; // Flag de movimiento
+        private bool mFlag; // Flag de mapa
 
         private string val1;
         private string val2;
@@ -73,6 +76,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.notificacion = "1";
             this.movFlag = false;
             this.mFlag = false;
+            this.eFlag = false;
+            this.enventoFlag = false;
+            this.accionFlag = false;
             this.val1 = "0";
             this.val2 = "0";
             #endregion
@@ -179,14 +185,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         EnviarEstadoSR();
                         if (this.Key == 1)
                         {
-                            if (!this.mFlag) 
+                            if (!this.mFlag)
                             {
                                 ucMapa1.CargarImagenBarco();
                                 EnviarCambiosMapa();
                                 this.mFlag = true;
                             }
                         }
-                        else 
+                        else
                         {
                             if (!this.mFlag)
                             {
@@ -202,23 +208,40 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         break;
 
                     case "Batalla":
+                        if (this.Key == 1 && !this.eFlag)
+                        {
+                            string envetoRandom = enventoRandom();
+
+                            EnviarEventoX(envetoRandom);
+
+                            this.eFlag = true;
+                        }
+
+                        if (!this.enventoFlag)
+                        {
+                            ConsultarEve();
+                            this.enventoFlag = true;
+                        }
+
                         HabilitarDados();
 
                         if (this.dados1.getEnable())
                         {
                             if (this.dados1.LISTO)
                             {
+                                this.dados1.LISTO = false;
                                 EnviarDadosCL();
                             }
                         }
-                        else 
+                        else
                         {
                             if (this.dados1.LISTO)
                             {
                                 ConsultarDadosCL();
                             }
                         }
-                        
+
+                        ConsultarEB();
                         EnviarEstadoSR();
                         break;
                 }
@@ -241,10 +264,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 if (this.eventoActual == "Orden" && this.eventoActual == parametros[2]) //Si estamos en el evento orden
                 {
-                    if (user == "1") //Y el capitan nos envia mensaje.
-                    {
-                        this.Turno = turno; //Igualamos el turno
+                    this.Turno = turno; //Igualamos el turno
 
+                    if (user == "1") //Y si el capitan nos envia mensaje.
+                    {
                         if (this.Key != 1)
                         {
                             SiguienteTurno();
@@ -276,7 +299,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 switch (this.Key)
                 {
                     case 2:
-                        MensajesVotacion(); 
+                        MensajesVotacion();
                         break;
 
                     case 3:
@@ -324,7 +347,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             int x = urnaCapitan1.ConsultarDesicion();
                             EnviarMovimiento(x);
                         }
-                        else 
+                        else
                         {
                             ConsultarMovimiento();
                         }
@@ -342,7 +365,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #region EVENTO BATALLA
             if (parametros[2] == "Batalla" && parametros[2] == this.eventoActual)
             {
-                if (turno > this.Turno && key == obtenerTurno(this.turnero1.getTurno()) && turno != 5) 
+                if (turno > this.Turno && key == obtenerTurno(this.turnero1.getTurno()) && obtenerTurno(turno) != 1)
                 {
                     this.Turno = turno;
 
@@ -440,8 +463,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
+
         #region ENVIAR - Mapa
-        private async void EnviarCambiosMapa() 
+        private async void EnviarCambiosMapa()
         {
             string usr = this.Key.ToString();
             string mapa = ucMapa1.ObtenerMapa();
@@ -451,7 +475,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 await HomeConection.InvokeAsync("EnviarMapa", usr, mapa);
             }
             catch { MessageBox.Show("Error en el envio del Mapa."); }
-            
+
         }
         #endregion
 
@@ -465,6 +489,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             catch { MessageBox.Show("Error en la consulta del mapa"); }
         }
         #endregion
+
 
         #region ENVIAR - Dados
         private async void EnviarDadosCL()
@@ -500,21 +525,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
-        #region ENVIAR - Barcos
-        private async void EnviarDados()
-        {
-
-        }
-        #endregion
 
         #region ENVIAR - DesicionCap
         private async void EnviarMovimiento(int x)
         {
-            string mapa = x.ToString();
+            string mov = x.ToString();
 
             try
             {
-                await HomeConection.InvokeAsync("EnviarMov", mapa);
+                await HomeConection.InvokeAsync("EnviarMov", mov);
             }
             catch { MessageBox.Show("Error en el envio del Movimiento."); }
         }
@@ -528,6 +547,55 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 await HomeConection.InvokeAsync("ConsultarMov");
             }
             catch { MessageBox.Show("Error en la consulta del Movimiento"); }
+        }
+        #endregion
+
+
+        #region ENVIAR - Evento
+        private async void EnviarEventoX(string x)
+        {
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarEvento", x);
+            }
+            catch { MessageBox.Show("Error en el envio del Evento."); }
+        }
+        #endregion
+
+        #region CONSULTAR - Evento
+        private async void ConsultarEve()
+        {
+            try
+            {
+                await HomeConection.InvokeAsync("ConsultarEv");
+            }
+            catch { MessageBox.Show("Error en la consulta del Ev"); }
+        }
+        #endregion
+
+        #region ENVIAR - Barcos
+        private async void EnviarEB() 
+        {
+            string b1 = this.barco1.ConsultarEstado();
+            string b2 = this.barco2.ConsultarEstado();
+
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarBarcos",b1,b2);
+            }
+            catch { MessageBox.Show("Error en la consulta del Ev"); }
+        }
+        #endregion
+
+        #region CONSULTAR - Barcos
+        private async void ConsultarEB()
+        {
+
+            try
+            {
+                await HomeConection.InvokeAsync("ConsutarBarcos");
+            }
+            catch { MessageBox.Show("Error en la consulta del Ev"); }
         }
         #endregion
 
@@ -639,8 +707,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #region DADOS-COM
             HomeConection.On<string, string, string>("RecibirDados", (usr, val1, val2) =>
             {
-                
-                
+                AccionesDados(val1, val2);
+                EnviarEB();
             });
 
             HomeConection.On<string, string>("RecibirCDados", (val1, val2) =>
@@ -651,8 +719,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     {
                         this.dados1.Invoke(new Action(() => this.dados1.AsignarValores(val1, val2)));
                     }
-                    catch { }
+                    catch { MessageBox.Show($"Error al cargar los valores {val1} y {val2} en los dados"); }
                 }
+                
             });
             #endregion
 
@@ -665,26 +734,81 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<string>("RecibirCMov", (mov) =>
             {
-                int x = 0;
                 try 
                 {
-                     x = int.Parse(mov);
-                }
-                catch { MessageBox.Show("No se puede convertir a int el movimiento"); }
-               
+                    int x = 0;
+                    x = int.Parse(mov);
 
-                if (!movFlag) 
-                {
-                    try
+                    if (!movFlag)
                     {
-                        this.ucMapa1.Invoke(new Action(() => this.ucMapa1.Movimiento(x)));
-                        this.movFlag = true;
+                        try
+                        {
+                            this.ucMapa1.Invoke(new Action(() => this.ucMapa1.Movimiento(x)));
+                            this.movFlag = true;
+                        }
+                        catch { MessageBox.Show("No pudo mostrarse el mapa"); }
                     }
-                    catch { MessageBox.Show("No pudo mostrarse el mapa"); }
                 }
+                catch { ConsultarMovimiento(); }
             });
 
             #endregion
+
+            #region EVENTO-COM
+
+            HomeConection.On<string>("RecibirEvento", (val2) =>
+            {
+            });
+
+            HomeConection.On<string>("RecibirCEvento", (val1) =>
+            {
+                try
+                {
+                    switch (val1)
+                    {
+                        case "M10":
+                            this.eventoActual = "Orden";
+                            break;
+
+                        case "M11":
+                            try
+                            {
+                                this.barco2.Invoke(new Action(() => this.barco2.Visible = true));
+                            }
+                            catch { }
+                            break;
+                    }
+                }
+                catch { MessageBox.Show(val1); }
+                
+            });
+
+            #endregion
+
+            #region BARCOS-COM
+            HomeConection.On<string, string>("RecibirBarcos", (val1, val2) =>
+            {
+
+
+            });
+
+            HomeConection.On<string, string>("RecibirCBarcos", (val1, val2) =>
+            {
+                try
+                {
+                    this.barco1.Invoke(new Action(() => this.barco1.RecibirEstado(val1)));
+                }
+                catch { MessageBox.Show("No se pudo asignar el estado al barco1 {0}", val1); }
+
+                try
+                {
+                    this.barco2.Invoke(new Action(() => this.barco2.RecibirEstado(val2)));
+                }
+                catch { MessageBox.Show("No se pudo asignar el estado al barco2 {0}", val2); }
+
+            });
+            #endregion
+
         }
 
         #endregion
@@ -769,6 +893,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #region DADOS
+
+        #region Click
         private void dados_Click(object sender, EventArgs e)
         {
             if (this.dados1.getEnable())
@@ -778,7 +904,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 SiguienteTurno();
             }
         }
+        #endregion
 
+        #region Activacion
         private void activarDados(int key) // Activa el user control dados, segun la key
         {
             if (this.Key == key)
@@ -811,6 +939,34 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
             }
         }
+        #endregion
+
+        #region Acciones
+        private void AccionesDados(string v1, string v2)
+        {
+            int v1I = int.Parse(v1);
+            int V2I = int.Parse(v2);
+
+            switch (this.eventoActual) 
+            {
+                case "Batalla":
+                    try
+                    {
+                        this.barco2.Invoke(new Action(() => this.barco2.RecibirDanio(v1I + V2I)));
+                        if (!this.accionFlag) 
+                        {
+                            EnviarEB();
+                            this.accionFlag = true;
+                        }
+                    }
+                    catch { }
+                    break;
+            }
+
+        }
+        #endregion
+
+
 
         #endregion
 
@@ -1106,6 +1262,50 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 catch { }
             }
         }
+        #endregion
+
+        #region EVENTO-RANDOM
+
+        private string enventoRandom() 
+        {
+            string eventoX = "0";
+            Random x = new Random();
+            int evento = x.Next(1, 3);
+
+            string variante = this.ucMapa1.ObteLugaActua();
+
+            switch (variante)
+            {
+                case "I":
+                    return "I";
+                case "F":
+                    return "F";
+                case "M1":
+                    switch (2) 
+                    {
+                        case 1:
+                            eventoX = "M10";
+                            break;
+
+                        case 2:
+                            eventoX = "M11";
+                            break;
+                    }
+                    break;
+            }
+
+
+            return eventoX;
+        }
+
+        #endregion
+
+        #region BARCO
+        private void spawnearBarco() 
+        {
+
+        }
+
         #endregion
 
         #endregion
