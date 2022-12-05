@@ -51,6 +51,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private string notificacion;
         private string accionBot;
 
+        private bool movFlag;
         private bool mFlag;
 
         private string val1;
@@ -70,6 +71,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
             this.notificacion = "1";
+            this.movFlag = false;
             this.mFlag = false;
             this.val1 = "0";
             this.val2 = "0";
@@ -268,13 +270,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #region EVENTO VOTACION
             if (parametros[2] == "Votacion" && parametros[2] == this.eventoActual)
             {
-                SwitchEscrutinio(true);
+                SwitchEscrutinio(true); //Cambia el user control de recursos por el de votacion.
 
-                #region actualizacion de urna
+                #region actualizacion de urna //Escribe los mensajes Si capitan y No capitan en la urna1
                 switch (this.Key)
                 {
                     case 2:
-                        MensajesVotacion(); //Escribe los mensajes Si capitan y No capitan en la urna1
+                        MensajesVotacion(); 
                         break;
 
                     case 3:
@@ -320,23 +322,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         if (this.Key == 1)
                         {
                             int x = urnaCapitan1.ConsultarDesicion();
-
-                            try 
-                            {
-                                this.ucMapa1.Invoke(new Action(() => this.ucMapa1.Movimiento(x)));
-                                this.ucMapa1.Invoke(new Action(() => this.ucMapa1.CargarImagenBarco()));
-                            }
-                            catch { MessageBox.Show("No pudo mostrarse el mapa"); }
-                            EnviarCambiosMapa();
+                            EnviarMovimiento(x);
                         }
                         else 
                         {
-                            ConsultarMapa();
-                            try
-                            {
-                                this.ucMapa1.Invoke(new Action(() => this.ucMapa1.CargarImagenBarco()));
-                            }
-                            catch { MessageBox.Show("No pudo mostrarse el mapa"); }
+                            ConsultarMovimiento();
                         }
 
                         SwitchEscrutinio(false);
@@ -394,7 +384,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region SIGNAL R
 
-        #region ENVIO DE MENSAJES
+        #region ENVIO DE MENSAJES Y CONSULTAS
 
         #region ENVIAR - Imagenes
         private async void mandarImagenes()
@@ -444,6 +434,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 await HomeConection.InvokeAsync("EnviarMapa", usr, mapa);
             }
             catch { MessageBox.Show("Error en el envio del Mapa."); }
+            
+        }
+        #endregion
+
+        #region CONSULTAR - Mapa
+        private async void ConsultarMapa()
+        {
+            try
+            {
+                await HomeConection.InvokeAsync("ConsultarMap");
+            }
+            catch { MessageBox.Show("Error en la consulta del mapa"); }
         }
         #endregion
 
@@ -478,19 +480,31 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
-        #region CONSULTAR - Mapa
-        private async void ConsultarMapa() 
+        #region ENVIAR - DesicionCap
+        private async void EnviarMovimiento(int x)
+        {
+            string mapa = x.ToString();
+
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarMov", mapa);
+            }
+            catch { MessageBox.Show("Error en el envio del Movimiento."); }
+        }
+        #endregion
+
+        #region CONSULTAR - DesicionCap
+        private async void ConsultarMovimiento()
         {
             try
             {
-                await HomeConection.InvokeAsync("ConsultarMap");
+                await HomeConection.InvokeAsync("ConsultarMov");
             }
-            catch { MessageBox.Show("Error en la consulta del mapa"); }
+            catch { MessageBox.Show("Error en la consulta del Movimiento"); }
         }
         #endregion
 
         #endregion
-
 
         ////////////////////////////////////////////////////
 
@@ -572,17 +586,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #region MAPA-COM
             HomeConection.On<string, string>("RecibirMapa", (key, mapa) =>
             {
-                if (key == "1") 
-                {
-                    try 
-                    {
-                        this.ucMapa1.Invoke(new Action(() => this.ucMapa1.CargarMapa(mapa)));
-                    }catch { MessageBox.Show("No pudo asignar el mapa!"); }
-                }
+                
             });
-            #endregion
-
-            #region MAPA-CONS
+            
             HomeConection.On<string>("RecibirCMapa", (mapa) =>
             {
                 try
@@ -609,20 +615,48 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 
                 
             });
-            #endregion
 
-            #region DADOS-CONS
             HomeConection.On<string, string>("RecibirCDados", (val1, val2) =>
             {
-                
+
 
             });
+            #endregion
+
+            #region MOVIMIENTO-COM
+
+            HomeConection.On<string>("RecibirMov", (mapa) =>
+            {
+
+            });
+
+            HomeConection.On<string>("RecibirCMov", (mov) =>
+            {
+                int x = int.Parse(mov);
+
+                if (!movFlag) 
+                {
+                    try
+                    {
+                        this.ucMapa1.Invoke(new Action(() => this.ucMapa1.Movimiento(x)));
+                        this.movFlag = true;
+                    }
+                    catch { MessageBox.Show("No pudo mostrarse el mapa"); }
+                }
+            });
+
             #endregion
         }
 
         #endregion
 
         #endregion
+
+        /// 
+        ///    
+        ///       FUNCIONES PRIVADAS DEL FORM!
+        /// 
+        /// 
 
         #region FUNCIONES PRIVADAS DEL FORM
 
