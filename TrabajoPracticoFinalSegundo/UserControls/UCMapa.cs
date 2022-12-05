@@ -27,11 +27,13 @@ namespace GeneradorMapa
          *  SI SE QUIERA CAMBIAR ESTE ORDEN, IR A LA FUNCION Y CAMBIAR LOS NUMEROS DEL SEGUNDO SWITCH
          *  ESO ES TODO...
          * 
+		 * Utilizar ObteLugaActua para ver en que celda ah caido el barco.
          */
         public void CargarImagenBarco();
         public void GenerarMapa();
         public void CargarMapa(string mapa);
         public string ObtenerMapa();
+		public string ObteLugaActua();
     }
     public partial class UCMapa : UserControl, IMapa
     {
@@ -259,7 +261,7 @@ namespace GeneradorMapa
         }
 
 
-        private string ObteLugaActua()
+        public string ObteLugaActua()
         {
             switch (lugarActual)
             {
@@ -339,10 +341,12 @@ namespace GeneradorMapa
                         if (y == 0)
                         {
                             GenerarMapa(TipoGeneracion.IslaF, x, y, false);
+							GenerarAlredorIsla(TipoGeneracion.M2,x, y);
                         }
                         else if (y == 9)
                         {
                             GenerarMapa(TipoGeneracion.Isla, x, y, false);
+							GenerarAlredorIsla(TipoGeneracion.M1,x, y);
                             GenerarMapa(TipoGeneracion.Barco, x, y, false);
                             this.posX = x;
                             this.posY = y;
@@ -350,6 +354,7 @@ namespace GeneradorMapa
                         else
                         {
                             GenerarMapa(TipoGeneracion.Isla, x, y, false);
+							GenerarAlredorIsla(TipoGeneracion.M1,x, y);
                         }
                     }
                     else
@@ -429,7 +434,6 @@ namespace GeneradorMapa
                     case TipoGeneracion.Isla:
                         celda.BackColor = Color.LightGreen;
                         celda.Text = "I";
-                        GenerarAlredorIsla(TipoGeneracion.M1,x, y);
                         break;
                     case TipoGeneracion.M1:
                         celda.BackColor = Color.LightBlue;
@@ -449,7 +453,6 @@ namespace GeneradorMapa
                     case TipoGeneracion.IslaF:
                         celda.BackColor = Color.LightGreen;
                         celda.Text = "F";
-                        GenerarAlredorIsla(TipoGeneracion.M2, x, y);
                         break;
                     case TipoGeneracion.Barco:
                         lugarActual = obtenerTipo(celda.Text);
