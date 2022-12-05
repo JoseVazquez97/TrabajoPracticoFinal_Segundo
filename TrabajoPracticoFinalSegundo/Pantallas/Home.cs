@@ -199,24 +199,24 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                     case "Votacion":
                         EnviarEstadoSR();
-
                         break;
 
                     case "Batalla":
-                        HabilitarDados(this.Key);
+                        HabilitarDados();
 
                         if (this.dados1.getEnable())
                         {
                             if (this.dados1.LISTO)
                             {
                                 EnviarDadosCL();
-                                SiguienteTurno();
-                                this.Turno++;
                             }
                         }
                         else 
                         {
-
+                            if (this.dados1.LISTO)
+                            {
+                                ConsultarDadosCL();
+                            }
                         }
                         
                         EnviarEstadoSR();
@@ -342,6 +342,23 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #region EVENTO BATALLA
             if (parametros[2] == "Batalla" && parametros[2] == this.eventoActual)
             {
+                if (turno > this.Turno && key == obtenerTurno(this.turnero1.getTurno()) && turno != 5) 
+                {
+                    this.Turno = turno;
+
+                    try
+                    {
+                        this.turnero1.Invoke(new Action(() => this.turnero1.setTurno(turno)));
+                    }
+                    catch { }
+
+                    try
+                    {
+                        this.dados1.Invoke(new Action(() => this.dados1.tirar()));
+                    }
+                    catch { }
+                }
+
                 if (noti != 0)
                 {
                     RecibirNotificacion(key, noti);
@@ -456,21 +473,31 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             string val1 = "";
             string val2 = "";
 
-            if (this.dados1.LISTO)
-            {
-                val1 = this.dados1.V1.ToString();
-                val2 = this.dados1.V2.ToString();
+            val1 = this.dados1.V1.ToString();
+            val2 = this.dados1.V2.ToString();
 
-                if (val1 != "0" && val2 != "0")
+            if (val1 != "0" && val2 != "0" && this.Key == obtenerTurno(this.turnero1.getTurno()))
+            {
+                try
                 {
-                    try
-                    {
-                        await HomeConection.InvokeAsync("EnviarDados", usr, val1, val2);
-                    }
-                    catch { MessageBox.Show("Error en el envio de dados."); }
+                    await HomeConection.InvokeAsync("EnviarDados", usr, val1, val2);
                 }
+                catch { MessageBox.Show("Error en el envio de dados."); }
             }
         }
+
+        private async void ConsultarDadosCL()
+        {
+            if (this.Key != obtenerTurno(this.turnero1.getTurno()))
+            {
+                try
+                {
+                    await HomeConection.InvokeAsync("ConsultarDados");
+                }
+                catch { MessageBox.Show("Error al consultar los dados."); }
+            }
+        }
+
         #endregion
 
         #region ENVIAR - Barcos
@@ -618,8 +645,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<string, string>("RecibirCDados", (val1, val2) =>
             {
-
-
+                if (this.dados1.LISTO) 
+                {
+                    try
+                    {
+                        this.dados1.Invoke(new Action(() => this.dados1.AsignarValores(val1, val2)));
+                    }
+                    catch { }
+                }
             });
             #endregion
 
@@ -735,6 +768,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             if (this.dados1.getEnable())
             {
                 this.dados1.tirar();
+                this.Turno++;
+                SiguienteTurno();
             }
         }
 
@@ -747,21 +782,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             else { this.dados1.setEnable(false); }
         }
 
-        private void TirarDadosAuto() // Ejecuta de manera automatica una tirada de dados.
+        private void HabilitarDados() //Habilita el UC dados segun a quien le toca
         {
-            if (this.dados1.InvokeRequired)
-            {
-                try
-                {
-                    this.dados1.Invoke(new Action(() => this.dados1.tirar()));
-                }
-                catch { }
-            }
-        }
-
-        private void HabilitarDados(int x) //Habilita el UC dados segun a quien le toca
-        {
-            int turno = x;
+            int turno = obtenerTurno(this.turnero1.getTurno());
 
             switch (turno)
             {
