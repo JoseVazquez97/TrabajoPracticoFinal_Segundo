@@ -38,10 +38,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.TIPO = 2;
 
             this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
-
+            this.p_boxUno.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            p_boxUno.Image = Image.FromFile(this.path + @"\Recursos\gif\bomb.gif");
             p_boxUno.Location = new Point((((this.Width) / 2) - 50), (this.Height / 2));
+            p_boxUno.BackColor = Color.White;
+            this.BackColor = Color.White;
 
-            p_boxUno.Image = Image.FromFile(this.path + @"\Recursos\Logos\LOGO_Manija.png");
+            
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -49,6 +52,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             cont++;
             if(cont >= 3 && cont < 5) 
             {
+                if (this.TIPO == 1)
                 p_boxUno.Image = Image.FromFile(this.path + @"\Recursos\Logos\LOGO_Gregoire.png");
             }
 
@@ -84,6 +88,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void Intro_Click(object sender, EventArgs e)
         {
+            if (this.TIPO == 1)
             Timer.Interval = 10;
 
         }
