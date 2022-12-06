@@ -88,39 +88,44 @@ namespace GeneradorMapa
 
         public void CargarMapa(string mapa)
         {
-            this.mapa = mapa;
-            string[] m = mapa.Split(';');
-            tblMapa.Controls.Clear();
-
-            #region Pre-Generacion Vacia
-            for (sbyte y = 0; y < 10; y++)
+            try
             {
-                for (sbyte x = 0; x < 10; x++)
+                this.mapa = mapa;
+                string[] m = mapa.Split(';');
+                tblMapa.Controls.Clear();
+
+                #region Pre-Generacion Vacia
+                for (sbyte y = 0; y < 10; y++)
                 {
-                    Control celda = new Control();
-                    celda.Location = new Point(1, 1);
-                    celda.Dock = DockStyle.Fill;
-                    celda.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    tblMapa.Controls.Add(celda, x, y);
+                    for (sbyte x = 0; x < 10; x++)
+                    {
+                        Control celda = new Control();
+                        celda.Location = new Point(1, 1);
+                        celda.Dock = DockStyle.Fill;
+                        celda.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                        tblMapa.Controls.Add(celda, x, y);
+                    }
+                }
+                #endregion
+
+                this.posX = sbyte.Parse(m[100]);
+                this.posY = sbyte.Parse(m[101]);
+                this.lugarActual = obtenerTipo(m[102]);
+                GenerarMapa(lugarActual, posX, posY, true);
+
+                int aux = 0;
+                for (sbyte y = 0; y < 10; y++)
+                {
+                    for (sbyte x = 0; x < 10; x++)
+                    {
+                        TipoGeneracion tg = obtenerTipo(m[aux]);
+                        GenerarMapa(tg, x, y, true);
+                        aux++;
+                    }
                 }
             }
-            #endregion
-
-            this.posX = sbyte.Parse(m[100]);
-            this.posY = sbyte.Parse(m[101]);
-            this.lugarActual = obtenerTipo(m[102]);
-            GenerarMapa(lugarActual, posX, posY, true);
-
-            int aux = 0;
-            for (sbyte y = 0; y < 10; y++)
-            {
-                for (sbyte x = 0; x < 10; x++)
-                {
-                    TipoGeneracion tg = obtenerTipo(m[aux]);
-                    GenerarMapa(tg, x, y, true);
-                    aux++;
-                }
-            }
+            catch { }
+            
             
         }
 

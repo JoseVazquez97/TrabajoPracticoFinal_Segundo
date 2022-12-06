@@ -38,7 +38,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region ATRIBUTOS DEL FORM CLIENTE
 
-        private string _url = "https://blazorserversignal2022.azurewebsites.net/homeHubNew";
+        private string _url = "https://localhost:7170/homeHubNew";
         HubConnection HomeConection;
 
         private string Rol;
@@ -88,6 +88,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.accionFlag = false;
             this.val1 = "0";
             this.val2 = "0";
+            this.fondo.SoundLocation = @".\Recursos\Musica\elBueno.wav";
+            this.fondo.PlayLooping();
             #endregion
 
             #region LOADS DE COMPONENTES 
@@ -911,7 +913,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 case "Capitan":
                     this.Key = 1;
-                    IniciarMusica();
                     this.pantallaWeb1.CargarAvatar(this.miAvatar);
                     this.pantallaWeb1.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
@@ -926,6 +927,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     this.pantallaWeb2.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
                     loadUrnas(false);
+
                     break;
 
                 case "Mercader":
@@ -934,6 +936,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     this.pantallaWeb3.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
                     loadUrnas(false);
+
                     break;
 
                 case "Artillero":
