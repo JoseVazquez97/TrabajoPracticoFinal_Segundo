@@ -38,7 +38,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region ATRIBUTOS DEL FORM CLIENTE
 
-        private string _url = "https://localhost:7170/homeHubNew";
+        private string _url = "https://blazorserversignal2022.azurewebsites.net/homeHubNew";
         HubConnection HomeConection;
 
         private string Rol;
@@ -337,18 +337,21 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                         case "2":
                             RecibirNotificacion(key, noti);
+                            SpawnearNoti(key, true);
                             SiguienteTurno();
                             CargarVoto(1, noti);
                             break;
 
                         case "3":
                             RecibirNotificacion(key, noti);
+                            SpawnearNoti(key, true);
                             SiguienteTurno();
                             CargarVoto(2, noti);
                             break;
 
                         case "4":
                             RecibirNotificacion(key, noti);
+                            SpawnearNoti(key, true);
                             SiguienteTurno();
                             CargarVoto(3, noti);
                             break;
@@ -401,11 +404,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 if (noti != 0)
                 {
                     RecibirNotificacion(key, noti);
-                    SpawnearNoti(key, true);
-                }
-                else 
-                {
-                    SpawnearNoti(key,false);
                 }
             }
             #endregion
@@ -423,18 +421,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     if (this.Key == 1)
                     {
                         this.notificacion = this.urnaCapitan1.ConsultarDesicion().ToString();
-                        this.urnaCapitan1.ReiniciarDesicion();
                         this.urna1.reiniciarVoto();
                     }
                     break;
 
                 case "Votacion":
-                    this.notificacion = this.urnaCapitan1.ConsultarDesicion().ToString();
-                    this.urnaCapitan1.ReiniciarDesicion();
+                    this.notificacion = this.urna1.ConsultarVoto().ToString();
+                    this.urna1.reiniciarVoto();
                     break;
 
                 case "Batalla":
-
                     break;
             }
 
@@ -1049,7 +1045,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private void RecibirNotificacion(int usr, int parametro) //Hace visible y muestra el mensaje que llega por parametro las notificaciones
         {
             NotificarOrden(usr, parametro);
-            SpawnearNoti(usr, true);
         }
 
         private void MensajesVotacion() //Establece los mensajes de las urnas

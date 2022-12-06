@@ -42,7 +42,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             p_boxUno.Image = Image.FromFile(this.path + @"\Recursos\gif\bomb.gif");
             p_boxUno.Location = new Point((((this.Width) / 2) - 50), (this.Height / 2));
             p_boxUno.BackColor = Color.White;
-            this.BackColor = Color.White;
+            this.BackColor = Color.Black;
 
             
         }
