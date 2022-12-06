@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -39,6 +40,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                     this.lbl_texto.Text = "Al Sur!";
                     break;
             }
+            
         }
 
         public void MensajeArmado(int x,string evento) 
@@ -68,12 +70,11 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                     break;
 
                 case 3:
-                    this.lbl_texto.Text = "Al Norte!";
                     break;
 
 
                 case 4:
-                    this.lbl_texto.Text = "Al Norte!";
+
                     break;
             }
         }

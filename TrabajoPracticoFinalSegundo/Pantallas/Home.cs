@@ -28,6 +28,8 @@ using System.Drawing.Text;
 using Emgu.CV.Features2D;
 using Emgu.CV.Util;
 using System.Runtime.CompilerServices;
+using System.Media;
+using System.Diagnostics.Metrics;
 
 namespace TrabajoPracticoFinalSegundo.Pantallas
 {
@@ -62,11 +64,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private string estadoBarco;
         private string estadoBarco2;
 
+        
+
         #endregion
 
         public Home()
         {
             InitializeComponent();
+
             this.conectado = false;
 
             #region ASIGNACION DE PARAMETROS INICIALES
@@ -165,6 +170,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             HomeConection.Closed +=
                 async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync(); };
             #endregion
+
         }
 
         /// ///////////////////////////////////////////////////////////////
@@ -182,9 +188,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 switch (this.eventoActual)
                 {
                     case "Orden":
-                        EnviarEstadoSR();
                         if (this.Key == 1)
                         {
+                            string x = this.urnaCapitan1.ConsultarDesicion().ToString();
+
+                            if (x != "0") 
+                            {
+                                EnviarEstadoSR();
+                            }
+
                             if (!this.mFlag)
                             {
                                 ucMapa1.CargarImagenBarco();
@@ -260,6 +272,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             int noti = int.Parse(parametros[1]);
 
             #region EVENTO ORDEN
+
             if (this.Turno < turno) //Si el turno de este cliente es menor del que me llega sucedio algo...
             {
                 if (this.eventoActual == "Orden" && this.eventoActual == parametros[2]) //Si estamos en el evento orden
@@ -273,7 +286,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             SiguienteTurno();
                         }
 
-                        if (noti != 0)
+                        if (noti != 0 && user == "1")
                         {
                             NotificarOrdenCap(noti);
                         }
@@ -319,6 +332,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 {
                     switch (user)
                     {
+
                         case "2":
                             RecibirNotificacion(key, noti);
                             SiguienteTurno();
@@ -700,6 +714,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 List<string> parametros = obternerParam(msg);
 
+                if (usr == this.Key.ToString() && parametros[1] != "0") 
+                {
+
+                }
+
                 ImpactarEnCliente(usr, parametros);
             });
             #endregion
@@ -858,11 +877,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 case "Capitan":
                     this.Key = 1;
+                    //IniciarMusica();
                     this.pantallaWeb1.CargarAvatar(this.miAvatar);
                     this.pantallaWeb1.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
                     ucMapa1.GenerarMapa();
                     loadUrnas(true);
+                    //RVozCap();
                     break;
 
                 case "Carpintero":
@@ -1064,14 +1085,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             switch (quien)
             {
                 case 1:
-                    if (this.noti_Cap.InvokeRequired)
+                    try
                     {
-                        try
-                        {
-                            this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmado(x, this.eventoActual)));
-                        }
-                        catch { }
+                        this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmado(x, this.eventoActual)));
                     }
+                    catch { }
                     break;
                 case 2:
                     if (this.noti_Carp.InvokeRequired)
@@ -1149,7 +1167,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 this.urnaCapitan1.Enabled = true;
                 this.urnaCapitan1.Visible = true;
-                this.urnaCapitan1.Load_UrnaCapitan(width, heigh, ref this.noti_Cap, ref this.turnero1, ref this.notificacion);
+                this.urnaCapitan1.Load_UrnaCapitan(width, heigh, ref this.noti_Cap, ref this.turnero1);
                 this.urna1.Load_Urna(width, heigh, ref this.noti_Cap);
                 this.urna1.Enabled = false;
                 this.urna1.Visible = false;
@@ -1294,7 +1312,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
             }
 
-
             return eventoX;
         }
 
@@ -1308,6 +1325,37 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
+        #region MUSICA
+        /*
+        private async void IniciarMusica() 
+        {
+            if (this.Key == 1) 
+            {
+                
+                await Reproducir();
+            }
+            
+        }
+        
+
+        private Task Reproducir()
+        {
+            return Task.Run(new Action(() => this.fondo.PlaySync()));
+        }
+
+        private async void RVozCap()
+        {
+            await RVozCapX();
+        }
+
+        private Task RVozCapX()
+        {
+            this.voz1.SoundLocation = @".\Recursos\Musica\yohoho.wav";
+            return Task.Run(new Action(() => this.voz1.Play()));
+        }
+        */
         #endregion
+        #endregion
+
     }
 }
