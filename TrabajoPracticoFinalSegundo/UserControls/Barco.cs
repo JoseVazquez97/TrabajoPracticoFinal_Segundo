@@ -26,6 +26,7 @@
 
         private void cargarImagenes()
         {
+            /*
             this.pictureBox1.Parent = this.pic_Barco;
             this.pictureBox2.Parent = this.pic_Barco;
             this.pictureBox3.Parent = this.pic_Barco;
@@ -34,7 +35,7 @@
             //this.pictureBox2.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseDerecho.png");
            // this.pictureBox3.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseIzquierdo.png");
            // this.pictureBox4.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseIzquierdo.png");
-
+            */
         }
 
         public void loadBarco(ref RecursosDisplay x)
@@ -181,7 +182,11 @@
                         break;
 
                     case 4:
-                        this.Vida = int.Parse(parametros[i]);
+                        try
+                        {
+                            this.Vida = int.Parse(parametros[i]);
+                        }
+                        catch { this.Vida = 100; }
                         break;
 
                     case 5:

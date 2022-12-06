@@ -64,6 +64,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private string estadoBarco;
         private string estadoBarco2;
 
+        private SoundPlayer fondo = new SoundPlayer();
+
         
 
         #endregion
@@ -399,6 +401,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 if (noti != 0)
                 {
                     RecibirNotificacion(key, noti);
+                    SpawnearNoti(key, true);
+                }
+                else 
+                {
+                    SpawnearNoti(key,false);
                 }
             }
             #endregion
@@ -416,16 +423,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     if (this.Key == 1)
                     {
                         this.notificacion = this.urnaCapitan1.ConsultarDesicion().ToString();
+                        this.urnaCapitan1.ReiniciarDesicion();
                         this.urna1.reiniciarVoto();
                     }
                     break;
 
                 case "Votacion":
-                    this.notificacion = this.urna1.ConsultarVoto().ToString();
-                    this.urna1.reiniciarVoto();
+                    this.notificacion = this.urnaCapitan1.ConsultarDesicion().ToString();
+                    this.urnaCapitan1.ReiniciarDesicion();
                     break;
 
                 case "Batalla":
+
                     break;
             }
 
@@ -435,6 +444,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #endregion
+
+
+
+
+
+
+
+
 
         #region SIGNAL R
 
@@ -614,6 +631,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #endregion
+
+
+
+
+
+
+
+
+
 
         ////////////////////////////////////////////////////
 
@@ -834,6 +860,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
+
+
+
+
+
+
+
+
+
+
+
+
         /// 
         ///    
         ///       FUNCIONES PRIVADAS DEL FORM!
@@ -877,7 +915,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 case "Capitan":
                     this.Key = 1;
-                    //IniciarMusica();
+                    IniciarMusica();
                     this.pantallaWeb1.CargarAvatar(this.miAvatar);
                     this.pantallaWeb1.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
@@ -979,6 +1017,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             EnviarEB();
                             this.accionFlag = true;
                         }
+                        QuitarTodasLasNotis();
+                        BorrarTodasLasNotis();
                     }
                     catch { }
                     break;
@@ -999,6 +1039,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             SpawnearNoti(3, false);
             SpawnearNoti(4, false);
         }
+
+        private void BorrarTodasLasNotis() 
+        {
+            this.notificacion = "0";
+        }
+
 
         private void RecibirNotificacion(int usr, int parametro) //Hace visible y muestra el mensaje que llega por parametro las notificaciones
         {
@@ -1326,34 +1372,23 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #region MUSICA
-        /*
         private async void IniciarMusica() 
         {
+            this.fondo.SoundLocation = @".\Recursos\Musica\elBueno.wav";
+
             if (this.Key == 1) 
             {
-                
                 await Reproducir();
             }
             
         }
-        
 
         private Task Reproducir()
         {
-            return Task.Run(new Action(() => this.fondo.PlaySync()));
+            return Task.Run(new Action(() => this.fondo.PlayLooping()));
         }
 
-        private async void RVozCap()
-        {
-            await RVozCapX();
-        }
 
-        private Task RVozCapX()
-        {
-            this.voz1.SoundLocation = @".\Recursos\Musica\yohoho.wav";
-            return Task.Run(new Action(() => this.voz1.Play()));
-        }
-        */
         #endregion
         #endregion
 
