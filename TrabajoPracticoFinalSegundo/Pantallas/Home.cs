@@ -265,6 +265,35 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
+        #region GENERAR - MENSAJE
+        private string GenerarEstado()
+        {
+            string mensaje = "";
+
+            switch (this.eventoActual) //Segun el evento donde me encuentro
+            {
+                case "Orden":
+                    if (this.Key == 1)
+                    {
+                        this.notificacion = this.urnaCapitan1.ConsultarDesicion().ToString();
+                        this.urna1.reiniciarVoto();
+                    }
+                    break;
+
+                case "Votacion":
+                    this.notificacion = this.urna1.ConsultarVoto().ToString();
+                    this.urna1.reiniciarVoto();
+                    break;
+
+                case "Batalla":
+                    break;
+            }
+
+            mensaje = this.turnero1.getTurno().ToString() + ";" + this.notificacion + ";" + this.eventoActual + ";";
+            return mensaje;
+        }
+        #endregion
+
         #region IMPACTAR EN FORM
         private void ImpactarEnCliente(string user, List<string> parametros)
         {
@@ -412,40 +441,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
-        #region GENERAR - MENSAJE
-        private string GenerarEstado()
-        {
-            string mensaje = "";
-
-            switch (this.eventoActual) //Segun el evento donde me encuentro
-            {
-                case "Orden":
-                    if (this.Key == 1)
-                    {
-                        this.notificacion = this.urnaCapitan1.ConsultarDesicion().ToString();
-                        this.urna1.reiniciarVoto();
-                    }
-                    break;
-
-                case "Votacion":
-                    this.notificacion = this.urna1.ConsultarVoto().ToString();
-                    this.urna1.reiniciarVoto();
-                    break;
-
-                case "Batalla":
-                    break;
-            }
-
-            mensaje = this.turnero1.getTurno().ToString() + ";" + this.notificacion + ";" + this.eventoActual + ";";
-            return mensaje;
-        }
         #endregion
-
-        #endregion
-
-
-
-
 
 
 
@@ -629,12 +625,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #endregion
-
-
-
-
-
-
 
 
 
@@ -857,13 +847,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #endregion
-
-
-
-
-
-
-
 
 
 
