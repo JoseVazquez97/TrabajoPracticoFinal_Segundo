@@ -37,12 +37,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.cont = 0;
             this.TIPO = 2;
 
-            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
-            this.p_boxUno.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            p_boxUno.Image = Image.FromFile(this.path + @"\Recursos\gif\bomb.gif");
-            p_boxUno.Location = new Point((((this.Width) / 2) - 50), (this.Height / 2));
-            p_boxUno.BackColor = Color.White;
-            this.BackColor = Color.Black;
+            this.p_boxUno.Enabled = false;
+			this.pb2.Enabled = true;
+			
+            pb2.Image = Image.FromFile(@".\Recursos\Gifs\barco.gif");
+            pb2.Location = new Point(30, (this.Height - 120));
+            pb2.BackColor = Color.black;this.BackColor = Color.Black;
+			
+			
 
             
         }

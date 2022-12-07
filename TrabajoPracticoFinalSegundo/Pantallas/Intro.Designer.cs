@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.p_boxUno = new System.Windows.Forms.PictureBox();
+			this.pb2 = new System.Windows.Forms.PictureBox();
             this.Timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.p_boxUno)).BeginInit();
             this.SuspendLayout();
@@ -44,6 +45,17 @@
             this.p_boxUno.TabIndex = 0;
             this.p_boxUno.TabStop = false;
             this.p_boxUno.Click += new System.EventHandler(this.Intro_Click);
+			// 
+            // pb2
+            // 
+            this.pb2.BackColor = System.Drawing.Color.Black;
+            this.pb2.Location = new System.Drawing.Point(30, 500);
+            this.pb2.Name = "pb2";
+            this.pb2.Size = new System.Drawing.Size(150, 150);
+            this.pb2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.center;
+            this.pb2.TabIndex = 0;
+            this.pb2.TabStop = false;
+			this.pb2.Enabled = false;
             // 
             // Timer
             // 
@@ -72,6 +84,7 @@
         #endregion
 
         private PictureBox p_boxUno;
+		private PictureBox pb2;
         private System.Windows.Forms.Timer Timer;
     }
 }
