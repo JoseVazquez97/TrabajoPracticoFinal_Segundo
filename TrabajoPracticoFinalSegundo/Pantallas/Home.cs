@@ -30,6 +30,7 @@ using Emgu.CV.Util;
 using System.Runtime.CompilerServices;
 using System.Media;
 using System.Diagnostics.Metrics;
+using NAudio.Wave;
 
 namespace TrabajoPracticoFinalSegundo.Pantallas
 {
@@ -64,9 +65,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private string estadoBarco;
         private string estadoBarco2;
 
-        private SoundPlayer fondo = new SoundPlayer();
+        private WaveOut salidaFondo = new WaveOut();
+        private WaveStream stream1;
 
-        
+        private WaveOut salidaVoz = new WaveOut();
+        private WaveStream stream2;
 
         #endregion
 
@@ -88,82 +91,103 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.accionFlag = false;
             this.val1 = "0";
             this.val2 = "0";
-            this.fondo.SoundLocation = @".\Recursos\Musica\elBueno.wav";
-            this.fondo.PlayLooping();
+
             #endregion
-
-            #region LOADS DE COMPONENTES 
-            //FlowLayout4 (Recursos y escrutinio)
-            this.flowLayoutPanel4.Padding = new System.Windows.Forms.Padding() { Left = this.flowLayoutPanel4.Width / 3 + 100 };
-
-            //FONDOS
-            this.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\Madera.jpg");
-            Navio_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\FondoHomeDos.jpg");
-            Navegacion_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\mapax.png");
-            int loc1 = this.flowLayoutPanel2.Width;
-            int loc2 = this.flowLayoutPanel4.Height;
-            this.Barco_Page.SelectTab(0);
-
-            //PANTALLAS WEB
-            this.pantallaWeb1.WebLoad();
-            this.pantallaWeb2.WebLoad();
-            this.pantallaWeb3.WebLoad();
 
             int x = (this.Width / 2);
             int y = (this.Height / 2);
 
-            //RECURSOS Y CAMBIOS DE PAG
-            this.recursosDisplay1.LoadRecursos(flowLayoutPanel4.Width, flowLayoutPanel4.Height);
+            #region LOADS DE COMPONENTES 
 
-            //BARCOS
-            this.barco1.loadBarco(ref this.recursosDisplay1);
-            this.barco2.loadBarcoEnemigo();
-            this.barco2.Visible = false;
+                #region FONDOS
+                this.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\Madera.jpg");
+                Navio_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\FondoHomeDos.jpg");
+                Navegacion_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\mapax.png");
+                int loc1 = this.flowLayoutPanel2.Width;
+                int loc2 = this.flowLayoutPanel4.Height;
+                this.Barco_Page.SelectTab(0);
+                #endregion
 
-            //BARRA (INFERIOR)
-            x = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
-            y = this.flowLayoutPanel1.Height;
+                #region PANTALLAS WEB
+                this.pantallaWeb1.WebLoad();
+                this.pantallaWeb2.WebLoad();
+                this.pantallaWeb3.WebLoad();
+                #endregion
 
-            //TURNERO
-            this.turnero1.LoadTurnero(x, y);
+                #region BARCOS
+                this.barco1.loadBarco(ref this.recursosDisplay1);
+                this.barco2.loadBarcoEnemigo();
+                this.barco2.Visible = false;
+                #endregion
 
-            //DADOS
-            this.dados1.CargarTablero(x + 100, y);
+                #region BARRA (INFERIOR)
+                x = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
+                y = this.flowLayoutPanel1.Height;
+                #endregion
+
+                #region TURNERO
+                this.turnero1.LoadTurnero(x, y);
+                #endregion
+
+                #region DADOS
+                this.dados1.CargarTablero(x + 100, y);
+                #endregion
+
+                #region NOTIFICADORES
+                Point locati;
+                this.flowLayoutPanel2.Parent = this;
+
+                this.noti_Cap.Load_Notificador();
+                this.noti_Cap.Visible = false;
+                this.noti_Cap.Parent = this;
+                locati = this.pantallaWeb1.Location;
+                this.noti_Cap.Location = new Point(locati.X + 255, locati.Y + 20);
+
+                this.noti_Carp.Load_Notificador();
+                this.noti_Carp.Visible = true;
+                this.noti_Carp.Parent = this;
+                locati = this.pantallaWeb2.Location;
+                this.noti_Carp.Location = new Point(locati.X + 255, locati.Y + 20);
+                this.noti_Carp.Mensaje("Ordenes capitan!");
+
+                this.noti_Mer.Load_Notificador();
+                this.noti_Mer.Visible = false;
+                this.noti_Mer.Parent = this;
+                locati = this.pantallaWeb3.Location;
+                this.noti_Mer.Location = new Point(locati.X + 255, locati.Y + 20);
+
+                this.noti_Ar.Load_Notificador();
+                this.noti_Ar.Visible = false;
+                this.noti_Ar.Parent = this;
+                locati = this.pantallaWeb4.Location;
+                this.noti_Ar.Location = new Point(locati.X + 255, locati.Y + 20);
+                #endregion
+
+                #region ESCRUTINIO
+                //FlowLayout4 (Recursos y escrutinio)
+                this.flowLayoutPanel4.Padding = new System.Windows.Forms.Padding() { Left = this.flowLayoutPanel4.Width / 3 + 100 };
 
 
-            //NOTIFICADORES
-            Point locati;
-            this.flowLayoutPanel2.Parent = this;
+                this.Turno = turnero1.getTurno();
+                this.escrutinio1.loadEscrutinio(this.flowLayoutPanel4.Width);
+                this.escrutinio1.Visible = false;
+                #endregion
 
-            this.noti_Cap.Load_Notificador();
-            this.noti_Cap.Visible = false;
-            this.noti_Cap.Parent = this;
-            locati = this.pantallaWeb1.Location;
-            this.noti_Cap.Location = new Point(locati.X + 255, locati.Y + 20);
+                #region RECURSOS Y CAMBIOS DE PAG
+                this.recursosDisplay1.LoadRecursos(flowLayoutPanel4.Width, flowLayoutPanel4.Height);
+                #endregion
 
-            this.noti_Carp.Load_Notificador();
-            this.noti_Carp.Visible = true;
-            this.noti_Carp.Parent = this;
-            locati = this.pantallaWeb2.Location;
-            this.noti_Carp.Location = new Point(locati.X + 255, locati.Y + 20);
-            this.noti_Carp.Mensaje("Ordenes capitan!");
+                #region MUSICA
+                this.stream1 = new AudioFileReader(@".\Recursos\Musica\elBueno.wav");
+                this.salidaFondo = new();
+                this.salidaFondo.Volume = 1;
+                this.salidaFondo.Init(stream1);
 
-            this.noti_Mer.Load_Notificador();
-            this.noti_Mer.Visible = false;
-            this.noti_Mer.Parent = this;
-            locati = this.pantallaWeb3.Location;
-            this.noti_Mer.Location = new Point(locati.X + 255, locati.Y + 20);
-
-            this.noti_Ar.Load_Notificador();
-            this.noti_Ar.Visible = false;
-            this.noti_Ar.Parent = this;
-            locati = this.pantallaWeb4.Location;
-            this.noti_Ar.Location = new Point(locati.X + 255, locati.Y + 20);
-
-            //ESCRUTINIO
-            this.Turno = turnero1.getTurno();
-            this.escrutinio1.loadEscrutinio(this.flowLayoutPanel4.Width);
-            this.escrutinio1.Visible = false;
+                this.stream2 = new AudioFileReader(@".\Recursos\Musica\yohoho.wav");
+                this.salidaVoz = new();
+                this.salidaVoz.Volume = 1;
+                this.salidaVoz.Init(stream2);
+                #endregion
 
             #endregion
 
@@ -896,12 +920,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 case "Capitan":
                     this.Key = 1;
+                    DalePower();
                     this.pantallaWeb1.CargarAvatar(this.miAvatar);
                     this.pantallaWeb1.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
                     ucMapa1.GenerarMapa();
                     loadUrnas(true);
-                    //RVozCap();
                     break;
 
                 case "Carpintero":
@@ -940,6 +964,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             if (this.dados1.getEnable())
             {
+                Voz();
                 this.dados1.tirar();
                 this.Turno++;
                 SiguienteTurno();
@@ -1353,22 +1378,19 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #region MUSICA
-        private async void IniciarMusica() 
+
+        private void DalePower() 
         {
-            this.fondo.SoundLocation = @".\Recursos\Musica\elBueno.wav";
-
-            if (this.Key == 1) 
-            {
-                await Reproducir();
-            }
-            
+            if (this.salidaFondo.PlaybackState is PlaybackState.Playing) salidaFondo.Stop();
+            stream1.CurrentTime = new TimeSpan(0L);
+            this.salidaFondo.Play();
         }
-
-        private Task Reproducir()
+        private void Voz() 
         {
-            return Task.Run(new Action(() => this.fondo.PlayLooping()));
+            if (this.salidaVoz.PlaybackState is PlaybackState.Playing) salidaVoz.Stop();
+            stream2.CurrentTime = new TimeSpan(0L);
+            this.salidaVoz.Play();
         }
-
 
         #endregion
         #endregion
