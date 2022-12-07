@@ -38,11 +38,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.TIPO = 2;
 
             this.p_boxUno.Enabled = false;
-			this.pb2.Enabled = true;
+			this.p_box2.Enabled = true;
 			
-            pb2.Image = Image.FromFile(@".\Recursos\Gifs\barco.gif");
-            pb2.Location = new Point(30, (this.Height - 120));
-            pb2.BackColor = Color.black;this.BackColor = Color.Black;
+            p_box2.Image = Image.FromFile(@".\Recursos\Gifs\barco.gif");
+            p_box2.Location = new Point(30, (this.Height - 100));
+            p_box2.BackColor = Color.Black;this.BackColor = Color.Black;
 			
 			
 
