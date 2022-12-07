@@ -41,8 +41,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 			this.p_box2.Enabled = true;
 			
             p_box2.Image = Image.FromFile(@".\Recursos\Gifs\barco.gif");
-            p_box2.Location = new Point(30, (this.Height - 100));
-            p_box2.BackColor = Color.Black;this.BackColor = Color.Black;
 			
 			
 
