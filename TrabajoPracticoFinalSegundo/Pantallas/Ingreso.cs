@@ -13,29 +13,16 @@ namespace TrabajoPracticoFinalSegundo
         public Ingreso()
         {
             InitializeComponent();
-            this.path = Directory.GetParent(Directory.GetParent("..").ToString()).ToString();
 
-            this.BackgroundImage = Image.FromFile(this.path + "/Recursos/Fondos/FONDO_Ingreso.jpg");
+            this.BackgroundImage = Image.FromFile(@"./Recursos/Fondos/FONDO_Ingreso.jpg");
+            Intro intro = new Intro(this);
+            intro.Show();
         }
 
         private void btn_Ingresar_Click(object sender, EventArgs e)
         {
-            
-            
-            Intro intro = new Intro(this);
-            intro.Show();
-            
-
-            /*
-            Home h = new Home();
-            h.Show();
-            */
-
-            /*
-            Prueba x = new Prueba();
-            x.Show();
-            */
-
+            PantallaPhoto pp = new PantallaPhoto();
+            pp.Show();
             this.Hide();
         }
 

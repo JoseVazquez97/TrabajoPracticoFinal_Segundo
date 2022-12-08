@@ -79,6 +79,7 @@
     <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\FondoHomeDos.jpg" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\FONDO_Home.jpg" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\FONDO_Ingreso.jpg" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\FONDO_PantallaPhoto - Discontinuado.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\FONDO_PantallaPhoto.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\Madera.jpg" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\mapax.png" />

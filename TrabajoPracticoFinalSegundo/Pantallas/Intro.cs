@@ -13,14 +13,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 {
     public partial class Intro : Form
     {
-        Ingreso ing;
         int cont;
         int TIPO;
 
         public Intro(Ingreso ing)
         {
             InitializeComponent();
-            this.ing = ing;
             this.cont = 0;
             this.TIPO = 1;
 
@@ -58,26 +56,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             if (cont >= 5) 
             {
-                /*
-                Home x = new Home();
-                x.Show();
-                */
-
-                /*
-                Prueba x = new Prueba();
-                x.Show();
-                */
-                if (this.TIPO == 1)
-                {
-                    PantallaPhoto x = new PantallaPhoto();
-                    x.Show();
-                    this.Close();
-                }
-                else 
-                {
-                    this.Close();
-                }
-                
+                this.Close();
             }
         }
 
