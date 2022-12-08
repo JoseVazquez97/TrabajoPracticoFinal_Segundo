@@ -59,6 +59,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private bool eFlag; //Flag de evento random
         private bool movFlag; // Flag de movimiento
         private bool mFlag; // Flag de mapa
+        private bool fotoFlag;
 
         private string val1;
         private string val2;
@@ -180,12 +181,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 #region MUSICA
                 this.stream1 = new AudioFileReader(@".\Recursos\Musica\elBueno.wav");
                 this.salidaFondo = new();
-                this.salidaFondo.Volume = 1;
+                this.salidaFondo.Volume = 0.5f;
                 this.salidaFondo.Init(stream1);
 
                 this.stream2 = new AudioFileReader(@".\Recursos\Musica\yohoho.wav");
                 this.salidaVoz = new();
-                this.salidaVoz.Volume = 1;
+                this.salidaVoz.Volume = 0.5f;
                 this.salidaVoz.Init(stream2);
                 #endregion
 
@@ -215,14 +216,26 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                 switch (this.eventoActual)
                 {
+                    #region EJECUCION cada 100ms durante ORDEN
                     case "Orden":
+                        if (!this.fotoFlag) 
+                        {
+                            
+
+                            this.fotoFlag = true;
+                        }
+
                         if (this.Key == 1)
                         {
                             string x = this.urnaCapitan1.ConsultarDesicion().ToString();
+                            this.urnaCapitan1.ReiniciarDesicion();
 
                             if (x != "0") 
                             {
+                                this.Turno++;
+                                SiguienteTurno();
                                 EnviarEstadoSR();
+                                this.eventoActual = "Votacion";
                             }
 
                             if (!this.mFlag)
@@ -242,27 +255,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             }
                         }
                         break;
+                    #endregion
 
+                    #region EJECUCION cada 100ms durante VOTACION
                     case "Votacion":
                         EnviarEstadoSR();
-                        break;
+                    break;
+                    #endregion
 
+                    #region EJECUCION cada 100ms durante BATALLA
                     case "Batalla":
-                        if (this.Key == 1 && !this.eFlag)
-                        {
-                            string envetoRandom = enventoRandom();
-
-                            EnviarEventoX(envetoRandom);
-
-                            this.eFlag = true;
-                        }
-
-                        if (!this.enventoFlag)
-                        {
-                            ConsultarEve();
-                            this.enventoFlag = true;
-                        }
-
                         HabilitarDados();
 
                         if (this.dados1.getEnable())
@@ -285,6 +287,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         EnviarEstadoSR();
                         break;
                 }
+                #endregion
             }
         }
         #endregion
@@ -318,7 +321,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
-        #region IMPACTAR EN FORM
+        #region IMPACTAR CLIENTE
         private void ImpactarEnCliente(string user, List<string> parametros)
         {
             // Index de parametros
@@ -329,35 +332,30 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             int noti = int.Parse(parametros[1]);
 
             #region EVENTO ORDEN
-
-            if (this.Turno < turno) //Si el turno de este cliente es menor del que me llega sucedio algo...
-            {
                 if (this.eventoActual == "Orden" && this.eventoActual == parametros[2]) //Si estamos en el evento orden
                 {
-                    this.Turno = turno; //Igualamos el turno
-
-                    if (user == "1") //Y si el capitan nos envia mensaje.
+                    if (this.Turno < turno) //Si el turno de este cliente es menor del que me llega sucedio algo...
                     {
-                        if (this.Key != 1)
+                        this.Turno = turno; //Igualamos el turno
+                        SiguienteTurno();
+
+                        if (user == "1") //Y si el capitan nos envia mensaje.
                         {
-                            SiguienteTurno();
+                            if (noti != 0)
+                            {
+                                NotificarOrdenCap(noti);
+                            }
+
+                            SpawnearNoti(1, true);
+                            SpawnearNoti(2, false);
+                            SpawnearNoti(3, false);
+                            SpawnearNoti(4, false);
+                            SwitchUrnaCap(true);
+
+                            this.eventoActual = "Votacion";
                         }
-
-                        if (noti != 0 && user == "1")
-                        {
-                            NotificarOrdenCap(noti);
-                        }
-
-                        SpawnearNoti(1, true);
-                        SpawnearNoti(2, false);
-                        SpawnearNoti(3, false);
-                        SpawnearNoti(4, false);
-                        SwitchUrnaCap(true);
-
-                        this.eventoActual = "Votacion";
                     }
                 }
-            }
             #endregion
 
             #region EVENTO VOTACION
@@ -385,8 +383,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 }
                 #endregion
 
+                
                 if (noti != 0)
                 {
+                    #region Notis
+
+
                     switch (user)
                     {
 
@@ -412,19 +414,26 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             break;
                     }
 
+
+                    #endregion
+
+                    #region EVENTO y MOVIMIENTO del barco.
+
+
                     if (this.escrutinio1.confirmarVotacion() != 0)
                     {
-                        this.eventoActual = "Batalla";
-
                         if (this.Key == 1)
                         {
                             int x = urnaCapitan1.ConsultarDesicion();
                             EnviarMovimiento(x);
+                            EventoRandom(); //Envia - Consulta el evento Random una vez terminada la votacion
                         }
                         else
                         {
                             ConsultarMovimiento();
                         }
+
+                        
 
                         SwitchEscrutinio(false);
                         this.escrutinio1.reiniciarVotos();
@@ -432,6 +441,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         this.notificacion = "0";
                         QuitarTodasLasNotis();
                     }
+
+
+                    #endregion
                 }
             }
             #endregion
@@ -649,8 +661,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #endregion
-
-
 
 
         ////////////////////////////////////////////////////
@@ -964,7 +974,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             if (this.dados1.getEnable())
             {
-                Voz();
                 this.dados1.tirar();
                 this.Turno++;
                 SiguienteTurno();
@@ -1080,6 +1089,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         try
                         {
                             noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = visible; }));
+                            if (visible) Voz();
                         }
                         catch { }
                     }
@@ -1091,6 +1101,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         try
                         {
                             noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = visible; }));
+                            if (visible) Voz();
                         }
                         catch { }
                     }
@@ -1102,6 +1113,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         try
                         {
                             noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = visible; }));
+                            if (visible) Voz();
                         }
                         catch { }
                     }
@@ -1113,6 +1125,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         try
                         {
                             noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = visible; }));
+                            if(visible) Voz();
                         }
                         catch { }
                     }
@@ -1336,6 +1349,24 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region EVENTO-RANDOM
 
+        private void EventoRandom() 
+        {
+            if (this.Key == 1 && !this.eFlag)
+            {
+                string envetoRandom = enventoRandom();
+
+                EnviarEventoX(envetoRandom);
+
+                this.eFlag = true;
+            }
+
+            if (!this.enventoFlag)
+            {
+                ConsultarEve();
+                this.enventoFlag = true;
+            }
+        }
+
         private string enventoRandom() 
         {
             string eventoX = "0";
@@ -1351,7 +1382,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 case "F":
                     return "F";
                 case "M1":
-                    switch (2) 
+                    switch (1) 
                     {
                         case 1:
                             eventoX = "M10";

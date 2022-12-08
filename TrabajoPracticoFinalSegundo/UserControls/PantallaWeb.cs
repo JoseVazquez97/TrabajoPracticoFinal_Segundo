@@ -40,6 +40,14 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             pictureBox1.Image = Image.FromFile(@".\Recursos\Iconos\LogoEjemplo.png");
         }
 
+        public void ReSize(Size size)
+        {
+            this.Size = size;
+            size.Width -= 20;
+            size.Height -= 20;
+            this.pictureBox1.Size = size;
+            this.pictureBox1.Location = new Point(10,10);
+        }
 
         public void jugarConCamara(bool x) 
         {

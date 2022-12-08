@@ -49,7 +49,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.desicion= 1;
             this.noti_cap.Visible = true;
             this.noti_cap.MensajeArmadoCap(1);
-            this.turn.Siguiente();
         }
 
 
@@ -58,7 +57,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.desicion= 3;
             this.noti_cap.Visible = true;
             this.noti_cap.MensajeArmadoCap(3);
-            this.turn.Siguiente();
         }
 
         private void btn_Oeste_Click(object sender, EventArgs e)
@@ -66,7 +64,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.desicion= 2;
             this.noti_cap.Visible = true;
             this.noti_cap.MensajeArmadoCap(2);
-            this.turn.Siguiente();
         }
 
         private void btn_Sur_Click(object sender, EventArgs e)
@@ -74,7 +71,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.desicion = 4;
             this.noti_cap.Visible = true;
             this.noti_cap.MensajeArmadoCap(4);
-            this.turn.Siguiente();
         }
     }
 }
