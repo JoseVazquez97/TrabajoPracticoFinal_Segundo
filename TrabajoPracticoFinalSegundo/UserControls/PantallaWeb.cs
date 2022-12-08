@@ -40,44 +40,10 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             pictureBox1.Image = Image.FromFile(@".\Recursos\Iconos\LogoEjemplo.png");
         }
 
-        public void ReSize(Size size)
-        {
-            this.Size = size;
-            size.Width -= 20;
-            size.Height -= 20;
-            this.pictureBox1.Size = size;
-            this.pictureBox1.Location = new Point(10,10);
-        }
 
-        public void jugarConCamara(bool x) 
+        public void CargarAvatar(string avatar) 
         {
-            this.jugarCam = x;
-            if (x) 
-            {
-                this.camara = new VideoCapture();
-                this.Camara.Start();
-            }
-        }
-
-        public void RecibirFrame(string stringimagen) 
-        {
-           byte[] imgBytes = Convert.FromBase64String(stringimagen);
-           
-           this.pictureBox1.Image = byteArrayToImage(imgBytes);
-            
-        }
-
-        public string DarFrame() 
-        {
-            byte[] arreglo = ImageToByteArray(this.pictureBox1.Image);
-
-            string imagenByte = Convert.ToBase64String(arreglo);
-            return imagenByte;
-        }
-
-        public void CargarAvatar(Image avatar) 
-        {
-            this.pictureBox1.Image = avatar;
+            this.pictureBox1.Image = Image.FromFile(avatar);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

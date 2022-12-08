@@ -162,33 +162,20 @@
         private void ConfirmarSeleccion_Click(object sender, EventArgs e)
         {
             Intro x = new Intro();
-            
+
             /*
              * 
              * ESTA ES LA FORMA FINAL DE CARGA
              * NECESITO QUE SE CAMBIE LO QUE RECIBE
              * EL CONSTRUCTOR DEL FORMULARIO HOME.
              * 
+             *             */
+
             home.AsignarAvatar(pathAvatar, this.comboBox1.Text);
             x.Show();
             home.Show();
             this.Dispose();
-            */
 
-            try
-            {
-                Imagen.Image = new Bitmap(Imagen.Image, new Size(100, 70));
-                if (File.Exists(@".\Recursos\Avatars\avatar" + comboBox1.Text + ".png"))
-                    File.Delete(@".\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
-                Imagen.Image.Save(@".\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
-                Imagen.Image = Image.FromFile(@".\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
-
-                home.AsignarAvatar(this.Imagen.Image, this.comboBox1.Text, false); //Se cambio de this.jugarCam a false, (ES MEJOR QUE ESTO SEA QUITADO LUEGO)
-                x.Show();
-                home.Show();
-                this.Dispose();
-            }
-            catch { MessageBox.Show("El rol ya esta ocupado."); }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

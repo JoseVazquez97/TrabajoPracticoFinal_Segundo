@@ -43,16 +43,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         HubConnection HomeConection;
 
         private string Rol;
-        private Image miAvatar;
+        private string miAvatar;
         private bool conectado;
 
         private int Key;
         private int Turno;
-        private string bar1;
-        private string bar2;
         private string eventoActual;
         private string notificacion;
-        private string accionBot;
 
         private bool enventoFlag; //Flag de evento
         private bool accionFlag; //Flag de danio
@@ -60,11 +57,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private bool movFlag; // Flag de movimiento
         private bool mFlag; // Flag de mapa
         private bool fotoFlag;
-
-        private string val1;
-        private string val2;
-        private string estadoBarco;
-        private string estadoBarco2;
 
         private WaveOut salidaFondo = new WaveOut();
         private WaveStream stream1;
@@ -90,8 +82,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.eFlag = false;
             this.enventoFlag = false;
             this.accionFlag = false;
-            this.val1 = "0";
-            this.val2 = "0";
 
             #endregion
 
@@ -211,7 +201,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             if (conectado)
             {
-                mandarImagenes();
                 this.notificacion = ConsultarDesicion();
 
                 switch (this.eventoActual)
@@ -220,8 +209,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     case "Orden":
                         if (!this.fotoFlag) 
                         {
-                            
-
+                            EnviarPathX();
                             this.fotoFlag = true;
                         }
 
@@ -488,23 +476,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #region ENVIO DE MENSAJES Y CONSULTAS
 
         #region ENVIAR - Imagenes
-        private async void mandarImagenes()
+        private async void EnviarPathX()
         {
-            string imgUser;
-            string rol = this.Rol;
-
-            switch (rol)
-            {
-                case "Capitan": imgUser = this.pantallaWeb1.DarFrame(); break;
-                case "Carpintero": imgUser = this.pantallaWeb2.DarFrame(); break;
-                case "Mercader": imgUser = this.pantallaWeb3.DarFrame(); break;
-                case "Artillero": imgUser = this.pantallaWeb4.DarFrame(); break;
-                default: imgUser = "Defaul"; break;
-            };
+            string quien = this.Key.ToString();
+            string path = this.miAvatar;
 
             try
             {
-                await HomeConection.InvokeAsync("EnviarImagen", imgUser, rol);
+                await HomeConection.InvokeAsync("EnviarPath", quien, path);
             }
             catch { MessageBox.Show("Error en el envio de imagenes."); }
         }
@@ -685,57 +664,42 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             #region IMAGE-COM
 
-            HomeConection.On<string, string>("RecibirImagen", (img, rolx) =>
+            HomeConection.On<string, string>("RecibirPath", (quien, path) =>
             {
-                switch (rolx.ToString())
+                MessageBox.Show(quien + "  " + path);
+                if (int.Parse(quien) != this.Key) 
                 {
-                    case "Capitan":
-                        if (this.pantallaWeb1.InvokeRequired)
-                        {
+                    switch (quien)
+                    {
+                        case "1":
                             try
                             {
-                                pantallaWeb1.Invoke(new Action(() => pantallaWeb1.RecibirFrame(img.ToString())));
+                                pantallaWeb1.Invoke(new Action(() => this.pantallaWeb1.CargarAvatar(path)));
                             }
-                            catch { }
-                        }
-                        break;
-
-                    case "Carpintero":
-                        if (this.pantallaWeb2.InvokeRequired)
-                        {
+                            catch { MessageBox.Show($"No se pudo recibir el path de {quien} que es : {path}"); }
+                            break;
+                        case "2":
                             try
                             {
-                                pantallaWeb2.Invoke(new Action(() => pantallaWeb2.RecibirFrame(img.ToString())));
+                                pantallaWeb2.Invoke(new Action(() => this.pantallaWeb2.CargarAvatar(path)));
                             }
-                            catch { }
-                        }
-                        break;
-
-                    case "Mercader":
-                        if (this.pantallaWeb3.InvokeRequired)
-                        {
+                            catch { MessageBox.Show($"No se pudo recibir el path de {quien} que es : {path}"); }
+                            break;
+                        case "3":
                             try
                             {
-                                pantallaWeb3.Invoke(new Action(() => pantallaWeb3.RecibirFrame(img.ToString())));
+                                pantallaWeb3.Invoke(new Action(() => this.pantallaWeb3.CargarAvatar(path)));
                             }
-                            catch { }
-                        }
-                        break;
-
-                    case "Artillero":
-                        if (this.pantallaWeb4.InvokeRequired)
-                        {
+                            catch { MessageBox.Show($"No se pudo recibir el path de {quien} que es : {path}"); }
+                            break;
+                        case "4":
                             try
                             {
-                                pantallaWeb4.Invoke(new Action(() => pantallaWeb4.RecibirFrame(img.ToString())));
+                                pantallaWeb4.Invoke(new Action(() => this.pantallaWeb4.CargarAvatar(path)));
                             }
-                            catch { }
-                        }
-                        break;
-
-                    default:
-
-                        break;
+                            catch { MessageBox.Show($"No se pudo recibir el path de {quien} que es : {path}"); }
+                            break;
+                    }
                 }
             });
             #endregion
@@ -921,7 +885,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #region ASIGNACION AVATAR
-        public void AsignarAvatar(Image avatar, string rol, bool jugarcam) //Funcion ejecutada desde la pantalla anterior
+        public void AsignarAvatar(string avatar, string rol) //Funcion ejecutada desde la pantalla anterior
         {
             this.Rol = rol;
             this.miAvatar = avatar;
@@ -930,9 +894,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 case "Capitan":
                     this.Key = 1;
+
                     DalePower();
                     this.pantallaWeb1.CargarAvatar(this.miAvatar);
-                    this.pantallaWeb1.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
                     ucMapa1.GenerarMapa();
                     loadUrnas(true);
@@ -940,26 +904,24 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                 case "Carpintero":
                     this.Key = 2;
+
                     this.pantallaWeb2.CargarAvatar(this.miAvatar);
-                    this.pantallaWeb2.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
                     loadUrnas(false);
-
                     break;
 
                 case "Mercader":
                     this.Key = 3;
+
                     this.pantallaWeb3.CargarAvatar(this.miAvatar);
-                    this.pantallaWeb3.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
                     loadUrnas(false);
-
                     break;
 
                 case "Artillero":
                     this.Key = 4;
+
                     this.pantallaWeb4.CargarAvatar(this.miAvatar);
-                    this.pantallaWeb4.jugarConCamara(jugarcam);
                     this.dados1.setEnable(false);
                     loadUrnas(false);
                     break;
