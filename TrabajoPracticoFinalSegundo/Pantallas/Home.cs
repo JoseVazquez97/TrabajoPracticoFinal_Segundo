@@ -487,7 +487,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
             catch { MessageBox.Show("Error en el envio de imagenes."); }
         }
+
+        private async void ConsultarPathX()
+        {
+            try
+            {
+                await HomeConection.InvokeAsync("ConsultarPath");
+            }
+            catch { MessageBox.Show("Error en el consultar las imagenes."); }
+        }
         #endregion
+
+
 
         #region ENVIAR - EstadoActual
         private async void EnviarEstadoSR()
@@ -666,8 +677,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<string, string>("RecibirPath", (quien, path) =>
             {
-                MessageBox.Show(quien + "  " + path);
-                if (int.Parse(quien) != this.Key) 
+                
+                if (int.Parse(quien) != this.Key)
                 {
                     switch (quien)
                     {
@@ -701,11 +712,66 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             break;
                     }
                 }
+                else 
+                {
+                    ConsultarPathX();
+                }
             });
+
+            HomeConection.On<string>("RecibirCPath", (msg) =>
+            {
+                List<string> paths = new List<string>();
+                paths = obternerParam(msg);
+
+                for (int i = 0; i < paths.Count; i++)
+                {
+                    if (paths[i] != "0")
+                    {
+                        switch (i) 
+                        {
+                            case 0:
+                                try
+                                {
+                                    pantallaWeb1.Invoke(new Action(() => this.pantallaWeb1.CargarAvatar(paths[i])));
+                                }
+                                catch { MessageBox.Show($"No se pudo recibir el path de {1} que es : {paths[i]}"); }
+                                break;
+
+                            case 1:
+                                try
+                                {
+                                    pantallaWeb2.Invoke(new Action(() => this.pantallaWeb2.CargarAvatar(paths[i])));
+                                }
+                                catch { MessageBox.Show($"No se pudo recibir el path de {2} que es : {paths[i]}"); }
+                                break;
+
+                            case 2:
+                                try
+                                {
+                                    pantallaWeb3.Invoke(new Action(() => this.pantallaWeb3.CargarAvatar(paths[i])));
+                                }
+                                catch { MessageBox.Show($"No se pudo recibir el path de {3} que es : {paths[i]}"); }
+                                break;
+
+                            case 3:
+                                try
+                                {
+                                    pantallaWeb4.Invoke(new Action(() => this.pantallaWeb4.CargarAvatar(paths[i])));
+                                }
+                                catch { MessageBox.Show($"No se pudo recibir el path de {4} que es : {paths[i]}"); }
+                                break;
+                        }
+                    }
+                }
+                
+
+            });
+
+
             #endregion
 
             #region MAPA-COM
-            HomeConection.On<string, string>("RecibirMapa", (key, mapa) =>
+                HomeConection.On<string, string>("RecibirMapa", (key, mapa) =>
             {
                 
             });
