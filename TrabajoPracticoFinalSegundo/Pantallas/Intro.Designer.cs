@@ -43,7 +43,7 @@
             this.p_boxUno.BackColor = System.Drawing.Color.Transparent;
             this.p_boxUno.Location = new System.Drawing.Point(621, 246);
             this.p_boxUno.Name = "p_boxUno";
-            this.p_boxUno.Size = new System.Drawing.Size(575, 364);
+            this.p_boxUno.Size = new System.Drawing.Size(575, 300);
             this.p_boxUno.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.p_boxUno.TabIndex = 0;
             this.p_boxUno.TabStop = false;

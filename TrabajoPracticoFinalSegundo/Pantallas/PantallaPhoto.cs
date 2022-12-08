@@ -1,30 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Emgu.CV;
-using Emgu.Util;
-
-namespace TrabajoPracticoFinalSegundo.Pantallas
+﻿namespace TrabajoPracticoFinalSegundo.Pantallas
 {
     public partial class PantallaPhoto : Form
     {
-        private VideoCapture camara;
-        private Mat frame;
+        //private VideoCapture camara;
+        //private Mat frame;
         private int contador;
-        private bool jugarCam;
+        //private bool jugarCam;
         Home home;
 
         public PantallaPhoto()
         {
-
+            this.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\FONDO_PantallaPhoto.png");
             InitializeComponent();
             this.comboBox1.SelectedItem = "Capitan";
             home = new Home();
@@ -53,39 +39,23 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
 
         private void Form1_Load(object sender, EventArgs e)
-        {   
-
-            frame = new Mat();
-
-            //106 a la derecha y hacia abajo -- 421; 70 posicion inicial
-            int x = 421, y = 160, c = 1;
-            for (int i = 0; i < 5; i++)
+        {
+            for (int c = 1; c <= 15; c++)
             {
-                
-                for (int j = 0; j < 3; j++)
-                {
-                    PictureBox avatar = new PictureBox();
-                    avatar.Location = new System.Drawing.Point(x, y);
-                    avatar.Name = "avatar" + c;
-                    avatar.Size = new System.Drawing.Size(100, 70);
-                    avatar.Image = new Bitmap(Image.FromFile(@".\Recursos\Avatars\" + avatar.Name + ".png"), new Size(100, 80));
-                    avatar.Click += new EventHandler(this.clickAvatar);
-                    avatar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                    avatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-                    this.Controls.Add(avatar);
-                    c++;
-                    y += 106;
-                }
-                x += 106;
-                y = 160;
+                PictureBox avatar = new PictureBox();
+                avatar.Name = "avatar" + c;
+                avatar.Size = new System.Drawing.Size(100, 100);
+                avatar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+                avatar.Image = new Bitmap(Image.FromFile(@".\Recursos\Avatars\" + avatar.Name + ".png"), new Size(100, 80));
+                avatar.Click += new EventHandler(this.clickAvatar);
+                avatar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+                this.fpl_avatars.Controls.Add(avatar);
             }
-            
-
         }
 
         private void clickAvatar(object sender, EventArgs e)
         {
-            this.jugarCam = false;
+            //this.jugarCam = false;
 
             object pictureBox = new PictureBox();
             if (sender.GetType() == pictureBox.GetType())
@@ -96,6 +66,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
         }
 
+        /*LEGACY CAMARA WEB
+         * 
+         * 
+         * 
         private void btnEncender_Click(object sender, EventArgs e)
         {
             this.jugarCam = false;
@@ -115,7 +89,21 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             
         }
+        *
+        *
+        */
 
+        private void PantallaPhoto_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+
+        /*LEGACY FUNCIONES PARA UTILIZAR LA CAMARA WEB
+         * 
+         * 
+         * 
+         * 
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.contador++;
@@ -128,11 +116,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 timer1.Stop();
                 camara.Dispose();
             }
-        }
-
-        private void PantallaPhoto_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
         }
 
         private void btn_JugarConFoto_Click(object sender, EventArgs e)
@@ -163,18 +146,26 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.jugarCam = true;
         }
 
+        *
+        *
+        *
+        *
+        */
         private void ConfirmarSeleccion_Click(object sender, EventArgs e)
         {
             Intro x = new Intro();
+
+            //TODO
+            //Se necesita cambiar este try, y que compruebe los roles disponibles de otra forma, ya no hara falta hacer rezise de la imagen
             try
             {
                 Imagen.Image = new Bitmap(Imagen.Image, new Size(100, 70));
-                if (File.Exists(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png"))
-                    File.Delete(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
-                Imagen.Image.Save(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
-                Imagen.Image = Image.FromFile(Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString() + @"\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
+                if (File.Exists(@".\Recursos\Avatars\avatar" + comboBox1.Text + ".png"))
+                    File.Delete(@".\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
+                Imagen.Image.Save(@".\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
+                Imagen.Image = Image.FromFile(@".\Recursos\Avatars\avatar" + comboBox1.Text + ".png");
 
-                home.AsignarAvatar(this.Imagen.Image, this.comboBox1.Text, this.jugarCam);
+                home.AsignarAvatar(this.Imagen.Image, this.comboBox1.Text, false); //Se cambio de this.jugarCam a false, (ES MEJOR QUE ESTO SEA QUITADO LUEGO)
                 x.Show();
                 home.Show();
                 this.Dispose();

@@ -15,7 +15,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
     {
         Ingreso ing;
         int cont;
-        string path;int TIPO;
+        int TIPO;
 
         public Intro(Ingreso ing)
         {
@@ -24,27 +24,27 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.cont = 0;
             this.TIPO = 1;
 
-            this.path = Directory.GetParent(Directory.GetParent(@"..").ToString()).ToString();
-
             p_boxUno.Location = new Point((((this.Width) / 2) - 50), (this.Height / 2));
 
-            p_boxUno.Image = Image.FromFile(this.path + @"\Recursos\Logos\LOGO_Manija.png");
+            p_boxUno.Image = Image.FromFile(@".\Recursos\Logos\LOGO_Manija.png");
         }
 
         public Intro()
         {
+            Image carga = Image.FromFile(@".\Recursos\Gifs\barco.gif");
             InitializeComponent();
             this.cont = 0;
             this.TIPO = 2;
 
             this.p_boxUno.Enabled = false;
 			this.p_box2.Enabled = true;
-			
-            p_box2.Image = Image.FromFile(@".\Recursos\Gifs\barco.gif");
-			
-			
 
-            
+            p_box2.Image = carga;
+
+
+
+
+
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -53,7 +53,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             if(cont >= 3 && cont < 5) 
             {
                 if (this.TIPO == 1)
-                p_boxUno.Image = Image.FromFile(this.path + @"\Recursos\Logos\LOGO_Gregoire.png");
+                p_boxUno.Image = Image.FromFile(@".\Recursos\Logos\LOGO_Gregoire.png");
             }
 
             if (cont >= 5) 
