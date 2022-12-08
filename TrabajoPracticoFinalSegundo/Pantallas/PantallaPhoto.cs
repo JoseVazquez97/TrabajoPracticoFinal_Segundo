@@ -4,15 +4,20 @@
     {
         //private VideoCapture camara;
         //private Mat frame;
-        private int contador;
+        //private int contador;
         //private bool jugarCam;
+
+
+        private string pathAvatar;
         Home home;
 
         public PantallaPhoto()
         {
-            this.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\FONDO_PantallaPhoto.png");
+            this.BackgroundImage = Image.FromFile(@"./Recursos/Fondos/Madera.jpg");
             InitializeComponent();
             this.comboBox1.SelectedItem = "Capitan";
+            this.pathAvatar = @".\Recursos\Avatars\avatar1.png";
+            this.Imagen.Image = Image.FromFile(pathAvatar);
             home = new Home();
         }
 
@@ -63,8 +68,11 @@
                 PictureBox avatarClickeado = sender as PictureBox;
                 string path = @".\Recursos\Avatars\";
                 Imagen.Image = Image.FromFile(path + avatarClickeado.Name + ".png");
+                pathAvatar = path + avatarClickeado.Name + ".png";
             }
         }
+
+        #region Legacy
 
         /*LEGACY CAMARA WEB
          * 
@@ -92,12 +100,6 @@
         *
         *
         */
-
-        private void PantallaPhoto_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
-
 
         /*LEGACY FUNCIONES PARA UTILIZAR LA CAMARA WEB
          * 
@@ -151,12 +153,28 @@
         *
         *
         */
+
+        #endregion
+        private void PantallaPhoto_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
         private void ConfirmarSeleccion_Click(object sender, EventArgs e)
         {
             Intro x = new Intro();
+            
+            /*
+             * 
+             * ESTA ES LA FORMA FINAL DE CARGA
+             * NECESITO QUE SE CAMBIE LO QUE RECIBE
+             * EL CONSTRUCTOR DEL FORMULARIO HOME.
+             * 
+            home.AsignarAvatar(pathAvatar, this.comboBox1.Text);
+            x.Show();
+            home.Show();
+            this.Dispose();
+            */
 
-            //TODO
-            //Se necesita cambiar este try, y que compruebe los roles disponibles de otra forma, ya no hara falta hacer rezise de la imagen
             try
             {
                 Imagen.Image = new Bitmap(Imagen.Image, new Size(100, 70));

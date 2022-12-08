@@ -130,7 +130,7 @@
             // 
             // fpl_avatars
             // 
-            this.fpl_avatars.BackColor = System.Drawing.Color.SaddleBrown;
+            this.fpl_avatars.BackColor = System.Drawing.Color.Transparent;
             this.fpl_avatars.Location = new System.Drawing.Point(359, 99);
             this.fpl_avatars.Name = "fpl_avatars";
             this.fpl_avatars.Size = new System.Drawing.Size(693, 443);
@@ -140,6 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1203, 685);
             this.Controls.Add(this.fpl_avatars);
             this.Controls.Add(this.tblArriba);
