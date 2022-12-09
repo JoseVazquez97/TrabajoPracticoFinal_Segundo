@@ -19,7 +19,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         private Mat frame;
         private VideoCapture camara;
         private Image imagenActual;
-        private bool jugarCam;
 
         ImageConverter _imageConverter = new ImageConverter();
 
@@ -103,13 +102,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
             g.Dispose();
             return (System.Drawing.Image)b;
-        }
-
-        private void Camara_Tick(object sender, EventArgs e)
-        {
-            camara.Read(frame);
-            imagenActual = resizeImage(frame.ToBitmap(), new Size(10, 10));
-            this.pictureBox1.Image = imagenActual;
         }
     }
 }
