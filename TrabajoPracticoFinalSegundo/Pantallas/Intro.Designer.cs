@@ -58,8 +58,8 @@
             // p_box2
             // 
             this.p_box2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.p_box2.Location = new System.Drawing.Point(30, 0);
-            this.p_box2.Margin = new System.Windows.Forms.Padding(30, 0, 30, 30);
+            this.p_box2.Location = new System.Drawing.Point(50, 0);
+            this.p_box2.Margin = new System.Windows.Forms.Padding(50, 0, 30, 50);
             this.p_box2.Name = "p_box2";
             this.p_box2.Size = new System.Drawing.Size(150, 150);
             this.p_box2.TabIndex = 2;
@@ -71,11 +71,11 @@
             this.tblBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblBottom.Controls.Add(this.p_box2, 0, 0);
             this.tblBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tblBottom.Location = new System.Drawing.Point(0, 488);
+            this.tblBottom.Location = new System.Drawing.Point(0, 468);
             this.tblBottom.Name = "tblBottom";
             this.tblBottom.RowCount = 1;
             this.tblBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblBottom.Size = new System.Drawing.Size(1447, 180);
+            this.tblBottom.Size = new System.Drawing.Size(1447, 200);
             this.tblBottom.TabIndex = 3;
             // 
             // Intro

@@ -15,12 +15,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
     {
         int cont;
         int TIPO;
-
+        int timeToWait;
         public Intro(Ingreso ing)
         {
             InitializeComponent();
             this.cont = 0;
             this.TIPO = 1;
+            this.timeToWait = 5;
 
             p_boxUno.Location = new Point((((this.Width) / 2) - 50), (this.Height / 2));
 
@@ -33,28 +34,38 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             InitializeComponent();
             this.cont = 0;
             this.TIPO = 2;
+            this.timeToWait = 5;
 
             this.p_boxUno.Enabled = false;
 			this.p_box2.Enabled = true;
 
             p_box2.Image = carga;
+        }
 
+        public Intro(int tiempoEspera)
+        {
+            Image carga = Image.FromFile(@".\Recursos\Gifs\barco.gif");
+            InitializeComponent();
+            this.cont = 0;
+            this.TIPO = 2;
+            this.timeToWait = tiempoEspera;
 
+            this.p_boxUno.Enabled = false;
+            this.p_box2.Enabled = true;
 
-
-
+            p_box2.Image = carga;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
             cont++;
-            if(cont >= 3 && cont < 5) 
+            if(cont >= 3) 
             {
                 if (this.TIPO == 1)
                 p_boxUno.Image = Image.FromFile(@".\Recursos\Logos\LOGO_Gregoire.png");
             }
 
-            if (cont >= 5) 
+            if (cont >= this.timeToWait) 
             {
                 this.Close();
             }

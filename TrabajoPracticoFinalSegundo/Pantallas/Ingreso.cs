@@ -22,6 +22,8 @@ namespace TrabajoPracticoFinalSegundo
         private void btn_Ingresar_Click(object sender, EventArgs e)
         {
             PantallaPhoto pp = new PantallaPhoto();
+            Intro espera = new Intro(3);
+            espera.Show();
             pp.Show();
             this.Hide();
         }
