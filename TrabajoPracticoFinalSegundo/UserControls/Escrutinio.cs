@@ -40,7 +40,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         {
             switch (rol)
             {
-                case 1:
+                case 2:
                     if (this.CHECKC == 0) 
                     {
                         if (voto == 2)
@@ -54,7 +54,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                     }
                     break;
 
-                case 2:
+                case 3:
                     if (this.CHECKM == 0)
                     {
                         if (voto == 2)
@@ -68,7 +68,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                     }
                     break;
 
-                case 3:
+                case 4:
                     if (this.CHECKA == 0)
                     {
                         if (voto == 2)
@@ -80,6 +80,10 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
                         if (voto == 1) { this.pictureBox3.BackColor = Color.Green; this.CHECKA++; this.resultado--; }
                     }
+                    break;
+
+                default:
+
                     break;
             }
         }

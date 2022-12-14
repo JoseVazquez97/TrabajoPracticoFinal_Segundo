@@ -58,6 +58,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private bool mFlag; // Flag de mapa
         private bool fotoFlag;
         private bool startFlag;
+        private bool batallaFlag;
+        private bool votaFlag;
 
         private WaveOut salidaFondo = new WaveOut();
         private WaveStream stream1;
@@ -84,7 +86,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.enventoFlag = false;
             this.accionFlag = false;
             this.startFlag = false;
-
+            this.batallaFlag = false;
+            this.votaFlag = true;
             #endregion
 
             int x = (this.Width / 2);
@@ -204,18 +207,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             if (conectado)
             {
                 EnviarNotificacion();
-                EnviarEstadoSR();
 
                 switch (this.eventoActual)
                 {
                     #region EJECUCION cada 100ms durante ORDEN
                     case "Orden":
-                        if (!this.startFlag) 
-                        {
-                            QuitarTodasLasNotis();
-                            this.startFlag = true;
-                        }
-
                         if (!this.fotoFlag) 
                         {
                             EnviarPathX();
@@ -226,8 +222,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         {
                             if (!this.mFlag)
                             {
-                                ucMapa1.CargarImagenBarco();
                                 EnviarCambiosMapa();
+                                ucMapa1.CargarImagenBarco();
                                 this.mFlag = true;
                             }
                         }
@@ -245,30 +241,23 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                     #region EJECUCION cada 100ms durante VOTACION
                     case "Votacion":
-                        this.startFlag = false;
-                         
-                        #region EVENTO y MOVIMIENTO del barco.
-
                         if (this.escrutinio1.confirmarVotacion() != 0)
                         {
                             if (this.Key != 1)
                             {
-                                if (!this.enventoFlag)
+                                ConsultarMovimiento();
+                                if (!this.eFlag)
                                 {
                                     ConsultarEve();
-                                    this.enventoFlag = true;
+                                    this.eFlag = true;
                                 }
-                                ConsultarMovimiento();
                             }
                             else
                             {
-                                if (!this.eFlag && this.notificacion != "0")
+                                if (!this.eFlag)
                                 {
-                                    this.urnaCapitan1.ReiniciarDesicion();
                                     string envetoRandom = enventoRandom();
-
                                     EnviarEventoX(envetoRandom);
-                                    EnviarMovimiento(int.Parse(this.notificacion));
                                     this.eFlag = true;
                                 }
                             }
@@ -277,7 +266,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             this.escrutinio1.reiniciarVotos();
                             this.escrutinio1.reiniciarCheck();
                         }
-                        #endregion
 
                         break;
                     #endregion
@@ -293,58 +281,117 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
 
         #region IMPACTAR CLIENTE - //Esta funcion se encarga de hacer los cambios principales en el cambio de evento.
-        private void ImpactarEnCliente(string user, List<string> parametros)
+
+        private void ImpactarAccion(int quien, int noti, int turno)
         {
-            // Index de parametros
-            // 0.Turno , 1.EventoActual
-
-            int key = int.Parse(user);
-            int turno = int.Parse(parametros[0]);
-            string EA = parametros[1];
-
-            if (eventoActual != EA && this.Turno < turno) 
+            if (noti != 0) 
             {
-                SiguienteTurno();
-                this.eventoActual = EA;
-            }
+                switch (this.eventoActual)
+                {
+                    case "Orden":
+                        switch (quien)
+                        {
+                            case 1:
+                                if (this.Key == 1)
+                                {
+                                    SwitchUrnaCap(true);
+                                }
 
-            #region EVENTO BATALLA
+                                SiguienteTurno();
+                                SwitchEscrutinio(true);
+                                SpawnearNoti(2, false);
+                                SpawnearNoti(3, false);
+                                SpawnearNoti(4, false);
+                                this.eventoActual = "Votacion";
+                                break;
+                            case 2:
+
+                                break;
+                            case 3:
+
+                                break;
+                            case 4:
+
+                                break;
+
+                        }
+                        break;
+
+
+                    case "Votacion":
+                        if (!this.votaFlag) 
+                        {
+                            this.votaFlag = true;
+                        }
+                        
+                        switch (quien)
+                        {
+                            case 1:
+
+                                break;
+                            case 2:
+                                CargarVoto(quien, noti);
+                                SiguienteTurno();
+                                break;
+                            case 3:
+                                CargarVoto(quien, noti);
+                                SiguienteTurno();
+                                break;
+                            case 4:
+                                CargarVoto(quien, noti);
+                                SiguienteTurno();
+                                break;
+
+                        }
+                        break;
+
+                    case "Batalla":
+                        if (!this.batallaFlag) 
+                        {
+                            SwitchEscrutinio(false);
+                            this.batallaFlag = true;
+                        }
+                        
+                        switch (quien)
+                        {
+                            case 1:
+
+                                break;
+                            case 2:
+
+                                break;
+                            case 3:
+
+                                break;
+                            case 4:
+
+                                break;
+
+                        }
+                        break;
+
+                    case "Pezca":
+                        SwitchEscrutinio(true);
+                        switch (quien)
+                        {
+                            case 1:
+
+                                break;
+                            case 2:
+
+                                break;
+                            case 3:
+
+                                break;
+                            case 4:
+
+                                break;
+
+                        }
+                        break;
+                }
+            }
             
-            #endregion
-        }
-
-        private void ImpactarAccion(int noti)
-        {
-            switch (this.eventoActual)
-            {
-                case "Orden":
-                    if (this.Key == 1) 
-                    {
-                        if (noti != 0)
-                        {
-                            this.Turno++;
-                            SiguienteTurno();
-                            this.eventoActual = "Votacion";
-                            EnviarEstadoSR();
-                        }
-                    }
-                    break;
-
-
-                case "Votacion":
-                    SwitchEscrutinio(true);
-
-                    if (this.Key != 1) 
-                    {
-                        try
-                        {
-                            this.escrutinio1.Invoke(new Action(() => this.escrutinio1.recibirVoto(this.Key, noti)));
-                        }
-                        catch { }
-                    }
-
-                    break;
-            }
         }
         #endregion
 
@@ -378,32 +425,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
-        #region ENVIAR - EstadoActual
-            private async void EnviarEstadoSR()
-            {
-                string usr = this.Key.ToString();
-                string msg = GenerarEstado();
-
-                try
-                {
-                    await HomeConection.InvokeAsync("EnviarEstado", usr, msg);
-                }
-                catch { MessageBox.Show("Error en el envio de Estado."); }
-            }
-
-            #region GENERAR - MENSAJE EVENTO
-            private string GenerarEstado()
-            {
-                string mensaje = "";
-                mensaje = this.turnero1.getTurno().ToString() + ";" + this.eventoActual + ";";
-                return mensaje;
-            }
-        #endregion
-        #endregion
-
-
-        #region NOTIFICACIONES
-
         #region ENVIAR - Notificacion
         private async void EnviarNotificacion()
         {
@@ -416,7 +437,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 if (this.eventoActual == "Orden")
                 {
                     msg = this.urnaCapitan1.ConsultarDesicion();
-                    this.notificacion = msg.ToString();
+                    this.urnaCapitan1.ReiniciarDesicion();
+                    if (msg != 0) 
+                    {
+                        EnviarMovimiento(msg);
+                    }
+                   
                 }
                 else
                 {
@@ -442,7 +468,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region CONSULTAR - Notificacion
 
-        #endregion
         #endregion
 
 
@@ -717,16 +742,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             });
             #endregion
 
-            #region ESTADO-COM
-
-            HomeConection.On<string, string>("RecibirEstado", (usr, msg) =>
-            {
-                List<string> parametros = obternerParam(msg);
-
-                ImpactarEnCliente(usr, parametros);
-            });
-            #endregion
-
             #region DADOS-COM
             HomeConection.On<string, string, string>("RecibirDados", (usr, val1, val2) =>
             {
@@ -787,6 +802,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     {
                         case "M10":
                             this.eventoActual = "Orden";
+                            if (this.Key == 1) 
+                            {
+                                SwitchUrnaCap(false);
+                            }
+                           
                             break;
 
                         case "M11":
@@ -853,7 +873,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #region NOTI-COM
             HomeConection.On<int, int, int>("RecibirNoti", (quien,noti,turno) =>
             {
-                ImpactarAccion(noti);
+                ImpactarAccion(quien, noti, turno);
 
                 if (quien != this.Key && noti != 0) 
                 {
@@ -1072,51 +1092,39 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             switch (rol)
             {
                 case 1:
-                    if (this.noti_Cap.InvokeRequired)
+                    try
                     {
-                        try
-                        {
-                            noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = visible; }));
-                            if (visible) Voz();
-                        }
-                        catch { }
+                        noti_Cap.Invoke(new Action(() => { noti_Cap.Visible = visible; }));
+                        if (visible) Voz();
                     }
+                    catch { }
                     break;
 
                 case 2:
-                    if (this.noti_Carp.InvokeRequired)
+                    try
                     {
-                        try
-                        {
-                            noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = visible; }));
-                            if (visible) Voz();
-                        }
-                        catch { }
+                        noti_Carp.Invoke(new Action(() => { noti_Carp.Visible = visible; }));
+                        if (visible) Voz();
                     }
+                    catch { }
                     break;
 
                 case 3:
-                    if (this.noti_Mer.InvokeRequired)
+                    try
                     {
-                        try
-                        {
-                            noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = visible; }));
-                            if (visible) Voz();
-                        }
-                        catch { }
+                        noti_Mer.Invoke(new Action(() => { noti_Mer.Visible = visible; }));
+                        if (visible) Voz();
                     }
+                    catch { }
                     break;
 
                 case 4:
-                    if (this.noti_Ar.InvokeRequired)
+                    try
                     {
-                        try
-                        {
-                            noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = visible; }));
-                            if(visible) Voz();
-                        }
-                        catch { }
+                        noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = visible; }));
+                        if(visible) Voz();
                     }
+                    catch { }
                     break;
             }
         }
@@ -1140,6 +1148,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         }
                         catch { }
                     break;
+
                 case 2:
                         try
                         {
@@ -1167,12 +1176,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #region URNAS
-        private string ConsultarDesicion() // Asigna al atributo del form "notificacion", la seleccion de la urna
-        {
-            string DES = "0";
-            DES = this.urna1.ConsultarVoto().ToString();
-            return DES;
-        }
 
         private void SwitchUrnaCap(bool cual) // Intercambia visibilidad entre la urna normal y la de capitan
         {
@@ -1303,23 +1306,17 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private void SwitchEscrutinio(bool cual) // Intercambia visibiliadad entre el escrutinio y los recursos
         {
             //TRUE ES --> ABRIR VOTACION
-            if (this.escrutinio1.InvokeRequired)
+            try
             {
-                try
-                {
-                    escrutinio1.Invoke(new Action(() => escrutinio1.Visible = cual));
-                }
-                catch { }
+                this.escrutinio1.Invoke(new Action(() => this.escrutinio1.Visible = cual));
             }
+            catch { }
 
-            if (this.recursosDisplay1.InvokeRequired)
+            try
             {
-                try
-                {
-                    recursosDisplay1.Invoke(new Action(() => recursosDisplay1.Visible = !cual));
-                }
-                catch { }
+                recursosDisplay1.Invoke(new Action(() => recursosDisplay1.Visible = !cual));
             }
+            catch { }
         }
         #endregion
 
@@ -1384,10 +1381,5 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #endregion
-
-        private void urnaCapitan1_Click(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

@@ -96,8 +96,10 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public void Votacion() 
         {
             this.tipo = "Votacion";
-            this.btn_Si.Text = "Si Capitan!";
+            this.btn_Si.Text = "Estoy Listo";
             this.btn_No.Text = "No Capitan!";
+
+            this.notificador.Mensaje("Estoy Listo!");
         }
         #endregion
 
@@ -114,6 +116,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         private void btn_Si_Click(object sender, EventArgs e)
         {
             voto = 1;
+            this.notificador.Mensaje("Estoy Listo!");
             this.notificador.Visible = true;
         }
 

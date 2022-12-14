@@ -48,6 +48,15 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             switch (x) 
             {
                 case 1:
+                    if (evento != "Votacion")
+                    {
+                        this.lbl_texto.Text = "Estoy Listo!";
+                    }
+                    else
+                    {
+                        this.lbl_texto.Text = "Voy a disparar!";
+                    }
+
                     if (evento != "Batalla")
                     {
                         this.lbl_texto.Text = "Si Capitan!";
