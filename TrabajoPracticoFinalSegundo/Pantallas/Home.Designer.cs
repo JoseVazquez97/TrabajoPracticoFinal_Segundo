@@ -86,6 +86,7 @@
             this.urnaCapitan1.Name = "urnaCapitan1";
             this.urnaCapitan1.Size = new System.Drawing.Size(510, 124);
             this.urnaCapitan1.TabIndex = 4;
+            this.urnaCapitan1.Click += new System.EventHandler(this.urnaCapitan1_Click);
             // 
             // urna1
             // 

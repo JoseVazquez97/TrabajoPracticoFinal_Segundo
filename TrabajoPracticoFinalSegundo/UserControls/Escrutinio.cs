@@ -86,9 +86,9 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
         public void reiniciarVotos() 
         {
-            this.pictureBox1.BackColor= Color.Transparent;
-            this.pictureBox2.BackColor = Color.Transparent;
-            this.pictureBox3.BackColor = Color.Transparent;
+            this.pictureBox1.BackColor= Color.Gray;
+            this.pictureBox2.BackColor = Color.Gray;
+            this.pictureBox3.BackColor = Color.Gray;
         }
 
         public void reiniciarCheck()
