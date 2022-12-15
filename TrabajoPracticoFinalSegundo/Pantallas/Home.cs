@@ -904,9 +904,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
-
-
-
         /// 
         ///    
         ///       FUNCIONES PRIVADAS DEL FORM!
@@ -1137,7 +1134,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 case 1:
                         try
                         {
-                            if (this.eventoActual == "Orden")
+                            if (this.eventoActual == "Votacion")
                             {
                                 this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmadoCap(x)));
                             }

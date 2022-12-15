@@ -68,6 +68,16 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                     break;
 
                 case 2:
+                    if (evento != "Votacion")
+                    {
+                        this.lbl_texto.Text = "Estoy Listo!";
+                    }
+                    else
+                    {
+                        this.lbl_texto.Text = "Voy a disparar!";
+                    }
+
+
                     if (evento != "Batalla")
                     {
                         this.lbl_texto.Text = "Estas loco!";
@@ -76,14 +86,6 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                     {
                         this.lbl_texto.Text = "Voy a Recargar!";
                     }
-                    break;
-
-                case 3:
-                    break;
-
-
-                case 4:
-
                     break;
             }
         }
