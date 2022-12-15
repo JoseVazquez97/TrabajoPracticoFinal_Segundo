@@ -45,7 +45,7 @@
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            for (int c = 1; c <= 15; c++)
+            for (int c = 1; c <= 12; c++)
             {
                 PictureBox avatar = new PictureBox();
                 avatar.Name = "avatar" + c;

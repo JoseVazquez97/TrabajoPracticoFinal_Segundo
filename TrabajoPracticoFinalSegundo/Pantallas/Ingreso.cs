@@ -9,7 +9,7 @@ namespace TrabajoPracticoFinalSegundo
     public partial class Ingreso : Form
     {
         string path;
-
+        PantallaPhoto pp;
         public Ingreso()
         {
             InitializeComponent();
@@ -17,14 +17,15 @@ namespace TrabajoPracticoFinalSegundo
             this.BackgroundImage = Image.FromFile(@"./Recursos/Fondos/FONDO_Ingreso.jpg");
             Intro intro = new Intro(this);
             intro.Show();
+            this.pp = new PantallaPhoto();
+            pp.Show();
+            pp.Visible = false;
         }
 
         private void btn_Ingresar_Click(object sender, EventArgs e)
         {
-            PantallaPhoto pp = new PantallaPhoto();
-            Intro espera = new Intro(3);
-            espera.Show();
-            pp.Show();
+            pp.WindowState = FormWindowState.Maximized;
+            pp.Visible = true;
             this.Hide();
         }
 
@@ -44,7 +45,6 @@ namespace TrabajoPracticoFinalSegundo
         {
             Pantalla_Unirme x = new Pantalla_Unirme();
             x.Show();
-
             this.Hide();
         }
     }
