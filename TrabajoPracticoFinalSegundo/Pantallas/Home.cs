@@ -211,6 +211,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             if (conectado)
             {
                 EnviarNotificacion();
+                AsegurarOrden();
 
                 switch (this.eventoActual)
                 {
@@ -261,7 +262,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             }
 
                             SwitchEscrutinio(false);
-                            
                         }
 
                         break;
@@ -440,14 +440,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 else
                 {
                     msg = this.urna1.ConsultarVoto();
-                    this.notificacion = msg.ToString();
                     this.urna1.reiniciarVoto();
                 }
             }
             else 
             {
                 msg = this.urna1.ConsultarVoto();
-                this.notificacion = msg.ToString();
                 this.urna1.reiniciarVoto();
             }
 
@@ -462,7 +460,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #region CONSULTAR - Notificacion
 
         #endregion
-
 
         #region ENVIAR - Mapa
         private async void EnviarCambiosMapa()
@@ -489,7 +486,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             catch { MessageBox.Show("Error en la consulta del mapa"); }
         }
         #endregion
-
 
         #region ENVIAR - Dados
         private async void EnviarDadosCL()
@@ -525,7 +521,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
-
         #region ENVIAR - DesicionCap
         private async void EnviarMovimiento(int x)
         {
@@ -550,7 +545,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
-
         #region ENVIAR - Evento
         private async void EnviarEventoX()
         {
@@ -561,7 +555,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                 try
                 {
-                    MessageBox.Show(eventox);
                     await HomeConection.InvokeAsync("EnviarEvento", rol, eventox);
                 }
                 catch { MessageBox.Show("Error en el envio del Evento."); }
@@ -796,6 +789,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     {
                         case "M10":
                             this.eventoActual = "Orden";
+                            this.eventoFlag = false;
                             break;
 
                         case "M11":
@@ -836,7 +830,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 ImpactarAccion(quien, noti, turno);
 
-                if (quien != this.Key && noti != 0) 
+                if (noti != 0) 
                 {
                     switch (quien)
                     {
@@ -1248,6 +1242,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             try
             {
                 this.turnero1.Invoke(new Action(() => this.turnero1.Siguiente()));
+                this.Turno++;
             }
             catch { }
         }
@@ -1289,7 +1284,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 case "F":
                     return "F";
                 case "M1":
-                    switch (evento) 
+                    switch (1) 
                     {
                         case 1:
                             eventoX = "M10";
@@ -1334,6 +1329,32 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
+        #region ASEGURAR
+
+        private void AsegurarOrden() 
+        {
+            if (obtenerTurno(this.Turno) != this.Key)
+            {
+                this.dados1.setEnable(false);
+                this.urna1.Enabled = false;
+                this.urnaCapitan1.Enabled = false;
+            }
+            else 
+            {
+                if (this.eventoActual == "Batalla" || this.eventoActual == "Pezca") 
+                {
+                    this.dados1.setEnable(true);
+                }
+                
+                this.urna1.Enabled = true;
+
+                if (this.Key == 1) 
+                {
+                    this.urnaCapitan1.Enabled = true;
+                }
+            }
+        }
+        #endregion
 
         #endregion
     }
