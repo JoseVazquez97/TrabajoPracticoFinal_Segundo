@@ -1140,7 +1140,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             }
                             else 
                             {
-                                this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmado(x, this.eventoActual)));
+                                this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmado(quien,x, this.eventoActual)));
                             }
                         }
                         catch { }
@@ -1149,21 +1149,21 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 case 2:
                         try
                         {
-                            this.noti_Carp.Invoke(new Action(() => noti_Carp.MensajeArmado(x, this.eventoActual)));
+                            this.noti_Carp.Invoke(new Action(() => noti_Carp.MensajeArmado(quien,x, this.eventoActual)));
                         }
                         catch { }
                     break;
                 case 3:
                         try
                         {
-                            this.noti_Mer.Invoke(new Action(() => noti_Mer.MensajeArmado(x, this.eventoActual)));
+                            this.noti_Mer.Invoke(new Action(() => noti_Mer.MensajeArmado(quien,x, this.eventoActual)));
                         }
                         catch { }
                     break;
                 case 4:
                         try
                         {
-                            this.noti_Ar.Invoke(new Action(() => noti_Ar.MensajeArmado(x, this.eventoActual)));
+                            this.noti_Ar.Invoke(new Action(() => noti_Ar.MensajeArmado(quien,x, this.eventoActual)));
                         }
                         catch { }
                     break;

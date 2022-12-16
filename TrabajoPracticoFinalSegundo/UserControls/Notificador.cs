@@ -43,48 +43,146 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             
         }
 
-        public void MensajeArmado(int x,string evento) 
+        public void MensajeArmado(int quien, int x,string evento) 
         {
             switch (x) 
             {
                 case 1:
-                    if (evento != "Votacion")
+                    switch (quien) 
                     {
-                        this.lbl_texto.Text = "Estoy Listo!";
-                    }
-                    else
-                    {
-                        this.lbl_texto.Text = "Voy a disparar!";
-                    }
+                        case 1:
+                            switch (evento) 
+                            {
+                                case "Batalla":
+                                    this.lbl_texto.Text = "Voy a Disparar!";
+                                    break;
 
-                    if (evento != "Batalla")
-                    {
-                        this.lbl_texto.Text = "Si Capitan!";
-                    }
-                    else 
-                    {
-                        this.lbl_texto.Text = "Voy a disparar!";
+                                case "Pezca":
+
+                                    break;
+                            }
+                            break;
+
+                        case 2:
+                            switch (evento)
+                            {
+                                case "Orden":
+
+                                    break;
+
+                                case "Votacion":
+                                    this.lbl_texto.Text = "Estoy Listo!";
+                                    break;
+
+                                case "Batalla":
+                                    this.lbl_texto.Text = "Voy a Disparar!";
+                                    break;
+
+                                case "Pezca":
+
+                                    break;
+                            }
+                            break;
+
+                        case 3:
+                            switch (evento)
+                            {
+                                case "Orden":
+
+                                    break;
+
+                                case "Votacion":
+                                    this.lbl_texto.Text = "Estoy Listo!";
+                                    break;
+
+                                case "Batalla":
+                                    this.lbl_texto.Text = "Voy a Disparar!";
+                                    break;
+
+                                case "Pezca":
+
+                                    break;
+                            }
+                            break;
+
+                        case 4:
+                            switch (evento)
+                            {
+
+                                case "Orden":
+
+                                    break;
+
+                                case "Votacion":
+                                    this.lbl_texto.Text = "Estoy Listo!";
+                                    break;
+
+                                case "Batalla":
+                                    this.lbl_texto.Text = "Voy a Disparar!";
+                                    break;
+
+                                case "Pezca":
+
+                                    break;
+                            }
+                            break;
                     }
                     break;
 
                 case 2:
-                    if (evento != "Votacion")
+                    switch (quien)
                     {
-                        this.lbl_texto.Text = "Estoy Listo!";
-                    }
-                    else
-                    {
-                        this.lbl_texto.Text = "Voy a disparar!";
-                    }
+                        case 1:
+                            switch (evento)
+                            {
+                                case "Batalla":
+                                    this.lbl_texto.Text = "Voy a Recargar!";
+                                    break;
 
+                                case "Pezca":
 
-                    if (evento != "Batalla")
-                    {
-                        this.lbl_texto.Text = "Estas loco!";
-                    }
-                    else
-                    {
-                        this.lbl_texto.Text = "Voy a Recargar!";
+                                    break;
+                            }
+                            break;
+
+                        case 2:
+                            switch (evento)
+                            {
+                                case "Batalla":
+                                    this.lbl_texto.Text = "Voy a Recargar!";
+                                    break;
+
+                                case "Pezca":
+
+                                    break;
+                            }
+                            break;
+
+                        case 3:
+                            switch (evento)
+                            {
+                                case "Batalla":
+                                    this.lbl_texto.Text = "Voy a Recargar!";
+                                    break;
+
+                                case "Pezca":
+
+                                    break;
+                            }
+                            break;
+
+                        case 4:
+                            switch (evento)
+                            {
+                                case "Batalla":
+                                    this.lbl_texto.Text = "Voy a Recargar!";
+                                    break;
+
+                                case "Pezca":
+
+                                    break;
+                            }
+                            break;
                     }
                     break;
             }
