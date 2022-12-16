@@ -31,6 +31,7 @@
             this.btn_Ingresar = new System.Windows.Forms.Button();
             this.btn_Host = new System.Windows.Forms.Button();
             this.btn_Unirse = new System.Windows.Forms.Button();
+            this.btnDeveloper = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_Ingresar
@@ -67,11 +68,23 @@
             this.btn_Unirse.UseVisualStyleBackColor = true;
             this.btn_Unirse.Click += new System.EventHandler(this.btn_Unirse_Click);
             // 
+            // btnDeveloper
+            // 
+            this.btnDeveloper.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnDeveloper.Location = new System.Drawing.Point(1220, 667);
+            this.btnDeveloper.Name = "btnDeveloper";
+            this.btnDeveloper.Size = new System.Drawing.Size(222, 56);
+            this.btnDeveloper.TabIndex = 3;
+            this.btnDeveloper.Text = "Sin amigos (Developer)";
+            this.btnDeveloper.UseVisualStyleBackColor = true;
+            this.btnDeveloper.Click += new System.EventHandler(this.btnDeveloper_Click);
+            // 
             // Ingreso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1454, 814);
+            this.Controls.Add(this.btnDeveloper);
             this.Controls.Add(this.btn_Unirse);
             this.Controls.Add(this.btn_Host);
             this.Controls.Add(this.btn_Ingresar);
@@ -87,5 +100,6 @@
         private Button btn_Ingresar;
         private Button btn_Host;
         private Button btn_Unirse;
+        private Button btnDeveloper;
     }
 }
