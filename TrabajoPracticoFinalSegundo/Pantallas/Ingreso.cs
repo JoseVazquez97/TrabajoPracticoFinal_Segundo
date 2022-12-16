@@ -26,7 +26,6 @@ namespace TrabajoPracticoFinalSegundo
 
         private void btn_Ingresar_Click(object sender, EventArgs e)
         {
-            pp.WindowState = FormWindowState.Maximized;
             pp.Visible = true;
             this.Hide();
         }

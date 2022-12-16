@@ -151,9 +151,8 @@
             this.Controls.Add(this.Imagen);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PantallaPhoto";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PantallaPhoto";
-            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PantallaPhoto_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Imagen)).EndInit();

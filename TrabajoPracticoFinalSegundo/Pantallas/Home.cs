@@ -50,6 +50,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private int Turno;
         private string eventoActual;
         private string notificacion;
+        private string eventoRandom;
         private int desCap;
 
         private bool enventoFlag; //Flag de evento
@@ -81,7 +82,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.eventoActual = "Orden";
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
-            this.notificacion = "1";
             this.desCap = 0;
             this.movFlag = false;
             this.mFlag = false;
@@ -215,6 +215,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 {
                     #region EJECUCION cada 100ms durante ORDEN
                     case "Orden":
+                        #region LISTO
                         if (!this.fotoFlag) 
                         {
                             EnviarPathX();
@@ -239,6 +240,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                                 this.mFlag = true;
                             }
                         }
+                        #endregion
+
+
                         break;
                     #endregion
 
@@ -248,8 +252,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         {
                             if (this.Key == 1)
                             {
-                                string envetoRandom = enventoRandom();
-                                EnviarEventoX(envetoRandom);
+                                EnviarEventoX();
                             }
 
                             if (this.Key == 1) 
@@ -268,6 +271,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                     #region EJECUCION cada 100ms durante BATALLA
                     case "Batalla":
+                        if (this.batallaFlag == false) 
+                        {
+                            this.barco2.Visible = true;
+
+                            this.batallaFlag = true;
+                        }
+
                         break;
                 }
                 #endregion
@@ -545,11 +555,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
 
         #region ENVIAR - Evento
-        private async void EnviarEventoX(string x)
+        private async void EnviarEventoX()
         {
+            this.eventoRandom = enventoRandom();
             try
             {
-                await HomeConection.InvokeAsync("EnviarEvento", x);
+                await HomeConection.InvokeAsync("EnviarEvento", this.eventoRandom);
             }
             catch { MessageBox.Show("Error en el envio del Evento."); }
         }
@@ -764,13 +775,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         {
                             this.ucMapa1.Invoke(new Action(() => this.ucMapa1.Movimiento(x)));
                             QuitarTodasLasNotis();
-
-                            if (this.Key == 1) 
-                            {
-                                SwitchUrnaCap(false);
-                            }
-                            
-                            this.movFlag = true;
                         }
                         catch { MessageBox.Show("No pudo mostrarse el mapa"); }
                     }
@@ -783,29 +787,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<string>("RecibirEvento", (val1) =>
             {
-                try
+
+                MessageBox.Show(val1);
+                switch (val1)
                 {
-                    switch (val1)
-                    {
-                        case "M10":
-                            this.eventoActual = "Orden";
-                            break;
+                    case "M10":
+                        this.eventoActual = "Orden";
+                        break;
 
-                        case "M11":
-
-                            if (this.barco2.InvokeRequired) 
-                            {
-                                try
-                                {
-                                    this.barco2.Invoke(new Action(() => this.barco2.Visible = true));
-                                }
-                                catch { }
-                            }
-                            
-                            break;
-                    }
+                    case "M11":
+                        this.eventoActual = "Batalla";
+                        break;
                 }
-                catch { MessageBox.Show(val1); }
             });
             #endregion
 
