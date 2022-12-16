@@ -136,7 +136,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                             switch (evento)
                             {
                                 case "Batalla":
-                                    this.lbl_texto.Text = "Voy a Recargar!";
+                                    this.lbl_texto.Text = "Hay que correr!";
                                     break;
 
                                 case "Pezca":

@@ -50,6 +50,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private int Turno;
         private string eventoActual;
         private string notificacion;
+        private int desCap;
 
         private bool enventoFlag; //Flag de evento
         private bool accionFlag; //Flag de danio
@@ -60,6 +61,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private bool startFlag;
         private bool batallaFlag;
         private bool votaFlag;
+       
 
         private WaveOut salidaFondo = new WaveOut();
         private WaveStream stream1;
@@ -80,6 +82,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
             this.notificacion = "1";
+            this.desCap = 0;
             this.movFlag = false;
             this.mFlag = false;
             this.eFlag = false;
@@ -220,7 +223,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                         if (this.Key == 1)
                         {
-                            if (!this.mFlag)
+                            if (this.mFlag == false)
                             {
                                 EnviarCambiosMapa();
                                 ucMapa1.CargarImagenBarco();
@@ -229,7 +232,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         }
                         else
                         {
-                            if (!this.mFlag)
+                            if (this.mFlag == false)
                             {
                                 ConsultarMapa();
                                 ucMapa1.CargarImagenBarco();
@@ -243,23 +246,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     case "Votacion":
                         if (this.escrutinio1.confirmarVotacion() != 0)
                         {
-                            if (this.Key != 1)
+                            if (this.Key == 1)
                             {
-                                ConsultarMovimiento();
-                                if (!this.eFlag)
-                                {
-                                    ConsultarEve();
-                                    this.eFlag = true;
-                                }
+                                string envetoRandom = enventoRandom();
+                                EnviarEventoX(envetoRandom);
                             }
-                            else
+
+                            if (this.Key == 1) 
                             {
-                                if (!this.eFlag)
-                                {
-                                    string envetoRandom = enventoRandom();
-                                    EnviarEventoX(envetoRandom);
-                                    this.eFlag = true;
-                                }
+                                EnviarMovimiento(this.desCap);
+                                this.desCap = 0;
                             }
 
                             SwitchEscrutinio(false);
@@ -294,14 +290,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             case 1:
                                 if (this.Key == 1)
                                 {
-                                    SwitchUrnaCap(true);
+                                    this.desCap = noti;
                                 }
-
                                 SiguienteTurno();
                                 SwitchEscrutinio(true);
                                 SpawnearNoti(2, false);
                                 SpawnearNoti(3, false);
                                 SpawnearNoti(4, false);
+                                MensajesVotacion();
                                 this.eventoActual = "Votacion";
                                 break;
                             case 2:
@@ -319,11 +315,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
 
                     case "Votacion":
-                        if (!this.votaFlag) 
-                        {
-                            this.votaFlag = true;
-                        }
-                        
                         switch (quien)
                         {
                             case 1:
@@ -437,12 +428,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 if (this.eventoActual == "Orden")
                 {
                     msg = this.urnaCapitan1.ConsultarDesicion();
-                    this.urnaCapitan1.ReiniciarDesicion();
-                    if (msg != 0) 
-                    {
-                        EnviarMovimiento(msg);
-                    }
-                   
+                    this.urnaCapitan1.ReiniciarDesicion();   
                 }
                 else
                 {
@@ -765,14 +751,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             #region MOVIMIENTO-COM
 
-            HomeConection.On<string>("RecibirMov", (mapa) =>
+            HomeConection.On<string>("RecibirMov", (mov) =>
             {
-
-            });
-
-            HomeConection.On<string>("RecibirCMov", (mov) =>
-            {
-                try 
+                try
                 {
                     int x = 0;
                     x = int.Parse(mov);
@@ -782,6 +763,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         try
                         {
                             this.ucMapa1.Invoke(new Action(() => this.ucMapa1.Movimiento(x)));
+                            QuitarTodasLasNotis();
+
+                            if (this.Key == 1) 
+                            {
+                                SwitchUrnaCap(false);
+                            }
+                            
                             this.movFlag = true;
                         }
                         catch { MessageBox.Show("No pudo mostrarse el mapa"); }
@@ -789,7 +777,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 }
                 catch { ConsultarMovimiento(); }
             });
-
             #endregion
 
             #region EVENTO-COM
@@ -802,48 +789,24 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     {
                         case "M10":
                             this.eventoActual = "Orden";
-                            if (this.Key == 1) 
-                            {
-                                SwitchUrnaCap(false);
-                            }
-                           
                             break;
 
                         case "M11":
-                            try
+
+                            if (this.barco2.InvokeRequired) 
                             {
-                                this.barco2.Invoke(new Action(() => this.barco2.Visible = true));
+                                try
+                                {
+                                    this.barco2.Invoke(new Action(() => this.barco2.Visible = true));
+                                }
+                                catch { }
                             }
-                            catch { }
+                            
                             break;
                     }
                 }
                 catch { MessageBox.Show(val1); }
             });
-
-            HomeConection.On<string>("RecibirCEvento", (val1) =>
-            {
-                try
-                {
-                    switch (val1)
-                    {
-                        case "M10":
-                            this.eventoActual = "Orden";
-                            break;
-
-                        case "M11":
-                            try
-                            {
-                                this.barco2.Invoke(new Action(() => this.barco2.Visible = true));
-                            }
-                            catch { }
-                            break;
-                    }
-                }
-                catch { MessageBox.Show(val1); }
-                
-            });
-
             #endregion
 
             #region BARCOS-COM
@@ -1048,7 +1011,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             EnviarEB();
                             this.accionFlag = true;
                         }
-                        QuitarTodasLasNotis();
                     }
                     catch { }
                     break;
@@ -1125,7 +1087,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
             }
         }
-
 
         private void NotificarOrden(int quien, int x) //Establece el mensaje de la notificacion, teniendo en cuenta el evento.
         {
@@ -1334,7 +1295,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 case "F":
                     return "F";
                 case "M1":
-                    switch (1) 
+                    switch (2) 
                     {
                         case 1:
                             eventoX = "M10";
@@ -1376,6 +1337,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
 
         #endregion
+
 
         #endregion
     }

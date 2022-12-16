@@ -98,6 +98,42 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.tipo = "Votacion";
             this.btn_Si.Text = "Estoy Listo";
             this.btn_No.Text = "No Capitan!";
+            this.btn_No.Visible = false;
+            this.btn_Si.Width = this.Width/2;
+
+            this.notificador.Mensaje("Estoy Listo!");
+        }
+
+        public void Batalla(int rol)
+        {
+            this.tipo = "Batalla";
+
+            switch (rol) 
+            {
+                case 1:
+                    this.btn_Si.Text = "Disparar!";
+                    this.btn_No.Text = "Huir";
+                    break;
+
+                case 2:
+                    this.btn_Si.Text = "Reparar!";
+                    this.btn_No.Text = "Recargar";
+                    break;
+
+                case 3:
+                    this.btn_Si.Text = "Parley!";
+                    this.btn_No.Text = "Recargar";
+                    break;
+
+                case 4:
+                    this.btn_Si.Text = "Disparar!";
+                    this.btn_No.Text = "Recargar";
+                    break;
+            }
+
+            
+            this.btn_No.Visible = false;
+            this.btn_Si.Width = this.Width / 2;
 
             this.notificador.Mensaje("Estoy Listo!");
         }
