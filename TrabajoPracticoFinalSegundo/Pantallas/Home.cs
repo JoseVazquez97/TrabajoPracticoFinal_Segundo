@@ -53,7 +53,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private string eventoRandom;
         private int desCap;
 
-        private bool enventoFlag; //Flag de evento
         private bool accionFlag; //Flag de danio
         private bool eFlag; //Flag de evento random
         private bool movFlag; // Flag de movimiento
@@ -62,14 +61,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private bool startFlag;
         private bool batallaFlag;
         private bool votaFlag;
-       
+        private bool eventoFlag;
+
+
 
         private WaveOut salidaFondo = new WaveOut();
         private WaveStream stream1;
 
         private WaveOut salidaVoz = new WaveOut();
         private WaveStream stream2;
-
         #endregion
 
         public Home()
@@ -86,11 +86,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.movFlag = false;
             this.mFlag = false;
             this.eFlag = false;
-            this.enventoFlag = false;
+            this.eventoFlag = false;
             this.accionFlag = false;
             this.startFlag = false;
             this.batallaFlag = false;
             this.votaFlag = true;
+            this.eventoRandom = "I";
             #endregion
 
             int x = (this.Width / 2);
@@ -250,20 +251,17 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     case "Votacion":
                         if (this.escrutinio1.confirmarVotacion() != 0)
                         {
-                            if (this.Key == 1)
-                            {
-                                EnviarEventoX();
-                            }
+                            this.escrutinio1.reiniciarVotos();
+                            this.escrutinio1.reiniciarCheck();
 
-                            if (this.Key == 1) 
+                            if (this.Key == 1)
                             {
                                 EnviarMovimiento(this.desCap);
                                 this.desCap = 0;
                             }
 
                             SwitchEscrutinio(false);
-                            this.escrutinio1.reiniciarVotos();
-                            this.escrutinio1.reiniciarCheck();
+                            
                         }
 
                         break;
@@ -319,7 +317,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             case 4:
 
                                 break;
-
                         }
                         break;
 
@@ -557,23 +554,19 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #region ENVIAR - Evento
         private async void EnviarEventoX()
         {
-            this.eventoRandom = enventoRandom();
-            try
+            if (this.Key == 1) 
             {
-                await HomeConection.InvokeAsync("EnviarEvento", this.eventoRandom);
-            }
-            catch { MessageBox.Show("Error en el envio del Evento."); }
-        }
-        #endregion
+                string eventox = this.eventoRandom;
+                int rol = this.Key;
 
-        #region CONSULTAR - Evento
-        private async void ConsultarEve()
-        {
-            try
-            {
-                await HomeConection.InvokeAsync("ConsultarEv");
+                try
+                {
+                    MessageBox.Show(eventox);
+                    await HomeConection.InvokeAsync("EnviarEvento", rol, eventox);
+                }
+                catch { MessageBox.Show("Error en el envio del Evento."); }
             }
-            catch { MessageBox.Show("Error en la consulta del Ev"); }
+            
         }
         #endregion
 
@@ -778,6 +771,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         }
                         catch { MessageBox.Show("No pudo mostrarse el mapa"); }
                     }
+
+                    if (this.Key == 1) 
+                    {
+                        this.eventoRandom = enventoRandom();
+                        if (this.eventoFlag == false)
+                        {
+                            this.eventoFlag = true;
+                            EnviarEventoX();
+                        }
+                    }
                 }
                 catch { ConsultarMovimiento(); }
             });
@@ -785,20 +788,22 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             #region EVENTO-COM
 
-            HomeConection.On<string>("RecibirEvento", (val1) =>
+            HomeConection.On<int, string>("RecibirEvento", (rol, val1) =>
             {
-
-                MessageBox.Show(val1);
-                switch (val1)
+                if (rol == 1) 
                 {
-                    case "M10":
-                        this.eventoActual = "Orden";
-                        break;
+                    switch (val1)
+                    {
+                        case "M10":
+                            this.eventoActual = "Orden";
+                            break;
 
-                    case "M11":
-                        this.eventoActual = "Batalla";
-                        break;
+                        case "M11":
+                            this.eventoActual = "Batalla";
+                            break;
+                    }
                 }
+                
             });
             #endregion
 
@@ -903,7 +908,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 case "Capitan":
                     this.Key = 1;
-
                     DalePower();
                     this.pantallaWeb1.CargarAvatar(this.miAvatar);
                     this.dados1.setEnable(false);
@@ -913,7 +917,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                 case "Carpintero":
                     this.Key = 2;
-
                     this.pantallaWeb2.CargarAvatar(this.miAvatar);
                     this.dados1.setEnable(false);
                     loadUrnas(false);
@@ -921,7 +924,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                 case "Mercader":
                     this.Key = 3;
-
                     this.pantallaWeb3.CargarAvatar(this.miAvatar);
                     this.dados1.setEnable(false);
                     loadUrnas(false);
@@ -929,7 +931,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                 case "Artillero":
                     this.Key = 4;
-
                     this.pantallaWeb4.CargarAvatar(this.miAvatar);
                     this.dados1.setEnable(false);
                     loadUrnas(false);
@@ -1288,7 +1289,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 case "F":
                     return "F";
                 case "M1":
-                    switch (2) 
+                    switch (evento) 
                     {
                         case 1:
                             eventoX = "M10";
@@ -1299,8 +1300,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             break;
                     }
                     break;
+                default:
+                    eventoX= "pepe";
+                    break;
             }
-
             return eventoX;
         }
 
