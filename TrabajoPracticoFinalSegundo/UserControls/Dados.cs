@@ -55,6 +55,11 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             cerradura = x;
         }
 
+        public void reiniciarListo() 
+        {
+            this.LISTO = false;
+        }
+
         public bool getEnable() 
         {
             return cerradura;

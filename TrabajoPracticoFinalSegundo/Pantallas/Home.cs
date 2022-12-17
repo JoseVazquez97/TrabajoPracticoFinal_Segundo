@@ -52,6 +52,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private string notificacion;
         private string eventoRandom;
         private int desCap;
+        private int desicion;
 
         private bool accionFlag; //Flag de danio
         private bool eFlag; //Flag de evento random
@@ -70,6 +71,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private WaveOut salidaVoz = new WaveOut();
         private WaveStream stream2;
+        
         #endregion
 
         public Home()
@@ -91,6 +93,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.startFlag = false;
             this.batallaFlag = false;
             this.votaFlag = true;
+            this.desicion = 0;
             this.eventoRandom = "I";
             #endregion
 
@@ -220,26 +223,26 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         #region LISTO
                         if (!this.fotoFlag) 
                         {
-                            EnviarPathX();
                             this.fotoFlag = true;
+                            EnviarPathX();
                         }
 
                         if (this.Key == 1)
                         {
                             if (this.mFlag == false)
                             {
+                                this.mFlag = true;
                                 EnviarCambiosMapa();
                                 ucMapa1.CargarImagenBarco();
-                                this.mFlag = true;
                             }
                         }
                         else
                         {
                             if (this.mFlag == false)
                             {
+                                this.mFlag = true;
                                 ConsultarMapa();
                                 ucMapa1.CargarImagenBarco();
-                                this.mFlag = true;
                             }
                         }
                         #endregion
@@ -271,10 +274,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     case "Batalla":
                         if (this.batallaFlag == false) 
                         {
-                            this.barco2.Visible = true;
-
                             this.batallaFlag = true;
+                            this.barco2.Visible = true;
+                            SwitchEscrutinio(false);
                         }
+
+                        EnviarDadosCL();
 
                         break;
                 }
@@ -349,22 +354,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             SwitchEscrutinio(false);
                             this.batallaFlag = true;
                         }
-                        
-                        switch (quien)
+
+                        if (quien == this.Key) 
                         {
-                            case 1:
-
-                                break;
-                            case 2:
-
-                                break;
-                            case 3:
-
-                                break;
-                            case 4:
-
-                                break;
-
+                            this.desicion = noti;
                         }
                         break;
 
@@ -947,41 +940,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
-        #region Activacion
-        private void activarDados(int key) // Activa el user control dados, segun la key
-        {
-            if (this.Key == key)
-            {
-                this.dados1.setEnable(true);
-            }
-            else { this.dados1.setEnable(false); }
-        }
-
-        private void HabilitarDados() //Habilita el UC dados segun a quien le toca
-        {
-            int turno = obtenerTurno(this.turnero1.getTurno());
-
-            switch (turno)
-            {
-                case 1:
-                    activarDados(1);
-                    break;
-
-                case 2:
-                    activarDados(2);
-                    break;
-
-                case 3:
-                    activarDados(3);
-                    break;
-
-                case 4:
-                    activarDados(4);
-                    break;
-            }
-        }
-        #endregion
-
         #region Acciones
         private void AccionesDados(string v1, string v2)
         {
@@ -994,11 +952,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     try
                     {
                         this.barco2.Invoke(new Action(() => this.barco2.RecibirDanio(v1I + V2I)));
-                        if (!this.accionFlag) 
-                        {
-                            EnviarEB();
-                            this.accionFlag = true;
-                        }
                     }
                     catch { }
                     break;
@@ -1006,8 +959,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         }
         #endregion
-
-
 
         #endregion
 
@@ -1284,7 +1235,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 case "F":
                     return "F";
                 case "M1":
-                    switch (1) 
+                    switch (2) 
                     {
                         case 1:
                             eventoX = "M10";
@@ -1295,8 +1246,35 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             break;
                     }
                     break;
+
+                case "M2":
+                    switch (2)
+                    {
+                        case 1:
+                            eventoX = "M10";
+                            break;
+
+                        case 2:
+                            eventoX = "M11";
+                            break;
+                    }
+                    break;
+
+                case "M3":
+                    switch (2)
+                    {
+                        case 1:
+                            eventoX = "M10";
+                            break;
+
+                        case 2:
+                            eventoX = "M11";
+                            break;
+                    }
+                    break;
+
                 default:
-                    eventoX= "pepe";
+                    MessageBox.Show("El mapa devolvio un lugar raro");
                     break;
             }
             return eventoX;
@@ -1329,7 +1307,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
-        #region ASEGURAR
+        #region ASEGURAR ORDEN
 
         private void AsegurarOrden() 
         {
