@@ -23,8 +23,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.TIPO = 1;
             this.timeToWait = 5;
 
-            p_boxUno.Location = new Point((((this.Width) / 2) - 50), (this.Height / 2));
-
             p_boxUno.Image = Image.FromFile(@".\Recursos\Logos\LOGO_Manija.png");
         }
 

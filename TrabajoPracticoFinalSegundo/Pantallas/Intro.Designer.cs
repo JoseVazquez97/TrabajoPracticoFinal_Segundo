@@ -41,9 +41,9 @@
             // p_boxUno
             // 
             this.p_boxUno.BackColor = System.Drawing.Color.Transparent;
-            this.p_boxUno.Location = new System.Drawing.Point(621, 246);
+            this.p_boxUno.Location = new System.Drawing.Point(437, 225);
             this.p_boxUno.Name = "p_boxUno";
-            this.p_boxUno.Size = new System.Drawing.Size(575, 300);
+            this.p_boxUno.Size = new System.Drawing.Size(572, 216);
             this.p_boxUno.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.p_boxUno.TabIndex = 0;
             this.p_boxUno.TabStop = false;
@@ -57,26 +57,31 @@
             // 
             // p_box2
             // 
-            this.p_box2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.p_box2.Location = new System.Drawing.Point(50, 0);
-            this.p_box2.Margin = new System.Windows.Forms.Padding(50, 0, 30, 50);
+            this.p_box2.Location = new System.Drawing.Point(50, 474);
+            this.p_box2.Margin = new System.Windows.Forms.Padding(50, 30, 30, 50);
             this.p_box2.Name = "p_box2";
-            this.p_box2.Size = new System.Drawing.Size(150, 150);
+            this.p_box2.Size = new System.Drawing.Size(150, 144);
             this.p_box2.TabIndex = 2;
             this.p_box2.TabStop = false;
             // 
             // tblBottom
             // 
-            this.tblBottom.ColumnCount = 1;
-            this.tblBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblBottom.Controls.Add(this.p_box2, 0, 0);
-            this.tblBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tblBottom.Location = new System.Drawing.Point(0, 468);
+            this.tblBottom.ColumnCount = 3;
+            this.tblBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tblBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tblBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tblBottom.Controls.Add(this.p_box2, 0, 2);
+            this.tblBottom.Controls.Add(this.p_boxUno, 1, 1);
+            this.tblBottom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblBottom.Location = new System.Drawing.Point(0, 0);
             this.tblBottom.Name = "tblBottom";
-            this.tblBottom.RowCount = 1;
-            this.tblBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblBottom.Size = new System.Drawing.Size(1447, 200);
+            this.tblBottom.RowCount = 3;
+            this.tblBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tblBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tblBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tblBottom.Size = new System.Drawing.Size(1447, 668);
             this.tblBottom.TabIndex = 3;
+            this.tblBottom.Click += new System.EventHandler(this.Intro_Click);
             // 
             // Intro
             // 
@@ -85,7 +90,6 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(1447, 668);
             this.Controls.Add(this.tblBottom);
-            this.Controls.Add(this.p_boxUno);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Intro";
             this.TopMost = true;

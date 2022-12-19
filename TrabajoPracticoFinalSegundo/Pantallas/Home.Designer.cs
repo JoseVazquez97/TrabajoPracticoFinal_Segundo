@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpInferior = new System.Windows.Forms.FlowLayoutPanel();
             this.urnaCapitan1 = new TrabajoPracticoFinalSegundo.UserControls.UrnaCapitan();
             this.urna1 = new TrabajoPracticoFinalSegundo.UserControls.Urna();
             this.dados1 = new TrabajoPracticoFinalSegundo.UserControls.Dados();
             this.turnero1 = new TrabajoPracticoFinalSegundo.UserControls.Turnero();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpLateralIzq = new System.Windows.Forms.FlowLayoutPanel();
             this.pantallaWeb1 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
             this.pantallaWeb2 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
             this.pantallaWeb3 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
@@ -42,8 +42,8 @@
             this.noti_Ar = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
             this.noti_Cap = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
             this.btn_Exit = new System.Windows.Forms.Button();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpLateralDer = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpSuperior = new System.Windows.Forms.FlowLayoutPanel();
             this.escrutinio1 = new TrabajoPracticoFinalSegundo.UserControls.Escrutinio();
             this.recursosDisplay1 = new TrabajoPracticoFinalSegundo.UserControls.RecursosDisplay();
             this.Update500ms = new System.Windows.Forms.Timer(this.components);
@@ -56,29 +56,29 @@
             this.Navegacion_Page = new System.Windows.Forms.TabPage();
             this.ucMapa1 = new GeneradorMapa.UCMapa();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
+            this.flpInferior.SuspendLayout();
+            this.flpLateralIzq.SuspendLayout();
+            this.flpLateralDer.SuspendLayout();
+            this.flpSuperior.SuspendLayout();
             this.Barco_Page.SuspendLayout();
             this.Navio_Page.SuspendLayout();
             this.Navegacion_Page.SuspendLayout();
             this.SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // flpInferior
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel1.Controls.Add(this.urnaCapitan1);
-            this.flowLayoutPanel1.Controls.Add(this.urna1);
-            this.flowLayoutPanel1.Controls.Add(this.dados1);
-            this.flowLayoutPanel1.Controls.Add(this.turnero1);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 928);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1478, 133);
-            this.flowLayoutPanel1.TabIndex = 4;
+            this.flpInferior.BackColor = System.Drawing.Color.Transparent;
+            this.flpInferior.Controls.Add(this.urnaCapitan1);
+            this.flpInferior.Controls.Add(this.urna1);
+            this.flpInferior.Controls.Add(this.dados1);
+            this.flpInferior.Controls.Add(this.turnero1);
+            this.flpInferior.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpInferior.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
+            this.flpInferior.Location = new System.Drawing.Point(0, 928);
+            this.flpInferior.Margin = new System.Windows.Forms.Padding(0);
+            this.flpInferior.Name = "flpInferior";
+            this.flpInferior.Size = new System.Drawing.Size(1478, 133);
+            this.flpInferior.TabIndex = 4;
             // 
             // urnaCapitan1
             // 
@@ -116,19 +116,19 @@
             this.turnero1.Size = new System.Drawing.Size(550, 127);
             this.turnero1.TabIndex = 3;
             // 
-            // flowLayoutPanel2
+            // flpLateralIzq
             // 
-            this.flowLayoutPanel2.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel2.Controls.Add(this.pantallaWeb1);
-            this.flowLayoutPanel2.Controls.Add(this.pantallaWeb2);
-            this.flowLayoutPanel2.Controls.Add(this.pantallaWeb3);
-            this.flowLayoutPanel2.Controls.Add(this.pantallaWeb4);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 928);
-            this.flowLayoutPanel2.TabIndex = 5;
+            this.flpLateralIzq.BackColor = System.Drawing.Color.Transparent;
+            this.flpLateralIzq.Controls.Add(this.pantallaWeb1);
+            this.flpLateralIzq.Controls.Add(this.pantallaWeb2);
+            this.flpLateralIzq.Controls.Add(this.pantallaWeb3);
+            this.flpLateralIzq.Controls.Add(this.pantallaWeb4);
+            this.flpLateralIzq.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flpLateralIzq.Location = new System.Drawing.Point(0, 0);
+            this.flpLateralIzq.Margin = new System.Windows.Forms.Padding(0);
+            this.flpLateralIzq.Name = "flpLateralIzq";
+            this.flpLateralIzq.Size = new System.Drawing.Size(325, 928);
+            this.flpLateralIzq.TabIndex = 5;
             // 
             // pantallaWeb1
             // 
@@ -137,6 +137,7 @@
             this.pantallaWeb1.Location = new System.Drawing.Point(25, 25);
             this.pantallaWeb1.Margin = new System.Windows.Forms.Padding(25, 25, 25, 5);
             this.pantallaWeb1.Name = "pantallaWeb1";
+            this.pantallaWeb1.Padding = new System.Windows.Forms.Padding(20);
             this.pantallaWeb1.Size = new System.Drawing.Size(249, 200);
             this.pantallaWeb1.TabIndex = 0;
             // 
@@ -147,6 +148,7 @@
             this.pantallaWeb2.Location = new System.Drawing.Point(25, 240);
             this.pantallaWeb2.Margin = new System.Windows.Forms.Padding(25, 10, 25, 5);
             this.pantallaWeb2.Name = "pantallaWeb2";
+            this.pantallaWeb2.Padding = new System.Windows.Forms.Padding(20);
             this.pantallaWeb2.Size = new System.Drawing.Size(249, 200);
             this.pantallaWeb2.TabIndex = 1;
             // 
@@ -157,6 +159,7 @@
             this.pantallaWeb3.Location = new System.Drawing.Point(25, 455);
             this.pantallaWeb3.Margin = new System.Windows.Forms.Padding(25, 10, 25, 5);
             this.pantallaWeb3.Name = "pantallaWeb3";
+            this.pantallaWeb3.Padding = new System.Windows.Forms.Padding(20);
             this.pantallaWeb3.Size = new System.Drawing.Size(249, 200);
             this.pantallaWeb3.TabIndex = 2;
             // 
@@ -166,6 +169,7 @@
             this.pantallaWeb4.Location = new System.Drawing.Point(25, 670);
             this.pantallaWeb4.Margin = new System.Windows.Forms.Padding(25, 10, 25, 5);
             this.pantallaWeb4.Name = "pantallaWeb4";
+            this.pantallaWeb4.Padding = new System.Windows.Forms.Padding(20);
             this.pantallaWeb4.Size = new System.Drawing.Size(249, 200);
             this.pantallaWeb4.TabIndex = 3;
             // 
@@ -197,30 +201,30 @@
             this.btn_Exit.UseVisualStyleBackColor = true;
             this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click_1);
             // 
-            // flowLayoutPanel3
+            // flpLateralDer
             // 
-            this.flowLayoutPanel3.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel3.Controls.Add(this.btn_Exit);
-            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(1408, 0);
-            this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel3.MaximumSize = new System.Drawing.Size(70, 0);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(70, 928);
-            this.flowLayoutPanel3.TabIndex = 7;
+            this.flpLateralDer.BackColor = System.Drawing.Color.Transparent;
+            this.flpLateralDer.Controls.Add(this.btn_Exit);
+            this.flpLateralDer.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flpLateralDer.Location = new System.Drawing.Point(1408, 0);
+            this.flpLateralDer.Margin = new System.Windows.Forms.Padding(0);
+            this.flpLateralDer.MaximumSize = new System.Drawing.Size(70, 0);
+            this.flpLateralDer.Name = "flpLateralDer";
+            this.flpLateralDer.Size = new System.Drawing.Size(70, 928);
+            this.flpLateralDer.TabIndex = 7;
             // 
-            // flowLayoutPanel4
+            // flpSuperior
             // 
-            this.flowLayoutPanel4.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel4.Controls.Add(this.escrutinio1);
-            this.flowLayoutPanel4.Controls.Add(this.recursosDisplay1);
-            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(325, 0);
-            this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(1083, 107);
-            this.flowLayoutPanel4.TabIndex = 8;
+            this.flpSuperior.BackColor = System.Drawing.Color.Transparent;
+            this.flpSuperior.Controls.Add(this.escrutinio1);
+            this.flpSuperior.Controls.Add(this.recursosDisplay1);
+            this.flpSuperior.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flpSuperior.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flpSuperior.Location = new System.Drawing.Point(325, 0);
+            this.flpSuperior.Margin = new System.Windows.Forms.Padding(0);
+            this.flpSuperior.Name = "flpSuperior";
+            this.flpSuperior.Size = new System.Drawing.Size(1083, 107);
+            this.flpSuperior.TabIndex = 8;
             // 
             // escrutinio1
             // 
@@ -337,19 +341,19 @@
             this.Controls.Add(this.noti_Carp);
             this.Controls.Add(this.noti_Cap);
             this.Controls.Add(this.Barco_Page);
-            this.Controls.Add(this.flowLayoutPanel4);
-            this.Controls.Add(this.flowLayoutPanel2);
-            this.Controls.Add(this.flowLayoutPanel3);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.flpSuperior);
+            this.Controls.Add(this.flpLateralIzq);
+            this.Controls.Add(this.flpLateralDer);
+            this.Controls.Add(this.flpInferior);
             this.Name = "Home";
             this.Text = "Home";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Home_FormClosed);
             this.Load += new System.EventHandler(this.Home_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel3.ResumeLayout(false);
-            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flpInferior.ResumeLayout(false);
+            this.flpLateralIzq.ResumeLayout(false);
+            this.flpLateralDer.ResumeLayout(false);
+            this.flpSuperior.ResumeLayout(false);
             this.Barco_Page.ResumeLayout(false);
             this.Navio_Page.ResumeLayout(false);
             this.Navegacion_Page.ResumeLayout(false);
@@ -358,15 +362,15 @@
         }
 
         #endregion
-        private FlowLayoutPanel flowLayoutPanel1;
-        private FlowLayoutPanel flowLayoutPanel2;
+        private FlowLayoutPanel flpInferior;
+        private FlowLayoutPanel flpLateralIzq;
         private Button btn_Exit;
-        private FlowLayoutPanel flowLayoutPanel3;
+        private FlowLayoutPanel flpLateralDer;
         private UserControls.Urna urna1;
         private UserControls.Turnero turnero1;
         private UserControls.PantallaWeb pantallaWeb1;
         private UserControls.PantallaWeb pantallaWeb2;
-        private FlowLayoutPanel flowLayoutPanel4;
+        private FlowLayoutPanel flpSuperior;
         private UserControls.RecursosDisplay recursosDisplay1;
         private UserControls.PantallaWeb pantallaWeb3;
         private UserControls.Dados dados1;
