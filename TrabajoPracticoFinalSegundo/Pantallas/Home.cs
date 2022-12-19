@@ -134,11 +134,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #region TURNERO
             this.turnero1.LoadTurnero(x, y);
             #endregion
-
-            #region DADOS
-            this.dados1.CargarTablero(x + 100, y);
-            #endregion
-
             #endregion
 
             #region NOTIFICADORES
@@ -284,7 +279,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         }
 
                         EjecutarAccion();
-                        EnviarDadosCL();
 
                         break;
                         #endregion
@@ -487,26 +481,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
-        #region ENVIAR - Dados
-        private async void EnviarDadosCL()
-        {
-            string usr = this.Key.ToString();
-            string val1 = "";
-            string val2 = "";
-
-            val1 = this.dados1.V1.ToString();
-            val2 = this.dados1.V2.ToString();
-
-            if (val1 != "0" && val2 != "0" && this.Key == obtenerTurno(this.turnero1.getTurno()))
-            {
-                try
-                {
-                    await HomeConection.InvokeAsync("EnviarDados", usr, val1, val2);
-                }
-                catch { MessageBox.Show("Error en el envio de dados."); }
-            }
-        }
-
+        #region CONSULTA - Dados
         private async void ConsultarDadosCL()
         {
             if (this.Key != obtenerTurno(this.turnero1.getTurno()))
@@ -726,12 +701,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
 
             #region DADOS-COM
-            HomeConection.On<string, string, string>("RecibirDados", (usr, val1, val2) =>
-            {
-                AccionesDados(val1, val2);
-                EnviarEB();
-            });
-
             HomeConection.On<string, string>("RecibirCDados", (val1, val2) =>
             {
                 if (this.dados1.LISTO)
@@ -794,6 +763,28 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                         case "M11":
                             this.eventoActual = "Batalla";
+
+                            try
+                            {
+                                this.urna1.Invoke(new Action(() => this.urna1.Batalla(this.Key) ));
+                            }
+                            catch { }
+                           
+                            switch (this.Key) 
+                            {
+                                case 1:
+                                    SwitchUrnaCap(true);
+                                    break;
+
+                                case 2:
+                                    break;
+
+                                case 3:
+                                    break;
+
+                                case 4:
+                                    break;
+                            }
                             break;
                     }
                 }
@@ -930,6 +921,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     loadUrnas(false);
                     break;
             }
+
+            #region DADOS
+            int x = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
+            int y = this.flowLayoutPanel1.Height;
+            this.dados1.CargarTablero(x + 100, y, this.Key);
+            #endregion
         }
         #endregion
 
@@ -947,30 +944,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
-        #region Acciones
-        private void AccionesDados(string v1, string v2)
-        {
-            int v1I = int.Parse(v1);
-            int V2I = int.Parse(v2);
-
-            switch (this.eventoActual)
-            {
-                case "Batalla":
-                    try
-                    {
-                        this.barco2.Invoke(new Action(() => this.barco2.RecibirDanio(v1I + V2I)));
-                    }
-                    catch { }
-                    break;
-            }
-
-        }
-        #endregion
-
         #endregion
 
         #region NOTIFICACIONES
-
 
         private void QuitarTodasLasNotis() //Quita todas las notificaciones del form, y establece el atributo a 0
         {
