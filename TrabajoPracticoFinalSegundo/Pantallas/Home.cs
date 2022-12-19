@@ -65,7 +65,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private bool batallaFlag;
         private bool votaFlag;
         private bool eventoFlag;
-
+        private bool NoAlSpam;
 
 
         private WaveOut salidaFondo = new WaveOut();
@@ -73,7 +73,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private WaveOut salidaVoz = new WaveOut();
         private WaveStream stream2;
-       
+        
+
 
         #endregion
 
@@ -96,13 +97,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.startFlag = false;
             this.batallaFlag = false;
             this.votaFlag = true;
+            this.NoAlSpam = false;
             this.desicion = 0;
             this.quien = 0;
             this.eventoRandom = "I";
             #endregion
 
             #region LOADS DE COMPONENTES 
-            ReSizeFlowLPS();
+            ReSizeFormControls();
             #region FONDOS
             this.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\Madera.jpg");
             Navio_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\FondoHomeDos.jpg");
@@ -144,26 +146,22 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.noti_Cap.Visible = false;
             this.noti_Cap.Parent = this;
             locati = this.pantallaWeb1.Location;
-            this.noti_Cap.Location = new Point(locati.X + 255, locati.Y + 20);
 
             this.noti_Carp.Load_Notificador();
             this.noti_Carp.Visible = true;
             this.noti_Carp.Parent = this;
             locati = this.pantallaWeb2.Location;
-            this.noti_Carp.Location = new Point(locati.X + 255, locati.Y + 20);
             this.noti_Carp.Mensaje("Ordenes capitan!");
 
             this.noti_Mer.Load_Notificador();
             this.noti_Mer.Visible = false;
             this.noti_Mer.Parent = this;
             locati = this.pantallaWeb3.Location;
-            this.noti_Mer.Location = new Point(locati.X + 255, locati.Y + 20);
 
             this.noti_Ar.Load_Notificador();
             this.noti_Ar.Visible = false;
             this.noti_Ar.Parent = this;
             locati = this.pantallaWeb4.Location;
-            this.noti_Ar.Location = new Point(locati.X + 255, locati.Y + 20);
             #endregion
 
             #region ESCRUTINIO
@@ -447,7 +445,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 await HomeConection.InvokeAsync("EnviarNoti", usr, msg, turno);
             }
-            catch { MessageBox.Show("Error en el envio de Notificacion."); }
+            catch 
+            {
+                NoAlSpam = true;
+                if(!NoAlSpam) MessageBox.Show("Error en el envio de Notificacion."); 
+            }
         }
         #endregion
 
@@ -1396,66 +1398,45 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
 
 
-        private void ReSizeFlowLPS()  //Funcion para ajustar los flps al tamaño de pantalla de los usuarios
+        private void ReSizeFormControls()  //Funcion para ajustar controles al tamaño de pantalla del usuario
+        {
+            
+            foreach (Control item in this.Controls)
+            {
+                AdjustSize(item);
+                AdjustLocation(item);
+
+                if (item.GetType() == new FlowLayoutPanel().GetType() || item.GetType() == new TabPage().GetType())
+                {
+                    foreach (Control FLPitem in item.Controls)
+                    {
+                        AdjustSize(FLPitem);
+                        AdjustLocation(FLPitem);
+                    }
+                }
+            }
+            
+            this.noti_Cap.Location = new Point(pantallaWeb1.Location.X + pantallaWeb1.Width, pantallaWeb1.Location.Y + 30);
+            this.noti_Carp.Location = new Point(pantallaWeb2.Location.X + pantallaWeb2.Width, pantallaWeb2.Location.Y + 30);
+            this.noti_Ar.Location = new Point(pantallaWeb3.Location.X + pantallaWeb3.Width, pantallaWeb3.Location.Y + 30);
+            this.noti_Mer.Location = new Point(pantallaWeb4.Location.X + pantallaWeb4.Width, pantallaWeb4.Location.Y + 30);
+            
+
+        }
+
+        private void AdjustSize(Control control)
         {
             int x = 0, y = 0;
-            y = (this.Height * 908) / 1080;
-            x = (this.Width * 325) / 1920 ;
-            flpLateralIzq.Size = new Size(x, y);
-
-
-            y = (this.Height * 133) / 1080;
-            x = (this.Width * 1478) / 1920;
-            flpInferior.Size = new Size(x, y);
-
-
-            y = (this.Height * 107) / 1080;
-            x = (this.Width * 1083) / 1920;
-            flpSuperior.Size = new Size(x, y);
-
-
-            y = (this.Height * 928) / 1080;
-            x = (this.Width * 70) / 1920;
-            flpLateralDer.Size = new Size(x, y);
-
-
-            y = (this.Height * Barco_Page.Height) / 1080;
-            x = (this.Width * Barco_Page.Width) / 1920;
-            Barco_Page.Size = new Size(x, y);
-
-            
-            y = (this.Height * barco1.Height) / 1080;
-            x = (this.Width * barco1.Width) / 1920;
-            barco1.Size = new Size(x, y);
-            barco2.Size = new Size(x, y);
-
-
-            y = (this.Height * escrutinio1.Height) / 1080;
-            x = (this.Width * escrutinio1.Width) / 1920;
-            escrutinio1.Size = new Size(x, y);
-            
-
-            y = (this.Height * recursosDisplay1.Height) / 1080;
-            x = (this.Width * recursosDisplay1.Width) / 1920;
-            recursosDisplay1.Size = new Size(x, y);
-
-
-            y = (this.Height * urnaCapitan1.Height) / 1080;
-            x = (this.Width * urnaCapitan1.Width) / 1920;
-            urnaCapitan1.Size = new Size(x, y);
-
-
-            y = (this.Height * urna1.Height) / 1080;
-            x = (this.Width * urna1.Width) / 1920;
-            urna1.Size = new Size(x, y);
-
-
-            y = (this.Height * turnero1.Height) / 1080;
-            x = (this.Width * turnero1.Width) / 1920;
-            turnero1.Size = new Size(x, y);
-
-            dados1.Size = urna1.Size;
-            dados1.Margin = urna1.Margin;
+            y = (this.Height * control.Height) / 1080;
+            x = (this.Width * control.Width) / 1920;
+            control.Size = new Size(x, y);
+        }
+        private void AdjustLocation(Control control)
+        {
+            int x = 0, y = 0;
+            y = (this.Height * control.Location.X) / 1080;
+            x = (this.Width * control.Location.Y) / 1920;
+            control.Location = new Point(x, y);
         }
     }
 }

@@ -16,11 +16,13 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public Notificador()
         {
             InitializeComponent();
+            
         }
 
         public void Load_Notificador() 
         {
             this.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\Notificador22.png");
+            ReSize();
         }
 
         public void MensajeArmadoCap(int x)
@@ -191,6 +193,21 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public void Mensaje(string texto) 
         {
             this.lbl_texto.Text = texto;
+        }
+
+        private void ReSize()
+        {
+            float x;
+            x = (this.Width * 20.25F) / 220F;
+            lbl_texto.Font = new System.Drawing.Font("BlackPearl", x, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+
+
+            int xx, y;
+
+            y = (this.Height * lbl_texto.Location.X) / 220;
+            xx = (this.Width * lbl_texto.Location.Y) / 83;
+            lbl_texto.Location = new Point(xx, y);
+
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)

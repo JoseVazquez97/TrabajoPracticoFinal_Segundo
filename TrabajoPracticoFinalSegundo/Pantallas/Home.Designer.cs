@@ -176,7 +176,7 @@
             // noti_Ar
             // 
             this.noti_Ar.BackColor = System.Drawing.Color.Transparent;
-            this.noti_Ar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.noti_Ar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.noti_Ar.Location = new System.Drawing.Point(197, 733);
             this.noti_Ar.Name = "noti_Ar";
             this.noti_Ar.Size = new System.Drawing.Size(220, 83);
@@ -185,7 +185,7 @@
             // noti_Cap
             // 
             this.noti_Cap.BackColor = System.Drawing.Color.Transparent;
-            this.noti_Cap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.noti_Cap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.noti_Cap.Location = new System.Drawing.Point(197, 110);
             this.noti_Cap.Name = "noti_Cap";
             this.noti_Cap.Size = new System.Drawing.Size(220, 83);
@@ -251,7 +251,7 @@
             // noti_Carp
             // 
             this.noti_Carp.BackColor = System.Drawing.Color.Transparent;
-            this.noti_Carp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.noti_Carp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.noti_Carp.Location = new System.Drawing.Point(197, 286);
             this.noti_Carp.Name = "noti_Carp";
             this.noti_Carp.Size = new System.Drawing.Size(220, 83);
@@ -260,7 +260,7 @@
             // noti_Mer
             // 
             this.noti_Mer.BackColor = System.Drawing.Color.Transparent;
-            this.noti_Mer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.noti_Mer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.noti_Mer.Location = new System.Drawing.Point(197, 504);
             this.noti_Mer.Name = "noti_Mer";
             this.noti_Mer.Size = new System.Drawing.Size(220, 83);
