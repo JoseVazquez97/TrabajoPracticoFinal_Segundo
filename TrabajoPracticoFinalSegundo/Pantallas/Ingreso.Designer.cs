@@ -53,7 +53,7 @@
             // 
             this.btnDeveloper.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDeveloper.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnDeveloper.Location = new System.Drawing.Point(584, 633);
+            this.btnDeveloper.Location = new System.Drawing.Point(584, 453);
             this.btnDeveloper.Name = "btnDeveloper";
             this.btnDeveloper.Size = new System.Drawing.Size(284, 84);
             this.btnDeveloper.TabIndex = 3;
@@ -68,8 +68,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.Controls.Add(this.btnDeveloper, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.btn_Ingresar, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.btnDeveloper, 1, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -90,6 +90,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1454, 814);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Ingreso";

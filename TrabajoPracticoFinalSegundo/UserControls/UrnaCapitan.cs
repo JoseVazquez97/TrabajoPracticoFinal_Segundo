@@ -29,7 +29,24 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         {
             this.noti_cap = noticap;
             this.turn = turnero;
+            this.pbBrujula.Image = Image.FromFile(@".\Recursos\Iconos\Brujula.png");
+            this.pbBrujula.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\Brujula.png");
             ReSize();
+            
+            int x = pbBrujula.Location.X, y = pbBrujula.Location.Y;
+
+            btn_Este.Parent = pbBrujula;
+            btn_Este.Location = new Point(btn_Este.Location.X - x, btn_Este.Location.Y - y);
+
+            btn_Oeste.Parent = pbBrujula;
+            btn_Oeste.Location = new Point(btn_Oeste.Location.X - x, btn_Oeste.Location.Y - y);
+
+            btn_Sur.Parent = pbBrujula;
+            btn_Sur.Location = new Point(btn_Sur.Location.X - x, btn_Sur.Location.Y - y);
+
+            btn_Norte.Parent = pbBrujula;
+            btn_Norte.Location = new Point(btn_Norte.Location.X - x, btn_Norte.Location.Y - y);
+            
         }
 
         public int ConsultarDesicion() 

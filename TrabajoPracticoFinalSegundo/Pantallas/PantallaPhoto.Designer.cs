@@ -52,7 +52,7 @@
             // 
             // ConfirmarSeleccion
             // 
-            this.ConfirmarSeleccion.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ConfirmarSeleccion.Font = new System.Drawing.Font("BlackPearl", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ConfirmarSeleccion.Location = new System.Drawing.Point(64, 473);
             this.ConfirmarSeleccion.Name = "ConfirmarSeleccion";
             this.ConfirmarSeleccion.Size = new System.Drawing.Size(215, 77);
@@ -64,16 +64,16 @@
             // labelAvatars
             // 
             this.labelAvatars.AutoSize = true;
-            this.labelAvatars.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelAvatars.Font = new System.Drawing.Font("BlackPearl", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelAvatars.Location = new System.Drawing.Point(359, 64);
             this.labelAvatars.Name = "labelAvatars";
-            this.labelAvatars.Size = new System.Drawing.Size(254, 32);
+            this.labelAvatars.Size = new System.Drawing.Size(336, 29);
             this.labelAvatars.TabIndex = 5;
             this.labelAvatars.Text = "Avatars Seleccionables";
             // 
             // comboBox1
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.comboBox1.Font = new System.Drawing.Font("BlackPearl", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Capitan",
@@ -88,10 +88,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("BlackPearl", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(65, 310);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(167, 33);
+            this.label1.Size = new System.Drawing.Size(228, 34);
             this.label1.TabIndex = 7;
             this.label1.Text = "Elije tu Rol";
             // 
