@@ -355,7 +355,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         if (quien != this.Key)
                         {
                             this.desicion = noti;
+                            if (noti == 99)
+                            {
+                                SiguienteTurno();
+                            }
                         }
+
                         break;
 
                     case "Pezca":
@@ -451,6 +456,26 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 if(!NoAlSpam) MessageBox.Show("Error en el envio de Notificacion."); 
             }
         }
+
+        private async void EnviarNotificacion(int click)
+        {
+            int usr = this.Key;
+            int msg = click;
+            int turno = this.Turno;
+
+            if (click == 99) 
+            {
+                try
+                {
+                    await HomeConection.InvokeAsync("EnviarNoti", usr, msg, turno);
+                }
+                catch
+                {
+                    NoAlSpam = true;
+                    if (!NoAlSpam) MessageBox.Show("Error en el envio de Notificacion.");
+                }
+            }
+        }
         #endregion
 
         #region CONSULTAR - Notificacion
@@ -459,18 +484,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region ENVIAR - Mapa
         private async void EnviarCambiosMapa()
+    {
+        string usr = this.Key.ToString();
+        string mapa = ucMapa1.ObtenerMapa();
+
+        try
         {
-            string usr = this.Key.ToString();
-            string mapa = ucMapa1.ObtenerMapa();
-
-            try
-            {
-                await HomeConection.InvokeAsync("EnviarMapa", usr, mapa);
-            }
-            catch { MessageBox.Show("Error en el envio del Mapa."); }
-
+            await HomeConection.InvokeAsync("EnviarMapa", usr, mapa);
         }
-        #endregion
+        catch { MessageBox.Show("Error en el envio del Mapa."); }
+
+    }
+    #endregion
 
         #region CONSULTAR - Mapa
         private async void ConsultarMapa()
@@ -942,6 +967,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 this.dados1.tirar();
                 this.Turno++;
                 SiguienteTurno();
+                EnviarNotificacion(99);
+                QuitarTodasLasNotis();
             }
         }
         #endregion
