@@ -113,13 +113,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
 
             #region PANTALLAS WEB
-
-
             this.pantallaWeb1.WebLoad(this.flowLayoutPanel1.Size);
             this.pantallaWeb2.WebLoad(this.flowLayoutPanel1.Size);
             this.pantallaWeb3.WebLoad(this.flowLayoutPanel1.Size);
+            this.pantallaWeb4.WebLoad(this.flowLayoutPanel1.Size);
             #endregion
-            this.pantallaWeb3.WebLoad(this.flowLayoutPanel1.Size);
+
             #endregion
 
             #region BARCOS
