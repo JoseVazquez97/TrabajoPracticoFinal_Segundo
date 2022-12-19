@@ -118,6 +118,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.pantallaWeb2.WebLoad(this.flowLayoutPanel1.Size);
             this.pantallaWeb3.WebLoad(this.flowLayoutPanel1.Size);
             #endregion
+            this.pantallaWeb3.WebLoad(this.flowLayoutPanel1.Size);
+            #endregion
 
             #region BARCOS
             this.barco1.loadBarco(ref this.recursosDisplay1);
