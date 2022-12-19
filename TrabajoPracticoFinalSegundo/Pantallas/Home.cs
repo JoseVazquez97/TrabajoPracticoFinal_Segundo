@@ -199,7 +199,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.salidaVoz.Init(stream2);
             #endregion
 
-            #endregion
 
             #region DECLARACION DEL HUB
             HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
