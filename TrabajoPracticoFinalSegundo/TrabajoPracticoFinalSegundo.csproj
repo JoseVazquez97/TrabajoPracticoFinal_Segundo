@@ -95,6 +95,7 @@
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\BotonMadera.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\BotonUno.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\Brujula.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\Comida.jpg" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\LogoEjemplo.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\Madera.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\MapaEsquina.png" />

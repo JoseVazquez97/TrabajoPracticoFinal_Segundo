@@ -34,6 +34,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.p_Madera.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\Madera.png");
             this.p_Tesoro.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\Oro.jpg");
             this.p_Balas.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\Balas.png");
+            this.p_Comida.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\Comida.jpg");
 
         }
 
@@ -57,6 +58,12 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                     aux = int.Parse(this.lbl_Balas.Text) - cant;
                     this.lbl_Balas.Text = aux.ToString();
                     break;
+
+                case "Comida":
+                    aux = int.Parse(this.lbl_Comida.Text) - cant;
+                    this.lbl_Comida.Text = aux.ToString();
+                    break;
+
             }
         }
 
@@ -79,6 +86,11 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                 case "Bala":
                     aux = int.Parse(this.lbl_Balas.Text) + cant;
                     this.lbl_Balas.Text = aux.ToString();
+                    break;
+
+                case "Comida":
+                    aux = int.Parse(this.lbl_Comida.Text) + cant;
+                    this.lbl_Comida.Text = aux.ToString();
                     break;
             }
         }
