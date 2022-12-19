@@ -9,10 +9,11 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoPracticoFinalSegundo.Clases;
 
 namespace TrabajoPracticoFinalSegundo.UserControls
 { 
-    public partial class Dados : UserControl
+    public partial class Dados : UserControl, IAjustar
     {
 
         private int tiradas;
@@ -96,11 +97,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 
             int x = Convert.ToInt32(this.Width / 2);
 
-            anim1.Location = new Point(x-70, 32);
-            anim2.Location = new Point(x+55, 32);
-
-            dado1.Location = new Point(x-65, 38);
-            dado2.Location = new Point(x+60, 38);
+            ReSize(new Size(0, 0));
         }
         #endregion
 
@@ -253,6 +250,31 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                     catch { MessageBox.Show($"Error al cargar los valores {val1} y {val2} en los dados"); }
                 }
             });
+        }
+
+        public void ReSize(Size tamanioPadre)
+        {
+            int x = 0, y = 0;
+
+            x = (this.Width * anim1.Location.X) / 334;
+            y = (this.Height * anim1.Location.Y) / 143;
+            anim1.Location = new Point(x,y);
+
+
+            x = (this.Width * anim2.Location.X) / 334;
+            y = (this.Height * anim2.Location.Y) / 143;
+            anim2.Location = new Point(x, y);
+
+
+            x = (this.Width * dado1.Location.X) / 334;
+            y = (this.Height * dado1.Location.Y) / 143;
+            dado1.Location = new Point(x, y);
+
+
+            x = (this.Width * dado2.Location.X) / 334;
+            y = (this.Height * dado2.Location.Y) / 143;
+            dado2.Location = new Point(x, y);
+
         }
     }
 }

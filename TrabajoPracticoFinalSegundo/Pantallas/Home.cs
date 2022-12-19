@@ -923,8 +923,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
 
             #region DADOS
-            int x = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
-            int y = this.flowLayoutPanel1.Height;
+            int x = Convert.ToInt32(this.flpInferior.Width / 3);
+            int y = this.flpInferior.Height;
             this.dados1.CargarTablero(x + 100, y, this.Key);
             #endregion
         }
@@ -1091,7 +1091,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 this.urnaCapitan1.Enabled = true;
                 this.urnaCapitan1.Visible = true;
-                this.urnaCapitan1.Load_UrnaCapitan(width, heigh, ref this.noti_Cap, ref this.turnero1);
+                this.urnaCapitan1.Load_UrnaCapitan(ref this.noti_Cap, ref this.turnero1);
                 this.urna1.Load_Urna(width, heigh, ref this.noti_Cap);
                 this.urna1.Enabled = false;
                 this.urna1.Visible = false;
@@ -1396,12 +1396,66 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
 
 
-        private void ReSizeFlowLPS()  //Funcion para ajustar los flp al tamaño de pantalla de los usuarios
+        private void ReSizeFlowLPS()  //Funcion para ajustar los flps al tamaño de pantalla de los usuarios
         {
             int x = 0, y = 0;
             y = (this.Height * 908) / 1080;
             x = (this.Width * 325) / 1920 ;
             flpLateralIzq.Size = new Size(x, y);
+
+
+            y = (this.Height * 133) / 1080;
+            x = (this.Width * 1478) / 1920;
+            flpInferior.Size = new Size(x, y);
+
+
+            y = (this.Height * 107) / 1080;
+            x = (this.Width * 1083) / 1920;
+            flpSuperior.Size = new Size(x, y);
+
+
+            y = (this.Height * 928) / 1080;
+            x = (this.Width * 70) / 1920;
+            flpLateralDer.Size = new Size(x, y);
+
+
+            y = (this.Height * Barco_Page.Height) / 1080;
+            x = (this.Width * Barco_Page.Width) / 1920;
+            Barco_Page.Size = new Size(x, y);
+
+            
+            y = (this.Height * barco1.Height) / 1080;
+            x = (this.Width * barco1.Width) / 1920;
+            barco1.Size = new Size(x, y);
+            barco2.Size = new Size(x, y);
+
+
+            y = (this.Height * escrutinio1.Height) / 1080;
+            x = (this.Width * escrutinio1.Width) / 1920;
+            escrutinio1.Size = new Size(x, y);
+            
+
+            y = (this.Height * recursosDisplay1.Height) / 1080;
+            x = (this.Width * recursosDisplay1.Width) / 1920;
+            recursosDisplay1.Size = new Size(x, y);
+
+
+            y = (this.Height * urnaCapitan1.Height) / 1080;
+            x = (this.Width * urnaCapitan1.Width) / 1920;
+            urnaCapitan1.Size = new Size(x, y);
+
+
+            y = (this.Height * urna1.Height) / 1080;
+            x = (this.Width * urna1.Width) / 1920;
+            urna1.Size = new Size(x, y);
+
+
+            y = (this.Height * turnero1.Height) / 1080;
+            x = (this.Width * turnero1.Width) / 1920;
+            turnero1.Size = new Size(x, y);
+
+            dados1.Size = urna1.Size;
+            dados1.Margin = urna1.Margin;
         }
     }
 }

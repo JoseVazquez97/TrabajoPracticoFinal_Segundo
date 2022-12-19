@@ -345,6 +345,7 @@
             this.Controls.Add(this.flpLateralIzq);
             this.Controls.Add(this.flpLateralDer);
             this.Controls.Add(this.flpInferior);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Home";
             this.Text = "Home";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
