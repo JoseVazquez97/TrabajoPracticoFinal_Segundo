@@ -36,9 +36,14 @@
             // 
             // btn_Ingresar
             // 
-            this.btn_Ingresar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btn_Ingresar.BackColor = System.Drawing.Color.Transparent;
+            this.btn_Ingresar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_Ingresar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Ingresar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn_Ingresar.FlatAppearance.BorderSize = 0;
+            this.btn_Ingresar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_Ingresar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btn_Ingresar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Ingresar.Font = new System.Drawing.Font("BlackPearl", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_Ingresar.ForeColor = System.Drawing.Color.Yellow;
             this.btn_Ingresar.Location = new System.Drawing.Point(584, 273);
@@ -48,6 +53,8 @@
             this.btn_Ingresar.Text = "JUGAR";
             this.btn_Ingresar.UseVisualStyleBackColor = false;
             this.btn_Ingresar.Click += new System.EventHandler(this.btn_Ingresar_Click);
+            this.btn_Ingresar.MouseLeave += new System.EventHandler(this.btn_Ingresar_MouseLeave);
+            this.btn_Ingresar.MouseHover += new System.EventHandler(this.btn_Ingresar_MouseHover);
             // 
             // btnDeveloper
             // 

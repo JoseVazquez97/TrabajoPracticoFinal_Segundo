@@ -22,6 +22,8 @@ namespace TrabajoPracticoFinalSegundo
             this.pp = new PantallaPhoto();
             pp.Show();
             pp.Visible = false;
+
+            btn_Ingresar.BackgroundImage = Image.FromFile(@"./Recursos/Iconos/BotonMadera.png");
         }
 
         private void btn_Ingresar_Click(object sender, EventArgs e)
@@ -78,6 +80,16 @@ namespace TrabajoPracticoFinalSegundo
 
 
             this.Hide();
+        }
+
+        private void btn_Ingresar_MouseHover(object sender, EventArgs e)
+        {
+            this.btn_Ingresar.Text = "Iniciar Partida";
+        }
+
+        private void btn_Ingresar_MouseLeave(object sender, EventArgs e)
+        {
+            this.btn_Ingresar.Text = "Jugar";
         }
     }
 }
