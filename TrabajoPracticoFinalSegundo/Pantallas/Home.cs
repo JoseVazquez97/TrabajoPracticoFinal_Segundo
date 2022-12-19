@@ -1416,10 +1416,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 }
             }
             
-            this.noti_Cap.Location = new Point(pantallaWeb1.Location.X + pantallaWeb1.Width, pantallaWeb1.Location.Y + 30);
-            this.noti_Carp.Location = new Point(pantallaWeb2.Location.X + pantallaWeb2.Width, pantallaWeb2.Location.Y + 30);
-            this.noti_Ar.Location = new Point(pantallaWeb3.Location.X + pantallaWeb3.Width, pantallaWeb3.Location.Y + 30);
-            this.noti_Mer.Location = new Point(pantallaWeb4.Location.X + pantallaWeb4.Width, pantallaWeb4.Location.Y + 30);
+            this.noti_Cap.Location = new Point(pantallaWeb1.Location.X + pantallaWeb1.Width, pantallaWeb1.Location.Y - 10);
+            this.noti_Carp.Location = new Point(pantallaWeb2.Location.X + pantallaWeb2.Width, pantallaWeb2.Location.Y - 10);
+            this.noti_Ar.Location = new Point(pantallaWeb3.Location.X + pantallaWeb3.Width, pantallaWeb3.Location.Y - 10);
+            this.noti_Mer.Location = new Point(pantallaWeb4.Location.X + pantallaWeb4.Width, pantallaWeb4.Location.Y - 10);
             
 
         }
