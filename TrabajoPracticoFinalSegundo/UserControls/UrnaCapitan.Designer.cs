@@ -39,9 +39,11 @@
             // btn_Norte
             // 
             this.btn_Norte.BackColor = System.Drawing.Color.Transparent;
+            this.btn_Norte.Cursor = System.Windows.Forms.Cursors.PanNorth;
             this.btn_Norte.FlatAppearance.BorderSize = 0;
-            this.btn_Norte.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Peru;
-            this.btn_Norte.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Tan;
+            this.btn_Norte.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btn_Norte.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_Norte.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_Norte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Norte.Font = new System.Drawing.Font("BlackPearl", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_Norte.Location = new System.Drawing.Point(236, 16);
@@ -55,9 +57,11 @@
             // btn_Oeste
             // 
             this.btn_Oeste.BackColor = System.Drawing.Color.Transparent;
+            this.btn_Oeste.Cursor = System.Windows.Forms.Cursors.PanEast;
             this.btn_Oeste.FlatAppearance.BorderSize = 0;
-            this.btn_Oeste.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Peru;
-            this.btn_Oeste.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Tan;
+            this.btn_Oeste.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btn_Oeste.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_Oeste.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_Oeste.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Oeste.Font = new System.Drawing.Font("BlackPearl", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_Oeste.Location = new System.Drawing.Point(278, 51);
@@ -71,9 +75,11 @@
             // btn_Este
             // 
             this.btn_Este.BackColor = System.Drawing.Color.Transparent;
+            this.btn_Este.Cursor = System.Windows.Forms.Cursors.PanWest;
             this.btn_Este.FlatAppearance.BorderSize = 0;
-            this.btn_Este.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Peru;
-            this.btn_Este.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Tan;
+            this.btn_Este.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btn_Este.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_Este.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_Este.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Este.Font = new System.Drawing.Font("BlackPearl", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_Este.Location = new System.Drawing.Point(198, 51);
@@ -87,9 +93,11 @@
             // btn_Sur
             // 
             this.btn_Sur.BackColor = System.Drawing.Color.Transparent;
+            this.btn_Sur.Cursor = System.Windows.Forms.Cursors.PanSouth;
             this.btn_Sur.FlatAppearance.BorderSize = 0;
-            this.btn_Sur.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Peru;
-            this.btn_Sur.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Tan;
+            this.btn_Sur.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btn_Sur.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_Sur.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_Sur.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Sur.Font = new System.Drawing.Font("BlackPearl", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_Sur.Location = new System.Drawing.Point(236, 93);
@@ -115,6 +123,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.btn_Sur);
             this.Controls.Add(this.btn_Oeste);
             this.Controls.Add(this.btn_Este);

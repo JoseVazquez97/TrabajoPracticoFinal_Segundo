@@ -31,6 +31,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.turn = turnero;
             this.pbBrujula.Image = Image.FromFile(@".\Recursos\Iconos\Brujula.png");
             this.pbBrujula.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\Brujula.png");
+            this.BackgroundImage = Image.FromFile(@"./Recursos/Iconos/MapaEsquina.png");
             ReSize();
             
             int x = pbBrujula.Location.X, y = pbBrujula.Location.Y;
