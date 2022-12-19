@@ -37,6 +37,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public void WebLoad(Size x)
         {
             pictureBox1.Image = Image.FromFile(@".\Recursos\Iconos\LogoEjemplo.png");
+            ReSize(x);
         }
 
 
@@ -113,8 +114,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             int yPantallaWb = y;
 
             this.Size = new Size(xPantallaWb, yPantallaWb);
-            this.pictureBox1.Size = new Size(xPantallaWb - 10, yPantallaWb - 10);
-            this.pictureBox1.Location = new Point(5,5);
+            this.pictureBox1.Size = new Size(xPantallaWb - 30, yPantallaWb - 30);
+            this.pictureBox1.Location = new Point(15,15);
         }
     }
 }
