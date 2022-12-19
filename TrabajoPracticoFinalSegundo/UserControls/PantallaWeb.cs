@@ -10,11 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using TrabajoPracticoFinalSegundo.Clases;
 
 namespace TrabajoPracticoFinalSegundo.UserControls
 {
-    public partial class PantallaWeb : UserControl
+    public partial class PantallaWeb : UserControl, IAjustar
     {
         private Mat frame;
         private VideoCapture camara;
@@ -102,6 +102,19 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
             g.Dispose();
             return (System.Drawing.Image)b;
+        }
+
+        public void ReSize(Size tamanioPadre)
+        {
+            int x = tamanioPadre.Width;
+            int y = tamanioPadre.Height;
+
+            int xPantallaWb = (x / 4)-10; //Seran un cuarto del tamaño de donde estan, y tendran 10 pixeles despacio entre ellos mismos
+            int yPantallaWb = y;
+
+            this.Size = new Size(xPantallaWb, yPantallaWb);
+            this.pictureBox1.Size = new Size(xPantallaWb - 10, yPantallaWb - 10);
+            this.pictureBox1.Location = new Point(5,5);
         }
     }
 }
