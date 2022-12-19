@@ -31,6 +31,7 @@ using System.Runtime.CompilerServices;
 using System.Media;
 using System.Diagnostics.Metrics;
 using NAudio.Wave;
+using System.Diagnostics;
 
 namespace TrabajoPracticoFinalSegundo.Pantallas
 {
@@ -53,6 +54,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private string eventoRandom;
         private int desCap;
         private int desicion;
+        private int quien;
 
         private bool accionFlag; //Flag de danio
         private bool eFlag; //Flag de evento random
@@ -71,6 +73,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private WaveOut salidaVoz = new WaveOut();
         private WaveStream stream2;
+       
 
         #endregion
 
@@ -94,11 +97,9 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.batallaFlag = false;
             this.votaFlag = true;
             this.desicion = 0;
+            this.quien = 0;
             this.eventoRandom = "I";
             #endregion
-
-
-            MessageBox.Show($"Ancho: {this.Width}; Alto: {this.Height}");
 
             #region LOADS DE COMPONENTES 
 
@@ -112,13 +113,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
 
             #region PANTALLAS WEB
-
-
             this.pantallaWeb1.WebLoad(this.flowLayoutPanel1.Size);
             this.pantallaWeb2.WebLoad(this.flowLayoutPanel1.Size);
             this.pantallaWeb3.WebLoad(this.flowLayoutPanel1.Size);
+            this.pantallaWeb4.WebLoad(this.flowLayoutPanel1.Size);
             #endregion
-            this.pantallaWeb3.WebLoad(this.flowLayoutPanel1.Size);
+
             #endregion
 
             #region BARCOS
@@ -140,8 +140,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
 
             #endregion
-
-
 
             #region NOTIFICADORES
             Point locati;
@@ -198,6 +196,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.salidaVoz.Volume = 0.5f;
             this.salidaVoz.Init(stream2);
             #endregion
+
 
 
             #region DECLARACION DEL HUB
@@ -1291,9 +1290,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #region BARCO
-        private void spawnearBarco()
-        {
 
+        private void daniarBarco() 
+        {
+            this.barco2.RecibirDanio(10);
+            this.quien = 0;
+            this.desicion = 0;
+        }
+
+        private void recargarBarco() 
+        {
+            this.quien = 0;
+            this.desicion = 0;
         }
 
         #endregion
@@ -1315,22 +1323,66 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #endregion
 
-        #region
+        #region ACCION DADOS
         private void EjecutarAccion() 
         {
             if (this.dados1.LISTO)
             {
                 this.dados1.LISTO = false;
 
-                switch (this.desicion) 
+                if (this.desicion != 0 && this.quien != 0) 
                 {
-                    case 1:
-                        this.barco2.RecibirDanio(10);
-                        break;
+                    switch (this.quien) 
+                    {
+                        case 1:
+                            switch (this.desicion) 
+                            {
+                                case 1:
+                                    daniarBarco();
+                                    break;
 
-                    case 2:
-                        this.barco1.Recargar();
-                        break;
+                                case 2:
+                                    recargarBarco();
+                                    break;
+                            }
+                            break;
+                        case 2:
+                            switch (this.desicion)
+                            {
+                                case 1:
+                                    daniarBarco();
+                                    break;
+
+                                case 2:
+                                    recargarBarco();
+                                    break;
+                            }
+                            break;
+                        case 3:
+                            switch (this.desicion)
+                            {
+                                case 1:
+                                    daniarBarco();
+                                    break;
+
+                                case 2:
+                                    recargarBarco();
+                                    break;
+                            }
+                            break;
+                        case 4:
+                            switch (this.desicion)
+                            {
+                                case 1:
+                                    daniarBarco();
+                                    break;
+
+                                case 2:
+                                    recargarBarco();
+                                    break;
+                            }
+                            break;
+                    }
                 }
             }
         }
