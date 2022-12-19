@@ -111,11 +111,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 this.Barco_Page.SelectTab(0);
                 #endregion
 
-                #region PANTALLAS WEB
-                this.pantallaWeb1.WebLoad();
-                this.pantallaWeb2.WebLoad();
-                this.pantallaWeb3.WebLoad();
-                #endregion
+            #region PANTALLAS WEB
+
+
+            this.pantallaWeb1.WebLoad(this.flowLayoutPanel1.Size);
+            this.pantallaWeb2.WebLoad(this.flowLayoutPanel1.Size);
+            this.pantallaWeb3.WebLoad(this.flowLayoutPanel1.Size);
+            #endregion
+            this.pantallaWeb3.WebLoad(this.flowLayoutPanel1.Size);
+            #endregion
 
                 #region BARCOS
                 this.barco1.loadBarco(ref this.recursosDisplay1);
