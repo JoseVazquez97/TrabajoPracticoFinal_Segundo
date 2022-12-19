@@ -110,12 +110,12 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             int x = tamanioPadre.Width;
             int y = tamanioPadre.Height;
 
-            int xPantallaWb = (x / 4)-10; //Seran un cuarto del tamaño de donde estan, y tendran 10 pixeles despacio entre ellos mismos
-            int yPantallaWb = y;
+            x = (x * 249) / 325;
+            y = (y * 200) / 928;
 
-            this.Size = new Size(xPantallaWb, yPantallaWb);
-            this.pictureBox1.Size = new Size(xPantallaWb - 30, yPantallaWb - 30);
-            this.pictureBox1.Location = new Point(15,15);
+            
+
+            this.Size = new Size(x, y);
         }
     }
 }

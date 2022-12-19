@@ -102,21 +102,21 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
 
             #region LOADS DE COMPONENTES 
-
+            ReSizeFlowLPS();
             #region FONDOS
             this.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\Madera.jpg");
             Navio_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\FondoHomeDos.jpg");
             Navegacion_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\mapax.png");
-            int loc1 = this.flowLayoutPanel2.Width;
-            int loc2 = this.flowLayoutPanel4.Height;
+            int loc1 = this.flpLateralIzq.Width;
+            int loc2 = this.flpSuperior.Height;
             this.Barco_Page.SelectTab(0);
             #endregion
 
             #region PANTALLAS WEB
-            this.pantallaWeb1.WebLoad(this.flowLayoutPanel1.Size);
-            this.pantallaWeb2.WebLoad(this.flowLayoutPanel1.Size);
-            this.pantallaWeb3.WebLoad(this.flowLayoutPanel1.Size);
-            this.pantallaWeb4.WebLoad(this.flowLayoutPanel1.Size);
+            this.pantallaWeb1.WebLoad(this.flpLateralIzq.Size);
+            this.pantallaWeb2.WebLoad(this.flpLateralIzq.Size);
+            this.pantallaWeb3.WebLoad(this.flpLateralIzq.Size);
+            this.pantallaWeb4.WebLoad(this.flpLateralIzq.Size);
             #endregion
 
             #endregion
@@ -128,8 +128,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
 
             #region BARRA (INFERIOR)
-            int x = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
-            int y = this.flowLayoutPanel1.Height;
+            int x = Convert.ToInt32(this.flpInferior.Width / 3);
+            int y = this.flpInferior.Height;
 
             #region TURNERO
             this.turnero1.LoadTurnero(x, y);
@@ -143,7 +143,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             #region NOTIFICADORES
             Point locati;
-            this.flowLayoutPanel2.Parent = this;
+            this.flpLateralIzq.Parent = this;
 
             this.noti_Cap.Load_Notificador();
             this.noti_Cap.Visible = false;
@@ -173,16 +173,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             #region ESCRUTINIO
             //FlowLayout4 (Recursos y escrutinio)
-            this.flowLayoutPanel4.Padding = new System.Windows.Forms.Padding() { Left = this.flowLayoutPanel4.Width / 3 + 100 };
+            this.flpSuperior.Padding = new System.Windows.Forms.Padding() { Left = this.flpSuperior.Width / 3 + 100 };
 
 
             this.Turno = turnero1.getTurno();
-            this.escrutinio1.loadEscrutinio(this.flowLayoutPanel4.Width);
+            this.escrutinio1.loadEscrutinio(this.flpSuperior.Width);
             this.escrutinio1.Visible = false;
             #endregion
 
             #region RECURSOS Y CAMBIOS DE PAG
-            this.recursosDisplay1.LoadRecursos(flowLayoutPanel4.Width, flowLayoutPanel4.Height);
+            this.recursosDisplay1.LoadRecursos(flpSuperior.Width, flpSuperior.Height);
             #endregion
 
             #region MUSICA
@@ -1108,8 +1108,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void loadUrnas(bool x) //Funcion para hacer los componentes del hud responsivos.
         {
-            int width = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
-            int heigh = this.flowLayoutPanel1.Height;
+            int width = Convert.ToInt32(this.flpInferior.Width / 3);
+            int heigh = this.flpInferior.Height;
 
             if (x)
             {
@@ -1417,5 +1417,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #endregion
+
+
+
+        private void ReSizeFlowLPS()  //Funcion para ajustar los flp al tamaño de pantalla de los usuarios
+        {
+            int x = 0, y = 0;
+            y = (this.Height * 908) / 1080;
+            x = (this.Width * 325) / 1920 ;
+            flpLateralIzq.Size = new Size(x, y);
+        }
     }
 }
