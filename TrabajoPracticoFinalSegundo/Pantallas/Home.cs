@@ -71,7 +71,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private WaveOut salidaVoz = new WaveOut();
         private WaveStream stream2;
-        
+
         #endregion
 
         public Home()
@@ -97,102 +97,108 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.eventoRandom = "I";
             #endregion
 
-            int x = (this.Width / 2);
-            int y = (this.Height / 2);
+
+            MessageBox.Show($"Ancho: {this.Width}; Alto: {this.Height}");
 
             #region LOADS DE COMPONENTES 
 
-                #region FONDOS
-                this.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\Madera.jpg");
-                Navio_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\FondoHomeDos.jpg");
-                Navegacion_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\mapax.png");
-                int loc1 = this.flowLayoutPanel2.Width;
-                int loc2 = this.flowLayoutPanel4.Height;
-                this.Barco_Page.SelectTab(0);
-                #endregion
+            #region FONDOS
+            this.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\Madera.jpg");
+            Navio_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\FondoHomeDos.jpg");
+            Navegacion_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\mapax.png");
+            int loc1 = this.flowLayoutPanel2.Width;
+            int loc2 = this.flowLayoutPanel4.Height;
+            this.Barco_Page.SelectTab(0);
+            #endregion
 
-                #region PANTALLAS WEB
-                this.pantallaWeb1.WebLoad();
-                this.pantallaWeb2.WebLoad();
-                this.pantallaWeb3.WebLoad();
-                #endregion
-
-                #region BARCOS
-                this.barco1.loadBarco(ref this.recursosDisplay1);
-                this.barco2.loadBarcoEnemigo();
-                this.barco2.Visible = false;
-                #endregion
-
-                #region BARRA (INFERIOR)
-                x = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
-                y = this.flowLayoutPanel1.Height;
-                #endregion
-
-                #region TURNERO
-                this.turnero1.LoadTurnero(x, y);
-                #endregion
-
-                #region DADOS
-                this.dados1.CargarTablero(x + 100, y);
-                #endregion
-
-                #region NOTIFICADORES
-                Point locati;
-                this.flowLayoutPanel2.Parent = this;
-
-                this.noti_Cap.Load_Notificador();
-                this.noti_Cap.Visible = false;
-                this.noti_Cap.Parent = this;
-                locati = this.pantallaWeb1.Location;
-                this.noti_Cap.Location = new Point(locati.X + 255, locati.Y + 20);
-
-                this.noti_Carp.Load_Notificador();
-                this.noti_Carp.Visible = true;
-                this.noti_Carp.Parent = this;
-                locati = this.pantallaWeb2.Location;
-                this.noti_Carp.Location = new Point(locati.X + 255, locati.Y + 20);
-                this.noti_Carp.Mensaje("Ordenes capitan!");
-
-                this.noti_Mer.Load_Notificador();
-                this.noti_Mer.Visible = false;
-                this.noti_Mer.Parent = this;
-                locati = this.pantallaWeb3.Location;
-                this.noti_Mer.Location = new Point(locati.X + 255, locati.Y + 20);
-
-                this.noti_Ar.Load_Notificador();
-                this.noti_Ar.Visible = false;
-                this.noti_Ar.Parent = this;
-                locati = this.pantallaWeb4.Location;
-                this.noti_Ar.Location = new Point(locati.X + 255, locati.Y + 20);
-                #endregion
-
-                #region ESCRUTINIO
-                //FlowLayout4 (Recursos y escrutinio)
-                this.flowLayoutPanel4.Padding = new System.Windows.Forms.Padding() { Left = this.flowLayoutPanel4.Width / 3 + 100 };
+            #region PANTALLAS WEB
 
 
-                this.Turno = turnero1.getTurno();
-                this.escrutinio1.loadEscrutinio(this.flowLayoutPanel4.Width);
-                this.escrutinio1.Visible = false;
-                #endregion
+            this.pantallaWeb1.WebLoad(this.flowLayoutPanel1.Size);
+            this.pantallaWeb2.WebLoad(this.flowLayoutPanel1.Size);
+            this.pantallaWeb3.WebLoad(this.flowLayoutPanel1.Size);
+            #endregion
+            this.pantallaWeb3.WebLoad(this.flowLayoutPanel1.Size);
+            #endregion
 
-                #region RECURSOS Y CAMBIOS DE PAG
-                this.recursosDisplay1.LoadRecursos(flowLayoutPanel4.Width, flowLayoutPanel4.Height);
-                #endregion
+            #region BARCOS
+            this.barco1.loadBarco(ref this.recursosDisplay1);
+            this.barco2.loadBarcoEnemigo();
+            this.barco2.Visible = false;
+            #endregion
 
-                #region MUSICA
-                this.stream1 = new AudioFileReader(@".\Recursos\Musica\elBueno.wav");
-                this.salidaFondo = new();
-                this.salidaFondo.Volume = 0.5f;
-                this.salidaFondo.Init(stream1);
+            #region BARRA (INFERIOR)
+            int x = Convert.ToInt32(this.flowLayoutPanel1.Width / 3);
+            int y = this.flowLayoutPanel1.Height;
 
-                this.stream2 = new AudioFileReader(@".\Recursos\Musica\yohoho.wav");
-                this.salidaVoz = new();
-                this.salidaVoz.Volume = 0.5f;
-                this.salidaVoz.Init(stream2);
-                #endregion
+            #region TURNERO
+            this.turnero1.LoadTurnero(x, y);
+            #endregion
+
+            #region DADOS
+            this.dados1.CargarTablero(x + 100, y);
+            #endregion
 
             #endregion
+
+
+
+            #region NOTIFICADORES
+            Point locati;
+            this.flowLayoutPanel2.Parent = this;
+
+            this.noti_Cap.Load_Notificador();
+            this.noti_Cap.Visible = false;
+            this.noti_Cap.Parent = this;
+            locati = this.pantallaWeb1.Location;
+            this.noti_Cap.Location = new Point(locati.X + 255, locati.Y + 20);
+
+            this.noti_Carp.Load_Notificador();
+            this.noti_Carp.Visible = true;
+            this.noti_Carp.Parent = this;
+            locati = this.pantallaWeb2.Location;
+            this.noti_Carp.Location = new Point(locati.X + 255, locati.Y + 20);
+            this.noti_Carp.Mensaje("Ordenes capitan!");
+
+            this.noti_Mer.Load_Notificador();
+            this.noti_Mer.Visible = false;
+            this.noti_Mer.Parent = this;
+            locati = this.pantallaWeb3.Location;
+            this.noti_Mer.Location = new Point(locati.X + 255, locati.Y + 20);
+
+            this.noti_Ar.Load_Notificador();
+            this.noti_Ar.Visible = false;
+            this.noti_Ar.Parent = this;
+            locati = this.pantallaWeb4.Location;
+            this.noti_Ar.Location = new Point(locati.X + 255, locati.Y + 20);
+            #endregion
+
+            #region ESCRUTINIO
+            //FlowLayout4 (Recursos y escrutinio)
+            this.flowLayoutPanel4.Padding = new System.Windows.Forms.Padding() { Left = this.flowLayoutPanel4.Width / 3 + 100 };
+
+
+            this.Turno = turnero1.getTurno();
+            this.escrutinio1.loadEscrutinio(this.flowLayoutPanel4.Width);
+            this.escrutinio1.Visible = false;
+            #endregion
+
+            #region RECURSOS Y CAMBIOS DE PAG
+            this.recursosDisplay1.LoadRecursos(flowLayoutPanel4.Width, flowLayoutPanel4.Height);
+            #endregion
+
+            #region MUSICA
+            this.stream1 = new AudioFileReader(@".\Recursos\Musica\elBueno.wav");
+            this.salidaFondo = new();
+            this.salidaFondo.Volume = 0.5f;
+            this.salidaFondo.Init(stream1);
+
+            this.stream2 = new AudioFileReader(@".\Recursos\Musica\yohoho.wav");
+            this.salidaVoz = new();
+            this.salidaVoz.Volume = 0.5f;
+            this.salidaVoz.Init(stream2);
+            #endregion
+
 
             #region DECLARACION DEL HUB
             HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
@@ -221,7 +227,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     #region EJECUCION cada 100ms durante ORDEN
                     case "Orden":
                         #region LISTO
-                        if (!this.fotoFlag) 
+                        if (!this.fotoFlag)
                         {
                             this.fotoFlag = true;
                             EnviarPathX();
@@ -266,24 +272,24 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                             SwitchEscrutinio(false);
                         }
-
                         break;
                     #endregion
 
                     #region EJECUCION cada 100ms durante BATALLA
                     case "Batalla":
-                        if (this.batallaFlag == false) 
+                        if (this.batallaFlag == false)
                         {
                             this.batallaFlag = true;
                             this.barco2.Visible = true;
                             SwitchEscrutinio(false);
                         }
 
+                        EjecutarAccion();
                         EnviarDadosCL();
 
                         break;
+                        #endregion
                 }
-                #endregion
             }
         }
         #endregion
@@ -293,7 +299,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void ImpactarAccion(int quien, int noti, int turno)
         {
-            if (noti != 0) 
+            if (noti != 0)
             {
                 switch (this.eventoActual)
                 {
@@ -349,13 +355,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         break;
 
                     case "Batalla":
-                        if (!this.batallaFlag) 
+                        if (!this.batallaFlag)
                         {
-                            SwitchEscrutinio(false);
                             this.batallaFlag = true;
+                            SwitchEscrutinio(false);
                         }
 
-                        if (quien == this.Key) 
+                        if (quien != this.Key)
                         {
                             this.desicion = noti;
                         }
@@ -368,21 +374,23 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             case 1:
 
                                 break;
+
                             case 2:
 
                                 break;
+
                             case 3:
 
                                 break;
+
                             case 4:
 
                                 break;
-
                         }
                         break;
                 }
             }
-            
+
         }
         #endregion
 
@@ -428,7 +436,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 if (this.eventoActual == "Orden")
                 {
                     msg = this.urnaCapitan1.ConsultarDesicion();
-                    this.urnaCapitan1.ReiniciarDesicion();   
+                    this.urnaCapitan1.ReiniciarDesicion();
                 }
                 else
                 {
@@ -436,7 +444,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     this.urna1.reiniciarVoto();
                 }
             }
-            else 
+            else
             {
                 msg = this.urna1.ConsultarVoto();
                 this.urna1.reiniciarVoto();
@@ -541,7 +549,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #region ENVIAR - Evento
         private async void EnviarEventoX()
         {
-            if (this.Key == 1) 
+            if (this.Key == 1)
             {
                 string eventox = this.eventoRandom;
                 int rol = this.Key;
@@ -552,19 +560,19 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 }
                 catch { MessageBox.Show("Error en el envio del Evento."); }
             }
-            
+
         }
         #endregion
 
         #region ENVIAR - Barcos
-        private async void EnviarEB() 
+        private async void EnviarEB()
         {
             string b1 = this.barco1.ConsultarEstado();
             string b2 = this.barco2.ConsultarEstado();
 
             try
             {
-                await HomeConection.InvokeAsync("EnviarBarcos",b1,b2);
+                await HomeConection.InvokeAsync("EnviarBarcos", b1, b2);
             }
             catch { MessageBox.Show("Error en la consulta del Ev"); }
         }
@@ -609,7 +617,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<string, string>("RecibirPath", (quien, path) =>
             {
-                
+
                 if (int.Parse(quien) != this.Key)
                 {
                     switch (quien)
@@ -644,7 +652,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             break;
                     }
                 }
-                else 
+                else
                 {
                     ConsultarPathX();
                 }
@@ -659,7 +667,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 {
                     if (paths[i] != "0")
                     {
-                        switch (i) 
+                        switch (i)
                         {
                             case 0:
                                 try
@@ -695,7 +703,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         }
                     }
                 }
-                
+
 
             });
 
@@ -703,11 +711,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
 
             #region MAPA-COM
-                HomeConection.On<string, string>("RecibirMapa", (key, mapa) =>
-            {
-                
-            });
-            
+            HomeConection.On<string, string>("RecibirMapa", (key, mapa) =>
+        {
+
+        });
+
             HomeConection.On<string>("RecibirCMapa", (mapa) =>
             {
                 try
@@ -727,7 +735,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<string, string>("RecibirCDados", (val1, val2) =>
             {
-                if (this.dados1.LISTO) 
+                if (this.dados1.LISTO)
                 {
                     try
                     {
@@ -735,7 +743,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     }
                     catch { MessageBox.Show($"Error al cargar los valores {val1} y {val2} en los dados"); }
                 }
-                
+
             });
             #endregion
 
@@ -758,7 +766,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         catch { MessageBox.Show("No pudo mostrarse el mapa"); }
                     }
 
-                    if (this.Key == 1) 
+                    if (this.Key == 1)
                     {
                         this.eventoRandom = enventoRandom();
                         if (this.eventoFlag == false)
@@ -776,7 +784,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<int, string>("RecibirEvento", (rol, val1) =>
             {
-                if (rol == 1) 
+                if (rol == 1)
                 {
                     switch (val1)
                     {
@@ -790,7 +798,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             break;
                     }
                 }
-                
+
             });
             #endregion
 
@@ -819,11 +827,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
 
             #region NOTI-COM
-            HomeConection.On<int, int, int>("RecibirNoti", (quien,noti,turno) =>
+            HomeConection.On<int, int, int>("RecibirNoti", (quien, noti, turno) =>
             {
                 ImpactarAccion(quien, noti, turno);
 
-                if (noti != 0) 
+                if (noti != 0)
                 {
                     switch (quien)
                     {
@@ -842,7 +850,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                     }
                 }
-                
+
             });
             #endregion
 
@@ -946,7 +954,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             int v1I = int.Parse(v1);
             int V2I = int.Parse(v2);
 
-            switch (this.eventoActual) 
+            switch (this.eventoActual)
             {
                 case "Batalla":
                     try
@@ -1020,7 +1028,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     try
                     {
                         noti_Ar.Invoke(new Action(() => { noti_Ar.Visible = visible; }));
-                        if(visible) Voz();
+                        if (visible) Voz();
                     }
                     catch { }
                     break;
@@ -1032,40 +1040,40 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             switch (quien)
             {
                 case 1:
-                        try
+                    try
+                    {
+                        if (this.eventoActual == "Votacion")
                         {
-                            if (this.eventoActual == "Votacion")
-                            {
-                                this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmadoCap(x)));
-                            }
-                            else 
-                            {
-                                this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmado(quien,x, this.eventoActual)));
-                            }
+                            this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmadoCap(x)));
                         }
-                        catch { }
+                        else
+                        {
+                            this.noti_Cap.Invoke(new Action(() => noti_Cap.MensajeArmado(quien, x, this.eventoActual)));
+                        }
+                    }
+                    catch { }
                     break;
 
                 case 2:
-                        try
-                        {
-                            this.noti_Carp.Invoke(new Action(() => noti_Carp.MensajeArmado(quien,x, this.eventoActual)));
-                        }
-                        catch { }
+                    try
+                    {
+                        this.noti_Carp.Invoke(new Action(() => noti_Carp.MensajeArmado(quien, x, this.eventoActual)));
+                    }
+                    catch { }
                     break;
                 case 3:
-                        try
-                        {
-                            this.noti_Mer.Invoke(new Action(() => noti_Mer.MensajeArmado(quien,x, this.eventoActual)));
-                        }
-                        catch { }
+                    try
+                    {
+                        this.noti_Mer.Invoke(new Action(() => noti_Mer.MensajeArmado(quien, x, this.eventoActual)));
+                    }
+                    catch { }
                     break;
                 case 4:
-                        try
-                        {
-                            this.noti_Ar.Invoke(new Action(() => noti_Ar.MensajeArmado(quien,x, this.eventoActual)));
-                        }
-                        catch { }
+                    try
+                    {
+                        this.noti_Ar.Invoke(new Action(() => noti_Ar.MensajeArmado(quien, x, this.eventoActual)));
+                    }
+                    catch { }
                     break;
             }
             SpawnearNoti(quien, true);
@@ -1220,7 +1228,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region EVENTO-RANDOM
 
-        private string enventoRandom() 
+        private string enventoRandom()
         {
             string eventoX = "0";
             Random x = new Random();
@@ -1235,7 +1243,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 case "F":
                     return "F";
                 case "M1":
-                    switch (2) 
+                    switch (2)
                     {
                         case 1:
                             eventoX = "M10";
@@ -1283,7 +1291,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #region BARCO
-        private void spawnearBarco() 
+        private void spawnearBarco()
         {
 
         }
@@ -1292,17 +1300,39 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region MUSICA
 
-        private void DalePower() 
+        private void DalePower()
         {
             if (this.salidaFondo.PlaybackState is PlaybackState.Playing) salidaFondo.Stop();
             stream1.CurrentTime = new TimeSpan(0L);
             this.salidaFondo.Play();
         }
-        private void Voz() 
+        private void Voz()
         {
             if (this.salidaVoz.PlaybackState is PlaybackState.Playing) salidaVoz.Stop();
             stream2.CurrentTime = new TimeSpan(0L);
             this.salidaVoz.Play();
+        }
+
+        #endregion
+
+        #region
+        private void EjecutarAccion() 
+        {
+            if (this.dados1.LISTO)
+            {
+                this.dados1.LISTO = false;
+
+                switch (this.desicion) 
+                {
+                    case 1:
+                        this.barco2.RecibirDanio(10);
+                        break;
+
+                    case 2:
+                        this.barco1.Recargar();
+                        break;
+                }
+            }
         }
 
         #endregion

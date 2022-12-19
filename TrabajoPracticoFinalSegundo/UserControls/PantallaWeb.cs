@@ -34,7 +34,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             frame = new Mat();
         }
 
-        public void WebLoad()
+        public void WebLoad(Size x)
         {
             pictureBox1.Image = Image.FromFile(@".\Recursos\Iconos\LogoEjemplo.png");
         }
