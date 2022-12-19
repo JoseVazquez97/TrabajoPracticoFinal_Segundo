@@ -66,15 +66,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private bool votaFlag;
         private bool eventoFlag;
         private bool NoAlSpam;
-
+        private bool barcoFlag;
 
         private WaveOut salidaFondo = new WaveOut();
         private WaveStream stream1;
 
         private WaveOut salidaVoz = new WaveOut();
         private WaveStream stream2;
-        
-
 
         #endregion
 
@@ -351,7 +349,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             this.batallaFlag = true;
                             SwitchEscrutinio(false);
                         }
-
                         if (quien != this.Key)
                         {
                             this.desicion = noti;
@@ -756,6 +753,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         try
                         {
                             this.ucMapa1.Invoke(new Action(() => this.ucMapa1.Movimiento(x)));
+                            this.recursosDisplay1.Invoke(new Action(() => this.recursosDisplay1.extraerRecurso("Comida", 1)));
                             QuitarTodasLasNotis();
                         }
                         catch { MessageBox.Show("No pudo mostrarse el mapa"); }
@@ -1422,8 +1420,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #endregion
-
-
 
         private void ReSizeFormControls()  //Funcion para ajustar controles al tamaño de pantalla del usuario
         {

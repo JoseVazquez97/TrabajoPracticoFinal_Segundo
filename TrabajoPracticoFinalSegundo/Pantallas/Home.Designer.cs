@@ -82,6 +82,8 @@
             // 
             // urnaCapitan1
             // 
+            this.urnaCapitan1.BackColor = System.Drawing.Color.Transparent;
+            this.urnaCapitan1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.urnaCapitan1.Location = new System.Drawing.Point(3, 6);
             this.urnaCapitan1.Name = "urnaCapitan1";
             this.urnaCapitan1.Size = new System.Drawing.Size(510, 124);
@@ -110,7 +112,7 @@
             // turnero1
             // 
             this.turnero1.BackColor = System.Drawing.Color.Green;
-            this.turnero1.Location = new System.Drawing.Point(1460, 6);
+            this.turnero1.Location = new System.Drawing.Point(1026, 6);
             this.turnero1.Margin = new System.Windows.Forms.Padding(0);
             this.turnero1.Name = "turnero1";
             this.turnero1.Size = new System.Drawing.Size(550, 127);
@@ -240,7 +242,7 @@
             this.recursosDisplay1.Location = new System.Drawing.Point(389, 0);
             this.recursosDisplay1.Margin = new System.Windows.Forms.Padding(0);
             this.recursosDisplay1.Name = "recursosDisplay1";
-            this.recursosDisplay1.Size = new System.Drawing.Size(356, 104);
+            this.recursosDisplay1.Size = new System.Drawing.Size(384, 104);
             this.recursosDisplay1.TabIndex = 0;
             // 
             // Update500ms
@@ -296,7 +298,7 @@
             // barco2
             // 
             this.barco2.BackColor = System.Drawing.Color.Transparent;
-            this.barco2.Location = new System.Drawing.Point(703, -31);
+            this.barco2.Location = new System.Drawing.Point(703, 68);
             this.barco2.Name = "barco2";
             this.barco2.Size = new System.Drawing.Size(366, 607);
             this.barco2.TabIndex = 1;
