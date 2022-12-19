@@ -88,6 +88,7 @@
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "Dados";
             this.Size = new System.Drawing.Size(323, 143);
+            this.Load += new System.EventHandler(this.Dados_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dado1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dado2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.anim1)).EndInit();

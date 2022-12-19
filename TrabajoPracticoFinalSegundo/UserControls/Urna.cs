@@ -108,34 +108,45 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         {
             this.tipo = "Batalla";
 
-            switch (rol) 
+            try
             {
-                case 1:
-                    this.btn_Si.Text = "Disparar!";
-                    this.btn_No.Text = "Huir";
-                    break;
 
-                case 2:
-                    this.btn_Si.Text = "Reparar!";
-                    this.btn_No.Text = "Recargar";
-                    break;
+                switch (rol) 
+                {
+                    case 1:
+                        this.btn_Si.Invoke(new Action(() => btn_Si.Text = "Disparar!"));
+                        this.btn_No.Invoke(new Action(() => btn_No.Text = "Huir!"));
+                        break;
 
-                case 3:
-                    this.btn_Si.Text = "Parley!";
-                    this.btn_No.Text = "Recargar";
-                    break;
+                    case 2:
+                        this.btn_Si.Invoke(new Action(() => btn_Si.Text = "Reparar!"));
+                        this.btn_No.Invoke(new Action(() => btn_No.Text = "Recargar!"));
+                        break;
 
-                case 4:
-                    this.btn_Si.Text = "Disparar!";
-                    this.btn_No.Text = "Recargar";
-                    break;
-            }
+                    case 3:
+                        this.btn_Si.Invoke(new Action(() => btn_Si.Text = "Parley!"));
+                        this.btn_No.Invoke(new Action(() => btn_No.Text = "Recargar!"));
+                        break;
+
+                    case 4:
+                        this.btn_Si.Invoke(new Action(() => btn_Si.Text = "Disparar!"));
+                        this.btn_No.Invoke(new Action(() => btn_No.Text = "Recargar!"));
+                        break;
+                }
 
             
-            this.btn_No.Visible = false;
-            this.btn_Si.Width = this.Width / 2;
+                this.btn_No.Visible = true;
+                this.btn_Si.Width = this.Width / 3;
+                this.btn_No.Width = this.Width / 3;
 
-            this.notificador.Mensaje("Estoy Listo!");
+                int x = this.Width / 2;
+
+                btn_Si.Location = new Point(x - 150, 0);
+                btn_No.Location = new Point(x + 150, 0);
+
+                this.notificador.Mensaje("Estoy Listo!");
+
+            }catch { MessageBox.Show("Error en la asignacion de mensajes Urna1"); }
         }
         #endregion
 
