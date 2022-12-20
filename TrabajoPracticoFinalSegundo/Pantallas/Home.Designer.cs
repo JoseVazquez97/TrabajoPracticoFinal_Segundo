@@ -32,7 +32,6 @@
             this.flpInferior = new System.Windows.Forms.FlowLayoutPanel();
             this.urnaCapitan1 = new TrabajoPracticoFinalSegundo.UserControls.UrnaCapitan();
             this.urna1 = new TrabajoPracticoFinalSegundo.UserControls.Urna();
-            this.dados1 = new TrabajoPracticoFinalSegundo.UserControls.Dados();
             this.turnero1 = new TrabajoPracticoFinalSegundo.UserControls.Turnero();
             this.flpLateralIzq = new System.Windows.Forms.FlowLayoutPanel();
             this.pantallaWeb1 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
@@ -67,7 +66,6 @@
             this.flpInferior.BackColor = System.Drawing.Color.Transparent;
             this.flpInferior.Controls.Add(this.urnaCapitan1);
             this.flpInferior.Controls.Add(this.urna1);
-            this.flpInferior.Controls.Add(this.dados1);
             this.flpInferior.Controls.Add(this.turnero1);
             this.flpInferior.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flpInferior.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
@@ -94,17 +92,6 @@
             this.urna1.Name = "urna1";
             this.urna1.Size = new System.Drawing.Size(510, 127);
             this.urna1.TabIndex = 2;
-            // 
-            // dados1
-            // 
-            this.dados1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dados1.LISTO = false;
-            this.dados1.Location = new System.Drawing.Point(1076, -13);
-            this.dados1.Margin = new System.Windows.Forms.Padding(50, 3, 50, 3);
-            this.dados1.Name = "dados1";
-            this.dados1.Size = new System.Drawing.Size(334, 143);
-            this.dados1.TabIndex = 3;
-            this.dados1.Click += new System.EventHandler(this.dados_Click);
             // 
             // turnero1
             // 
