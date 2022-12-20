@@ -55,7 +55,7 @@
             this.Navegacion_Page = new System.Windows.Forms.TabPage();
             this.ucMapa1 = new GeneradorMapa.UCMapa();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
-            this.barco1 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
+            this.barco2 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.flpInferior.SuspendLayout();
             this.flpLateralIzq.SuspendLayout();
             this.flpLateralDer.SuspendLayout();
@@ -328,14 +328,14 @@
             this.ucMapa1.Size = new System.Drawing.Size(1069, 777);
             this.ucMapa1.TabIndex = 0;
             // 
-            // barco1
+            // barco2
             // 
-            this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.barco1.Location = new System.Drawing.Point(3, 3);
-            this.barco1.Name = "barco1";
-            this.barco1.Size = new System.Drawing.Size(1069, 777);
-            this.barco1.TabIndex = 1;
+            this.barco2.BackColor = System.Drawing.Color.Transparent;
+            this.barco2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.barco2.Location = new System.Drawing.Point(3, 3);
+            this.barco2.Name = "barco2";
+            this.barco2.Size = new System.Drawing.Size(1069, 777);
+            this.barco2.TabIndex = 1;
             // 
             // Home
             // 
