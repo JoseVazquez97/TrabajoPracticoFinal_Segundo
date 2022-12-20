@@ -42,7 +42,7 @@
             this.pic_Barco.Dock = System.Windows.Forms.DockStyle.Left;
             this.pic_Barco.Location = new System.Drawing.Point(0, 0);
             this.pic_Barco.Name = "pic_Barco";
-            this.pic_Barco.Size = new System.Drawing.Size(516, 783);
+            this.pic_Barco.Size = new System.Drawing.Size(516, 802);
             this.pic_Barco.TabIndex = 0;
             this.pic_Barco.TabStop = false;
             this.pic_Barco.Click += new System.EventHandler(this.pic_Barco_Click);
@@ -63,7 +63,7 @@
             this.pic_Evento.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pic_Evento.Location = new System.Drawing.Point(516, 0);
             this.pic_Evento.Name = "pic_Evento";
-            this.pic_Evento.Size = new System.Drawing.Size(559, 783);
+            this.pic_Evento.Size = new System.Drawing.Size(1001, 802);
             this.pic_Evento.TabIndex = 6;
             this.pic_Evento.TabStop = false;
             // 
@@ -75,7 +75,7 @@
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.pic_Barco);
             this.Name = "Barco";
-            this.Size = new System.Drawing.Size(1075, 783);
+            this.Size = new System.Drawing.Size(1517, 802);
             ((System.ComponentModel.ISupportInitialize)(this.pic_Barco)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Evento)).EndInit();
             this.ResumeLayout(false);

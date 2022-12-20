@@ -29,8 +29,11 @@
             this.recDispley = x;
             this.Width = ancho;
             this.Height = alto;
-            this.pic_Barco.Width = ancho;
+            this.pic_Barco.Width = ancho / 2;
+            this.pic_Evento.Width = ancho / 2;
             this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+            this.pic_Evento.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+
         }
 
         public bool Curar()
