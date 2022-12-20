@@ -57,6 +57,7 @@
             // 
             // p_box2
             // 
+            this.p_box2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.p_box2.Location = new System.Drawing.Point(50, 474);
             this.p_box2.Margin = new System.Windows.Forms.Padding(50, 30, 30, 50);
             this.p_box2.Name = "p_box2";
