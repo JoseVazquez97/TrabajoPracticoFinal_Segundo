@@ -32,6 +32,7 @@
             this.flpInferior = new System.Windows.Forms.FlowLayoutPanel();
             this.urnaCapitan1 = new TrabajoPracticoFinalSegundo.UserControls.UrnaCapitan();
             this.urna1 = new TrabajoPracticoFinalSegundo.UserControls.Urna();
+            this.dados1 = new TrabajoPracticoFinalSegundo.UserControls.Dados();
             this.turnero1 = new TrabajoPracticoFinalSegundo.UserControls.Turnero();
             this.flpLateralIzq = new System.Windows.Forms.FlowLayoutPanel();
             this.pantallaWeb1 = new TrabajoPracticoFinalSegundo.UserControls.PantallaWeb();
@@ -61,7 +62,6 @@
             this.Barco_Page.SuspendLayout();
             this.Navio_Page.SuspendLayout();
             this.Navegacion_Page.SuspendLayout();
-            this.dados1 = new TrabajoPracticoFinalSegundo.UserControls.Dados();
             ((System.ComponentModel.ISupportInitialize)(this.p_FondoBarcos)).BeginInit();
             this.SuspendLayout();
             // 
