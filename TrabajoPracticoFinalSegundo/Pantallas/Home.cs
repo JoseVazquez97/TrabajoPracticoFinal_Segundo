@@ -121,12 +121,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             #endregion
 
-            #region BARCOS
-            this.barco1.loadBarco(ref this.recursosDisplay1);
-            this.barco2.loadBarcoEnemigo();
-            this.barco2.Visible = false;
-            #endregion
-
             #region BARRA (INFERIOR)
             int x = Convert.ToInt32(this.flpInferior.Width / 3);
             int y = this.flpInferior.Height;
@@ -270,7 +264,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         if (this.batallaFlag == false)
                         {
                             this.batallaFlag = true;
-                            this.barco2.Visible = true;
                             SwitchEscrutinio(false);
                         }
 
@@ -562,20 +555,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
-        #region ENVIAR - Barcos
-        private async void EnviarEB()
-        {
-            string b1 = this.barco1.ConsultarEstado();
-            string b2 = this.barco2.ConsultarEstado();
-
-            try
-            {
-                await HomeConection.InvokeAsync("EnviarBarcos", b1, b2);
-            }
-            catch { MessageBox.Show("Error en la consulta del Ev"); }
-        }
-        #endregion
-
         #region CONSULTAR - Barcos
         private async void ConsultarEB()
         {
@@ -813,30 +792,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             break;
                     }
                 }
-
-            });
-            #endregion
-
-            #region BARCOS-COM
-            HomeConection.On<string, string>("RecibirBarcos", (val1, val2) =>
-            {
-
-
-            });
-
-            HomeConection.On<string, string>("RecibirCBarcos", (val1, val2) =>
-            {
-                try
-                {
-                    this.barco1.Invoke(new Action(() => this.barco1.RecibirEstado(val1)));
-                }
-                catch { MessageBox.Show("No se pudo asignar el estado al barco1 {0}", val1); }
-
-                try
-                {
-                    this.barco2.Invoke(new Action(() => this.barco2.RecibirEstado(val2)));
-                }
-                catch { MessageBox.Show("No se pudo asignar el estado al barco2 {0}", val2); }
 
             });
             #endregion
@@ -1245,7 +1200,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 case "F":
                     return "F";
                 case "M1":
-                    switch (2)
+                    switch (1)
                     {
                         case 1:
                             eventoX = "M10";
@@ -1258,7 +1213,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
 
                 case "M2":
-                    switch (2)
+                    switch (1)
                     {
                         case 1:
                             eventoX = "M10";
@@ -1271,7 +1226,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
 
                 case "M3":
-                    switch (2)
+                    switch (1)
                     {
                         case 1:
                             eventoX = "M10";
@@ -1296,7 +1251,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void daniarBarco() 
         {
-            this.barco2.RecibirDanio(10);
             this.quien = 0;
             this.desicion = 0;
         }
