@@ -51,6 +51,7 @@
             this.noti_Mer = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
             this.Barco_Page = new System.Windows.Forms.TabControl();
             this.Navio_Page = new System.Windows.Forms.TabPage();
+            this.barco1 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.p_FondoBarcos = new System.Windows.Forms.PictureBox();
             this.Navegacion_Page = new System.Windows.Forms.TabPage();
             this.ucMapa1 = new GeneradorMapa.UCMapa();
@@ -65,7 +66,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.p_FondoBarcos)).BeginInit();
             this.Navegacion_Page.SuspendLayout();
             this.SuspendLayout();
-            //
+            // 
             // dados1
             // 
             this.dados1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -288,6 +289,7 @@
             // Navio_Page
             // 
             this.Navio_Page.Controls.Add(this.barco1);
+            this.Navio_Page.Controls.Add(this.barco2);
             this.Navio_Page.Controls.Add(this.p_FondoBarcos);
             this.Navio_Page.Location = new System.Drawing.Point(4, 34);
             this.Navio_Page.Name = "Navio_Page";
@@ -296,6 +298,15 @@
             this.Navio_Page.TabIndex = 0;
             this.Navio_Page.Text = "Navio";
             this.Navio_Page.UseVisualStyleBackColor = true;
+            // 
+            // barco1
+            // 
+            this.barco1.BackColor = System.Drawing.Color.Transparent;
+            this.barco1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.barco1.Location = new System.Drawing.Point(3, 3);
+            this.barco1.Name = "barco1";
+            this.barco1.Size = new System.Drawing.Size(1069, 777);
+            this.barco1.TabIndex = 1;
             // 
             // p_FondoBarcos
             // 
@@ -397,5 +408,6 @@
         private GeneradorMapa.UCMapa ucMapa1;
         private PictureBox p_FondoBarcos;
         private UserControls.Barco barco1;
+        private UserControls.Barco barco2;
     }
 }

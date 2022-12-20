@@ -38,16 +38,22 @@
             */
         }
 
-        public void loadBarco(ref RecursosDisplay x)
+        public void loadBarco(int ancho, int alto, ref RecursosDisplay x)
         {
             this.recDispley = x;
+            this.Width = ancho;
+            this.Height = alto;
             this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
             this.pic_Barco.SizeMode = PictureBoxSizeMode.StretchImage;
             cargarImagenes(); 
         }
 
-        public void loadBarcoEnemigo()
+        public void loadBarcoEnemigo(int ancho, int alto)
         {
+            this.Width = ancho;
+            this.Height = alto;
+            this.pic_Barco.Location = new Point(ancho / 2, 100);
+
             this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
             this.pic_Barco.SizeMode = PictureBoxSizeMode.StretchImage;
             cargarImagenes();

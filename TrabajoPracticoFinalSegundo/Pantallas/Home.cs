@@ -121,12 +121,25 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             #endregion
 
+            #region BARCOS
+            this.p_FondoBarcos.Parent = this.barco1;
+            this.barco1.Parent = this.barco2;
+
+            int x = this.Navegacion_Page.Width;
+            int y = this.Navegacion_Page.Height;
+
+            this.barco1.loadBarco(x, y, ref recursosDisplay1);
+            this.barco2.loadBarcoEnemigo(x, y);
+            this.barco2.Visible = true;
+
+            #endregion
+
             #region BARRA (INFERIOR)
-            int x = Convert.ToInt32(this.flpInferior.Width / 3);
-            int y = this.flpInferior.Height;
+            int ancho = Convert.ToInt32(this.flpInferior.Width / 3);
+            int alto = this.flpInferior.Height;
 
             #region TURNERO
-            this.turnero1.LoadTurnero(x, y);
+            this.turnero1.LoadTurnero(ancho, alto);
             #endregion
             #endregion
 
