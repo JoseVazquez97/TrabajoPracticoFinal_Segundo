@@ -35,6 +35,8 @@
             // btn_Si
             // 
             this.btn_Si.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_Si.FlatAppearance.BorderSize = 0;
+            this.btn_Si.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Si.Font = new System.Drawing.Font("BlackPearl", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_Si.Location = new System.Drawing.Point(19, 22);
             this.btn_Si.Margin = new System.Windows.Forms.Padding(3, 3, 25, 3);
@@ -48,6 +50,8 @@
             // btn_No
             // 
             this.btn_No.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_No.FlatAppearance.BorderSize = 0;
+            this.btn_No.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_No.Font = new System.Drawing.Font("BlackPearl", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_No.Location = new System.Drawing.Point(255, 22);
             this.btn_No.Name = "btn_No";
@@ -62,6 +66,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.btn_No);
             this.Controls.Add(this.btn_Si);
             this.Name = "Urna";

@@ -43,9 +43,9 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             btn_Si.Location = new Point(x-150,y);
             btn_No.Location = new Point(x+150,y);
 
-            btn_No.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\BotonUno.png");
-            btn_Si.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\BotonUno.png");
-
+            btn_No.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\BotonMadera.png");
+            btn_Si.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\BotonMadera.png");
+            this.BackgroundImage = Image.FromFile(@"./Recursos/Iconos/MapaEsquina.png");
         }
 
         public void DesicionesNuevas(string rol) 

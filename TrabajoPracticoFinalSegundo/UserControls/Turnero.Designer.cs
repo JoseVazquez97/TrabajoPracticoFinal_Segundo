@@ -41,7 +41,7 @@
             // 
             this.lbl_Nombre.AutoSize = true;
             this.lbl_Nombre.Font = new System.Drawing.Font("BlackPearl", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbl_Nombre.Location = new System.Drawing.Point(335, 57);
+            this.lbl_Nombre.Location = new System.Drawing.Point(293, 51);
             this.lbl_Nombre.Name = "lbl_Nombre";
             this.lbl_Nombre.Size = new System.Drawing.Size(225, 38);
             this.lbl_Nombre.TabIndex = 1;
@@ -53,7 +53,7 @@
             // 
             this.lbl_Turno.AutoSize = true;
             this.lbl_Turno.Font = new System.Drawing.Font("BlackPearl", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbl_Turno.Location = new System.Drawing.Point(146, 81);
+            this.lbl_Turno.Location = new System.Drawing.Point(112, 85);
             this.lbl_Turno.Name = "lbl_Turno";
             this.lbl_Turno.Size = new System.Drawing.Size(19, 25);
             this.lbl_Turno.TabIndex = 2;
@@ -63,7 +63,7 @@
             // 
             this.lbl_Title.AutoSize = true;
             this.lbl_Title.Font = new System.Drawing.Font("BlackPearl", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbl_Title.Location = new System.Drawing.Point(101, 47);
+            this.lbl_Title.Location = new System.Drawing.Point(67, 51);
             this.lbl_Title.Name = "lbl_Title";
             this.lbl_Title.Size = new System.Drawing.Size(112, 34);
             this.lbl_Title.TabIndex = 3;

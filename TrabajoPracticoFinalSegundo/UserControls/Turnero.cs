@@ -36,7 +36,17 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.pictureBox1.Height = tamaTotal;
             this.pictureBox1.Image = Image.FromFile(@".\Recursos\Iconos\Turnero.png");
 
-            
+            Point a = new Point(lbl_Nombre.Location.X - pictureBox1.Location.X, lbl_Nombre.Location.Y - pictureBox1.Location.Y);
+            Point b = new Point(lbl_Title.Location.X - pictureBox1.Location.X, lbl_Title.Location.Y - pictureBox1.Location.Y);
+            Point c = new Point(lbl_Turno.Location.X - pictureBox1.Location.X, lbl_Turno.Location.Y - pictureBox1.Location.Y);
+
+            lbl_Nombre.Parent = pictureBox1;
+            lbl_Title.Parent = pictureBox1;
+            lbl_Turno.Parent = pictureBox1;
+
+            lbl_Nombre.Location = a;
+            lbl_Title.Location = b;
+            lbl_Turno.Location = c;
 
             setRol();
         }

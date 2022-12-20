@@ -32,7 +32,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             this.lbl_Balas.Parent = this.flowLayoutPanel2;
 
             this.p_Madera.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\Madera.png");
-            this.p_Tesoro.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\Oro.jpg");
+            this.p_Tesoro.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\Oro.png");
             this.p_Balas.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\Balas.png");
             this.p_Comida.BackgroundImage = Image.FromFile(@".\Recursos\Iconos\Comida.jpg");
 

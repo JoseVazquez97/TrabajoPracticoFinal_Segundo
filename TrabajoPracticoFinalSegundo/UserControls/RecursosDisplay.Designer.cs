@@ -36,16 +36,16 @@
             this.p_Madera = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.p_Comida = new System.Windows.Forms.PictureBox();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.lbl_Comida = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.p_Tesoro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p_Balas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p_Madera)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.p_Comida)).BeginInit();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_Tesoro
@@ -87,7 +87,7 @@
             // 
             // p_Tesoro
             // 
-            this.p_Tesoro.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.p_Tesoro.BackColor = System.Drawing.Color.White;
             this.p_Tesoro.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.p_Tesoro.Location = new System.Drawing.Point(25, 5);
             this.p_Tesoro.Margin = new System.Windows.Forms.Padding(25, 5, 35, 5);
@@ -99,7 +99,7 @@
             // 
             // p_Balas
             // 
-            this.p_Balas.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.p_Balas.BackColor = System.Drawing.Color.White;
             this.p_Balas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.p_Balas.Location = new System.Drawing.Point(130, 5);
             this.p_Balas.Margin = new System.Windows.Forms.Padding(15, 5, 20, 5);
@@ -110,7 +110,7 @@
             // 
             // p_Madera
             // 
-            this.p_Madera.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.p_Madera.BackColor = System.Drawing.Color.White;
             this.p_Madera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.p_Madera.Location = new System.Drawing.Point(225, 5);
             this.p_Madera.Margin = new System.Windows.Forms.Padding(20, 5, 0, 5);
@@ -144,6 +144,17 @@
             this.flowLayoutPanel3.Size = new System.Drawing.Size(388, 59);
             this.flowLayoutPanel3.TabIndex = 9;
             // 
+            // p_Comida
+            // 
+            this.p_Comida.BackColor = System.Drawing.Color.White;
+            this.p_Comida.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.p_Comida.Location = new System.Drawing.Point(305, 5);
+            this.p_Comida.Margin = new System.Windows.Forms.Padding(25, 5, 0, 5);
+            this.p_Comida.Name = "p_Comida";
+            this.p_Comida.Size = new System.Drawing.Size(55, 55);
+            this.p_Comida.TabIndex = 7;
+            this.p_Comida.TabStop = false;
+            // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.Transparent;
@@ -156,17 +167,6 @@
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(388, 47);
             this.flowLayoutPanel2.TabIndex = 8;
-            // 
-            // p_Comida
-            // 
-            this.p_Comida.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.p_Comida.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.p_Comida.Location = new System.Drawing.Point(305, 5);
-            this.p_Comida.Margin = new System.Windows.Forms.Padding(25, 5, 0, 5);
-            this.p_Comida.Name = "p_Comida";
-            this.p_Comida.Size = new System.Drawing.Size(55, 55);
-            this.p_Comida.TabIndex = 7;
-            this.p_Comida.TabStop = false;
             // 
             // lbl_Comida
             // 
@@ -193,9 +193,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.p_Madera)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.p_Comida)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.p_Comida)).EndInit();
             this.ResumeLayout(false);
 
         }
