@@ -105,7 +105,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             ReSizeFormControls();
             #region FONDOS
             this.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\Madera.jpg");
-            Navio_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\FondoHomeDos.jpg");
+            p_FondoBarcos.Image = Image.FromFile(@".\Recursos\Gifs\aguaLenta.gif");
             Navegacion_Page.BackgroundImage = Image.FromFile(@".\Recursos\Fondos\mapax.png");
             int loc1 = this.flpLateralIzq.Width;
             int loc2 = this.flpSuperior.Height;

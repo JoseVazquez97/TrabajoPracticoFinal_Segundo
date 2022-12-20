@@ -87,8 +87,15 @@
     <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\Notificador22.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\Notificador33.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Fondos\Viajando.gif" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\agua.gif" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\aguaLenta.gif" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\barco.gif" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\barco2.gif" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\BarcoLlega.gif" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\BarcoLlegaLento.gif" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\BarcoLlegaLento2.gif" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\barcoQuieto.gif" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\barcoQuietoLento.gif" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\ASSETS - copia.jpg" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\ASSETS.jpg" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\Balas.png" />

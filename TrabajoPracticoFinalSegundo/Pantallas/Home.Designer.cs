@@ -53,12 +53,16 @@
             this.Navegacion_Page = new System.Windows.Forms.TabPage();
             this.ucMapa1 = new GeneradorMapa.UCMapa();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
+            this.p_FondoBarcos = new System.Windows.Forms.PictureBox();
             this.flpInferior.SuspendLayout();
             this.flpLateralIzq.SuspendLayout();
             this.flpLateralDer.SuspendLayout();
             this.flpSuperior.SuspendLayout();
             this.Barco_Page.SuspendLayout();
+            this.Navio_Page.SuspendLayout();
             this.Navegacion_Page.SuspendLayout();
+            this.dados1 = new TrabajoPracticoFinalSegundo.UserControls.Dados();
+            ((System.ComponentModel.ISupportInitialize)(this.p_FondoBarcos)).BeginInit();
             this.SuspendLayout();
             // 
             // flpInferior
@@ -67,6 +71,7 @@
             this.flpInferior.Controls.Add(this.urnaCapitan1);
             this.flpInferior.Controls.Add(this.urna1);
             this.flpInferior.Controls.Add(this.turnero1);
+            this.flpInferior.Controls.Add(this.dados1);
             this.flpInferior.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flpInferior.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
             this.flpInferior.Location = new System.Drawing.Point(0, 928);
@@ -269,6 +274,7 @@
             // 
             // Navio_Page
             // 
+            this.Navio_Page.Controls.Add(this.p_FondoBarcos);
             this.Navio_Page.Location = new System.Drawing.Point(4, 34);
             this.Navio_Page.Name = "Navio_Page";
             this.Navio_Page.Padding = new System.Windows.Forms.Padding(3);
@@ -299,6 +305,26 @@
             this.ucMapa1.Size = new System.Drawing.Size(1069, 777);
             this.ucMapa1.TabIndex = 0;
             // 
+            // p_FondoBarcos
+            // 
+            this.p_FondoBarcos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.p_FondoBarcos.Location = new System.Drawing.Point(3, 3);
+            this.p_FondoBarcos.Name = "p_FondoBarcos";
+            this.p_FondoBarcos.Size = new System.Drawing.Size(1069, 777);
+            this.p_FondoBarcos.TabIndex = 0;
+            this.p_FondoBarcos.TabStop = false;
+            //
+            // dados1
+            // 
+            this.dados1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dados1.LISTO = false;
+            this.dados1.Location = new System.Drawing.Point(1076, -13);
+            this.dados1.Margin = new System.Windows.Forms.Padding(50, 3, 50, 3);
+            this.dados1.Name = "dados1";
+            this.dados1.Size = new System.Drawing.Size(334, 143);
+            this.dados1.TabIndex = 3;
+            this.dados1.Click += new System.EventHandler(this.dados_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -324,7 +350,9 @@
             this.flpLateralDer.ResumeLayout(false);
             this.flpSuperior.ResumeLayout(false);
             this.Barco_Page.ResumeLayout(false);
+            this.Navio_Page.ResumeLayout(false);
             this.Navegacion_Page.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.p_FondoBarcos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -355,5 +383,6 @@
         private TabPage Navegacion_Page;
         private TabPage Navio_Page;
         private GeneradorMapa.UCMapa ucMapa1;
+        private PictureBox p_FondoBarcos;
     }
 }
