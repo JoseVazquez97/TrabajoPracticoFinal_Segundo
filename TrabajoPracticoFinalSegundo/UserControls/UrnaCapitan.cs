@@ -125,6 +125,15 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             x = (this.Width * btn_Norte.Width) / 510;
             y = (this.Height * btn_Norte.Height) / 124;
             btn_Norte.Size = new Size(x, y);
+
+            x = (this.Width * pbBrujula.Location.X) / 510;
+            y = (this.Height * pbBrujula.Location.Y) / 124;
+            pbBrujula.Location = new Point(x, y);
+
+
+            x = (this.Width *pbBrujula.Width) / 510;
+            y = (this.Height *pbBrujula.Height) / 124;
+           pbBrujula.Size = new Size(x, y);
         }
     }
 }
