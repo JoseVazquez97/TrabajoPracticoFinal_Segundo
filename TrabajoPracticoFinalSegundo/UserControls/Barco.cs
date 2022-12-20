@@ -30,7 +30,18 @@
             this.Width = ancho;
             this.Height = alto;
             this.pic_Barco.Width = ancho;
+            this.pic_Evento.SizeMode = PictureBoxSizeMode.StretchImage;
             this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+        }
+
+        public void ejecutarEvento(int x) 
+        {
+            switch (x)
+            {
+                case 1:
+                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Muelle.gif");
+                    break;
+            }
         }
 
         public bool Curar()

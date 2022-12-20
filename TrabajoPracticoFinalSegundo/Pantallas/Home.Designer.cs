@@ -317,6 +317,7 @@
             // 
             // Navegacion_Page
             // 
+            this.Navegacion_Page.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Navegacion_Page.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Navegacion_Page.Controls.Add(this.ucMapa1);
             this.Navegacion_Page.Location = new System.Drawing.Point(4, 34);

@@ -127,6 +127,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             int x = this.Navegacion_Page.Width;
             int y = this.Navegacion_Page.Height;
 
+            
             this.barco1.Dock = DockStyle.Fill;
             this.barco1.loadBarco(x, y, ref recursosDisplay1);
 
@@ -303,6 +304,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                                 if (this.Key == 1)
                                 {
                                     this.desCap = noti;
+                                    this.barco1.ejecutarEvento(1);
+                                    
                                 }
                                 SiguienteTurno();
                                 SwitchEscrutinio(true);
