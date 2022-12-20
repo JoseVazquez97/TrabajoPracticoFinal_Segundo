@@ -123,14 +123,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             #region BARCOS
             this.p_FondoBarcos.Parent = this.barco1;
-            this.barco1.Parent = this.barco2;
 
             int x = this.Navegacion_Page.Width;
             int y = this.Navegacion_Page.Height;
 
             this.barco1.loadBarco(x, y, ref recursosDisplay1);
-            this.barco2.loadBarcoEnemigo(x, y);
-            this.barco2.Visible = true;
 
             #endregion
 

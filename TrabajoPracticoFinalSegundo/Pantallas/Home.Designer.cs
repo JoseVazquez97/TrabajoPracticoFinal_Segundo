@@ -114,6 +114,7 @@
             // turnero1
             // 
             this.turnero1.BackColor = System.Drawing.Color.Green;
+            this.turnero1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.turnero1.Location = new System.Drawing.Point(1026, 6);
             this.turnero1.Margin = new System.Windows.Forms.Padding(0);
             this.turnero1.Name = "turnero1";
