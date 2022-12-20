@@ -56,7 +56,6 @@
             this.Navegacion_Page = new System.Windows.Forms.TabPage();
             this.ucMapa1 = new GeneradorMapa.UCMapa();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
-            this.barco2 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.flpInferior.SuspendLayout();
             this.flpLateralIzq.SuspendLayout();
             this.flpLateralDer.SuspendLayout();
@@ -289,7 +288,6 @@
             // Navio_Page
             // 
             this.Navio_Page.Controls.Add(this.barco1);
-            this.Navio_Page.Controls.Add(this.barco2);
             this.Navio_Page.Controls.Add(this.p_FondoBarcos);
             this.Navio_Page.Location = new System.Drawing.Point(4, 34);
             this.Navio_Page.Name = "Navio_Page";
@@ -302,10 +300,9 @@
             // barco1
             // 
             this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.barco1.Location = new System.Drawing.Point(3, 3);
+            this.barco1.Location = new System.Drawing.Point(438, 274);
             this.barco1.Name = "barco1";
-            this.barco1.Size = new System.Drawing.Size(1069, 777);
+            this.barco1.Size = new System.Drawing.Size(634, 506);
             this.barco1.TabIndex = 1;
             // 
             // p_FondoBarcos
@@ -338,16 +335,6 @@
             this.ucMapa1.Name = "ucMapa1";
             this.ucMapa1.Size = new System.Drawing.Size(1069, 777);
             this.ucMapa1.TabIndex = 0;
-            // 
-            // barco2
-            // 
-            this.barco2.BackColor = System.Drawing.Color.Transparent;
-            this.barco2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.barco2.Location = new System.Drawing.Point(3, 3);
-            this.barco2.Name = "barco2";
-            this.barco2.Size = new System.Drawing.Size(1069, 777);
-            this.barco2.TabIndex = 1;
-            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -408,6 +395,5 @@
         private GeneradorMapa.UCMapa ucMapa1;
         private PictureBox p_FondoBarcos;
         private UserControls.Barco barco1;
-        private UserControls.Barco barco2;
     }
 }
