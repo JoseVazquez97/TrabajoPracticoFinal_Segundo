@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Recursos\Mares\**" />
+    <EmbeddedResource Remove="Recursos\Mares\**" />
+    <None Remove="Recursos\Mares\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Emgu.CV" Version="4.6.0.5131" />
     <PackageReference Include="Emgu.CV.Bitmap" Version="4.6.0.5131" />
     <PackageReference Include="Emgu.CV.runtime.windows" Version="4.6.0.5131" />
@@ -111,6 +117,11 @@
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\Turnero.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Logos\LOGO_Gregoire.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Logos\LOGO_Manija.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Mapa\Isla.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Mapa\IslaFinal.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Mapa\M1.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Mapa\M2.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Mapa\M3.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Musica\elBueno.wav" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Musica\yohoho.wav" />
   </ItemGroup>

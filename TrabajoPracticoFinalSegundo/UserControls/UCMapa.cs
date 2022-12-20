@@ -72,13 +72,13 @@ namespace GeneradorMapa
         {
             InitializeComponent();
             this.mapa = "";
-            
+            this.barco = Image.FromFile(@".\Recursos\Barco\BarcoChiquito.png");
+            this.direccionActual = Direccion.Norte;
         }
 
         public void CargarImagenBarco()
         {
-            this.barco = Image.FromFile(@".\Recursos\Barco\BarcoChiquito.png");
-            this.direccionActual = Direccion.Norte;
+           
         }
 
         public string ObtenerMapa()
@@ -431,31 +431,30 @@ namespace GeneradorMapa
             {
 
                 Control celda = tblMapa.GetControlFromPosition(x, y);
-                celda.BackgroundImage = null;
-                
+                celda.BackgroundImageLayout = ImageLayout.Stretch;
                 switch (g)
                 {
                     case TipoGeneracion.Isla:
-                        celda.BackColor = Color.LightGreen;
+                        celda.BackgroundImage = Image.FromFile(".\\Recursos\\Mapa\\Isla.png");
                         celda.Text = "I";
                         break;
                     case TipoGeneracion.M1:
-                        celda.BackColor = Color.LightBlue;
+                        celda.BackgroundImage = Image.FromFile(".\\Recursos\\Mapa\\M1.png");
                         celda.Text = "M1";
                         break;
                     case TipoGeneracion.M2:
                         if (celda.Text == "" || rePaint)
                         {
-                            celda.BackColor = Color.DeepSkyBlue;
+                            celda.BackgroundImage = Image.FromFile(".\\Recursos\\Mapa\\M2.png");
                             celda.Text = "M2";
                         }
                         break;
                     case TipoGeneracion.M3:
-                        celda.BackColor = Color.DarkSlateBlue;
+                        celda.BackgroundImage = Image.FromFile(".\\Recursos\\Mapa\\M3.png");
                         celda.Text = "M3";
                         break;
                     case TipoGeneracion.IslaF:
-                        celda.BackColor = Color.LightGreen;
+                        celda.BackgroundImage = Image.FromFile(".\\Recursos\\Mapa\\IslaFinal.png");
                         celda.Text = "F";
                         break;
                     case TipoGeneracion.Barco:
