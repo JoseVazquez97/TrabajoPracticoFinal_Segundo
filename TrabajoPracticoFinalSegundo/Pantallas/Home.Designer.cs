@@ -51,8 +51,6 @@
             this.noti_Mer = new TrabajoPracticoFinalSegundo.UserControls.Notificador();
             this.Barco_Page = new System.Windows.Forms.TabControl();
             this.Navio_Page = new System.Windows.Forms.TabPage();
-            this.barco2 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
-            this.barco1 = new TrabajoPracticoFinalSegundo.UserControls.Barco();
             this.Navegacion_Page = new System.Windows.Forms.TabPage();
             this.ucMapa1 = new GeneradorMapa.UCMapa();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
@@ -61,7 +59,6 @@
             this.flpLateralDer.SuspendLayout();
             this.flpSuperior.SuspendLayout();
             this.Barco_Page.SuspendLayout();
-            this.Navio_Page.SuspendLayout();
             this.Navegacion_Page.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -285,8 +282,6 @@
             // 
             // Navio_Page
             // 
-            this.Navio_Page.Controls.Add(this.barco2);
-            this.Navio_Page.Controls.Add(this.barco1);
             this.Navio_Page.Location = new System.Drawing.Point(4, 34);
             this.Navio_Page.Name = "Navio_Page";
             this.Navio_Page.Padding = new System.Windows.Forms.Padding(3);
@@ -294,22 +289,6 @@
             this.Navio_Page.TabIndex = 0;
             this.Navio_Page.Text = "Navio";
             this.Navio_Page.UseVisualStyleBackColor = true;
-            // 
-            // barco2
-            // 
-            this.barco2.BackColor = System.Drawing.Color.Transparent;
-            this.barco2.Location = new System.Drawing.Point(703, 68);
-            this.barco2.Name = "barco2";
-            this.barco2.Size = new System.Drawing.Size(366, 607);
-            this.barco2.TabIndex = 1;
-            // 
-            // barco1
-            // 
-            this.barco1.BackColor = System.Drawing.Color.Transparent;
-            this.barco1.Location = new System.Drawing.Point(264, 68);
-            this.barco1.Name = "barco1";
-            this.barco1.Size = new System.Drawing.Size(366, 607);
-            this.barco1.TabIndex = 0;
             // 
             // Navegacion_Page
             // 
@@ -358,7 +337,6 @@
             this.flpLateralDer.ResumeLayout(false);
             this.flpSuperior.ResumeLayout(false);
             this.Barco_Page.ResumeLayout(false);
-            this.Navio_Page.ResumeLayout(false);
             this.Navegacion_Page.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -389,8 +367,6 @@
         private UserControls.Escrutinio escrutinio1;
         private TabPage Navegacion_Page;
         private TabPage Navio_Page;
-        private UserControls.Barco barco1;
-        private UserControls.Barco barco2;
         private GeneradorMapa.UCMapa ucMapa1;
     }
 }
