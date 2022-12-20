@@ -70,8 +70,8 @@
             this.flpInferior.BackColor = System.Drawing.Color.Transparent;
             this.flpInferior.Controls.Add(this.urnaCapitan1);
             this.flpInferior.Controls.Add(this.urna1);
-            this.flpInferior.Controls.Add(this.turnero1);
             this.flpInferior.Controls.Add(this.dados1);
+            this.flpInferior.Controls.Add(this.turnero1);
             this.flpInferior.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flpInferior.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
             this.flpInferior.Location = new System.Drawing.Point(0, 928);
