@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using Emgu.CV.Dnn;
+using Emgu.CV.Face;
+using Emgu.CV;
+using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajoPracticoFinalSegundo.Clases;
 using TrabajoPracticoFinalSegundo.Pantallas;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TrabajoPracticoFinalSegundo.UserControls
 {
@@ -23,16 +28,18 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             InitializeComponent();
             this.turno = 1;
         }
-
-        public void LoadTurnero(int tamaTotal, int altoTotal) 
+        public void LoadTurnero(int tamaTotal, int altoTotal)
         {
             this.Width = tamaTotal;
             this.Height = altoTotal;
+            this.pictureBox1.Width = tamaTotal;
+            this.pictureBox1.Height = tamaTotal;
+            this.pictureBox1.Image = Image.FromFile(@".\Recursos\Iconos\Turnero.png");
 
-            this.pictureBox1.Width = tamaTotal / 2;
+            
+
             setRol();
         }
-
         public void Siguiente() 
         {
             this.turno++;

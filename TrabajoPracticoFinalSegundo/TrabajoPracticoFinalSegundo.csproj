@@ -108,6 +108,7 @@
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\MapaEsquina.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\Oro.jpg" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\Plano.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\Turnero.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Logos\LOGO_Gregoire.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Logos\LOGO_Manija.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Musica\elBueno.wav" />
