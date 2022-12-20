@@ -24,39 +24,13 @@
             int Danio = 10;
         }
 
-        private void cargarImagenes()
-        {
-            /*
-            this.pictureBox1.Parent = this.pic_Barco;
-            this.pictureBox2.Parent = this.pic_Barco;
-            this.pictureBox3.Parent = this.pic_Barco;
-            this.pictureBox4.Parent = this.pic_Barco;
-           // this.pictureBox1.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseDerecho.png");
-            //this.pictureBox2.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseDerecho.png");
-           // this.pictureBox3.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseIzquierdo.png");
-           // this.pictureBox4.Image = Image.FromFile(@".\Recursos\Caniones\CanionBaseIzquierdo.png");
-            */
-        }
-
         public void loadBarco(int ancho, int alto, ref RecursosDisplay x)
         {
             this.recDispley = x;
             this.Width = ancho;
             this.Height = alto;
+            this.pic_Barco.Width = ancho;
             this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
-            this.pic_Barco.SizeMode = PictureBoxSizeMode.StretchImage;
-            cargarImagenes(); 
-        }
-
-        public void loadBarcoEnemigo(int ancho, int alto)
-        {
-            this.Width = ancho;
-            this.Height = alto;
-            this.pic_Barco.Location = new Point(ancho / 2, 100);
-
-            this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
-            this.pic_Barco.SizeMode = PictureBoxSizeMode.StretchImage;
-            cargarImagenes();
         }
 
         public bool Curar()

@@ -122,11 +122,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
 
             #region BARCOS
-            this.p_FondoBarcos.Parent = this.barco1;
+            this.barco1.Parent = this.p_FondoBarcos;
 
             int x = this.Navegacion_Page.Width;
             int y = this.Navegacion_Page.Height;
 
+            this.barco1.Dock = DockStyle.Fill;
             this.barco1.loadBarco(x, y, ref recursosDisplay1);
 
             #endregion
