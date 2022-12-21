@@ -263,6 +263,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         {
                             this.noti_Carp.Mensaje("Ordenes Capitan");
                             SpawnearNoti(2, true);
+                            this.barco1.TerminarEvento(this.eventoActual);
                             this.eventoFlag = false;
                             this.eventoActual = "Orden";
                         }
@@ -283,6 +284,21 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             this.batallaFlag = true;
                             
                             SwitchEscrutinio(false);
+                        }
+
+                        if (this.dados1.LISTO)
+                        {
+                            this.dados1.LISTO = false;
+                            int aux = this.dados1.V1 + this.dados1.V2;
+                            this.barco1.RecibirDanio(aux);
+                        }
+
+                        if (this.barco1.VIDA == 0) 
+                        {
+                            this.noti_Carp.Mensaje("Ordenes Capitan");
+                            SpawnearNoti(2, true);
+                            this.eventoFlag = false;
+                            this.eventoActual = "Orden";
                         }
 
                         EjecutarAccion();
@@ -997,11 +1013,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
             }
 
-            #region DADOS
+            #region LOADS
             int x = Convert.ToInt32(this.flpInferior.Width / 3);
             int y = this.flpInferior.Height;
             this.dados1.CargarTablero(x, y, this.Key);
             this.recursosDisplay1.recibirKey(this.Key);
+            this.barco1.recibirKey(this.Key);
             #endregion
         }
         #endregion

@@ -106,9 +106,12 @@
     <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\Muelles\Muelle.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\Muelles\Muelle.xcf" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\Muelles\MuelleFinal.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\Nombre.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\original.jpg" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\Pezca\pez.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\Pezca\pez.xcf" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\Pezca\pezfinal.png" />
+    <None Include="bin\Debug\net6.0-windows\Recursos\Gifs\Pezca\pezMuerto.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\ASSETS - copia.jpg" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\ASSETS.jpg" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Iconos\Balas.png" />

@@ -1,15 +1,25 @@
-﻿namespace TrabajoPracticoFinalSegundo.UserControls
+﻿using Microsoft.AspNetCore.SignalR.Client;
+
+namespace TrabajoPracticoFinalSegundo.UserControls
 {
     public partial class Barco : UserControl
     {
         int Vida;
         int Acciones;
 
+        private string _url = "https://localhost:7170/homeHubNew";
+        HubConnection HomeConection;
+
+
+        public int VIDA { get { return this.Vida; } set { this.Vida = value; }}
+
         RecursosDisplay recDispley;
         int muni1;
         int muni4;
         int muni3;
         int muni2;
+        private int Key;
+
         public enum Movimiento
         {
             Subir,
@@ -34,6 +44,57 @@
             int muni2 = 1;
 
             int Danio = 10;
+
+
+            #region DECLARACION DEL HUB
+            HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
+
+            //Si te desconectas segui intentado.
+            HomeConection.Closed +=
+                async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync(); };
+            #endregion
+        }
+
+
+        private async void EnviarBarcoCL()
+        {
+            int usr = this.Key;
+            string estado = "";
+
+            estado = ConsultarEstado();
+
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarBarco", usr, estado);
+            }
+            catch { MessageBox.Show("Error en el envio de dados."); }
+        }
+
+        private async void Barco_Load(object sender, EventArgs e)
+        {
+            #region CONECTARSE
+            //Este try es importante no sacar xd
+            try
+            {
+                await HomeConection.StartAsync();
+            }
+            catch
+            {
+                MessageBox.Show("Nosepuedoconectar");
+            }
+            #endregion
+
+            HomeConection.On<int, string>("RecibirBarco", (usr, estado) =>
+            {
+                if (usr != this.Key)
+                {
+                    try
+                    {
+                        RecibirEstado(estado);
+                    }
+                    catch { MessageBox.Show($"Error al cargar los valores {usr} y {estado} en los dados"); }
+                }
+            });
         }
 
         public void loadBarco(int ancho, int alto, ref RecursosDisplay x)
@@ -194,7 +255,7 @@
                         {
                             this.Vida = int.Parse(parametros[i]);
                         }
-                        catch { this.Vida = 100; }
+                        catch { if (this.Vida < 0) { this.Vida = 0; } }
                         break;
 
                     case 5:
@@ -210,13 +271,13 @@
             this.Vida -= danio;
             if (this.Vida >= 0)
             {
-                this.pBarBarco.Value = this.Vida;
+                this.pBarEnemigo.Value = this.Vida;
             }
             else
             {
-                this.pBarBarco.Value = 0;
+                this.pBarEnemigo.Value = 0;
             }
-
+            EnviarBarcoCL();
         }
 
         public void ReiniciarVida()
@@ -276,8 +337,24 @@
 
         }
 
+        internal void TerminarEvento(string eventoActual)
+        {
+            switch (eventoActual) 
+            {
+                case "Pezca":
+                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Pezca\pezMuerto.png");
+                    break;
 
 
-        
+                case "Batalla":
+                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Pezca\pezMuerto.png");
+                    break;
+            }
+        }
+
+        internal void recibirKey(int key)
+        {
+            this.Key = key;
+        }
     }
 }

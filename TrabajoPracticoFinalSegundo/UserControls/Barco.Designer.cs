@@ -86,6 +86,7 @@
             this.Controls.Add(this.pic_Barco);
             this.Name = "Barco";
             this.Size = new System.Drawing.Size(1517, 802);
+            this.Load += new System.EventHandler(this.Barco_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pic_Barco)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Evento)).EndInit();
             this.ResumeLayout(false);
