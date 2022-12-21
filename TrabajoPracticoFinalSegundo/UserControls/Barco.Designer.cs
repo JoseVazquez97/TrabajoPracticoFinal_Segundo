@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.pic_Barco = new System.Windows.Forms.PictureBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.pBarBarco = new System.Windows.Forms.ProgressBar();
             this.pic_Evento = new System.Windows.Forms.PictureBox();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
+            this.pBarEnemigo = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Barco)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Evento)).BeginInit();
             this.SuspendLayout();
@@ -43,49 +43,47 @@
             this.pic_Barco.Dock = System.Windows.Forms.DockStyle.Left;
             this.pic_Barco.Location = new System.Drawing.Point(0, 0);
             this.pic_Barco.Name = "pic_Barco";
-            this.pic_Barco.Size = new System.Drawing.Size(516, 777);
+            this.pic_Barco.Size = new System.Drawing.Size(516, 802);
             this.pic_Barco.TabIndex = 0;
             this.pic_Barco.TabStop = false;
             // 
-            // progressBar1
+            // pBarBarco
             // 
-            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar1.Location = new System.Drawing.Point(0, 777);
-            this.progressBar1.MaximumSize = new System.Drawing.Size(300, 25);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(300, 25);
-            this.progressBar1.TabIndex = 5;
-            this.progressBar1.Value = 100;
+            this.pBarBarco.Location = new System.Drawing.Point(0, 777);
+            this.pBarBarco.MaximumSize = new System.Drawing.Size(300, 25);
+            this.pBarBarco.Name = "pBarBarco";
+            this.pBarBarco.Size = new System.Drawing.Size(300, 25);
+            this.pBarBarco.TabIndex = 5;
+            this.pBarBarco.Value = 100;
             // 
             // pic_Evento
             // 
             this.pic_Evento.BackColor = System.Drawing.Color.Transparent;
             this.pic_Evento.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pic_Evento.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pic_Evento.Location = new System.Drawing.Point(516, 0);
+            this.pic_Evento.Location = new System.Drawing.Point(0, 0);
             this.pic_Evento.Name = "pic_Evento";
-            this.pic_Evento.Size = new System.Drawing.Size(1001, 777);
+            this.pic_Evento.Size = new System.Drawing.Size(1517, 802);
             this.pic_Evento.TabIndex = 6;
             this.pic_Evento.TabStop = false;
             // 
-            // progressBar2
+            // pBarEnemigo
             // 
-            this.progressBar2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar2.Location = new System.Drawing.Point(1192, 777);
-            this.progressBar2.MaximumSize = new System.Drawing.Size(300, 25);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(300, 25);
-            this.progressBar2.TabIndex = 7;
-            this.progressBar2.Value = 100;
+            this.pBarEnemigo.Location = new System.Drawing.Point(1192, 777);
+            this.pBarEnemigo.MaximumSize = new System.Drawing.Size(300, 25);
+            this.pBarEnemigo.Name = "pBarEnemigo";
+            this.pBarEnemigo.Size = new System.Drawing.Size(300, 25);
+            this.pBarEnemigo.TabIndex = 7;
+            this.pBarEnemigo.Value = 100;
             // 
             // Barco
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.pic_Evento);
+            this.Controls.Add(this.pBarBarco);
             this.Controls.Add(this.pic_Barco);
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.progressBar2);
+            this.Controls.Add(this.pBarEnemigo);
+            this.Controls.Add(this.pic_Evento);
             this.Name = "Barco";
             this.Size = new System.Drawing.Size(1517, 802);
             ((System.ComponentModel.ISupportInitialize)(this.pic_Barco)).EndInit();
@@ -97,8 +95,8 @@
         #endregion
 
         private PictureBox pic_Barco;
-        private ProgressBar progressBar1;
+        private ProgressBar pBarBarco;
         private PictureBox pic_Evento;
-        private ProgressBar progressBar2;
+        private ProgressBar pBarEnemigo;
     }
 }

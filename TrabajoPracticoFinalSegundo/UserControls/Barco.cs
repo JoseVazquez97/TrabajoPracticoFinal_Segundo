@@ -46,7 +46,8 @@
             this.pic_Evento.SizeMode = PictureBoxSizeMode.StretchImage;
             this.pic_Barco.Image = Image.FromFile(@".\Recursos\Gifs\Barco\BarcoQuieto.png");
             this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Muelles\MuelleFinal.png");
-
+            this.pBarBarco.Location = new Point(0, this.Height - pBarBarco.Height);
+            this.pBarEnemigo.Location = new Point(2000, 2000);
         }
 
         public void ejecutarEvento(int x) 
@@ -63,9 +64,9 @@
         public bool Curar()
         {
 
-            if (this.progressBar1.Value <= this.Vida - 10)
+            if (this.pBarBarco.Value <= this.Vida - 10)
             {
-                this.progressBar1.Value = this.Vida + 10;
+                this.pBarBarco.Value = this.Vida + 10;
                 this.recDispley.extraerRecurso("Madera", 1);
                 return true;
             }
@@ -209,11 +210,11 @@
             this.Vida -= danio;
             if (this.Vida >= 0)
             {
-                this.progressBar1.Value = this.Vida;
+                this.pBarBarco.Value = this.Vida;
             }
             else
             {
-                this.progressBar1.Value = 0;
+                this.pBarBarco.Value = 0;
             }
 
         }
@@ -221,7 +222,7 @@
         public void ReiniciarVida()
         {
             this.Vida = 100;
-            this.progressBar1.Value = 100;
+            this.pBarBarco.Value = 100;
         }
 
         
@@ -245,7 +246,7 @@
         
         public async void ImagenEvento(Evento evento)
         {
-
+            this.pBarEnemigo.Location = new Point(2000, 2000);
             MovimientoBarco(Movimiento.Subir);
             await Task.Delay(4000);
 
@@ -254,6 +255,7 @@
             {
                 case Evento.Barco:
                     this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Barco\BarcoQuieto.png");
+                    this.pBarEnemigo.Location = new Point(this.Width - pBarEnemigo.Width, this.Height - pBarEnemigo.Height);
                     break;
                 case Evento.Pesca:
                     this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Pesca\pezFinal.png");
@@ -269,7 +271,7 @@
             }
 
             MovimientoBarco(Movimiento.Bajar);
-            await Task.Delay(3000);
+            await Task.Delay(2500);
             MovimientoBarco(Movimiento.Quieto);
 
         }
