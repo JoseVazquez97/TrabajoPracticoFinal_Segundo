@@ -269,7 +269,7 @@
             }
 
             MovimientoBarco(Movimiento.Bajar);
-            await Task.Delay(4000);
+            await Task.Delay(3000);
             MovimientoBarco(Movimiento.Quieto);
 
         }

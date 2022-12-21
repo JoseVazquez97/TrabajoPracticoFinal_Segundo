@@ -742,44 +742,56 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<int, string>("RecibirEvento", (rol, val1) =>
             {
-            if (rol == 1)
-            {
-                switch (val1)
+                if (rol == 1)
                 {
-                    case "M10":
-                        this.eventoActual = "Orden";
-                        this.eventoFlag = false;
-                        break;
+                    switch (val1)
+                    {
+                        case "M10":
+                            this.eventoActual = "Orden";
+                            this.eventoFlag = false;
+                            break;
 
-                    case "M11":
-                        this.eventoActual = "Batalla";
+                        case "M11":
+                            this.eventoActual = "Batalla";
 
-                        try
-                        {
-                            this.barco1.Invoke(new Action(() => this.barco1.ImagenEvento(Evento.Barco)));
-                            this.urna1.Invoke(new Action(() => this.urna1.Batalla(this.Key)));
-                        }
-                        catch { }
+                            try
+                            {
+                                this.barco1.Invoke(new Action(() => this.barco1.ImagenEvento(Evento.Barco)));
+                                this.urna1.Invoke(new Action(() => this.urna1.Batalla(this.Key)));
+                            }
+                            catch { }
 
-                        switch (this.Key)
-                        {
-                            case 1:
-                                SwitchUrnaCap(true);
-                                break;
+                            switch (this.Key)
+                            {
+                                case 1:
+                                    SwitchUrnaCap(true);
+                                    break;
 
-                            case 2:
-                                break;
+                                case 2:
+                                    break;
 
-                            case 3:
-                                break;
+                                case 3:
+                                    break;
 
-                            case 4:
-                                break;
-                        }
-                        break;
+                                case 4:
+                                    break;
+                            }
+                            break;
+
+                        case "M12":
+                            try
+                            {
+                                this.barco1.Invoke(new Action(() => this.barco1.ImagenEvento(Evento.Pesca)));
+                            }
+                            catch { }
+                            break;
 
                         case "I":
-
+                            try
+                            {
+                                this.barco1.Invoke(new Action(() => this.barco1.ImagenEvento(Evento.Isla)));
+                            }
+                            catch { }
                             break;
                     }
                 }
@@ -1201,12 +1213,17 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     eventoX = "I";
                     return "I";
                 case "F":
+                    eventoX = "F";
                     return "F";
                 case "M1":
                     switch (2)
                     {
                         case 1:
                             eventoX = "M10";
+                            break;
+
+                        case 3:
+                            eventoX = "M12";
                             break;
 
                         case 2:
@@ -1225,6 +1242,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         case 2:
                             eventoX = "M11";
                             break;
+
+                        case 3:
+                            eventoX = "M12";
+                            break;
                     }
                     break;
 
@@ -1237,6 +1258,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                         case 2:
                             eventoX = "M11";
+                            break;
+
+                        case 3:
+                            eventoX = "M12";
                             break;
                     }
                     break;
