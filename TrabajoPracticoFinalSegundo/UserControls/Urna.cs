@@ -139,10 +139,11 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                 this.btn_Si.Width = this.Width / 3;
                 this.btn_No.Width = this.Width / 3;
 
-                int x = this.Width / 2;
+                int x = this.Width / 2 - btn_Si.Width / 2;
+                int y = this.Height / 2 - btn_Si.Width / 5;
 
-                btn_Si.Location = new Point(x - 150, 0);
-                btn_No.Location = new Point(x + 150, 0);
+                btn_Si.Location = new Point(x - 150, y);
+                btn_No.Location = new Point(x + 150, y);
 
                 this.notificador.Mensaje("Estoy Listo!");
 

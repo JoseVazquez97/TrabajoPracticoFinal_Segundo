@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using Emgu.CV;
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.VisualBasic.ApplicationServices;
 using NAudio.Wave;
 using static TrabajoPracticoFinalSegundo.UserControls.Barco;
 
@@ -396,6 +398,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         }
         #endregion
 
+        #region ENVIAR - Reinicio de Servidor
+        private async void ReinciarServer() 
+        {
+            try
+            {
+                await HomeConection.InvokeAsync("ReiniciarDatosServer");
+            }
+            catch{ }
+
+        }
+        #endregion
+
         #region ENVIAR - Notificacion
         private async void EnviarNotificacion()
         {
@@ -748,6 +762,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     {
                         case "M10":
                             this.eventoActual = "Orden";
+                            try
+                            {
+                                this.escrutinio1.Invoke(new Action(() => this.escrutinio1.reiniciarCheck()));
+                                this.escrutinio1.Invoke(new Action(() => this.escrutinio1.reiniciarVotos()));
+                               
+                            }catch { }
                             this.eventoFlag = false;
                             break;
 
@@ -782,6 +802,21 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             try
                             {
                                 this.barco1.Invoke(new Action(() => this.barco1.ImagenEvento(Evento.Pesca)));
+                                this.eventoActual = "Pezca";
+                            }
+                            catch { }
+                            break;
+
+                        case "M13":
+                            try
+                            {
+                                this.barco1.Invoke(new Action(() => this.barco1.ImagenEvento(Evento.Nada)));
+                                if (this.Key == 1) 
+                                {
+                                    this.urnaCapitan1.Invoke(new Action(() => this.urnaCapitan1.Visible = true));
+                                }
+                                this.eventoActual = "Orden";
+                                this.eventoFlag = false;
                             }
                             catch { }
                             break;
@@ -887,6 +922,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 case "Capitan":
                     this.Key = 1;
+                    ReinciarServer();
                     DalePower();
                     this.pantallaWeb1.CargarAvatar(this.miAvatar);
                     this.dados1.setEnable(false);
@@ -1203,7 +1239,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         {
             string eventoX = "0";
             Random x = new Random();
-            int evento = x.Next(1, 3);
+            int evento = x.Next(1, 5);
 
             string variante = this.ucMapa1.ObteLugaActua();
 
@@ -1219,15 +1255,19 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     switch (2)
                     {
                         case 1:
-                            eventoX = "M10";
+                            eventoX = "M10"; //Orden
                             break;
 
                         case 3:
-                            eventoX = "M12";
+                            eventoX = "M12"; //Evento Pezca
                             break;
 
                         case 2:
-                            eventoX = "M11";
+                            eventoX = "M11"; //Evento Batalla
+                            break;
+
+                        case 4:
+                            eventoX = "M13"; //Evento Nada
                             break;
                     }
                     break;
@@ -1246,6 +1286,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         case 3:
                             eventoX = "M12";
                             break;
+
+                        case 4:
+                            eventoX = "M13";
+                            break;
                     }
                     break;
 
@@ -1262,6 +1306,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                         case 3:
                             eventoX = "M12";
+                            break;
+
+                        case 4:
+                            eventoX = "M13";
                             break;
                     }
                     break;
