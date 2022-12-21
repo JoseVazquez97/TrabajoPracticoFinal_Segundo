@@ -43,9 +43,22 @@
             this.Height = alto;
             this.pic_Barco.Width = ancho / 2;
             this.pic_Evento.Width = ancho / 2;
+            this.pic_Evento.SizeMode = PictureBoxSizeMode.StretchImage;
             this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
             this.pic_Evento.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
 
+        }
+
+        public void ejecutarEvento(int x) 
+        {
+            switch (x)
+            {
+                case 1:
+                    MovimientoBarco(Movimiento.Subir);
+                    ImagenEvento(Evento.Isla);
+
+                    break;
+            }
         }
 
         public bool Curar()
@@ -242,7 +255,7 @@
                     this.pic_Evento.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
                     break;
                 case Evento.Isla:
-                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Muelle.gif");
                     break;
                 case Evento.Nada:
                     this.pic_Evento.Image = null;
