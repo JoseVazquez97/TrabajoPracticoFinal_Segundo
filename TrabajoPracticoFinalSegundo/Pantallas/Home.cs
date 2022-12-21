@@ -227,6 +227,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             }
                         }
                         #endregion
+
+                        this.pezcaFlag = false;
                         break;
                     #endregion
 
@@ -261,6 +263,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         {
                             this.noti_Carp.Mensaje("Ordenes Capitan");
                             SpawnearNoti(2, true);
+                            this.eventoFlag = false;
                             this.eventoActual = "Orden";
                         }
 
@@ -284,6 +287,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                         EjecutarAccion();
 
+                        break;
+                    #endregion
+
+                    #region EJECUCION cada 100ms durante NADA
+                    case "Nada":
+                        this.noti_Carp.Mensaje("Ordenes Capitan");
+                        SpawnearNoti(2, true);
+                        this.eventoActual = "Orden";
                         break;
                         #endregion
                 }
@@ -1307,7 +1318,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
 
                 case "M2":
-                    switch (3)
+                    switch (2)
                     {
                         case 1:
                             eventoX = "M10";
@@ -1328,7 +1339,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
 
                 case "M3":
-                    switch (3)
+                    switch (4)
                     {
                         case 1:
                             eventoX = "M10";
