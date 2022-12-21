@@ -97,7 +97,7 @@
             // 
             this.urnaCapitan1.BackColor = System.Drawing.Color.Transparent;
             this.urnaCapitan1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.urnaCapitan1.Location = new System.Drawing.Point(3, 6);
+            this.urnaCapitan1.Location = new System.Drawing.Point(0, 9);
             this.urnaCapitan1.Name = "urnaCapitan1";
             this.urnaCapitan1.Size = new System.Drawing.Size(510, 124);
             this.urnaCapitan1.TabIndex = 4;
@@ -105,7 +105,7 @@
             // urna1
             // 
             this.urna1.BackColor = System.Drawing.Color.Transparent;
-            this.urna1.Location = new System.Drawing.Point(516, 6);
+            this.urna1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.urna1.Margin = new System.Windows.Forms.Padding(0);
             this.urna1.Name = "urna1";
             this.urna1.Size = new System.Drawing.Size(510, 127);
@@ -115,7 +115,7 @@
             // 
             this.turnero1.BackColor = System.Drawing.Color.Transparent;
             this.turnero1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.turnero1.Location = new System.Drawing.Point(1026, 6);
+            this.turnero1.Location = new System.Drawing.Point(1020, 6);
             this.turnero1.Margin = new System.Windows.Forms.Padding(0);
             this.turnero1.Name = "turnero1";
             this.turnero1.Size = new System.Drawing.Size(550, 127);

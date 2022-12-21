@@ -1000,7 +1000,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #region DADOS
             int x = Convert.ToInt32(this.flpInferior.Width / 3);
             int y = this.flpInferior.Height;
-            this.dados1.CargarTablero(x + 100, y, this.Key);
+            this.dados1.CargarTablero(x, y, this.Key);
             this.recursosDisplay1.recibirKey(this.Key);
             #endregion
         }
