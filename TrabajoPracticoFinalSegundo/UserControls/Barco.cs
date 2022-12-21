@@ -243,15 +243,20 @@
             }
         }
         
-        public void ImagenEvento(Evento evento)
+        public async void ImagenEvento(Evento evento)
         {
+
+            MovimientoBarco(Movimiento.Subir);
+            await Task.Delay(4000);
+
+
             switch (evento)
             {
                 case Evento.Barco:
-                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Barco\BarcoQuieto.png");
                     break;
                 case Evento.Pesca:
-                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Pesca\pezFinal.png");
                     break;
                 case Evento.Isla:
                     this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Muelles\MuelleFinal.png");
@@ -262,7 +267,14 @@
                 default:
                     break;
             }
+
+            MovimientoBarco(Movimiento.Bajar);
+            await Task.Delay(4000);
+            MovimientoBarco(Movimiento.Quieto);
+
         }
+
+
 
         
     }

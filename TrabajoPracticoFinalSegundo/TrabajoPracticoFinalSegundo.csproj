@@ -55,10 +55,6 @@
     <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar7.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar8.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatar9.png" />
-    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatarArtillero.png" />
-    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatarCapitan.png" />
-    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatarCarpintero.png" />
-    <None Include="bin\Debug\net6.0-windows\Recursos\Avatars\avatarMercader.png" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Barco\barco - copia - copia.jpg" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Barco\barco.jpg" />
     <None Include="bin\Debug\net6.0-windows\Recursos\Barco\BarcoChiquito.png" />
