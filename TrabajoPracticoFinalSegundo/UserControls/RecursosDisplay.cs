@@ -9,14 +9,67 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace TrabajoPracticoFinalSegundo.UserControls
 {
     public partial class RecursosDisplay : UserControl
     {
+        private string _url = "https://localhost:7170/homeHubNew";
+        HubConnection HomeConection;
+        private int Key;
+
         public RecursosDisplay()
         {
             InitializeComponent();
+
+            #region DECLARACION DEL HUB
+            HomeConection = new HubConnectionBuilder().WithUrl(_url).Build();
+
+            //Si te desconectas segui intentado.
+            HomeConection.Closed +=
+                async (error) => { System.Threading.Thread.Sleep(5000); await HomeConection.StartAsync(); };
+            #endregion
+        }
+
+        private async void EnviarRecursos()
+        {
+            int usr = this.Key;
+            string msg = consultarRecursos();
+
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarRecursos", usr,msg);
+            }
+            catch { MessageBox.Show("Error en el envio de dados."); }
+        }
+
+
+        private async void RecursosDisplay_Load(object sender, EventArgs e)
+        {
+            #region CONECTARSE
+            //Este try es importante no sacar xd
+            try
+            {
+                await HomeConection.StartAsync();
+            }
+            catch
+            {
+                MessageBox.Show("Nosepuedoconectar");
+            }
+            #endregion
+
+            HomeConection.On<int,string>("RecibirRecursos", (usr, msg) =>
+            {
+                if (usr != this.Key)
+                {
+                    try
+                    {
+                        RecibirRecurso(msg);
+                    }
+                    catch { MessageBox.Show($"Error al cargar los valores {msg} en los dados"); }
+                }
+            });
         }
 
         public void LoadRecursos(int tamaTotal, int alturaTotal) 
@@ -65,6 +118,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                     break;
 
             }
+
+            EnviarRecursos();
         }
 
         public void cargarRecurso(string cual, int cant)
@@ -93,6 +148,8 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                     this.lbl_Comida.Text = aux.ToString();
                     break;
             }
+
+            EnviarRecursos();
         }
 
         #region SIGNALR
@@ -101,7 +158,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         {
             string mensaje;
 
-            mensaje = this.lbl_Tesoro.Text + ";" + this.lbl_Maderas.Text + ";" + this.lbl_Balas.Text + ";";
+            mensaje = this.lbl_Tesoro.Text + ";" + this.lbl_Balas.Text + ";" + this.lbl_Maderas.Text + ";"  + this.lbl_Comida.Text + ";";
             return mensaje;
         }
 
@@ -115,24 +172,30 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                 if (recursos[i] != ';')
                 {
                     aux += recursos[i].ToString();
-                    
                 }
                 else 
                 {
                     cont++;
 
-                    switch (cont) 
+                    switch (cont)
                     {
-                        case 1: this.lbl_Tesoro.Text = aux; break;
-                        case 2: this.lbl_Maderas.Text = aux; break;
-                        case 3: this.lbl_Balas.Text = aux; break;
+                        case 1: this.lbl_Tesoro.Invoke(new Action(() => this.lbl_Tesoro.Text = aux)); break;
+                        case 2: this.lbl_Balas.Invoke(new Action(() => this.lbl_Balas.Text = aux)); break;
+                        case 3: this.lbl_Maderas.Invoke(new Action(() => this.lbl_Maderas.Text = aux)); break;
+                        case 4: this.lbl_Comida.Invoke(new Action(() => this.lbl_Comida.Text = aux)); break;
                     }
                     aux = "";
                 }
             }
         }
 
+        internal void recibirKey(int key)
+        {
+            this.Key = key;
+        }
+
         #endregion
+
 
     }
 }

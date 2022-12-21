@@ -258,7 +258,7 @@
                     this.pBarEnemigo.Location = new Point(this.Width - pBarEnemigo.Width, this.Height - pBarEnemigo.Height);
                     break;
                 case Evento.Pesca:
-                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Pesca\pezFinal.png");
+                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Pezca\pezfinal.png");
                     break;
                 case Evento.Isla:
                     this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Muelles\MuelleFinal.png");

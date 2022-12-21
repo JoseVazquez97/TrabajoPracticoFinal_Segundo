@@ -188,6 +188,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "RecursosDisplay";
             this.Size = new System.Drawing.Size(396, 108);
+            this.Load += new System.EventHandler(this.RecursosDisplay_Load);
             ((System.ComponentModel.ISupportInitialize)(this.p_Tesoro)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p_Balas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p_Madera)).EndInit();

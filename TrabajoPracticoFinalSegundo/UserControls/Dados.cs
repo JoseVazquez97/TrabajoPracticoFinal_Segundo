@@ -216,10 +216,17 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             string usr = this.Key.ToString();
             string val1 = d1.ToString();
             string val2 = d2.ToString();
+            string listo = "0";
+
+            if (this.Listo) 
+            {
+                listo = "1";
+            }
+
 
             try
             {
-                await HomeConection.InvokeAsync("EnviarDados", usr, val1, val2);
+                await HomeConection.InvokeAsync("EnviarDados", usr, val1, val2, listo);
             }
             catch { MessageBox.Show("Error en el envio de dados."); }
         }
@@ -239,7 +246,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
             }
             #endregion
 
-            HomeConection.On<string, string, string>("RecibirDados", (usr, val1, val2) =>
+            HomeConection.On<string, string, string, string>("RecibirDados", (usr, val1, val2, listo) =>
             {
                 if (int.Parse(usr) != this.Key) 
                 {

@@ -26,6 +26,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private int desCap;
         private int desicion;
         private int quien;
+        private int turnoInicialPezca;
 
         private bool accionFlag; //Flag de danio
         private bool eFlag; //Flag de evento random
@@ -38,12 +39,14 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private bool eventoFlag;
         private bool NoAlSpam;
         private bool barcoFlag;
+        private bool pezcaFlag;
 
         private WaveOut salidaFondo = new WaveOut();
         private WaveStream stream1;
 
         private WaveOut salidaVoz = new WaveOut();
         private WaveStream stream2;
+        
 
         #endregion
 
@@ -81,6 +84,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             this.batallaFlag = false;
             this.votaFlag = true;
             this.NoAlSpam = false;
+            this.pezcaFlag = false;
             this.desicion = 0;
             this.quien = 0;
             this.eventoRandom = "I";
@@ -223,8 +227,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             }
                         }
                         #endregion
-
-
                         break;
                     #endregion
 
@@ -242,6 +244,31 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                             }
 
                             SwitchEscrutinio(false);
+                        }
+                        break;
+                    #endregion
+
+                    #region EJECUCION cada 100ms durante PEZCA
+                    case "Pezca":
+                        if (this.pezcaFlag == false) 
+                        {
+                            this.pezcaFlag = true;
+                            this.turnoInicialPezca = this.Turno;
+                            SwitchEscrutinio(false);
+                        }
+
+                        if (this.Turno == this.turnoInicialPezca + 4)
+                        {
+                            this.noti_Carp.Mensaje("Ordenes Capitan");
+                            SpawnearNoti(2, true);
+                            this.eventoActual = "Orden";
+                        }
+
+                        if (this.dados1.LISTO)
+                        {
+                            this.dados1.LISTO = false;
+                            int aux = this.dados1.V1 + this.dados1.V2;
+                            if (aux > 6) this.recursosDisplay1.cargarRecurso("Comida", 1);
                         }
                         break;
                     #endregion
@@ -342,7 +369,15 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         break;
 
                     case "Pezca":
-                        SwitchEscrutinio(true);
+
+                        if (quien != this.Key)
+                        {
+                            if (noti == 99)
+                            {
+                                SiguienteTurno();
+                            }
+                        }
+
                         switch (quien)
                         {
                             case 1:
@@ -839,7 +874,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 ImpactarAccion(quien, noti, turno);
 
-                if (noti != 0)
+                if (noti != 0 && noti != 99)
                 {
                     switch (quien)
                     {
@@ -861,7 +896,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             });
             #endregion
-
 
             #region BARCOS
             this.barco1.Parent = this.p_FondoBarcos;
@@ -956,6 +990,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             int x = Convert.ToInt32(this.flpInferior.Width / 3);
             int y = this.flpInferior.Height;
             this.dados1.CargarTablero(x + 100, y, this.Key);
+            this.recursosDisplay1.recibirKey(this.Key);
             #endregion
         }
         #endregion
@@ -968,7 +1003,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             if (this.dados1.getEnable())
             {
                 this.dados1.tirar();
-                this.Turno++;
                 SiguienteTurno();
                 EnviarNotificacion(99);
                 QuitarTodasLasNotis();
@@ -1252,7 +1286,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     eventoX = "F";
                     return "F";
                 case "M1":
-                    switch (2)
+                    switch (3)
                     {
                         case 1:
                             eventoX = "M10"; //Orden
@@ -1273,7 +1307,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
 
                 case "M2":
-                    switch (2)
+                    switch (3)
                     {
                         case 1:
                             eventoX = "M10";
@@ -1294,7 +1328,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
 
                 case "M3":
-                    switch (2)
+                    switch (3)
                     {
                         case 1:
                             eventoX = "M10";
@@ -1434,22 +1468,48 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             }
             else
             {
-                if (this.eventoActual == "Batalla" || this.eventoActual == "Pezca")
+                switch (this.eventoActual) 
                 {
-                    this.dados1.setEnable(true);
-                }
+                    case "Orden":
+                        if (this.Key == 1)
+                        {
+                            this.urnaCapitan1.Enabled = true;
+                            this.dados1.setEnable(false);
+                        }
+                        break;
 
-                this.urna1.Enabled = true;
+                    case "Votacion":
+                        if (this.Key == 1)
+                        {
+                            this.urna1.Enabled = false;
+                            this.urnaCapitan1.Enabled = false;
+                            this.dados1.setEnable(false);
+                        }
+                        else 
+                        {
+                            this.urna1.Enabled = true;
+                        }
+                        break;
 
-                if (this.Key == 1)
-                {
-                    this.urnaCapitan1.Enabled = true;
+                    case "Batalla":
+                        this.dados1.setEnable(true);
+                        this.urna1.Enabled = true;
+                        break;
+
+                    case "Pezca":
+                        this.dados1.setEnable(true);
+                        break;
+
+                    case "Nada":
+                        this.dados1.setEnable(true);
+                        this.urna1.Enabled = true;
+                        break;
                 }
             }
         }
         #endregion
 
-        #endregion
+        #region CONFIGURACION RESPONSIVA (JOACO)
 
         private void ReSizeFormControls()  //Funcion para ajustar controles al tamaño de pantalla del usuario
         {
@@ -1490,5 +1550,8 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             x = (this.Width * control.Location.Y) / 1920;
             control.Location = new Point(x, y);
         }
+        #endregion
+
+        #endregion
     }
 }
