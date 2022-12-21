@@ -45,7 +45,7 @@
             this.pic_Evento.Width = ancho / 2;
             this.pic_Evento.SizeMode = PictureBoxSizeMode.StretchImage;
             this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
-            this.pic_Evento.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+            this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Muelles\MuelleFinal.png");
 
         }
 

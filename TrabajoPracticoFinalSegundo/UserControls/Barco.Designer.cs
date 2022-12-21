@@ -45,7 +45,6 @@
             this.pic_Barco.Size = new System.Drawing.Size(516, 802);
             this.pic_Barco.TabIndex = 0;
             this.pic_Barco.TabStop = false;
-            this.pic_Barco.Click += new System.EventHandler(this.pic_Barco_Click);
             // 
             // progressBar1
             // 
