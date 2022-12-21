@@ -249,6 +249,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                         if (this.batallaFlag == false)
                         {
                             this.batallaFlag = true;
+                            
                             SwitchEscrutinio(false);
                         }
 
@@ -741,39 +742,44 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             HomeConection.On<int, string>("RecibirEvento", (rol, val1) =>
             {
-                if (rol == 1)
+            if (rol == 1)
+            {
+                switch (val1)
                 {
-                    switch (val1)
-                    {
-                        case "M10":
-                            this.eventoActual = "Orden";
-                            this.eventoFlag = false;
-                            break;
+                    case "M10":
+                        this.eventoActual = "Orden";
+                        this.eventoFlag = false;
+                        break;
 
-                        case "M11":
-                            this.eventoActual = "Batalla";
+                    case "M11":
+                        this.eventoActual = "Batalla";
 
-                            try
-                            {
-                                this.urna1.Invoke(new Action(() => this.urna1.Batalla(this.Key)));
-                            }
-                            catch { }
+                        try
+                        {
+                            this.barco1.Invoke(new Action(() => this.barco1.ImagenEvento(Evento.Barco)));
+                            this.urna1.Invoke(new Action(() => this.urna1.Batalla(this.Key)));
+                        }
+                        catch { }
 
-                            switch (this.Key)
-                            {
-                                case 1:
-                                    SwitchUrnaCap(true);
-                                    break;
+                        switch (this.Key)
+                        {
+                            case 1:
+                                SwitchUrnaCap(true);
+                                break;
 
-                                case 2:
-                                    break;
+                            case 2:
+                                break;
 
-                                case 3:
-                                    break;
+                            case 3:
+                                break;
 
-                                case 4:
-                                    break;
-                            }
+                            case 4:
+                                break;
+                        }
+                        break;
+
+                        case "I":
+
                             break;
                     }
                 }
@@ -1192,11 +1198,12 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             switch (variante)
             {
                 case "I":
+                    eventoX = "I";
                     return "I";
                 case "F":
                     return "F";
                 case "M1":
-                    switch (1)
+                    switch (2)
                     {
                         case 1:
                             eventoX = "M10";
@@ -1209,7 +1216,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
 
                 case "M2":
-                    switch (1)
+                    switch (2)
                     {
                         case 1:
                             eventoX = "M10";
@@ -1222,7 +1229,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     break;
 
                 case "M3":
-                    switch (1)
+                    switch (2)
                     {
                         case 1:
                             eventoX = "M10";

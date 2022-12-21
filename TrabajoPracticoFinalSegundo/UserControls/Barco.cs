@@ -44,7 +44,7 @@
             this.pic_Barco.Width = ancho / 2;
             this.pic_Evento.Width = ancho / 2;
             this.pic_Evento.SizeMode = PictureBoxSizeMode.StretchImage;
-            this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+            this.pic_Barco.Image = Image.FromFile(@".\Recursos\Gifs\Barco\BarcoQuieto.png");
             this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Muelles\MuelleFinal.png");
 
         }
@@ -56,7 +56,6 @@
                 case 1:
                     MovimientoBarco(Movimiento.Subir);
                     ImagenEvento(Evento.Isla);
-
                     break;
             }
         }
@@ -231,13 +230,13 @@
             switch (move)
             {
                 case Movimiento.Subir:
-                    this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+                    this.pic_Barco.Image = Image.FromFile(@".\Recursos\Gifs\Barco\Salir.gif");
                     break;
                 case Movimiento.Bajar:
-                    this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+                    this.pic_Barco.Image = Image.FromFile(@".\Recursos\Gifs\Barco\Entrar.gif");
                     break;
                 case Movimiento.Quieto:
-                    this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+                    this.pic_Barco.Image = Image.FromFile(@".\Recursos\Gifs\Barco\BarcoQuieto.png");
                     break;
                 default:
                     break;
@@ -255,7 +254,7 @@
                     this.pic_Evento.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
                     break;
                 case Evento.Isla:
-                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Muelle.gif");
+                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Gifs\Muelles\MuelleFinal.png");
                     break;
                 case Evento.Nada:
                     this.pic_Evento.Image = null;
