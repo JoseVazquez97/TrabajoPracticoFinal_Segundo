@@ -10,7 +10,19 @@
         int muni4;
         int muni3;
         int muni2;
-
+        public enum Movimiento
+        {
+            Subir,
+            Bajar,
+            Quieto
+        }
+        public enum Evento
+        {
+            Barco,
+            Pesca,
+            Isla,
+            Nada
+        }
         public Barco()
         {
             InitializeComponent();
@@ -200,36 +212,46 @@
             this.progressBar1.Value = 100;
         }
 
-
-
-        private void canon1_Load(object sender, EventArgs e)
+        
+        public void MovimientoBarco(Movimiento move)
         {
-
+            switch (move)
+            {
+                case Movimiento.Subir:
+                    this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+                    break;
+                case Movimiento.Bajar:
+                    this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+                    break;
+                case Movimiento.Quieto:
+                    this.pic_Barco.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        public void ImagenEvento(Evento evento)
+        {
+            switch (evento)
+            {
+                case Evento.Barco:
+                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+                    break;
+                case Evento.Pesca:
+                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+                    break;
+                case Evento.Isla:
+                    this.pic_Evento.Image = Image.FromFile(@".\Recursos\Barco\BarcoGrande.png");
+                    break;
+                case Evento.Nada:
+                    this.pic_Evento.Image = null;
+                    break;
+                default:
+                    break;
+            }
         }
 
-        private void pic_Barco_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void canon2_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void canon5_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void canon1_Load_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

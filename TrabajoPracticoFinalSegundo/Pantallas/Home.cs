@@ -1,37 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TrabajoPracticoFinalSegundo.Clases;
-using System.IO;
-using Microsoft.AspNetCore.SignalR.Client;
-using TrabajoPracticoFinalSegundo.UserControls;
-using Microsoft.AspNetCore.Http;
-using System.Security.Policy;
-using Microsoft.VisualBasic.ApplicationServices;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Net.PeerToPeer.Collaboration;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
-using System.Reflection.Metadata;
-using System.CodeDom;
-using System.Drawing.Text;
-using Emgu.CV.Features2D;
-using Emgu.CV.Util;
-using System.Runtime.CompilerServices;
-using System.Media;
-using System.Diagnostics.Metrics;
+﻿using Microsoft.AspNetCore.SignalR.Client;
 using NAudio.Wave;
-using System.Diagnostics;
+using static TrabajoPracticoFinalSegundo.UserControls.Barco;
 
 namespace TrabajoPracticoFinalSegundo.Pantallas
 {
@@ -75,6 +44,20 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         private WaveStream stream2;
 
         #endregion
+
+        /*
+         * 
+         * Estos son algunos ejemplos de como utilizar las funciones del barco para el movimiento
+         * 
+         * ES NECESARIO CAMBIAR LAS IMAGENES QUE LLEVAN LOS SWITCH POR LOS GIF QUE TENDRA EL JUEGO
+         * 
+         * barco1.ImagenEvento(Evento.Isla)
+         * 
+         * barco1.MovimientoBarco(Movimiento.Arriba)
+         * 
+         */
+
+
 
         public Home()
         {
@@ -120,7 +103,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             #endregion
 
             #endregion
-            
+
             //Region Barcos trasladada a Home_Load
 
             #region BARRA (INFERIOR)
@@ -442,10 +425,10 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             {
                 await HomeConection.InvokeAsync("EnviarNoti", usr, msg, turno);
             }
-            catch 
+            catch
             {
                 NoAlSpam = true;
-                if(!NoAlSpam) MessageBox.Show("Error en el envio de Notificacion."); 
+                if (!NoAlSpam) MessageBox.Show("Error en el envio de Notificacion.");
             }
         }
 
@@ -455,7 +438,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
             int msg = click;
             int turno = this.Turno;
 
-            if (click == 99) 
+            if (click == 99)
             {
                 try
                 {
@@ -476,18 +459,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region ENVIAR - Mapa
         private async void EnviarCambiosMapa()
-    {
-        string usr = this.Key.ToString();
-        string mapa = ucMapa1.ObtenerMapa();
-
-        try
         {
-            await HomeConection.InvokeAsync("EnviarMapa", usr, mapa);
-        }
-        catch { MessageBox.Show("Error en el envio del Mapa."); }
+            string usr = this.Key.ToString();
+            string mapa = ucMapa1.ObtenerMapa();
 
-    }
-    #endregion
+            try
+            {
+                await HomeConection.InvokeAsync("EnviarMapa", usr, mapa);
+            }
+            catch { MessageBox.Show("Error en el envio del Mapa."); }
+
+        }
+        #endregion
 
         #region CONSULTAR - Mapa
         private async void ConsultarMapa()
@@ -772,11 +755,11 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
                             try
                             {
-                                this.urna1.Invoke(new Action(() => this.urna1.Batalla(this.Key) ));
+                                this.urna1.Invoke(new Action(() => this.urna1.Batalla(this.Key)));
                             }
                             catch { }
-                           
-                            switch (this.Key) 
+
+                            switch (this.Key)
                             {
                                 case 1:
                                     SwitchUrnaCap(true);
@@ -829,7 +812,6 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
             #region BARCOS
             this.barco1.Parent = this.p_FondoBarcos;
-
             int x = this.Navegacion_Page.Width;
             int y = this.Navegacion_Page.Height;
 
@@ -1263,13 +1245,13 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region BARCO
 
-        private void daniarBarco() 
+        private void daniarBarco()
         {
             this.quien = 0;
             this.desicion = 0;
         }
 
-        private void recargarBarco() 
+        private void recargarBarco()
         {
             this.quien = 0;
             this.desicion = 0;
@@ -1295,18 +1277,18 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
         #endregion
 
         #region ACCION DADOS
-        private void EjecutarAccion() 
+        private void EjecutarAccion()
         {
             if (this.dados1.LISTO)
             {
                 this.dados1.LISTO = false;
 
-                if (this.desicion != 0 && this.quien != 0) 
+                if (this.desicion != 0 && this.quien != 0)
                 {
-                    switch (this.quien) 
+                    switch (this.quien)
                     {
                         case 1:
-                            switch (this.desicion) 
+                            switch (this.desicion)
                             {
                                 case 1:
                                     daniarBarco();
@@ -1362,7 +1344,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         #region ASEGURAR ORDEN
 
-        private void AsegurarOrden() 
+        private void AsegurarOrden()
         {
             if (obtenerTurno(this.Turno) != this.Key)
             {
@@ -1370,16 +1352,16 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                 this.urna1.Enabled = false;
                 this.urnaCapitan1.Enabled = false;
             }
-            else 
+            else
             {
-                if (this.eventoActual == "Batalla" || this.eventoActual == "Pezca") 
+                if (this.eventoActual == "Batalla" || this.eventoActual == "Pezca")
                 {
                     this.dados1.setEnable(true);
                 }
-                
+
                 this.urna1.Enabled = true;
 
-                if (this.Key == 1) 
+                if (this.Key == 1)
                 {
                     this.urnaCapitan1.Enabled = true;
                 }
@@ -1391,7 +1373,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
 
         private void ReSizeFormControls()  //Funcion para ajustar controles al tamaño de pantalla del usuario
         {
-            
+
             foreach (Control item in this.Controls)
             {
                 AdjustSize(item);
@@ -1406,7 +1388,7 @@ namespace TrabajoPracticoFinalSegundo.Pantallas
                     }
                 }
             }
-            
+
             this.noti_Cap.Location = new Point(pantallaWeb1.Location.X + pantallaWeb1.Width, pantallaWeb1.Location.Y - 10);
             this.noti_Carp.Location = new Point(pantallaWeb2.Location.X + pantallaWeb2.Width, pantallaWeb2.Location.Y - 10);
             this.noti_Mer.Location = new Point(pantallaWeb3.Location.X + pantallaWeb3.Width, pantallaWeb3.Location.Y - 10);
