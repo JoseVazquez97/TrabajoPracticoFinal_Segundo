@@ -60,8 +60,8 @@
             // 
             this.pic_Evento.BackColor = System.Drawing.Color.Transparent;
             this.pic_Evento.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pic_Evento.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pic_Evento.Location = new System.Drawing.Point(0, 0);
+            this.pic_Evento.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pic_Evento.Location = new System.Drawing.Point(516, 0);
             this.pic_Evento.Name = "pic_Evento";
             this.pic_Evento.Size = new System.Drawing.Size(1517, 802);
             this.pic_Evento.TabIndex = 6;
@@ -81,9 +81,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.pBarBarco);
-            this.Controls.Add(this.pic_Barco);
             this.Controls.Add(this.pBarEnemigo);
             this.Controls.Add(this.pic_Evento);
+            this.Controls.Add(this.pic_Barco);
             this.Name = "Barco";
             this.Size = new System.Drawing.Size(1517, 802);
             ((System.ComponentModel.ISupportInitialize)(this.pic_Barco)).EndInit();
