@@ -172,12 +172,13 @@ namespace TrabajoPracticoFinalSegundo.UserControls
                 if (recursos[i] != ';')
                 {
                     aux += recursos[i].ToString();
+                    
                 }
                 else 
                 {
                     cont++;
 
-                    switch (cont)
+                    switch (cont) 
                     {
                         case 1: this.lbl_Tesoro.Invoke(new Action(() => this.lbl_Tesoro.Text = aux)); break;
                         case 2: this.lbl_Balas.Invoke(new Action(() => this.lbl_Balas.Text = aux)); break;
