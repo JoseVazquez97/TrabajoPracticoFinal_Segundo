@@ -15,7 +15,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
 {
     public partial class RecursosDisplay : UserControl
     {
-        private string _url = "https://blazorserversignal2022.azurewebsites.net/homeHubNew";
+        private string _url = "https://localhost:7170/homeHubNew";
         HubConnection HomeConection;
         private int Key;
 

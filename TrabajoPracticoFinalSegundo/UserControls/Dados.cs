@@ -28,7 +28,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         public bool LISTO { get { return this.Listo; } set { this.Listo = value; } }
 
 
-        private string _url = "https://blazorserversignal2022.azurewebsites.net/homeHubNew";
+        private string _url = "https://localhost:7170/homeHubNew";
         HubConnection HomeConection;
 
 

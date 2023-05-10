@@ -7,7 +7,7 @@ namespace TrabajoPracticoFinalSegundo.UserControls
         int Vida;
         int Acciones;
 
-        private string _url = "https://blazorserversignal2022.azurewebsites.net/homeHubNew";
+        private string _url = "https://localhost:7170/homeHubNew";
         HubConnection HomeConection;
 
 
